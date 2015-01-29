@@ -39,9 +39,9 @@ public class CopterManager : MonoBehaviour {
 		
 		if (Input.GetKey (KeyCode.LeftArrow)){
 			//What happens the first frame
-			/*if (Input.GetKeyDown(KeyCode.LeftArrow) && gameObject.transform.rotation.y != 180f){
-				gameObject.transform.localEulerAngles = new Vector3 (gameObject.transform.rotation.x, 180f, gameObject.transform.rotation.z);
-			}*/
+			if (Input.GetKeyDown(KeyCode.LeftArrow) && gameObject.transform.localScale.x > 0f){
+				gameObject.transform.localScale = new Vector3(-gameObject.transform.localScale.x, gameObject.transform.localScale.y);
+			}
 
 			//What happens every frame
 			if (gameObject.transform.eulerAngles.z >= maxTilt 
@@ -52,9 +52,9 @@ public class CopterManager : MonoBehaviour {
 
 		if (Input.GetKey (KeyCode.RightArrow)) {
 			//What happens the first frame
-			/*if (Input.GetKeyDown (KeyCode.RightArrow) && gameObject.transform.rotation.y != 0f) {
-				gameObject.transform.localEulerAngles = new Vector3 (gameObject.transform.rotation.x, 0f, gameObject.transform.rotation.z);
-			}*/
+			if (Input.GetKeyDown (KeyCode.RightArrow) && gameObject.transform.localScale.x < 0f) {
+				gameObject.transform.localScale = new Vector3(-gameObject.transform.localScale.x, gameObject.transform.localScale.y);
+			}
 
 			//What happens every frame
 			if (gameObject.transform.eulerAngles.z <= 360f-maxTilt 
@@ -84,8 +84,11 @@ public class CopterManager : MonoBehaviour {
 			}
 		}
 
+		//Automatic 
 		if (gameObject.transform.position.y < flyingAltitude && running) {
-			copterBody.AddForce(gameObject.transform.up * acceleration);
+			copterBody.AddForce (gameObject.transform.up * acceleration);
+		} else if (gameObject.transform.position.y > flyingAltitude && running) {
+			copterBody.AddForce ((gameObject.transform.up - new Vector3(0f, gameObject.transform.up.y, 0f)) * acceleration);
 		}
 
 		altitudeInd.SetPosition (0, new Vector3 (9f, flyingAltitude, 0f));

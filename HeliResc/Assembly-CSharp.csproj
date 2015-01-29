@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\CopterManager.cs" />
+     <Compile Include="Assets\Scripts\HookLineManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
