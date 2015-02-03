@@ -4,7 +4,8 @@ using System.Collections;
 public class HookLineManager : MonoBehaviour {
 
 	private LineRenderer line;
-	public GameObject copter;
+	private bool isHookDown = true;
+	public GameObject copter, anchor;
 
 	// Use this for initialization
 	void Start () {
@@ -13,7 +14,8 @@ public class HookLineManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		line.SetPosition (0, gameObject.transform.position);
-		line.SetPosition (1, copter.transform.position + new Vector3(0f, -0.3f, 0f));
+		line.SetPosition (1, anchor.transform.position);
 	}
 }

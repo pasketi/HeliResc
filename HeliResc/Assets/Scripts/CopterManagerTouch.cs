@@ -5,7 +5,7 @@ public class CopterManagerTouch : MonoBehaviour {
 
 	private SpriteRenderer spriteRenderer;
 	private Rigidbody2D copterBody;
-	private bool running = true, lastMovementRight = true;
+	private bool running = true, lastMovementRight = true, isHookDown = true;
 	private Vector2 lastVelocity;
 	private Touch[] touches;
 
@@ -43,13 +43,32 @@ public class CopterManagerTouch : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.LeftControl))
 						running = !running;
 		*/
-
+		
 		//Copter animation handling
 		if (lastTime < Time.time - frameTime){
 			if (spriteRenderer.sprite.name == copterSprite1.name) spriteRenderer.sprite = copterSprite2;
 			else if (spriteRenderer.sprite.name == copterSprite2.name) spriteRenderer.sprite = copterSprite1;
 			lastTime = Time.time;
 		}
+
+		//Copter Press
+		/*if (Input.touchCount > 0)
+		{
+			//for (int i = 0; i < Input.touchCount; i++) {
+				Vector3 wp = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
+				Vector2 touchPos = new Vector2(wp.x, wp.y);
+				if (copter.collider2D == Physics2D.OverlapPoint(touchPos))
+				{
+					if (isHookDown){
+						Debug.Log ("Reel In");
+						isHookDown = false;
+					} else {
+						Debug.Log ("Drop Down");
+						isHookDown = true;
+					}
+				}
+			//}
+		}*/
 
 		//Left rotate
 		if (Input.touchCount > 1){}
