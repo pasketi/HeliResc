@@ -12,14 +12,15 @@ public class CopterManagerTouch : MonoBehaviour {
 
 	public Sprite copterSprite1, copterSprite2;
 	public GameObject indicatorRect;
+	public GameObject hook;
 	private RectTransform altitudeIndRect;
 	public float 	maxTilt = 75f, 
 					tiltSpeed = 100f, 
 					returnSpeed = 5f, 
-					//acceleration = 5f, 
-					maxPower = 500f, 
+					//acceleration = 50f, 
+					//maxPower = 50f, 
 					power = 0f, 
-					cruisePower = 200f, 
+					cruisePower = 20f, 
 					flyingAltitude = 4f, 
 					maxVelocity = 3f;
 	public AnimationCurve powerUp, powerDown;
@@ -170,9 +171,9 @@ public class CopterManagerTouch : MonoBehaviour {
 
 		// Automatic 
 		if (gameObject.transform.position.y < flyingAltitude && running) {
-			copterBody.AddForce (gameObject.transform.up * power);
+			copterBody.AddForce (gameObject.transform.up * (power*10));
 		} else if (gameObject.transform.position.y > flyingAltitude && running) {
-			copterBody.AddForce ((gameObject.transform.up - new Vector3(0f, gameObject.transform.up.y, 0f)) * power);
+			copterBody.AddForce ((gameObject.transform.up - new Vector3(0f, gameObject.transform.up.y, 0f)) * (power*10));
 		}
 
 		altitudeIndRect.anchoredPosition = new Vector2(0, Camera.main.WorldToScreenPoint(new Vector3(0f, flyingAltitude)).y);
