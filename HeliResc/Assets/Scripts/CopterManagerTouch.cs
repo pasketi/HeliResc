@@ -19,7 +19,7 @@ public class CopterManagerTouch : MonoBehaviour {
 					returnSpeed = 5f, 
 					//acceleration = 50f, 
 					//maxPower = 50f, 
-					power = 0f, 
+					power = 20f, 
 					cruisePower = 20f, 
 					flyingAltitude = 4f, 
 					maxVelocity = 3f;
@@ -97,7 +97,7 @@ public class CopterManagerTouch : MonoBehaviour {
 
 		// Left rotate
 		if (Input.touchCount > 1){}
-		else if (Input.touchCount > 0 && Input.GetTouch(0).position.x < Screen.width/2 && Input.GetTouch(0).position.x > Screen.width*0.1f){
+		else if (Input.touchCount > 0 && Input.GetTouch(0).position.x < Screen.width/2 && Input.GetTouch(0).position.x > 100){
 			//  happens the first frame
 			// FIX FOR TOUCH
 			if (lastMovementRight != false){
@@ -114,7 +114,7 @@ public class CopterManagerTouch : MonoBehaviour {
 
 		// Right rotate
 		if (Input.touchCount > 1){}
-		else if (Input.touchCount > 0 && Input.GetTouch(0).position.x > Screen.width/2 && Input.GetTouch(0).position.x < Screen.width*0.9f) {
+		else if (Input.touchCount > 0 && Input.GetTouch(0).position.x > Screen.width/2 && Input.GetTouch(0).position.x < Screen.width-100) {
 			// What happens the first frame
 			// FIX FOR TOUCH
 			if (lastMovementRight != true) {
@@ -139,18 +139,18 @@ public class CopterManagerTouch : MonoBehaviour {
 		}
 
 		// Engine power toggle
-		if (running) {
+		/*if (running) {
 			power = cruisePower;
 		} else {
 			power = 0f;
-		}
+		}*/
 
 		// New input management maybe?
 		if (Input.touchCount == 0) {} 
 		else if (Input.touchCount == 1) {
 
 			// Altitude management
-			if (Input.GetTouch(0).position.x < Screen.width * 0.1f || Input.GetTouch(0).position.x > Screen.width * 0.9f) {
+			if (Input.GetTouch(0).position.x < 100 || Input.GetTouch(0).position.x > Screen.width -100) {
 				float tempY = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position).y;
 				if (tempY <= 7.5f && tempY >= 0f){
 					setFlyingAltitude(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position).y);
@@ -159,7 +159,7 @@ public class CopterManagerTouch : MonoBehaviour {
 		} else if (Input.touchCount == 2) {
 
 			// Altitude management
-			if (Input.GetTouch(1).position.x < Screen.width * 0.1f || Input.GetTouch(1).position.x > Screen.width * 0.9f) {
+			if (Input.GetTouch(1).position.x < 100 || Input.GetTouch(1).position.x > Screen.width -100) {
 				float tempY = Camera.main.ScreenToWorldPoint(Input.GetTouch(1).position).y;
 				if (tempY <= 7.5f && tempY >= 0f){
 					setFlyingAltitude(Camera.main.ScreenToWorldPoint(Input.GetTouch(1).position).y);

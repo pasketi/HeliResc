@@ -44,7 +44,11 @@ TextureImporter:
   spritePixelsToUnits: 32
   alphaIsTransparency: 1
   textureType: 8
-  buildTargetSettings: []
+  buildTargetSettings:
+  - buildTarget: iPhone
+    maxTextureSize: 128
+    textureFormat: -3
+    compressionQuality: 50
   spriteSheet:
     sprites:
     - name: Kopteri_PlaceHolder_0
