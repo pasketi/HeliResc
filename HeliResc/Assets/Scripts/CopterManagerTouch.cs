@@ -6,13 +6,15 @@ public class CopterManagerTouch : MonoBehaviour {
 
 	private SpriteRenderer spriteRenderer;
 	private Rigidbody2D copterBody;
-	private bool running = true, lastMovementRight = true, isHookDown = true;
+	private DistanceJoint2D hookJoint;
+	private bool running = true, lastMovementRight = true, isHookDown = true, once = false;
 	private Vector2 lastVelocity;
 	private int lastTouchCount;
+	private LevelManager manager;
 
 	public Sprite copterSprite1, copterSprite2;
-	public GameObject indicatorRect;
-	public GameObject hook;
+	public GameObject indicatorRect, hookPrefab, hookAnchor;
+	private GameObject hook;
 	private RectTransform altitudeIndRect;
 	public float 	maxTilt = 75f, 
 					tiltSpeed = 100f, 
@@ -33,11 +35,13 @@ public class CopterManagerTouch : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		manager = (LevelManager) GameObject.Find("LevelManagerO").GetComponent(typeof(LevelManager));
 		copterBody = gameObject.GetComponent<Rigidbody2D>();
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>(); 
 		Debug.Log(spriteRenderer.gameObject.name);
 		Debug.Log (360f - maxTilt);
 		altitudeIndRect = indicatorRect.GetComponent<RectTransform> ();
+		hookJoint = GetComponent<DistanceJoint2D> ();
 		//Input.simulateMouseWithTouches == true;
 	}
 	
@@ -174,6 +178,17 @@ public class CopterManagerTouch : MonoBehaviour {
 			copterBody.AddForce (gameObject.transform.up * (power*10));
 		} else if (gameObject.transform.position.y > flyingAltitude && running) {
 			copterBody.AddForce ((gameObject.transform.up - new Vector3(0f, gameObject.transform.up.y, 0f)) * (power*10));
+		}
+
+		if (isHookDown && hook == null) {
+			once = true;
+			hook = Instantiate (hookPrefab, gameObject.transform.position + new Vector3 (0f, -0.3f), Quaternion.identity) as GameObject;
+			hook.transform.parent = gameObject.transform.parent;
+			hookJoint.connectedBody = hook.rigidbody2D;
+		} else if (!isHookDown == once) {
+			manager.cargoHookedCrates(hook);
+			Destroy(hook);
+			once = false;
 		}
 
 		altitudeIndRect.anchoredPosition = new Vector2(0, Camera.main.WorldToScreenPoint(new Vector3(0f, flyingAltitude)).y);
