@@ -54,5 +54,8 @@ public class LevelManager : MonoBehaviour {
 		savedCrates += cargoCrates;
 		cargoCrates = 0;
 		Debug.Log ("Cargo Emptied! Current score: " + savedCrates + "/" + crateAmount);
+		if (savedCrates >= crateAmount) {
+			allSaved = true;
+		}
 	}
 }

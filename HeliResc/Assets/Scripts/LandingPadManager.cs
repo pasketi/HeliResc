@@ -22,7 +22,7 @@ public class LandingPadManager : MonoBehaviour {
 			Destroy(other.gameObject);
 			manager.saveCrate();
 		}
-		if (other.gameObject.transform.tag == "Copter") {
+		if (other.gameObject.transform.tag == "Copter" && manager.getCargoCrates() > 0) {
 			manager.emptyCargo();
 		}
 	}

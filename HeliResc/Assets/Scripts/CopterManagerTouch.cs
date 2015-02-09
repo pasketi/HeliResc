@@ -12,20 +12,15 @@ public class CopterManagerTouch : MonoBehaviour {
 	private int lastTouchCount;
 	private LevelManager manager;
 
-	public Sprite copterSprite1, copterSprite2;
 	public GameObject indicatorRect, hookPrefab, hookAnchor;
 	private GameObject hook;
 	private RectTransform altitudeIndRect;
 	public float 	maxTilt = 75f, 
 					tiltSpeed = 100f, 
 					returnSpeed = 5f, 
-					//acceleration = 50f, 
-					//maxPower = 50f, 
-					power = 20f, 
-					cruisePower = 20f, 
+					power = 20f,
 					flyingAltitude = 4f, 
 					maxVelocity = 3f;
-	public AnimationCurve powerUp, powerDown;
 
 	float lastTime = 0f, frameTime = 0.125f;
 
@@ -42,6 +37,7 @@ public class CopterManagerTouch : MonoBehaviour {
 		Debug.Log (360f - maxTilt);
 		altitudeIndRect = indicatorRect.GetComponent<RectTransform> ();
 		hookJoint = GetComponent<DistanceJoint2D> ();
+		hookJoint.anchor = hookAnchor.transform.localPosition;
 		//Input.simulateMouseWithTouches == true;
 	}
 	
@@ -53,32 +49,6 @@ public class CopterManagerTouch : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.LeftControl))
 						running = !running;
 		*/
-		
-		//Copter animation handling
-		if (lastTime < Time.time - frameTime){
-			if (spriteRenderer.sprite.name == copterSprite1.name) spriteRenderer.sprite = copterSprite2;
-			else if (spriteRenderer.sprite.name == copterSprite2.name) spriteRenderer.sprite = copterSprite1;
-			lastTime = Time.time;
-		}
-
-		//Copter Press
-		/*if (Input.touchCount > 0)
-		{
-			//for (int i = 0; i < Input.touchCount; i++) {
-				Vector3 wp = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
-				Vector2 touchPos = new Vector2(wp.x, wp.y);
-				if (copter.collider2D == Physics2D.OverlapPoint(touchPos))
-				{
-					if (isHookDown){
-						Debug.Log ("Reel In");
-						isHookDown = false;
-					} else {
-						Debug.Log ("Drop Down");
-						isHookDown = true;
-					}
-				}
-			//}
-		}*/
 
 		// START INPUT ------------------------------------------------------------------------------------------------------------------------------------------
 
