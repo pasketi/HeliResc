@@ -33,11 +33,11 @@ public class LevelManager : MonoBehaviour {
 
 	private int countCrates (){
 		var crates = GameObject.FindGameObjectsWithTag ("SaveableObject");
-		int count = 0;
+		/*int count = 0;
 		foreach (var crate in crates) {
 			count++;
-		}
-		return count;
+		}*/
+		return crates.Length;
 	}
 
 	public void cargoHookedCrates(GameObject hook){

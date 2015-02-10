@@ -38,17 +38,10 @@ public class CopterManagerTouch : MonoBehaviour {
 		altitudeIndRect = indicatorRect.GetComponent<RectTransform> ();
 		hookJoint = GetComponent<DistanceJoint2D> ();
 		hookJoint.anchor = hookAnchor.transform.localPosition;
-		//Input.simulateMouseWithTouches == true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		// Fix for touch
-		/*
-		if (Input.GetKeyDown (KeyCode.LeftControl))
-						running = !running;
-		*/
 
 		// START INPUT ------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -58,10 +51,8 @@ public class CopterManagerTouch : MonoBehaviour {
 			if (Input.GetTouch(i).phase == TouchPhase.Began && 
 			    gameObject.collider2D == Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position))){
 				if (isHookDown){
-					Debug.Log ("Reel In");
 					isHookDown = false;
 				} else {
-					Debug.Log ("Drop Down");
 					isHookDown = true;
 				}
 			}
@@ -73,7 +64,6 @@ public class CopterManagerTouch : MonoBehaviour {
 		if (Input.touchCount > 1){}
 		else if (Input.touchCount > 0 && Input.GetTouch(0).position.x < Screen.width/2 && Input.GetTouch(0).position.x > 100){
 			//  happens the first frame
-			// FIX FOR TOUCH
 			if (lastMovementRight != false){
 				gameObject.transform.localScale = new Vector3(-gameObject.transform.localScale.x, gameObject.transform.localScale.y);
 				lastMovementRight = false;
@@ -90,7 +80,6 @@ public class CopterManagerTouch : MonoBehaviour {
 		if (Input.touchCount > 1){}
 		else if (Input.touchCount > 0 && Input.GetTouch(0).position.x > Screen.width/2 && Input.GetTouch(0).position.x < Screen.width-100) {
 			// What happens the first frame
-			// FIX FOR TOUCH
 			if (lastMovementRight != true) {
 				gameObject.transform.localScale = new Vector3(-gameObject.transform.localScale.x, gameObject.transform.localScale.y);
 				lastMovementRight = true;
@@ -111,13 +100,6 @@ public class CopterManagerTouch : MonoBehaviour {
 				gameObject.transform.Rotate (new Vector3 (0f, 0f, -(returnSpeed*Time.deltaTime)*gameObject.transform.eulerAngles.z));
 			}
 		}
-
-		// Engine power toggle
-		/*if (running) {
-			power = cruisePower;
-		} else {
-			power = 0f;
-		}*/
 
 		// New input management maybe?
 		if (Input.touchCount == 0) {} 
@@ -153,9 +135,8 @@ public class CopterManagerTouch : MonoBehaviour {
 		if (isHookDown && hook == null) {
 			once = true;
 			hook = Instantiate (hookPrefab, gameObject.transform.position + new Vector3 (0f, -0.3f), Quaternion.identity) as GameObject;
-			hook.transform.parent = gameObject.transform.parent;
 			hookJoint.connectedBody = hook.rigidbody2D;
-		} else if (!isHookDown == once) {
+		} else if (!isHookDown && once) {
 			manager.cargoHookedCrates(hook);
 			Destroy(hook);
 			once = false;
