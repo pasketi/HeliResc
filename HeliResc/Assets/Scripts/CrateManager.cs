@@ -3,14 +3,21 @@ using System.Collections;
 
 public class CrateManager : MonoBehaviour {
 
+	private LevelManager manager;
+	private float floatyValue = 0.005f; //buoancy?
+	private GameObject crate;
+
 	// Use this for initialization
 	void Start () {
-	
+		manager = (LevelManager) GameObject.Find("LevelManagerO").GetComponent(typeof(LevelManager));
+		crate = gameObject.transform.parent.gameObject;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (crate.transform.position.y < manager.getWaterLevel ()) {
+			crate.rigidbody2D.AddForce (Vector3.up * floatyValue);
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){

@@ -5,6 +5,7 @@ public class LevelManager : MonoBehaviour {
 
 	private int savedCrates, cargoCrates, crateAmount;
 	private bool allSaved;
+	public float waterLevel = 0;
 	
 	// Use this for initialization
 	void Start () {
@@ -57,5 +58,13 @@ public class LevelManager : MonoBehaviour {
 		if (savedCrates >= crateAmount) {
 			allSaved = true;
 		}
+	}
+
+	public float getWaterLevel(){
+		return waterLevel;
+	}
+
+	public void setWaterLevel(float newWaterLevel) {
+		waterLevel = newWaterLevel;
 	}
 }
