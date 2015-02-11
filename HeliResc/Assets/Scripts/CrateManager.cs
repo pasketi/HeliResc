@@ -6,17 +6,26 @@ public class CrateManager : MonoBehaviour {
 	private LevelManager manager;
 	private float floatyValue = 0.005f; //buoancy?
 	private GameObject crate;
+	private SpriteRenderer spriteRenderer;
+
+	public Sprite Dropped, Hooked;
 
 	// Use this for initialization
 	void Start () {
 		manager = (LevelManager) GameObject.Find("LevelManagerO").GetComponent(typeof(LevelManager));
 		crate = gameObject.transform.parent.gameObject;
+		spriteRenderer = crate.GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (crate.transform.position.y < manager.getWaterLevel ()) {
 			crate.rigidbody2D.AddForce (Vector3.up * floatyValue);
+		}
+		if (gameObject.transform.parent.gameObject.layer == 11) {
+			spriteRenderer.sprite = Hooked;
+		} else {
+			spriteRenderer.sprite = Dropped;
 		}
 	}
 
@@ -35,7 +44,7 @@ public class CrateManager : MonoBehaviour {
 			hinge.useLimits = false;
 
 			gameObject.collider2D.enabled = false;
-			gameObject.transform.parent.gameObject.layer = 11; //liftedCrate
+			crate.layer = 11; //liftedCrate
 		}
 	}
 }

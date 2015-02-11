@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class LevelManager : MonoBehaviour {
@@ -6,10 +7,12 @@ public class LevelManager : MonoBehaviour {
 	private int savedCrates, cargoCrates, crateAmount;
 	private bool allSaved;
 	public float waterLevel = 0;
+	public Text cargoText, savedText;
 	
 	// Use this for initialization
 	void Start () {
 		crateAmount = countCrates ();
+		savedText.text = savedCrates + "/" + crateAmount;
 	}
 	
 	// Update is called once per frame
@@ -29,7 +32,7 @@ public class LevelManager : MonoBehaviour {
 		if (savedCrates >= crateAmount) {
 			allSaved = true;
 		}
-		Debug.Log ("Crate Saved! Current score: " + savedCrates + "/" + crateAmount);
+		savedText.text = savedCrates + "/" + crateAmount;
 	}
 
 	private int countCrates (){
@@ -45,6 +48,7 @@ public class LevelManager : MonoBehaviour {
 		foreach (Transform child in hook.transform) {
 			cargoCrates++;
 		}
+		cargoText.text = getCargoCrates().ToString();
 	}
 
 	public int getCargoCrates() {
@@ -54,10 +58,11 @@ public class LevelManager : MonoBehaviour {
 	public void emptyCargo() {
 		savedCrates += cargoCrates;
 		cargoCrates = 0;
-		Debug.Log ("Cargo Emptied! Current score: " + savedCrates + "/" + crateAmount);
 		if (savedCrates >= crateAmount) {
 			allSaved = true;
 		}
+		savedText.text = savedCrates + "/" + crateAmount;
+		cargoText.text = "0";
 	}
 
 	public float getWaterLevel(){
