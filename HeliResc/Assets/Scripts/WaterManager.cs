@@ -3,9 +3,9 @@ using System.Collections;
 
 public class WaterManager : MonoBehaviour {
 
-	public float 	wave0Magnitude = 1f, wave0Amplitude = 1f, wave0TimeOffset = 0.00f, wave0Speed = 1f,
-					wave1Magnitude = 1f, wave1Amplitude = 1f, wave1TimeOffset = 0.30f, wave1Speed = 1f,
-					wave2Magnitude = 1f, wave2Amplitude = 1f, wave2TimeOffset = 0.65f, wave2Speed = 1f,
+	public float 	wave0Magnitude = 1f, wave0Amplitude = 1f, wave0TimeOffset = 0.00f, wave0Speed = 1f, wave0Yoffset = 0f,
+					wave1Magnitude = 1f, wave1Amplitude = 1f, wave1TimeOffset = 0.30f, wave1Speed = 1f, wave1Yoffset = 0f,
+					wave2Magnitude = 1f, wave2Amplitude = 1f, wave2TimeOffset = 0.65f, wave2Speed = 1f, wave2Yoffset = 0f,
 					generalScale = 0.3f;
 	private Vector3 waterLayer0, waterLayer1, waterLayer2; //Offsets
 	private GameObject[] layer0, layer1, layer2;
@@ -27,11 +27,11 @@ public class WaterManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		waterLayer0 = new Vector3(Mathf.Cos((Time.time + wave0TimeOffset) * wave0Speed) * wave0Amplitude * generalScale, 
-		                          Mathf.Sin((Time.time + wave0TimeOffset) * wave0Speed) * wave0Magnitude * generalScale);
+		                          (Mathf.Sin((Time.time + wave0TimeOffset) * wave0Speed) * wave0Magnitude * generalScale) + wave0Yoffset);
 		waterLayer1 = new Vector3(Mathf.Cos((Time.time + wave1TimeOffset) * wave1Speed) * wave1Amplitude * generalScale, 
-		                          Mathf.Sin((Time.time + wave1TimeOffset) * wave1Speed) * wave1Magnitude * generalScale);
+		                          (Mathf.Sin((Time.time + wave1TimeOffset) * wave1Speed) * wave1Magnitude * generalScale) + wave1Yoffset);
 		waterLayer2 = new Vector3(Mathf.Cos((Time.time + wave2TimeOffset) * wave2Speed) * wave2Amplitude * generalScale, 
-		                          Mathf.Sin((Time.time + wave2TimeOffset) * wave2Speed) * wave2Magnitude * generalScale);
+		                          (Mathf.Sin((Time.time + wave2TimeOffset) * wave2Speed) * wave2Magnitude * generalScale) + wave2Yoffset);
 
 		foreach (GameObject layer in layer0){
 			layer.transform.localPosition = waterLayer0;

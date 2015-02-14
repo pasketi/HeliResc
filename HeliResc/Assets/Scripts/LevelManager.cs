@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour {
 	private bool allSaved;
 	public float waterLevel = 0;
 	public Text cargoText, savedText;
-	
+
 	// Use this for initialization
 	void Start () {
 		crateAmount = countCrates ();

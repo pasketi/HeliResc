@@ -60,7 +60,7 @@ public class CopterManagerTouch : MonoBehaviour {
 
 		// Left rotate
 		if (Input.touchCount > 1){}
-		else if (Input.touchCount > 0 && Input.GetTouch(0).position.x < Screen.width/2 && Input.GetTouch(0).position.x > 50){
+		else if (Input.touchCount > 0 && Input.GetTouch(0).position.x < Screen.width/2 && Input.GetTouch(0).position.x > 150){
 			//  happens the first frame
 			if (lastMovementRight != false){
 				gameObject.transform.localScale = new Vector3(-gameObject.transform.localScale.x, gameObject.transform.localScale.y);
@@ -76,7 +76,7 @@ public class CopterManagerTouch : MonoBehaviour {
 
 		// Right rotate
 		if (Input.touchCount > 1){}
-		else if (Input.touchCount > 0 && Input.GetTouch(0).position.x > Screen.width/2 && Input.GetTouch(0).position.x < Screen.width-50) {
+		else if (Input.touchCount > 0 && Input.GetTouch(0).position.x > Screen.width/2 && Input.GetTouch(0).position.x < Screen.width-150) {
 			// What happens the first frame
 			if (lastMovementRight != true) {
 				gameObject.transform.localScale = new Vector3(-gameObject.transform.localScale.x, gameObject.transform.localScale.y);
@@ -104,7 +104,7 @@ public class CopterManagerTouch : MonoBehaviour {
 		else if (Input.touchCount == 1) {
 
 			// Altitude management
-			if (Input.GetTouch(0).position.x < 100 || Input.GetTouch(0).position.x > Screen.width -50) {
+			if (Input.GetTouch(0).position.x < 100 || Input.GetTouch(0).position.x > Screen.width -150) {
 				float tempY = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position).y;
 				if (tempY <= 7.5f && tempY >= 0f){
 					setFlyingAltitude(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position).y);
@@ -113,7 +113,7 @@ public class CopterManagerTouch : MonoBehaviour {
 		} else if (Input.touchCount == 2) {
 
 			// Altitude management
-			if (Input.GetTouch(1).position.x < 100 || Input.GetTouch(1).position.x > Screen.width -50) {
+			if (Input.GetTouch(1).position.x < 100 || Input.GetTouch(1).position.x > Screen.width -150) {
 				float tempY = Camera.main.ScreenToWorldPoint(Input.GetTouch(1).position).y;
 				if (tempY <= 7.5f && tempY >= 0f){
 					setFlyingAltitude(Camera.main.ScreenToWorldPoint(Input.GetTouch(1).position).y);
@@ -125,9 +125,9 @@ public class CopterManagerTouch : MonoBehaviour {
 
 		// Automatic 
 		if (gameObject.transform.position.y < flyingAltitude && running) {
-			copterBody.AddForce (gameObject.transform.up * (power*10) * Time.deltaTime);
+			copterBody.AddForce (gameObject.transform.up * (power*100) * Time.deltaTime);
 		} else if (gameObject.transform.position.y > flyingAltitude && running) {
-			copterBody.AddForce ((gameObject.transform.up - new Vector3(0f, gameObject.transform.up.y, 0f)) * (power*10) * Time.deltaTime);
+			copterBody.AddForce ((gameObject.transform.up - new Vector3(0f, gameObject.transform.up.y, 0f)) * (power*100) * Time.deltaTime);
 		}
 
 		if (isHookDown && hook == null) {
