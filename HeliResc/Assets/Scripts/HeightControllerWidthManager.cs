@@ -5,15 +5,16 @@ using System.Collections;
 public class HeightControllerWidthManager : MonoBehaviour {
 
 	private RectTransform rect;
-	public float widthPercentageByScreen = 0.1f;
+	private LevelManager manager;
 
 	// Use this for initialization
 	void Start () {
+		manager = (LevelManager) GameObject.Find("LevelManagerO").GetComponent(typeof(LevelManager));
 		rect = gameObject.GetComponent<RectTransform>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		rect.sizeDelta = new Vector2(Screen.width*widthPercentageByScreen,rect.sizeDelta.y);
+		rect.sizeDelta = new Vector2(Screen.width*manager.uiLiftPowerWidth,rect.sizeDelta.y);
 	}
 }

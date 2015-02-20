@@ -9,7 +9,6 @@ public class LandingPadManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		manager = (LevelManager) GameObject.Find("LevelManagerO").GetComponent(typeof(LevelManager));
-		//trigger = GetComponent<BoxCollider2D> ();
 	}
 	
 	// Update is called once per frame
@@ -19,8 +18,8 @@ public class LandingPadManager : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.transform.tag == "Crate") {
+			manager.saveCrate(other.GetComponentInChildren<CrateManager>().crateMass);
 			Destroy(other.gameObject);
-			manager.saveCrate();
 		}
 		if (other.gameObject.transform.tag == "Copter" && manager.getCargoCrates() > 0) {
 			manager.emptyCargo();

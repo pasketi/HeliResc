@@ -6,8 +6,9 @@ public class LevelManager : MonoBehaviour {
 
 	private int savedCrates, cargoCrates, crateAmount;
 	private bool allSaved;
-	public float waterLevel = 0;
+	public float waterLevel = 0, uiLiftPowerWidth = 0.1f, uiLiftPowerDeadZone = 0.05f;
 	public Text cargoText, savedText;
+
 
 	// Use this for initialization
 	void Start () {
@@ -27,12 +28,13 @@ public class LevelManager : MonoBehaviour {
 		Application.LoadLevel(Application.loadedLevelName);
 	}
 
-	public void saveCrate() {
+	public void saveCrate(float crateMass) {
 		savedCrates++;
 		if (savedCrates >= crateAmount) {
 			allSaved = true;
 		}
 		savedText.text = savedCrates + "/" + crateAmount;
+		GameObject.Find("Copter").GetComponent<CopterManagerTouch>().dropOneCrate(crateMass);
 	}
 
 	private int countCrates (){
@@ -47,6 +49,7 @@ public class LevelManager : MonoBehaviour {
 	public void cargoHookedCrates(GameObject hook){
 		foreach (Transform child in hook.transform) {
 			cargoCrates++;
+			Destroy(child.gameObject);
 		}
 		cargoText.text = getCargoCrates().ToString();
 	}
@@ -63,6 +66,7 @@ public class LevelManager : MonoBehaviour {
 		}
 		savedText.text = savedCrates + "/" + crateAmount;
 		cargoText.text = "0";
+		GameObject.Find("Copter").GetComponent<CopterManagerTouch>().dropAllCrates();
 	}
 
 	public float getWaterLevel(){

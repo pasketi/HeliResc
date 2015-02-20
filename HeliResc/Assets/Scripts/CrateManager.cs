@@ -4,17 +4,21 @@ using System.Collections;
 public class CrateManager : MonoBehaviour {
 
 	private LevelManager manager;
-	private float floatyValue = 0.005f; //buoancy?
+	private CopterManagerTouch copterScript;
+	private float floatyValue; //buoancy?
 	private GameObject crate;
 	private SpriteRenderer spriteRenderer;
+	public float crateMass = 5f;
 
 	public Sprite Dropped, Hooked;
 
 	// Use this for initialization
 	void Start () {
 		manager = (LevelManager) GameObject.Find("LevelManagerO").GetComponent(typeof(LevelManager));
+		copterScript = (CopterManagerTouch) GameObject.Find ("Copter").GetComponent(typeof(CopterManagerTouch));
 		crate = gameObject.transform.parent.gameObject;
 		spriteRenderer = crate.GetComponent<SpriteRenderer>();
+		floatyValue = gameObject.transform.parent.rigidbody2D.mass * 30f;
 	}
 	
 	// Update is called once per frame
@@ -45,6 +49,7 @@ public class CrateManager : MonoBehaviour {
 
 			gameObject.collider2D.enabled = false;
 			crate.layer = 11; //liftedCrate
+			copterScript.pickUpCrate(crateMass);
 		}
 	}
 }
