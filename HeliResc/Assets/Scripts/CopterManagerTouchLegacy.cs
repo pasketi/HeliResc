@@ -11,7 +11,6 @@ public class CopterManagerTouchLegacy : MonoBehaviour {
 	private DistanceJoint2D hookJoint;
 	private bool running = true, lastMovementRight = true, isHookDown = true, once = false;
 	private Vector2 lastVelocity;
-	private int lastTouchCount = 0;
 	private LevelManager manager;
 
 	public GameObject indicatorRect, hookPrefab, hookAnchor;
@@ -143,7 +142,5 @@ public class CopterManagerTouchLegacy : MonoBehaviour {
 		}
 
 		altitudeIndRect.anchoredPosition = new Vector2(0, Camera.main.WorldToScreenPoint(new Vector3(0f, flyingAltitude)).y);
-
-		lastTouchCount = Input.touchCount;
 	}
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class LandingPadManager : MonoBehaviour {
@@ -23,6 +23,9 @@ public class LandingPadManager : MonoBehaviour {
 		}
 		if (other.gameObject.transform.tag == "Copter" && manager.getCargoCrates() > 0) {
 			manager.emptyCargo();
+		}
+		if (other.gameObject.transform.tag == "Copter" && other.GetComponent<CopterManagerTouch>().isHookDead == true) {
+			other.GetComponent<CopterManagerTouch>().isHookDead = false;
 		}
 	}
 }

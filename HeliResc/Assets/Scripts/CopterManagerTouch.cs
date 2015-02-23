@@ -27,6 +27,7 @@ public class CopterManagerTouch : MonoBehaviour {
 
 	// Public values
 	public GameObject indicatorRect, hookPrefab, hookAnchor;
+	public bool isHookDead = false;
 	public float 	maxTilt = 75f, 
 					tiltSpeed = 50f, 
 					returnSpeed = 5f,
@@ -37,7 +38,9 @@ public class CopterManagerTouch : MonoBehaviour {
 					currentPower = 75f,
 					flyingAltitude = 4f, 
 					maxVelocity = 3f,
-					cargoMass = 0f;
+					cargoMass = 0f,
+					hookDistance = 1.5f,
+					reelSpeed = 0.05f;
 
 	public void pickUpCrate (float crateMass) {
 		gameObject.rigidbody2D.mass += crateMass;
@@ -129,7 +132,7 @@ public class CopterManagerTouch : MonoBehaviour {
 
 				//Copter press and Joystick initialization since both cannot happen during the same frame
 				if(touch.phase == TouchPhase.Began && 
-				   gameObject.collider2D == Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(touch.position))){
+				   gameObject.collider2D == Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(touch.position)) && !isHookDead){
 					copterID = touch.fingerId;
 					Debug.Log("Copter touched @ " + Time.time);
 					if (isHookDown){
@@ -271,15 +274,27 @@ public class CopterManagerTouch : MonoBehaviour {
 
 		copterBody.AddForce (gameObject.transform.up * (currentPower*100) * Time.deltaTime);
 
-		if (isHookDown && hook == null) {
+		if (isHookDown && hook == null && !isHookDead) {
 			once = true;
 			hook = Instantiate (hookPrefab, gameObject.transform.position + new Vector3 (0f, -0.3f), Quaternion.identity) as GameObject;
+			hookJoint.enabled = true;
+			hookJoint.distance = hookDistance;
 			hookJoint.connectedBody = hook.rigidbody2D;
-		} else if (!isHookDown && once) {
-			manager.cargoHookedCrates(hook);
-			Destroy(hook);
+		} else if (!isHookDown && once && Vector2.Distance (hook.transform.position, hookAnchor.transform.position) < 0.1 && !isHookDead) {
+			manager.cargoHookedCrates (hook);
+			Destroy (hook);
 			once = false;
-		}
+		} else if (!isHookDown && hook != null && !isHookDead) {
+			hookJoint.distance -= reelSpeed;
+		} else if (isHookDown && hookJoint.distance != hookDistance)
+			hookJoint.distance = hookDistance;
+
+		if (!isHookDead && isHookDown && Vector2.Distance (hook.transform.position, hookAnchor.transform.position) > hookDistance*2) {
+			hookJoint.enabled = false;
+			hook.GetComponent<DestroyHookOverTime>().doom();
+			hook = null;
+			isHookDead = true;
+		} 
 
 		if (tempHoldTime != holdTime) {
 			tempHoldTime += Time.deltaTime;
