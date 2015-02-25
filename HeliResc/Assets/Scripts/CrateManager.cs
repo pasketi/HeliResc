@@ -38,7 +38,7 @@ public class CrateManager : MonoBehaviour {
 		if (crate.transform.position.y < manager.getWaterLevel ()) {
 			crate.rigidbody2D.AddForce (Vector3.up * floatyValue);
 		}
-		if (gameObject.transform.parent.gameObject.layer == 11) {
+		if (crate.layer == 11) {
 			spriteRenderer.sprite = Hooked;
 		} else {
 			spriteRenderer.sprite = Dropped;

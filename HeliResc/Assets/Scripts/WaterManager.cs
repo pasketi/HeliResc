@@ -52,6 +52,6 @@ public class WaterManager : MonoBehaviour {
 
 	private void setLeftAndRightWaters() {
 		waterLeft.transform.localPosition = new Vector3(-(exampleWaterSprite.texture.width/exampleWaterSprite.pixelsPerUnit), waterLeft.transform.localPosition.y);
-		waterRight.transform.localPosition = new Vector3(exampleWaterSprite.texture.width/exampleWaterSprite.pixelsPerUnit, waterRight.transform.localPosition.y);
+		waterRight.transform.localPosition = new Vector3((exampleWaterSprite.texture.width/exampleWaterSprite.pixelsPerUnit), waterRight.transform.localPosition.y);
 	}
 }

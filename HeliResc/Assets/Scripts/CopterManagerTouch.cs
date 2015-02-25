@@ -23,17 +23,18 @@ public class CopterManagerTouch : MonoBehaviour {
 	private GameObject hook;
 	private RectTransform powerIndRect;
 	private LevelManager manager;
-	private int rotationID = 255, powerID = 255, copterID = 255;
+	private int rotationID1 = 255, rotationID2 = 255, powerID = 255, copterID = 255;
 
 	// Public values
-	public GameObject indicatorRect, hookPrefab, hookAnchor;
-	public bool isHookDead = false;
+	public GameObject indicatorRect, hookPrefab, hookAnchor, brokenCopter;
+	public bool isHookDead = false, isKill = false;
 	public float 	maxTilt = 75f, 
 					tiltSpeed = 50f, 
 					returnSpeed = 5f,
 					holdTime = 0.25f,
 					rotationSensitivity = 0.5f,
-					minPower = 60f,
+					powerSensitivity = 0.5f,
+					minPower = 0f,
 					maxPower = 120f,
 					currentPower = 75f,
 					flyingAltitude = 4f, 
@@ -140,14 +141,20 @@ public class CopterManagerTouch : MonoBehaviour {
 					} else {
 						isHookDown = true;
 					}
-				} else if (touch.position.x > Screen.width * manager.uiLiftPowerWidth && touch.phase == TouchPhase.Began) {
+				} else if (touch.phase == TouchPhase.Began) {
 					currentAngle = copterAngle;
-					rotationID = touch.fingerId;
-					Debug.Log ("Joystick Initialized @ " + Time.time);
+					if (rotationID1 == 255) {
+						rotationID1 = touch.fingerId;
+						Debug.Log ("Joystick 1 Initialized @ " + Time.time);
+					} else if (rotationID2 == 255) {
+						rotationID2 = touch.fingerId;
+						Debug.Log ("Joystick 2 Initialized @ " + Time.time);
+					}
 				}
 
-				//Joystick moved
-				if (touch.fingerId == rotationID && touch.phase == TouchPhase.Moved) {
+				//Joystick moved (JOYSTICK CONTROLS ROTATION AND POWER MANAGEMENT 
+				if ((touch.fingerId == rotationID1 || touch.fingerId == rotationID2) && touch.phase == TouchPhase.Moved) {
+					//Rotation
 					if ((currentAngle < maxTilt || touch.deltaPosition.x < 0f) || 
 					    (currentAngle > 360f-maxTilt || touch.deltaPosition.x > 0f)) currentAngle -= touch.deltaPosition.x * rotationSensitivity;
 
@@ -157,36 +164,46 @@ public class CopterManagerTouch : MonoBehaviour {
 					if (currentAngle > maxTilt && currentAngle < 180f) currentAngle = maxTilt;
 					else if (currentAngle < 360f - maxTilt && currentAngle > 180f) currentAngle = 360f - maxTilt;
 
+					//Power Management
+					if (currentPower <= maxPower || currentPower >= minPower) {
+						currentPower += (touch.deltaPosition.y/Screen.height)*(maxPower*powerSensitivity);
+					}
+
 					//Debug.Log ("Joystick moved " + currentAngle);
 				}
 
 				//Power initialization
-				if (touch.position.x < Screen.width * manager.uiLiftPowerWidth && touch.phase == TouchPhase.Began) {
+				/*if (touch.position.x < Screen.width * manager.uiLiftPowerWidth && touch.phase == TouchPhase.Began) {
 					powerID = touch.fingerId;
 					Debug.Log ("Power finger initialized @ " + Time.time);
-				}
+				}*/
 
 				//Power finger management
-				if (touch.fingerId == powerID && (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)) {
+				/*if (touch.fingerId == powerID && (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)) {
 					currentPower = (((maxPower + minPower) * (Screen.height*manager.uiLiftPowerDeadZone)) - ((maxPower-minPower) * touch.position.y) - minPower*Screen.height) / ((2 * (Screen.height*manager.uiLiftPowerDeadZone)) - Screen.height);
 					if (touch.position.y < Screen.height - Screen.height*manager.uiLiftPowerDeadZone || touch.position.y > Screen.height*manager.uiLiftPowerDeadZone)
 						powerIndPosition = new Vector2(0f, touch.position.y);
 					//Debug.Log ("Power finger check " + touch.deltaPosition);
-				}
+				}*/
 
 				//Control destruction
 				if (touch.phase == TouchPhase.Ended) {
-					if (touch.fingerId == rotationID) {
-						currentAngle = 0f;
-						tempHoldTime = 0f;
-						rotationID = 255;
-						Debug.Log ("Joystick Destroyed @ " + Time.time);
-					} else if (touch.fingerId == powerID) {
+					if (touch.fingerId == rotationID1) {
+						rotationID1 = 255;
+						Debug.Log ("Joystick #1 Destroyed @ " + Time.time);
+					} else if (touch.fingerId == rotationID2) {
+						rotationID2 = 255;
+						Debug.Log ("Joystick #2 Destroyed @ " + Time.time); 
+					}/* else if (touch.fingerId == powerID) {
 						Debug.Log ("Power Control disengaged @ " + Time.time);
 						powerID = 255;
-					} else if (touch.fingerId == copterID) {
+					} */else if (touch.fingerId == copterID) {
 						Debug.Log ("Copter touch ended @ " + Time.time);
 						copterID = 255;
+					}
+					if (rotationID1 == 255 && rotationID2 == 255) {
+						currentAngle = 0f;
+						tempHoldTime = 0f;
 					}
 				}
 			}
@@ -230,13 +247,13 @@ public class CopterManagerTouch : MonoBehaviour {
 
 		// Helicopter angle management
 
-		if (copterAngle != 0f && rotationID == 255) { // Return to 0°
+		if (copterAngle != 0f && rotationID1 == 255) { // Return to 0°
 			if (copterAngle > 180f) {
 				gameObject.transform.Rotate (new Vector3 (0f, 0f, returnSpeed * Time.deltaTime * (360f - copterAngle) * persistence));
 			} else if (copterAngle < 180f) {
 				gameObject.transform.Rotate (new Vector3 (0f, 0f, -(returnSpeed * Time.deltaTime) * copterAngle * persistence));
 			}
-		} else if (copterAngle != currentAngle && rotationID != 255) { // Turn to currentAngle
+		} else if (copterAngle != currentAngle && rotationID1 != 255) { // Turn to currentAngle
 			if (currentAngle < 180f) {
 				if (copterAngle > 180f) {
 					// Rotate CCW
@@ -267,8 +284,8 @@ public class CopterManagerTouch : MonoBehaviour {
 		}
 
 		//Copter direction mangement
-		if (currentAngle > 180f && rotationID != 255) gameObject.transform.localScale = new Vector3(copterScale, gameObject.transform.localScale.y); 
-		else if (currentAngle < 180f && rotationID != 255) gameObject.transform.localScale = new Vector3(-copterScale, gameObject.transform.localScale.y);
+		if (currentAngle > 180f && rotationID1 != 255) gameObject.transform.localScale = new Vector3(copterScale, gameObject.transform.localScale.y); 
+		else if (currentAngle < 180f && rotationID1 != 255) gameObject.transform.localScale = new Vector3(-copterScale, gameObject.transform.localScale.y);
 
 		// END INPUT ------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -286,14 +303,11 @@ public class CopterManagerTouch : MonoBehaviour {
 			once = false;
 		} else if (!isHookDown && hook != null && !isHookDead) {
 			hookJoint.distance -= reelSpeed;
-		} else if (isHookDown && hookJoint.distance != hookDistance)
+		} else if (isHookDown && hookJoint.distance != hookDistance) {
 			hookJoint.distance = hookDistance;
-
+		}
 		if (!isHookDead && isHookDown && Vector2.Distance (hook.transform.position, hookAnchor.transform.position) > hookDistance*2) {
-			hookJoint.enabled = false;
-			hook.GetComponent<DestroyHookOverTime>().doom();
-			hook = null;
-			isHookDead = true;
+			killHook();
 		} 
 
 		if (tempHoldTime != holdTime) {
@@ -305,7 +319,32 @@ public class CopterManagerTouch : MonoBehaviour {
 			tempHoldTime = holdTime;
 		}
 
+		if (transform.position.y - 1f < manager.getWaterLevel()){
+			manager.Reset();
+		}
+
 		powerIndPosition = new Vector2(0f, ((Screen.height*manager.uiLiftPowerDeadZone)*(maxPower-(2*currentPower)+minPower)+(currentPower-minPower)*Screen.height)/(maxPower-minPower));
 		powerIndRect.anchoredPosition = new Vector2(0, powerIndPosition.y);
+
+		if (isKill) kill();
+	}
+
+	private void killHook () {
+		hookJoint.enabled = false;
+		hook.GetComponent<DestroyHookOverTime>().doom();
+		hook = null;
+		isHookDead = true;
+	}
+
+	public void kill() {
+		if (hook != null)
+			killHook ();
+		GameObject newCopter = (GameObject) Instantiate(brokenCopter, transform.position, Quaternion.identity);
+		Rigidbody2D[] parts = newCopter.GetComponentsInChildren<Rigidbody2D>();
+		foreach(Rigidbody2D part in parts){
+			part.velocity += gameObject.rigidbody2D.velocity;
+			part.angularVelocity += gameObject.rigidbody2D.angularVelocity;
+		}
+		Destroy (gameObject);
 	}
 }
