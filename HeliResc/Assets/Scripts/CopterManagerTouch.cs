@@ -19,11 +19,12 @@ public class CopterManagerTouch : MonoBehaviour {
 					copterScale = 0f, 
 					persistence = 1f,
 					tempHoldTime = 0f, 
-					controlSmoothZone = 1f;
+					controlSmoothZone = 1f,
+					currentPower;
 	private GameObject hook;
 	private RectTransform powerIndRect;
 	private LevelManager manager;
-	private int rotationID1 = 255, rotationID2 = 255, powerID = 255, copterID = 255;
+	private int rotationID1 = 255, rotationID2 = 255;
 
 	// Public values
 	public GameObject indicatorRect, hookPrefab, hookAnchor, brokenCopter;
@@ -36,9 +37,7 @@ public class CopterManagerTouch : MonoBehaviour {
 					powerSensitivity = 0.5f,
 					minPower = 0f,
 					maxPower = 120f,
-					currentPower = 75f,
-					flyingAltitude = 4f, 
-					maxVelocity = 3f,
+					initialPower = 75f,
 					cargoMass = 0f,
 					hookDistance = 1.5f,
 					reelSpeed = 0.05f;
@@ -57,6 +56,10 @@ public class CopterManagerTouch : MonoBehaviour {
 		gameObject.rigidbody2D.mass -= cargoMass;
 		cargoMass = 0f;
 	}
+
+	public void resetPower() {
+		currentPower = initialPower;
+	}
 	
 	// Use this for initialization
 	void Start () {
@@ -68,6 +71,7 @@ public class CopterManagerTouch : MonoBehaviour {
 		copterScale = gameObject.transform.localScale.x;
 		tempHoldTime = holdTime;
 		powerIndPosition = new Vector2(0f, ((Screen.height*manager.uiLiftPowerDeadZone)*(maxPower-(2*currentPower)+minPower)+(currentPower-minPower)*Screen.height)/(maxPower-minPower));
+		resetPower();
 	}
 
 	//Update is called before void Update();

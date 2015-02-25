@@ -23,6 +23,7 @@ public class LandingPadManager : MonoBehaviour {
 		}
 		if (other.gameObject.transform.tag == "Copter" && manager.getCargoCrates() > 0) {
 			manager.emptyCargo();
+			other.GetComponent<CopterManagerTouch>().resetPower();
 		}
 		if (other.gameObject.transform.tag == "Copter" && other.GetComponent<CopterManagerTouch>().isHookDead == true) {
 			other.GetComponent<CopterManagerTouch>().isHookDead = false;

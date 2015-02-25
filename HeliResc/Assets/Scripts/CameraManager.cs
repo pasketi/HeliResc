@@ -3,22 +3,26 @@ using System.Collections;
 
 public class CameraManager : MonoBehaviour {
 
-	private float cameraOriginalY;
+	private Vector3 cameraOriginal, target, zero = Vector3.zero;
+	private float deadZonePixels;
 
 	public GameObject copter;
-	public float deadZone = 300f;
+	public float deadZonePercent = 0.2f;
 	public float dampTime = 0.15f;
+	public float maxSpeed = 1f;
 
 	// Use this for initialization
 	void Start () {
-		cameraOriginalY = Camera.main.transform.position.y;
+		cameraOriginal = Camera.main.transform.position;
+		deadZonePixels = Screen.width * deadZonePercent;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (copter != null && (Camera.main.WorldToScreenPoint(copter.transform.position).x >= Screen.width - deadZone || Camera.main.WorldToScreenPoint(copter.transform.position).x <= deadZone)){
-			Vector3 destination = new Vector3(copter.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-			gameObject.transform.position = destination; 
+		//maxSpeed = copter.rigidbody2D.velocity.x;
+		if (copter != null && (Camera.main.WorldToScreenPoint(copter.transform.position).x >= Screen.width - deadZonePixels || Camera.main.WorldToScreenPoint(copter.transform.position).x <= deadZonePixels)){
+			target = new Vector3(copter.transform.position.x, cameraOriginal.y, cameraOriginal.z);
 		}
+		if (Camera.main.transform.position.x != target.x) gameObject.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, target, ref zero, dampTime, maxSpeed); 
 	}
 }
