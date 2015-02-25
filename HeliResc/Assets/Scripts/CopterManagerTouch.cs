@@ -88,45 +88,6 @@ public class CopterManagerTouch : MonoBehaviour {
 
 		// START INPUT ------------------------------------------------------------------------------------------------------------------------------------------
 
-		/* NEW CONTROL LOGIC
-		 * -----------------
-		 * VARIABLES FOR ROTATION
-		 * rootAngle = the angle for joystick 0°
-		 * currentAngle = the angle for current joystick position
-		 * joystickPosition = current screen position of joystick
-		 * 
-		 * VARIABLES FOR POWER MANAGEMENT
-		 * minPower = minimum lift power for the copter (Enough to decend slowly with empty cargo)
-		 * maxPower = maximum lift power for the copter
-		 * currentPower = current position of power meter
-		 * 
-		 * Cycle through every touch
-		 * 
-		 * 		ROTATION CONTROL
-		 * 		if touchPhase has began on horizontal control area
-		 * 			Set the currentAngle to current copter angle
-		 * 			Create joystick on touch position
-		 * 		if touchPhase on rotation control area stationary or moved
-		 * 			Get X on the joystick and set currentAngle as X
-		 * 
-		 * 		POWER CONTROL
-		 * 		if touchPhase has began on power control area
-		 * 			Set the anchorpoint to touch position
-		 * 		if power control touchPhase has moved
-		 * 			Set currentPower as follows: currentPower = getPowerFromMovement(minPower, maxPower, touch.deltaPosition)
-		 * 
-		 * 		if ANY kind of touchPhase ended
-		 * 			if Rotation control
-		 * 				set currentAngle to 0f, so the copter returns
-		 * 				Destroy joystick
-		 * 			if Power control
-		 * 				
-		 * 
-		 * Automatically
-		 * 		Set the copter angle to currentAngle if possible using modified automatic copter return to 0° algorithm
-		 * 		Give copter lift according to currentPower
-		 */
-
 		// Control system
 		if (Input.touchCount > 0) {
 			foreach (Touch touch in Input.touches){
@@ -134,14 +95,15 @@ public class CopterManagerTouch : MonoBehaviour {
 				//Copter press and Joystick initialization since both cannot happen during the same frame
 				if(touch.phase == TouchPhase.Began && 
 				   gameObject.collider2D == Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(touch.position)) && !isHookDead){
-					copterID = touch.fingerId;
+					//copterID = touch.fingerId;
 					Debug.Log("Copter touched @ " + Time.time);
 					if (isHookDown){
 						isHookDown = false;
 					} else {
 						isHookDown = true;
 					}
-				} else if (touch.phase == TouchPhase.Began) {
+				}
+				if (touch.phase == TouchPhase.Began) {
 					currentAngle = copterAngle;
 					if (rotationID1 == 255) {
 						rotationID1 = touch.fingerId;
@@ -172,20 +134,6 @@ public class CopterManagerTouch : MonoBehaviour {
 					//Debug.Log ("Joystick moved " + currentAngle);
 				}
 
-				//Power initialization
-				/*if (touch.position.x < Screen.width * manager.uiLiftPowerWidth && touch.phase == TouchPhase.Began) {
-					powerID = touch.fingerId;
-					Debug.Log ("Power finger initialized @ " + Time.time);
-				}*/
-
-				//Power finger management
-				/*if (touch.fingerId == powerID && (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)) {
-					currentPower = (((maxPower + minPower) * (Screen.height*manager.uiLiftPowerDeadZone)) - ((maxPower-minPower) * touch.position.y) - minPower*Screen.height) / ((2 * (Screen.height*manager.uiLiftPowerDeadZone)) - Screen.height);
-					if (touch.position.y < Screen.height - Screen.height*manager.uiLiftPowerDeadZone || touch.position.y > Screen.height*manager.uiLiftPowerDeadZone)
-						powerIndPosition = new Vector2(0f, touch.position.y);
-					//Debug.Log ("Power finger check " + touch.deltaPosition);
-				}*/
-
 				//Control destruction
 				if (touch.phase == TouchPhase.Ended) {
 					if (touch.fingerId == rotationID1) {
@@ -194,13 +142,10 @@ public class CopterManagerTouch : MonoBehaviour {
 					} else if (touch.fingerId == rotationID2) {
 						rotationID2 = 255;
 						Debug.Log ("Joystick #2 Destroyed @ " + Time.time); 
-					}/* else if (touch.fingerId == powerID) {
-						Debug.Log ("Power Control disengaged @ " + Time.time);
-						powerID = 255;
-					} */else if (touch.fingerId == copterID) {
+					} /*else if (touch.fingerId == copterID) {
 						Debug.Log ("Copter touch ended @ " + Time.time);
 						copterID = 255;
-					}
+					}*/
 					if (rotationID1 == 255 && rotationID2 == 255) {
 						currentAngle = 0f;
 						tempHoldTime = 0f;
@@ -211,39 +156,6 @@ public class CopterManagerTouch : MonoBehaviour {
 		}
 
 		//------------------------------------------------------------------------------------------------------------------------------------------
-		/*
-		// Left rotate
-		if (Input.touchCount > 1){}
-		else if (Input.touchCount > 0 && Input.GetTouch(0).position.x < Screen.width/2 && Input.GetTouch(0).position.x > manager.uiLiftPowerWidth){
-			//  happens the first frame
-			if (lastMovementRight != false){
-				gameObject.transform.localScale = new Vector3(-gameObject.transform.localScale.x, gameObject.transform.localScale.y);
-				lastMovementRight = false;
-			}
-
-			// What happens every frame
-			if (gameObject.transform.eulerAngles.z >= maxTilt 
-			    && gameObject.transform.eulerAngles.z <= 180f) {} else {
-				gameObject.transform.Rotate(new Vector3(0f, 0f, tiltSpeed*Time.deltaTime));
-			}
-		}
-
-		// Right rotate
-		if (Input.touchCount > 1){}
-		else if (Input.touchCount > 0 && Input.GetTouch(0).position.x > Screen.width/2 && Input.GetTouch(0).position.x < Screen.width - manager.uiLiftPowerWidth) {
-			// What happens the first frame
-			if (lastMovementRight != true) {
-				gameObject.transform.localScale = new Vector3(-gameObject.transform.localScale.x, gameObject.transform.localScale.y);
-				lastMovementRight = true;
-			}
-
-			// What happens every frame
-			if (gameObject.transform.eulerAngles.z <= 360f-maxTilt 
-			    && gameObject.transform.eulerAngles.z >= 180f) {} else {
-				gameObject.transform.Rotate (new Vector3 (0f, 0f, -tiltSpeed * Time.deltaTime));
-			}
-		}
-		 */
 
 		// Helicopter angle management
 
@@ -319,7 +231,7 @@ public class CopterManagerTouch : MonoBehaviour {
 			tempHoldTime = holdTime;
 		}
 
-		if (transform.position.y - 1f < manager.getWaterLevel()){
+		if ((gameObject.transform.position.y) < manager.getWaterLevel()){
 			manager.Reset();
 		}
 

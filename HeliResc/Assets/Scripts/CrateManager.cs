@@ -46,7 +46,7 @@ public class CrateManager : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
-		if (collision.collider.gameObject.CompareTag ("Hook") && GameObject.Find ("Copter").GetComponent<CopterManagerTouch> ().isHookDead == false) {
+		if (copterScript != null && collision.collider.gameObject.CompareTag ("Hook") && copterScript.isHookDead == false) {
 			gameObject.transform.parent.parent = collision.collider.gameObject.transform;
 			gameObject.AddComponent ("DistanceJoint2D");
 

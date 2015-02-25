@@ -14,6 +14,7 @@ public class ExplodeParts : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (exploded) Destroy(gameObject);
 		if (!exploded){
 			foreach(Rigidbody2D part in parts) {
 				part.transform.parent = null;
