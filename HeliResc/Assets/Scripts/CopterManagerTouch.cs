@@ -63,14 +63,6 @@ public class CopterManagerTouch : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		// for powermanagement in editor
-		if (currentPower < minPower) currentPower = minPower;
-		if (currentPower > maxPower) currentPower = maxPower;
-
-		if (minPower > maxPower) minPower = maxPower;
-		if (maxPower < minPower) maxPower = minPower;
-
-
 		// START INPUT ------------------------------------------------------------------------------------------------------------------------------------------
 
 		// Control system
@@ -175,6 +167,13 @@ public class CopterManagerTouch : MonoBehaviour {
 				}
 			}
 		}
+
+		// for limits
+		if (currentPower < minPower) currentPower = minPower;
+		if (currentPower > maxPower) currentPower = maxPower;
+		
+		if (minPower > maxPower) minPower = maxPower;
+		if (maxPower < minPower) maxPower = minPower;
 
 		//Copter direction mangement
 		if (currentAngle > 180f && rotationID1 != 255) gameObject.transform.localScale = new Vector3(copterScale, gameObject.transform.localScale.y); 
