@@ -9,6 +9,8 @@ public class HookLineManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		line = gameObject.GetComponent<LineRenderer> ();
+		line.sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
+		line.sortingLayerID = GetComponent<SpriteRenderer>().sortingLayerID;
 	}
 	
 	// Update is called once per frame
