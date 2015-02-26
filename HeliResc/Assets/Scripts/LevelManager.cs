@@ -4,74 +4,74 @@ using System.Collections;
 
 public class LevelManager : MonoBehaviour {
 
-	private int savedCrates, cargoCrates, crateAmount;
-	private bool allSaved, reset = false;
-	public float waterLevel = 0, uiLiftPowerWidth = 0.1f, uiLiftPowerDeadZone = 0.05f, resetCountdown = 3f;
+	private int savedCrates = 0, crateAmount;
+	private bool win = false, lose = false, splash = false;
+	public float waterLevel = 0f, uiLiftPowerWidth = 0.1f, uiLiftPowerDeadZone = 0.05f, resetCountdown = 3f, crateSize;
 	public Text cargoText, savedText;
+	public int cargoSize = 2;
 
 
 	// Use this for initialization
 	void Start () {
 		crateAmount = countCrates ();
 		savedText.text = savedCrates + "/" + crateAmount;
+		crateSize = getCrateScale();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (allSaved) {
+
+		if (savedCrates >= crateAmount) {
+			win = true;
+		}
+
+		if (win) {
 			Debug.Log("Victory!");
 			Reset();
 		}
-		if (reset) {
+		if (lose) {
 			resetCountdown -= Time.deltaTime;
 			if (GameObject.Find("Copter") != null) GameObject.Find("Copter").GetComponent<CopterManagerTouch>().isKill = true;
-			if (resetCountdown <= 0f) Application.LoadLevel(Application.loadedLevelName);
+			if (resetCountdown <= 0f) Reset ();
+		} else if (splash) {
+			resetCountdown -= Time.deltaTime;
+			if (GameObject.Find("Copter") != null) GameObject.Find("Copter").GetComponent<CopterManagerTouch>().isSplash = true;
+			if (resetCountdown <= 0f) Reset ();
 		}
+	}
+
+	public void levelFailed (int type) {
+		if (type == 1)
+			lose = true;
+		else if (type == 2)
+			splash = true;
+	}
+
+	public void levelPassed () {
+		win = true;
 	}
 
 	public void Reset() {
-		reset = true;
-	}
-
-	public void saveCrate(float crateMass) {
-		savedCrates++;
-		if (savedCrates >= crateAmount) {
-			allSaved = true;
-		}
-		savedText.text = savedCrates + "/" + crateAmount;
-		GameObject.Find("Copter").GetComponent<CopterManagerTouch>().dropOneCrate(crateMass);
+		Application.LoadLevel(Application.loadedLevelName);
 	}
 
 	private int countCrates (){
 		var crates = GameObject.FindGameObjectsWithTag ("SaveableObject");
-		/*int count = 0;
-		foreach (var crate in crates) {
-			count++;
-		}*/
 		return crates.Length;
 	}
 
-	public void cargoHookedCrates(GameObject hook){
-		foreach (Transform child in hook.transform) {
-			cargoCrates++;
-			Destroy(child.gameObject);
-		}
-		cargoText.text = getCargoCrates().ToString();
+	private float getCrateScale() {
+		GameObject crates = GameObject.FindGameObjectWithTag ("Crate");
+		return crates.transform.localScale.x;
 	}
 
-	public int getCargoCrates() {
-		return cargoCrates;
+	public int getCrateAmount () {
+		return crateAmount;
 	}
 
-	public void emptyCargo() {
-		savedCrates += cargoCrates;
-		cargoCrates = 0;
-		if (savedCrates >= crateAmount) {
-			allSaved = true;
-		}
+	public void saveCrates (int amount) {
+		savedCrates += amount;
 		savedText.text = savedCrates + "/" + crateAmount;
-		cargoText.text = "0";
-		GameObject.Find("Copter").GetComponent<CopterManagerTouch>().dropAllCrates();
 	}
 
 	public float getWaterLevel(){
@@ -80,5 +80,11 @@ public class LevelManager : MonoBehaviour {
 
 	public void setWaterLevel(float newWaterLevel) {
 		waterLevel = newWaterLevel;
+	}
+
+	public void setCargoCrates(int amount) {
+		cargoText.text = amount.ToString();
+		if (cargoSize.ToString() == cargoText.text) cargoText.color = new Color(1f, 0f, 0f);
+		else cargoText.color = new Color(0f, 0f, 0f);
 	}
 }

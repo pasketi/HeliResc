@@ -5,14 +5,17 @@ public class CrateManager : MonoBehaviour {
 
 	private LevelManager manager;
 	private CopterManagerTouch copterScript;
+	private CargoManager cargoScript;
 	private float floatyValue; //buoancy?
 	private GameObject crate;
 	private SpriteRenderer spriteRenderer;
 	private DistanceJoint2D joint;
 	private HingeJoint2D hinge;
 	public float crateMass = 5f;
+	public float inWaterModifier = 0.2f;
 
 	public Sprite Dropped, Hooked;
+	public bool inWater = false;
 
 
 
@@ -20,6 +23,7 @@ public class CrateManager : MonoBehaviour {
 	void Start () {
 		manager = (LevelManager) GameObject.Find("LevelManagerO").GetComponent(typeof(LevelManager));
 		copterScript = (CopterManagerTouch) GameObject.Find ("Copter").GetComponent(typeof(CopterManagerTouch));
+		cargoScript = (CargoManager) GameObject.Find ("Copter").GetComponent(typeof(CargoManager));
 		crate = gameObject.transform.parent.gameObject;
 		spriteRenderer = crate.GetComponent<SpriteRenderer>();
 		floatyValue = gameObject.transform.parent.rigidbody2D.mass * 30f;
@@ -28,15 +32,18 @@ public class CrateManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (crate.layer == 11 && copterScript.isHookDead == true) {
+		if ((copterScript != null && crate.layer == 11 && copterScript.isHookDead == true) || copterScript == null) {
 			Destroy(joint);
-			copterScript.pickUpCrate (-crateMass);
+			cargoScript.changeCargoMass (-crateMass);
 			gameObject.collider2D.enabled = true;
 			crate.layer = 10;
 			gameObject.transform.parent.parent = null;
 		}
 		if (crate.transform.position.y < manager.getWaterLevel ()) {
 			crate.rigidbody2D.AddForce (Vector3.up * floatyValue);
+			inWater = true;
+		} else {
+			inWater = false;
 		}
 		if (crate.layer == 11) {
 			spriteRenderer.sprite = Hooked;
@@ -61,7 +68,7 @@ public class CrateManager : MonoBehaviour {
 
 			gameObject.collider2D.enabled = false;
 			crate.layer = 11; //liftedCrate
-			copterScript.pickUpCrate (crateMass);
+			cargoScript.changeCargoMass (crateMass);
 		}
 	}
 }

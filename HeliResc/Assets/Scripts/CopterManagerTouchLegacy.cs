@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -143,4 +143,4 @@ public class CopterManagerTouchLegacy : MonoBehaviour {
 
 		altitudeIndRect.anchoredPosition = new Vector2(0, Camera.main.WorldToScreenPoint(new Vector3(0f, flyingAltitude)).y);
 	}
-}
+}*/

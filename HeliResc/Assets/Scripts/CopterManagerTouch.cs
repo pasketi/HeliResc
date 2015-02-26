@@ -4,11 +4,6 @@ using System.Collections;
 
 public class CopterManagerTouch : MonoBehaviour {
 
-	//USE THIS TO SWAP BETWEEN THE CONTROL SYSTEMS
-	// true == Erte && Panu version
-	// false == Cifu && Henri version (sorry)
-	public bool controlSystem = true;
-
 	// Private stuff
 	private Rigidbody2D copterBody;
 	private DistanceJoint2D hookJoint;
@@ -24,11 +19,12 @@ public class CopterManagerTouch : MonoBehaviour {
 	private GameObject hook;
 	private RectTransform powerIndRect;
 	private LevelManager manager;
+	private CargoManager cargo;
 	private int rotationID1 = 255, rotationID2 = 255;
 
 	// Public values
-	public GameObject indicatorRect, hookPrefab, hookAnchor, brokenCopter;
-	public bool isHookDead = false, isKill = false;
+	public GameObject indicatorRect, hookPrefab, hookAnchor, brokenCopter, explosion, splash;
+	public bool isHookDead = false, isKill = false, isSplash = false;
 	public float 	maxTilt = 75f, 
 					tiltSpeed = 50f, 
 					returnSpeed = 5f,
@@ -38,24 +34,8 @@ public class CopterManagerTouch : MonoBehaviour {
 					minPower = 0f,
 					maxPower = 120f,
 					initialPower = 75f,
-					cargoMass = 0f,
 					hookDistance = 1.5f,
 					reelSpeed = 0.05f;
-
-	public void pickUpCrate (float crateMass) {
-		gameObject.rigidbody2D.mass += crateMass;
-		cargoMass += crateMass;
-	}
-
-	public void dropOneCrate (float crateMass) {
-		gameObject.rigidbody2D.mass -= crateMass;
-		cargoMass -= crateMass;
-	}
-
-	public void dropAllCrates () {
-		gameObject.rigidbody2D.mass -= cargoMass;
-		cargoMass = 0f;
-	}
 
 	public void resetPower() {
 		currentPower = initialPower;
@@ -64,6 +44,7 @@ public class CopterManagerTouch : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		manager = (LevelManager) GameObject.Find("LevelManagerO").GetComponent(typeof(LevelManager));
+		cargo = GetComponent<CargoManager>();
 		copterBody = gameObject.GetComponent<Rigidbody2D>();
 		powerIndRect = indicatorRect.GetComponent<RectTransform> ();
 		hookJoint = GetComponent<DistanceJoint2D> ();
@@ -99,22 +80,20 @@ public class CopterManagerTouch : MonoBehaviour {
 				//Copter press and Joystick initialization since both cannot happen during the same frame
 				if(touch.phase == TouchPhase.Began && 
 				   gameObject.collider2D == Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(touch.position)) && !isHookDead){
-					//copterID = touch.fingerId;
-					Debug.Log("Copter touched @ " + Time.time);
 					if (isHookDown){
 						isHookDown = false;
 					} else {
 						isHookDown = true;
 					}
 				}
+
+				//Joystick initialization
 				if (touch.phase == TouchPhase.Began) {
 					currentAngle = copterAngle;
 					if (rotationID1 == 255) {
 						rotationID1 = touch.fingerId;
-						Debug.Log ("Joystick 1 Initialized @ " + Time.time);
 					} else if (rotationID2 == 255) {
 						rotationID2 = touch.fingerId;
-						Debug.Log ("Joystick 2 Initialized @ " + Time.time);
 					}
 				}
 
@@ -142,10 +121,8 @@ public class CopterManagerTouch : MonoBehaviour {
 				if (touch.phase == TouchPhase.Ended) {
 					if (touch.fingerId == rotationID1) {
 						rotationID1 = 255;
-						Debug.Log ("Joystick #1 Destroyed @ " + Time.time);
 					} else if (touch.fingerId == rotationID2) {
 						rotationID2 = 255;
-						Debug.Log ("Joystick #2 Destroyed @ " + Time.time); 
 					} /*else if (touch.fingerId == copterID) {
 						Debug.Log ("Copter touch ended @ " + Time.time);
 						copterID = 255;
@@ -214,9 +191,14 @@ public class CopterManagerTouch : MonoBehaviour {
 			hookJoint.distance = hookDistance;
 			hookJoint.connectedBody = hook.rigidbody2D;
 		} else if (!isHookDown && once && Vector2.Distance (hook.transform.position, hookAnchor.transform.position) < 0.1 && !isHookDead) {
-			manager.cargoHookedCrates (hook);
-			Destroy (hook);
-			once = false;
+			cargo.cargoHookedCrates (hook);
+			if (cargo.getCargoCrates() >= manager.cargoSize && hook.transform.childCount > 0){
+				isHookDown = true;
+				Debug.Log("Cargo full");
+			} else if (hook.transform.childCount == 0){
+				Destroy (hook);
+				once = false;
+			}
 		} else if (!isHookDown && hook != null && !isHookDead) {
 			hookJoint.distance -= reelSpeed;
 		} else if (isHookDown && hookJoint.distance != hookDistance) {
@@ -236,13 +218,14 @@ public class CopterManagerTouch : MonoBehaviour {
 		}
 
 		if ((gameObject.transform.position.y) < manager.getWaterLevel()){
-			manager.Reset();
+			manager.levelFailed(2);
 		}
 
 		powerIndPosition = new Vector2(0f, ((Screen.height*manager.uiLiftPowerDeadZone)*(maxPower-(2*currentPower)+minPower)+(currentPower-minPower)*Screen.height)/(maxPower-minPower));
 		powerIndRect.anchoredPosition = new Vector2(0, powerIndPosition.y);
 
 		if (isKill) kill();
+		if (isSplash) splashKill();
 	}
 
 	private void killHook () {
@@ -252,15 +235,32 @@ public class CopterManagerTouch : MonoBehaviour {
 		isHookDead = true;
 	}
 
-	public void kill() {
+	private void kill() {
 		if (hook != null)
 			killHook ();
 		GameObject newCopter = (GameObject) Instantiate(brokenCopter, transform.position, Quaternion.identity);
+		Instantiate(explosion, transform.position, Quaternion.identity);
 		Rigidbody2D[] parts = newCopter.GetComponentsInChildren<Rigidbody2D>();
 		foreach(Rigidbody2D part in parts){
 			part.velocity += gameObject.rigidbody2D.velocity;
 			part.angularVelocity += gameObject.rigidbody2D.angularVelocity;
 		}
+		newCopter.GetComponent<ExplodeParts>().enabled = true;
+		Destroy (gameObject);
+	}
+
+	private void splashKill() {
+		if (hook != null)
+			killHook ();
+		GameObject newCopter = (GameObject) Instantiate(brokenCopter, transform.position, Quaternion.identity);
+		Vector3 splashPos = new Vector3(transform.position.x, manager.getWaterLevel()+0.5f);
+		Instantiate(splash, splashPos, Quaternion.identity);
+		Rigidbody2D[] parts = newCopter.GetComponentsInChildren<Rigidbody2D>();
+		foreach(Rigidbody2D part in parts){
+			part.velocity += gameObject.rigidbody2D.velocity;
+			part.angularVelocity += gameObject.rigidbody2D.angularVelocity;
+		}
+		newCopter.GetComponent<ExplodeParts>().enabled = false;
 		Destroy (gameObject);
 	}
 }

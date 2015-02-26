@@ -4,12 +4,12 @@ using System.Collections;
 public class CameraManager : MonoBehaviour {
 
 	private Vector3 cameraOriginal, target, zero = Vector3.zero;
-	private float deadZonePixels;
+	private float deadZonePixels, targetX, targetY;
 
 	public GameObject copter;
 	public float deadZonePercent = 0.2f;
-	public float dampTime = 0.15f;
-	public float maxSpeed = 1f;
+	public float dampTime = 2f;
+	public float maxSpeed = 20f;
 
 	// Use this for initialization
 	void Start () {
@@ -19,10 +19,19 @@ public class CameraManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//maxSpeed = copter.rigidbody2D.velocity.x;
-		if (copter != null && (Camera.main.WorldToScreenPoint(copter.transform.position).x >= Screen.width - deadZonePixels || Camera.main.WorldToScreenPoint(copter.transform.position).x <= deadZonePixels)){
-			target = new Vector3(copter.transform.position.x, cameraOriginal.y, cameraOriginal.z);
+
+		if (copter != null && copter.transform.position.y <= cameraOriginal.y*2){
+			targetY = cameraOriginal.y;
+			target = new Vector3(targetX, targetY, cameraOriginal.z);
+		} else if (copter != null && (Camera.main.WorldToScreenPoint(copter.transform.position).y >= Screen.height - Screen.height*(deadZonePercent/2) || Camera.main.WorldToScreenPoint(copter.transform.position).y <= Screen.height*deadZonePercent*2.5f)){
+			targetY = copter.transform.position.y;
+			target = new Vector3(targetX, targetY, cameraOriginal.z);
 		}
-		if (Camera.main.transform.position.x != target.x) gameObject.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, target, ref zero, dampTime, maxSpeed); 
+		if (copter != null && (Camera.main.WorldToScreenPoint(copter.transform.position).x >= Screen.width - deadZonePixels || Camera.main.WorldToScreenPoint(copter.transform.position).x <= deadZonePixels)){
+			targetX = copter.transform.position.x;
+			target = new Vector3(targetX, targetY, cameraOriginal.z);
+		}
+
+		if (Camera.main.transform.position.x != target.x || Camera.main.transform.position.y != target.y) gameObject.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, target, ref zero, dampTime, maxSpeed); 
 	}
 }
