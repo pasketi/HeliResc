@@ -6,27 +6,31 @@ public class CargoManager : MonoBehaviour {
 	private LevelManager manager;
 	private Transform cargo;
 	private int cargoCrates = 0;
-	private float copterMass, cargoMass = 0f;
+	private float copterMass, cargoMass = 0f, hookMass = 0f;
 
 	// Use this for initialization
 	void Start () {
 		manager = (LevelManager) GameObject.Find("LevelManagerO").GetComponent(typeof(LevelManager));
 		cargo = gameObject.transform.FindChild("Cargo");
-		copterMass = rigidbody2D.mass;
+		copterMass = GetComponent<Rigidbody2D>().mass;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		gameObject.rigidbody2D.mass = copterMass + cargoMass;
+		gameObject.GetComponent<Rigidbody2D>().mass = copterMass + cargoMass + hookMass;
 	}
 
 	public void changeCargoMass (float crateMass) {
 		cargoMass += crateMass;
 	}
 
+	public void changeHookMass (float crateMass) {
+		hookMass += crateMass;
+	}
+
 	public void dropAllCrates () {
-		gameObject.rigidbody2D.mass = copterMass;
 		cargoMass = 0f;
+		hookMass = 0f;
 		foreach(Transform crate in cargo) {
 			Destroy(crate.gameObject);
 		}
@@ -37,18 +41,21 @@ public class CargoManager : MonoBehaviour {
 			if (manager.cargoSize > cargoCrates){
 				if (child.tag == "Crate"){
 					cargoCrates += 1;
+					child.GetComponentInChildren<CrateManager>().inCargo = true;
 					child.parent = cargo;
-					child.collider2D.enabled = false;
-					child.renderer.enabled = false;
+					child.GetComponent<Collider2D>().enabled = false;
+					child.GetComponent<Renderer>().enabled = false;
+					child.GetComponent<Rigidbody2D>().isKinematic = true;
+					child.transform.localPosition = Vector3.zero;
 					manager.setCargoCrates(cargoCrates);
 				}
 			}
 		}
 	}
 
-	public void saveCrate(float crateMass) {
+	public void saveHookedCrate(float crateMass) {
 		manager.saveCrates(1);
-		changeCargoMass(-crateMass);
+		changeHookMass(-crateMass);
 	}
 	
 	public int getCargoCrates() {

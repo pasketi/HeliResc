@@ -18,7 +18,7 @@ public class LandingPadManager : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.transform.tag == "Crate") {
-			cargo.saveCrate(other.GetComponentInChildren<CrateManager>().crateMass);
+			cargo.saveHookedCrate(other.GetComponentInChildren<CrateManager>().crateMass);
 			Destroy(other.gameObject);
 		}
 		if (other.gameObject.transform.tag == "Copter" && cargo.getCargoCrates() > 0) {

@@ -7,7 +7,7 @@ public class CopterManagerTouch : MonoBehaviour {
 	// Private stuff
 	private Rigidbody2D copterBody;
 	private DistanceJoint2D hookJoint;
-	private bool isHookDown = true, once = false;
+	private bool once = false;
 	private Vector2 powerIndPosition;
 	private float 	currentAngle = 0f,  
 					copterAngle = 0f, 
@@ -24,13 +24,14 @@ public class CopterManagerTouch : MonoBehaviour {
 
 	// Public values
 	public GameObject indicatorRect, hookPrefab, hookAnchor, brokenCopter, explosion, splash;
-	public bool isHookDead = false, isKill = false, isSplash = false;
+	public bool isHookDead = false, isHookDown = false, isKill = false, isSplash = false;
 	public float 	maxTilt = 75f, 
 					tiltSpeed = 50f, 
 					returnSpeed = 5f,
 					holdTime = 0.25f,
 					rotationSensitivity = 0.5f,
 					powerSensitivity = 0.5f,
+					powerMultiplier = 100f,
 					minPower = 0f,
 					maxPower = 120f,
 					initialPower = 75f,
@@ -71,7 +72,7 @@ public class CopterManagerTouch : MonoBehaviour {
 
 				//Copter press and Joystick initialization since both cannot happen during the same frame
 				if(touch.phase == TouchPhase.Began && 
-				   gameObject.collider2D == Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(touch.position)) && !isHookDead){
+				   gameObject.GetComponent<Collider2D>() == Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(touch.position)) && !isHookDead){
 					if (isHookDown){
 						isHookDown = false;
 					} else {
@@ -102,11 +103,10 @@ public class CopterManagerTouch : MonoBehaviour {
 					else if (currentAngle < 360f - maxTilt && currentAngle > 180f) currentAngle = 360f - maxTilt;
 
 					//Power Management
-					if (currentPower <= maxPower || currentPower >= minPower) {
-						currentPower += (touch.deltaPosition.y/Screen.height)*(maxPower*powerSensitivity);
+					if (currentPower <= maxPower && currentPower >= minPower) {
+						currentPower += (touch.deltaPosition.y/Screen.height)*((maxPower-minPower)*powerSensitivity);
+						//Debug.Log(((touch.deltaPosition.y/Screen.height)*((maxPower-minPower)*powerSensitivity)) + " = (" + touch.deltaPosition.y + " / " + Screen.height + ") * (" + (maxPower - minPower) + " * " + powerSensitivity + ")");
 					}
-
-					//Debug.Log ("Joystick moved " + currentAngle);
 				}
 
 				//Control destruction
@@ -181,14 +181,14 @@ public class CopterManagerTouch : MonoBehaviour {
 
 		// END INPUT ------------------------------------------------------------------------------------------------------------------------------------------
 
-		copterBody.AddForce (gameObject.transform.up * (currentPower*100) * Time.deltaTime);
+		copterBody.AddForce (gameObject.transform.up * (currentPower*powerMultiplier) * Time.deltaTime);
 
 		if (isHookDown && hook == null && !isHookDead) {
 			once = true;
 			hook = Instantiate (hookPrefab, gameObject.transform.position + new Vector3 (0f, -0.3f), Quaternion.identity) as GameObject;
 			hookJoint.enabled = true;
 			hookJoint.distance = hookDistance;
-			hookJoint.connectedBody = hook.rigidbody2D;
+			hookJoint.connectedBody = hook.GetComponent<Rigidbody2D>();
 		} else if (!isHookDown && once && Vector2.Distance (hook.transform.position, hookAnchor.transform.position) < 0.1 && !isHookDead) {
 			cargo.cargoHookedCrates (hook);
 			if (cargo.getCargoCrates() >= manager.cargoSize && hook.transform.childCount > 0){
@@ -241,8 +241,8 @@ public class CopterManagerTouch : MonoBehaviour {
 		Instantiate(explosion, transform.position, Quaternion.identity);
 		Rigidbody2D[] parts = newCopter.GetComponentsInChildren<Rigidbody2D>();
 		foreach(Rigidbody2D part in parts){
-			part.velocity += gameObject.rigidbody2D.velocity;
-			part.angularVelocity += gameObject.rigidbody2D.angularVelocity;
+			part.velocity += gameObject.GetComponent<Rigidbody2D>().velocity;
+			part.angularVelocity += gameObject.GetComponent<Rigidbody2D>().angularVelocity;
 		}
 		newCopter.GetComponent<ExplodeParts>().enabled = true;
 		Destroy (gameObject);
@@ -256,8 +256,8 @@ public class CopterManagerTouch : MonoBehaviour {
 		Instantiate(splash, splashPos, Quaternion.identity);
 		Rigidbody2D[] parts = newCopter.GetComponentsInChildren<Rigidbody2D>();
 		foreach(Rigidbody2D part in parts){
-			part.velocity += gameObject.rigidbody2D.velocity;
-			part.angularVelocity += gameObject.rigidbody2D.angularVelocity;
+			part.velocity += gameObject.GetComponent<Rigidbody2D>().velocity;
+			part.angularVelocity += gameObject.GetComponent<Rigidbody2D>().angularVelocity;
 		}
 		newCopter.GetComponent<ExplodeParts>().enabled = false;
 		Destroy (gameObject);
