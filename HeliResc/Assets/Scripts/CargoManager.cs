@@ -10,7 +10,7 @@ public class CargoManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		manager = (LevelManager) GameObject.Find("LevelManagerO").GetComponent(typeof(LevelManager));
+		manager = GameObject.Find("LevelManagerO").GetComponent<LevelManager>();
 		cargo = gameObject.transform.FindChild("Cargo");
 		copterMass = GetComponent<Rigidbody2D>().mass;
 	}

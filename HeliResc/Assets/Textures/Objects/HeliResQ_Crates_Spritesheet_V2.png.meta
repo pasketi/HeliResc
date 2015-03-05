@@ -1,9 +1,13 @@
 fileFormatVersion: 2
-guid: db9b64c6144dd429782a09430813c4e2
+guid: 8b475ae2c6afd4cd8bbdbbc9d68099dc
+timeCreated: 1425578502
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: HeliResQ_LZ_Spritesheet_V3_0
-    21300002: HeliResQ_LZ_Spritesheet_V3_1
+    21300000: HeliResQ_Crates_Spritesheet_V2_0
+    21300002: HeliResQ_Crates_Spritesheet_V2_1
+    21300004: HeliResQ_Crates_Spritesheet_V2_2
+    21300006: HeliResQ_Crates_Spritesheet_V2_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -26,8 +30,8 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -1
-  maxTextureSize: 1024
+  textureFormat: -3
+  maxTextureSize: 256
   textureSettings:
     filterMode: 2
     aniso: 16
@@ -43,29 +47,49 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: HeliResQ_LZ_Spritesheet_V3_0
+    - name: HeliResQ_Crates_Spritesheet_V2_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 24
-        width: 772
-        height: 380
+        y: 7
+        width: 49
+        height: 69
+      alignment: 9
+      pivot: {x: .5, y: .35800001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HeliResQ_Crates_Spritesheet_V2_1
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 7
+        width: 49
+        height: 69
+      alignment: 9
+      pivot: {x: .5, y: .35800001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HeliResQ_Crates_Spritesheet_V2_2
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 0
+        width: 55
+        height: 76
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: HeliResQ_LZ_Spritesheet_V3_1
+    - name: HeliResQ_Crates_Spritesheet_V2_3
       rect:
         serializedVersion: 2
-        x: 0
+        x: 159
         y: 0
-        width: 216
-        height: 24
+        width: 55
+        height: 76
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

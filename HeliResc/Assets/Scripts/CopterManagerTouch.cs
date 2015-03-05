@@ -15,16 +15,33 @@ public class CopterManagerTouch : MonoBehaviour {
 					persistence = 1f,
 					tempHoldTime = 0f, 
 					controlSmoothZone = 1f,
-					currentPower;
+					currentPower,
+					currentHealth,
+					minDamage = -5f,
+					currentFuel,
+					idleConsumption = 1f;
 	private GameObject hook;
 	private RectTransform powerIndRect;
 	private LevelManager manager;
 	private CargoManager cargo;
-	private int rotationID1 = 255, rotationID2 = 255;
+	private int 	rotationID1 = 255, 
+					rotationID2 = 255;
 
 	// Public values
-	public GameObject indicatorRect, hookPrefab, hookAnchor, brokenCopter, explosion, splash;
-	public bool isHookDead = false, isHookDown = false, isKill = false, isSplash = false;
+	public GameObject 	indicatorRect, 
+						hookPrefab, 
+						hookAnchor, 
+						brokenCopter, 
+						explosion, 
+						splash,
+						fuelIndicator,
+						healthIndicator;
+	
+	public bool 	isHookDead = false,
+					isHookDown = false, 
+					isKill = false, 
+					isSplash = false;
+
 	public float 	maxTilt = 75f, 
 					tiltSpeed = 50f, 
 					returnSpeed = 5f,
@@ -36,7 +53,11 @@ public class CopterManagerTouch : MonoBehaviour {
 					maxPower = 120f,
 					initialPower = 75f,
 					hookDistance = 1.5f,
-					reelSpeed = 0.05f;
+					reelSpeed = 0.05f,
+					maxHealth = 100f,
+					healPerSecond = 20f,
+					maxFuel = 500f,
+					reFuelPerSecond = 100f;
 
 	public void resetPower() {
 		currentPower = initialPower;
@@ -44,7 +65,7 @@ public class CopterManagerTouch : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		manager = (LevelManager) GameObject.Find("LevelManagerO").GetComponent(typeof(LevelManager));
+		manager = GameObject.Find("LevelManagerO").GetComponent<LevelManager>();
 		cargo = GetComponent<CargoManager>();
 		copterBody = gameObject.GetComponent<Rigidbody2D>();
 		powerIndRect = indicatorRect.GetComponent<RectTransform> ();
@@ -52,6 +73,8 @@ public class CopterManagerTouch : MonoBehaviour {
 		hookJoint.anchor = hookAnchor.transform.localPosition;
 		copterScale = gameObject.transform.localScale.x;
 		tempHoldTime = holdTime;
+		currentHealth = maxHealth;
+		currentFuel = maxFuel;
 		powerIndPosition = new Vector2(0f, ((Screen.height*manager.uiLiftPowerDeadZone)*(maxPower-(2*currentPower)+minPower)+(currentPower-minPower)*Screen.height)/(maxPower-minPower));
 		resetPower();
 	}
@@ -103,7 +126,7 @@ public class CopterManagerTouch : MonoBehaviour {
 					else if (currentAngle < 360f - maxTilt && currentAngle > 180f) currentAngle = 360f - maxTilt;
 
 					//Power Management
-					if (currentPower <= maxPower && currentPower >= minPower) {
+					if (currentPower <= maxPower && currentPower >= minPower && currentFuel > 0f) {
 						currentPower += (touch.deltaPosition.y/Screen.height)*((maxPower-minPower)*powerSensitivity);
 						//Debug.Log(((touch.deltaPosition.y/Screen.height)*((maxPower-minPower)*powerSensitivity)) + " = (" + touch.deltaPosition.y + " / " + Screen.height + ") * (" + (maxPower - minPower) + " * " + powerSensitivity + ")");
 					}
@@ -181,6 +204,12 @@ public class CopterManagerTouch : MonoBehaviour {
 
 		// END INPUT ------------------------------------------------------------------------------------------------------------------------------------------
 
+		if (currentFuel > 0f) changeFuel(-((idleConsumption + (currentPower/10)) * Time.deltaTime));
+		else if (currentFuel <= 0f) {
+			currentFuel = 0f;
+			if (currentPower > 0f) currentPower -= currentPower * (currentPower/maxPower) * Time.deltaTime * 3f;
+		}
+
 		copterBody.AddForce (gameObject.transform.up * (currentPower*powerMultiplier) * Time.deltaTime);
 
 		if (isHookDown && hook == null && !isHookDead) {
@@ -222,9 +251,34 @@ public class CopterManagerTouch : MonoBehaviour {
 
 		powerIndPosition = new Vector2(0f, ((Screen.height*manager.uiLiftPowerDeadZone)*(maxPower-(2*currentPower)+minPower)+(currentPower-minPower)*Screen.height)/(maxPower-minPower));
 		powerIndRect.anchoredPosition = new Vector2(0, powerIndPosition.y);
+		fuelIndicator.GetComponent<Slider>().value = currentFuel/maxFuel;
+		healthIndicator.GetComponent<Slider>().value = currentHealth/maxHealth;
 
 		if (isKill) kill();
 		if (isSplash) splashKill();
+	}
+
+	// Positive values to GAIN health and negative to LOSE health
+	public void changeHealth (float amount) {
+		if (amount < minDamage){
+			currentHealth += amount;
+			if (currentHealth <= 0) manager.levelFailed(1);
+		} else if (amount > 0f) {
+			if (currentHealth < maxHealth) currentHealth += amount;
+			if (currentHealth > maxHealth) currentHealth = maxHealth;
+		}
+	}
+
+	public float getHealth (){
+		return currentHealth;
+	}
+
+	public float getFuel () {
+		return currentFuel;
+	}
+
+	public void changeFuel (float amount){
+		currentFuel += amount;
 	}
 
 	private void killHook () {

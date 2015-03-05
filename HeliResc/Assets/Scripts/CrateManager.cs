@@ -9,24 +9,25 @@ public class CrateManager : MonoBehaviour {
 	private float floatyValue; //buoancy?
 	private bool lastInWater = false;
 	private GameObject crate;
-	private SpriteRenderer spriteRenderer;
+	private SpriteRenderer spriteRenderer, bgRenderer;
 	private DistanceJoint2D joint;
 	private HingeJoint2D hinge;
 	public float crateMass = 5f;
 	public float inWaterModifier = 0.2f;
 
-	public Sprite Dropped, Hooked;
+	public Sprite Dropped, Hooked, DroppedBG, HookedBG;
 	public bool inWater = false, inCargo = false;
 
 
 
 	// Use this for initialization
 	void Start () {
-		manager = (LevelManager) GameObject.Find("LevelManagerO").GetComponent(typeof(LevelManager));
-		copterScript = (CopterManagerTouch) GameObject.Find ("Copter").GetComponent(typeof(CopterManagerTouch));
-		cargoScript = (CargoManager) GameObject.Find ("Copter").GetComponent(typeof(CargoManager));
+		manager = GameObject.Find("LevelManagerO").GetComponent<LevelManager>();
+		copterScript = GameObject.Find ("Copter").GetComponent<CopterManagerTouch>();
+		cargoScript = GameObject.Find ("Copter").GetComponent<CargoManager>();
 		crate = gameObject.transform.parent.gameObject;
 		spriteRenderer = crate.GetComponent<SpriteRenderer>();
+		if (crate.transform.FindChild("BackGround") != null) bgRenderer = crate.transform.FindChild("BackGround").GetComponent<SpriteRenderer>();
 		floatyValue = gameObject.transform.parent.GetComponent<Rigidbody2D>().mass * 30f;
 		hinge = GetComponent<HingeJoint2D>();
 	}
@@ -59,8 +60,10 @@ public class CrateManager : MonoBehaviour {
 
 		if (crate.layer == 11) {
 			spriteRenderer.sprite = Hooked;
+			if (bgRenderer != null) bgRenderer.sprite = HookedBG;
 		} else {
 			spriteRenderer.sprite = Dropped;
+			if (bgRenderer != null) bgRenderer.sprite = DroppedBG;
 		}
 	}
 

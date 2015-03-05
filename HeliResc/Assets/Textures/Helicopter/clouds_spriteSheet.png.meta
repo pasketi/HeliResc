@@ -1,9 +1,13 @@
 fileFormatVersion: 2
-guid: db9b64c6144dd429782a09430813c4e2
+guid: 1e1867d243d8748d6a37d389295a6843
+timeCreated: 1425505088
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: HeliResQ_LZ_Spritesheet_V3_0
-    21300002: HeliResQ_LZ_Spritesheet_V3_1
+    21300000: clouds_spriteSheet_0
+    21300002: clouds_spriteSheet_1
+    21300004: clouds_spriteSheet_2
+    21300006: clouds_spriteSheet_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -26,10 +30,10 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -1
-  maxTextureSize: 1024
+  textureFormat: -3
+  maxTextureSize: 256
   textureSettings:
-    filterMode: 2
+    filterMode: 0
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -49,23 +53,43 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: HeliResQ_LZ_Spritesheet_V3_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 24
-        width: 772
-        height: 380
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: HeliResQ_LZ_Spritesheet_V3_1
+    - name: clouds_spriteSheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 216
-        height: 24
+        width: 45
+        height: 48
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: clouds_spriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 0
+        width: 45
+        height: 48
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: clouds_spriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 0
+        width: 39
+        height: 48
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: clouds_spriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 0
+        width: 39
+        height: 48
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

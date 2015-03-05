@@ -21,12 +21,27 @@ public class LandingPadManager : MonoBehaviour {
 			cargo.saveHookedCrate(other.GetComponentInChildren<CrateManager>().crateMass);
 			Destroy(other.gameObject);
 		}
-		if (other.gameObject.transform.tag == "Copter" && cargo.getCargoCrates() > 0) {
-			cargo.emptyCargo();
-			other.GetComponent<CopterManagerTouch>().resetPower();
+
+		if (other.gameObject.transform.tag == "Copter") {
+		    if (cargo.getCargoCrates() > 0) {
+				cargo.emptyCargo();
+				other.GetComponent<CopterManagerTouch>().resetPower();
+			}
+
+			if (other.GetComponent<CopterManagerTouch>().isHookDead == true) {
+				other.GetComponent<CopterManagerTouch>().isHookDead = false;
+			}
 		}
-		if (other.gameObject.transform.tag == "Copter" && other.GetComponent<CopterManagerTouch>().isHookDead == true) {
-			other.GetComponent<CopterManagerTouch>().isHookDead = false;
+	}
+
+	void OnTriggerStay2D(Collider2D other){
+		if (other.gameObject.transform.tag == "Copter") {
+			if (other.GetComponent<CopterManagerTouch>().getHealth() < other.GetComponent<CopterManagerTouch>().maxHealth) {
+				other.GetComponent<CopterManagerTouch>().changeHealth((float)other.GetComponent<CopterManagerTouch>().healPerSecond*Time.deltaTime);
+			}
+			if (other.GetComponent<CopterManagerTouch>().getFuel() < other.GetComponent<CopterManagerTouch>().maxFuel) {
+				other.GetComponent<CopterManagerTouch>().changeFuel(other.GetComponent<CopterManagerTouch>().reFuelPerSecond*Time.deltaTime);
+			}
 		}
 	}
 }

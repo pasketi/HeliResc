@@ -7,9 +7,10 @@ public class CameraManager : MonoBehaviour {
 	private float deadZonePixels, targetX, targetY;
 
 	public GameObject copter;
-	public float deadZonePercent = 0.2f;
-	public float dampTime = 2f;
-	public float maxSpeed = 20f;
+	public float 	deadZonePercent = 0.2f, 
+					dampTime = 2f, 
+					maxSpeed = 20f,
+					maxY = 30f;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +26,7 @@ public class CameraManager : MonoBehaviour {
 			target = new Vector3(targetX, targetY, cameraOriginal.z);
 		} else if (copter != null && (Camera.main.WorldToScreenPoint(copter.transform.position).y >= Screen.height - Screen.height*(deadZonePercent/2) || Camera.main.WorldToScreenPoint(copter.transform.position).y <= Screen.height*deadZonePercent*2.5f)){
 			targetY = copter.transform.position.y;
+			if (targetY > maxY) targetY = maxY;
 			target = new Vector3(targetX, targetY, cameraOriginal.z);
 		}
 		if (copter != null && (Camera.main.WorldToScreenPoint(copter.transform.position).x >= Screen.width - deadZonePixels || Camera.main.WorldToScreenPoint(copter.transform.position).x <= deadZonePixels)){
