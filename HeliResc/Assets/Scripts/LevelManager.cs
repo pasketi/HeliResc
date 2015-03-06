@@ -7,14 +7,12 @@ public class LevelManager : MonoBehaviour {
 	private int savedCrates = 0, crateAmount;
 	private bool win = false, lose = false, splash = false;
 	public float waterLevel = 0f, uiLiftPowerWidth = 0.1f, uiLiftPowerDeadZone = 0.05f, resetCountdown = 3f, crateSize;
-	public Text cargoText, savedText;
-	public int cargoSize = 2;
+	public int cargoSize = 2, cargoCrates = 0;
 
 
 	// Use this for initialization
 	void Start () {
-		crateAmount = countCrates ();
-		savedText.text = savedCrates + "/" + crateAmount;
+		crateAmount = countCrates();
 		crateSize = getCrateScale();
 	}
 	
@@ -71,7 +69,10 @@ public class LevelManager : MonoBehaviour {
 
 	public void saveCrates (int amount) {
 		savedCrates += amount;
-		savedText.text = savedCrates + "/" + crateAmount;
+	}
+
+	public int getSavedCrates () {
+		return savedCrates;
 	}
 
 	public float getWaterLevel(){
@@ -83,8 +84,6 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void setCargoCrates(int amount) {
-		cargoText.text = amount.ToString();
-		if (cargoSize.ToString() == cargoText.text) cargoText.color = new Color(1f, 0f, 0f);
-		else cargoText.color = new Color(0f, 0f, 0f);
+		cargoCrates = amount;
 	}
 }

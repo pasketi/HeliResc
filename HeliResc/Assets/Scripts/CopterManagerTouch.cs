@@ -8,7 +8,6 @@ public class CopterManagerTouch : MonoBehaviour {
 	private Rigidbody2D copterBody;
 	private DistanceJoint2D hookJoint;
 	private bool once = false;
-	private Vector2 powerIndPosition;
 	private float 	currentAngle = 0f,  
 					copterAngle = 0f, 
 					copterScale = 0f, 
@@ -21,21 +20,17 @@ public class CopterManagerTouch : MonoBehaviour {
 					currentFuel,
 					idleConsumption = 1f;
 	private GameObject hook;
-	private RectTransform powerIndRect;
 	private LevelManager manager;
 	private CargoManager cargo;
 	private int 	rotationID1 = 255, 
 					rotationID2 = 255;
 
 	// Public values
-	public GameObject 	indicatorRect, 
-						hookPrefab, 
+	public GameObject 	hookPrefab, 
 						hookAnchor, 
 						brokenCopter, 
 						explosion, 
-						splash,
-						fuelIndicator,
-						healthIndicator;
+						splash;
 	
 	public bool 	isHookDead = false,
 					isHookDown = false, 
@@ -68,14 +63,12 @@ public class CopterManagerTouch : MonoBehaviour {
 		manager = GameObject.Find("LevelManagerO").GetComponent<LevelManager>();
 		cargo = GetComponent<CargoManager>();
 		copterBody = gameObject.GetComponent<Rigidbody2D>();
-		powerIndRect = indicatorRect.GetComponent<RectTransform> ();
 		hookJoint = GetComponent<DistanceJoint2D> ();
 		hookJoint.anchor = hookAnchor.transform.localPosition;
 		copterScale = gameObject.transform.localScale.x;
 		tempHoldTime = holdTime;
 		currentHealth = maxHealth;
 		currentFuel = maxFuel;
-		powerIndPosition = new Vector2(0f, ((Screen.height*manager.uiLiftPowerDeadZone)*(maxPower-(2*currentPower)+minPower)+(currentPower-minPower)*Screen.height)/(maxPower-minPower));
 		resetPower();
 	}
 
@@ -87,7 +80,7 @@ public class CopterManagerTouch : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		// START INPUT ------------------------------------------------------------------------------------------------------------------------------------------
+		// START INPUT ----------------------------------------------------------------------------------
 
 		// Control system
 		if (Input.touchCount > 0) {
@@ -151,7 +144,7 @@ public class CopterManagerTouch : MonoBehaviour {
 
 		}
 
-		//------------------------------------------------------------------------------------------------------------------------------------------
+		// END INPUT ------------------------------------------------------------------------------------
 
 		// Helicopter angle management
 
@@ -202,8 +195,6 @@ public class CopterManagerTouch : MonoBehaviour {
 		if (currentAngle > 180f && rotationID1 != 255) gameObject.transform.localScale = new Vector3(copterScale, gameObject.transform.localScale.y); 
 		else if (currentAngle < 180f && rotationID1 != 255) gameObject.transform.localScale = new Vector3(-copterScale, gameObject.transform.localScale.y);
 
-		// END INPUT ------------------------------------------------------------------------------------------------------------------------------------------
-
 		if (currentFuel > 0f) changeFuel(-((idleConsumption + (currentPower/10)) * Time.deltaTime));
 		else if (currentFuel <= 0f) {
 			currentFuel = 0f;
@@ -249,11 +240,6 @@ public class CopterManagerTouch : MonoBehaviour {
 			manager.levelFailed(2);
 		}
 
-		powerIndPosition = new Vector2(0f, ((Screen.height*manager.uiLiftPowerDeadZone)*(maxPower-(2*currentPower)+minPower)+(currentPower-minPower)*Screen.height)/(maxPower-minPower));
-		powerIndRect.anchoredPosition = new Vector2(0, powerIndPosition.y);
-		fuelIndicator.GetComponent<Slider>().value = currentFuel/maxFuel;
-		healthIndicator.GetComponent<Slider>().value = currentHealth/maxHealth;
-
 		if (isKill) kill();
 		if (isSplash) splashKill();
 	}
@@ -275,6 +261,10 @@ public class CopterManagerTouch : MonoBehaviour {
 
 	public float getFuel () {
 		return currentFuel;
+	}
+
+	public float getPower () {
+		return currentPower;
 	}
 
 	public void changeFuel (float amount){
@@ -299,6 +289,7 @@ public class CopterManagerTouch : MonoBehaviour {
 			part.angularVelocity += gameObject.GetComponent<Rigidbody2D>().angularVelocity;
 		}
 		newCopter.GetComponent<ExplodeParts>().enabled = true;
+		currentHealth = 0f;
 		Destroy (gameObject);
 	}
 
@@ -314,6 +305,7 @@ public class CopterManagerTouch : MonoBehaviour {
 			part.angularVelocity += gameObject.GetComponent<Rigidbody2D>().angularVelocity;
 		}
 		newCopter.GetComponent<ExplodeParts>().enabled = false;
+		currentHealth = 0f;
 		Destroy (gameObject);
 	}
 }
