@@ -22,6 +22,7 @@ public class CrateManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Time.timeScale = 1f;
 		manager = GameObject.Find("LevelManagerO").GetComponent<LevelManager>();
 		copterScript = GameObject.Find ("Copter").GetComponent<CopterManagerTouch>();
 		cargoScript = GameObject.Find ("Copter").GetComponent<CargoManager>();
@@ -43,7 +44,7 @@ public class CrateManager : MonoBehaviour {
 		}
 
 		if (crate != null && (!inCargo && crate.transform.position.y < manager.getWaterLevel ())) {
-			crate.GetComponent<Rigidbody2D>().AddForce (Vector3.up * floatyValue);
+			if (manager.getPaused() == false) crate.GetComponent<Rigidbody2D>().AddForce (Vector3.up * floatyValue);
 			inWater = true;
 		} else {
 			inWater = false;

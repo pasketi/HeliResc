@@ -12,8 +12,7 @@ public class CopterManagerTouch : MonoBehaviour {
 					copterAngle = 0f, 
 					copterScale = 0f, 
 					persistence = 1f,
-					tempHoldTime = 0f, 
-					controlSmoothZone = 1f,
+					tempHoldTime = 0f,
 					currentPower,
 					currentHealth,
 					minDamage = -5f,
@@ -48,7 +47,7 @@ public class CopterManagerTouch : MonoBehaviour {
 					maxPower = 120f,
 					initialPower = 75f,
 					hookDistance = 1.5f,
-					reelSpeed = 0.05f,
+					reelSpeed = 1.5f,
 					maxHealth = 100f,
 					healPerSecond = 20f,
 					maxFuel = 500f,
@@ -120,8 +119,8 @@ public class CopterManagerTouch : MonoBehaviour {
 
 					//Power Management
 					if (currentPower <= maxPower && currentPower >= minPower && currentFuel > 0f) {
-						currentPower += (touch.deltaPosition.y/Screen.height)*((maxPower-minPower)*powerSensitivity);
-						//Debug.Log(((touch.deltaPosition.y/Screen.height)*((maxPower-minPower)*powerSensitivity)) + " = (" + touch.deltaPosition.y + " / " + Screen.height + ") * (" + (maxPower - minPower) + " * " + powerSensitivity + ")");
+						if (touch.deltaTime != 0f) currentPower += (((touch.deltaPosition.y/Screen.height)*(maxPower-minPower))*powerSensitivity) * (Time.deltaTime / touch.deltaTime);
+						else currentPower += (((touch.deltaPosition.y/Screen.height)*(maxPower-minPower))*powerSensitivity);
 					}
 				}
 
@@ -131,10 +130,7 @@ public class CopterManagerTouch : MonoBehaviour {
 						rotationID1 = 255;
 					} else if (touch.fingerId == rotationID2) {
 						rotationID2 = 255;
-					} /*else if (touch.fingerId == copterID) {
-						Debug.Log ("Copter touch ended @ " + Time.time);
-						copterID = 255;
-					}*/
+					}
 					if (rotationID1 == 255 && rotationID2 == 255) {
 						currentAngle = 0f;
 						tempHoldTime = 0f;
@@ -160,10 +156,10 @@ public class CopterManagerTouch : MonoBehaviour {
 					// Rotate CCW
 					gameObject.transform.Rotate(new Vector3(0f, 0f, tiltSpeed * Time.deltaTime));
 				} else if (copterAngle < 180f) {
-					if (copterAngle < currentAngle - controlSmoothZone) {
+					if (copterAngle < currentAngle) {
 						// Rotate CCW
 						gameObject.transform.Rotate (new Vector3 (0f, 0f, tiltSpeed * Time.deltaTime));
-					} else if (copterAngle > currentAngle + controlSmoothZone) {
+					} else if (copterAngle > currentAngle) {
 						// Rotate CW
 						gameObject.transform.Rotate(new Vector3(0f, 0f, -tiltSpeed * Time.deltaTime));
 					}
@@ -173,10 +169,10 @@ public class CopterManagerTouch : MonoBehaviour {
 					// Rotate CW
 					gameObject.transform.Rotate (new Vector3 (0f, 0f, -tiltSpeed * Time.deltaTime));
 				} else if (copterAngle > 180f) {
-					if (copterAngle < currentAngle - controlSmoothZone) {
+					if (copterAngle < currentAngle) {
 						// Rotate CCW
 						gameObject.transform.Rotate (new Vector3 (0f, 0f, tiltSpeed * Time.deltaTime));
-					} else if (copterAngle > currentAngle + controlSmoothZone) {
+					} else if (copterAngle > currentAngle) {
 						// Rotate CW
 						gameObject.transform.Rotate(new Vector3(0f, 0f, -tiltSpeed * Time.deltaTime));
 					}
@@ -219,7 +215,7 @@ public class CopterManagerTouch : MonoBehaviour {
 				once = false;
 			}
 		} else if (!isHookDown && hook != null && !isHookDead) {
-			hookJoint.distance -= reelSpeed;
+			hookJoint.distance -= reelSpeed * Time.deltaTime;
 		} else if (isHookDown && hookJoint.distance != hookDistance) {
 			hookJoint.distance = hookDistance;
 		}

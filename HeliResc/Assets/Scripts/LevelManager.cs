@@ -5,20 +5,26 @@ using System.Collections;
 public class LevelManager : MonoBehaviour {
 
 	private int savedCrates = 0, crateAmount;
-	private bool win = false, lose = false, splash = false;
+	public GameObject pauseScreen, HUD;
+	private bool win = false, lose = false, splash = false, gamePaused = false;
 	public float waterLevel = 0f, uiLiftPowerWidth = 0.1f, uiLiftPowerDeadZone = 0.05f, resetCountdown = 3f, crateSize;
 	public int cargoSize = 2, cargoCrates = 0;
-
 
 	// Use this for initialization
 	void Start () {
 		crateAmount = countCrates();
 		crateSize = getCrateScale();
+		if (pauseScreen == null) pauseScreen = GameObject.Find("PauseScreen");
+		if (HUD == null) HUD = GameObject.Find("HUD");
+		pauseScreen.SetActive(false);
+		HUD.SetActive(true);
+
+		// We are SO sorry
+		//Application.targetFrameRate = 30;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
 		if (savedCrates >= crateAmount) {
 			win = true;
 		}
@@ -47,6 +53,28 @@ public class LevelManager : MonoBehaviour {
 
 	public void levelPassed () {
 		win = true;
+	}
+
+	public void pause () {
+		if (!gamePaused) {
+			gamePaused = true;
+
+			HUD.SetActive(false);
+			pauseScreen.SetActive(true);
+
+			Time.timeScale = 0f;
+		} else {
+			gamePaused = false;
+
+			pauseScreen.SetActive(false);
+			HUD.SetActive(true);
+
+			Time.timeScale = 1f;
+		}
+	}
+
+	public bool getPaused () {
+		return gamePaused;
 	}
 
 	public void Reset() {

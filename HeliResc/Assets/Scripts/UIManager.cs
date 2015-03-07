@@ -9,15 +9,10 @@ public class UIManager : MonoBehaviour {
 	private Text tempText;
 	private float scale = 0.1f;*/
 
-	private RectTransform health, fuel;
-	private bool lowFuel = false, lowHealth = false;
+	private Image power, fuel;
+	private bool lowFuel = false;
 	private Text saved, cargo;
-	private Slider power;
-	private float 	healthMin, 
-					healthMax,
-					fuelMin, 
-					fuelMax,
-					flashLength = 0.25f,
+	private float 	flashLength = 0.25f,
 					tempTime = 0f;
 	private LevelManager manager;
 	private CopterManagerTouch copter;
@@ -31,26 +26,18 @@ public class UIManager : MonoBehaviour {
 		manager = GameObject.Find("LevelManagerO").GetComponent<LevelManager>();
 		copter = GameObject.Find ("Copter").GetComponent<CopterManagerTouch> ();
 
-		saved = transform.FindChild ("Saved").GetComponent<Text> ();
-		cargo = transform.FindChild ("Cargo").GetComponent<Text> ();
-		power = transform.FindChild ("Power").GetComponent<Slider> ();
-
-		health = transform.FindChild ("Health").GetComponent<RectTransform> ();
-		healthMin = health.anchorMin.y;
-		healthMax = health.anchorMax.y;
-
-		fuel = transform.FindChild ("Fuel").GetComponent<RectTransform> ();
-		fuelMin = fuel.anchorMin.x;
-		fuelMax = fuel.anchorMax.x;
+		saved = transform.FindChild ("SavedBackground").FindChild ("Saved").GetComponent<Text> ();
+		cargo = transform.FindChild ("CargoBackground").FindChild ("Cargo").GetComponent<Text> ();
+		power = transform.FindChild ("Power").GetComponent<Image> ();
+		fuel = transform.FindChild ("Fuel").GetComponent<Image> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		health.anchorMax = new Vector2 (health.anchorMax.x, ((copter.getHealth () / copter.maxHealth) * (healthMax - healthMin)) + healthMin);
-		fuel.anchorMax = new Vector2 (((copter.getFuel() / copter.maxFuel) * (fuelMax-fuelMin)) + fuelMin, fuel.anchorMax.y);
+		fuel.fillAmount = copter.getFuel () / copter.maxFuel;
+		power.fillAmount = copter.getPower () / (copter.maxPower-copter.minPower);
 		saved.text = manager.getSavedCrates ().ToString () + "/" + manager.getCrateAmount ().ToString ();
 		cargo.text = manager.cargoCrates.ToString () + "/" + manager.cargoSize.ToString ();
-		power.value = copter.getPower () / (copter.maxPower - copter.minPower);
 
 		if (manager.cargoCrates == manager.cargoSize)
 			cargo.color = red;
@@ -64,31 +51,14 @@ public class UIManager : MonoBehaviour {
 			fuel.GetComponent<Image> ().color = white;
 		}
 
-		if (copter.getHealth () / copter.maxHealth < 0.3f)
-			lowHealth = true;
-		else {
-			lowHealth = false;
-			health.GetComponent<Image> ().color = white;
-		}
-
-		if (lowFuel || lowHealth) {
+		if (lowFuel) {
 			tempTime += Time.deltaTime;
 			if (tempTime >= flashLength) {
 				tempTime = 0f;
-
-				if (lowFuel) {
-					if (fuel.GetComponent<Image> ().color == white)
-						fuel.GetComponent<Image> ().color = lightGrey;
-					else if (fuel.GetComponent<Image> ().color == lightGrey)
-						fuel.GetComponent<Image> ().color = white;
-				}
-
-				if (lowHealth) {
-					if (health.GetComponent<Image> ().color == white)
-						health.GetComponent<Image> ().color = lightGrey;
-					else if (health.GetComponent<Image> ().color == lightGrey)
-						health.GetComponent<Image> ().color = white;
-				}
+				if (fuel.GetComponent<Image> ().color == white)
+					fuel.GetComponent<Image> ().color = lightGrey;
+				else if (fuel.GetComponent<Image> ().color == lightGrey)
+					fuel.GetComponent<Image> ().color = white;
 			}
 		}
 	}
