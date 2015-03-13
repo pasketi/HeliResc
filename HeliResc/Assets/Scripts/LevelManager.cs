@@ -5,17 +5,32 @@ using System.Collections;
 public class LevelManager : MonoBehaviour {
 
 	private int savedCrates = 0, crateAmount;
-	public GameObject pauseScreen, HUD;
+	private GameManager gameManager;
+	private GameObject copter;
+	public GameObject pauseScreen, HUD, copterSpawnPoint;
+	public GameObject[] copters = new GameObject[GameObject.Find("GameManager").GetComponent<GameManager>().getCopterAmount()];
 	private bool win = false, lose = false, splash = false, gamePaused = false;
 	public float waterLevel = 0f, uiLiftPowerWidth = 0.1f, uiLiftPowerDeadZone = 0.05f, resetCountdown = 3f, crateSize;
 	public int cargoSize = 2, cargoCrates = 0;
 
 	// Use this for initialization
 	void Start () {
+		if (GameObject.Find("GameManager") != null){
+			gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+			gameManager.load();
+		}
 		crateAmount = countCrates();
 		crateSize = getCrateScale();
 		if (pauseScreen == null) pauseScreen = GameObject.Find("PauseScreen");
 		if (HUD == null) HUD = GameObject.Find("HUD");
+
+		//copter instantiate
+		if (copterSpawnPoint == null) copterSpawnPoint = GameObject.Find ("CopterSpawn");
+		if (gameManager != null) copter = Instantiate (copters[gameManager.getCurrentCopter()], copterSpawnPoint.transform.position, Quaternion.identity) as GameObject;
+		else copter = Instantiate (copters[0], copterSpawnPoint.transform.position, Quaternion.identity) as GameObject;
+		copter.name = "Copter";
+
+		resetCountdown = 3f;
 		pauseScreen.SetActive(false);
 		HUD.SetActive(true);
 
@@ -31,7 +46,8 @@ public class LevelManager : MonoBehaviour {
 
 		if (win) {
 			Debug.Log("Victory!");
-			Reset();
+			resetCountdown -= Time.deltaTime;
+			if (resetCountdown <= 0f) Application.LoadLevel ("MainMenu");
 		}
 		if (lose) {
 			resetCountdown -= Time.deltaTime;
@@ -75,6 +91,11 @@ public class LevelManager : MonoBehaviour {
 
 	public bool getPaused () {
 		return gamePaused;
+	}
+
+	public void backToMainMenu () {
+		Time.timeScale = 1f;
+		Application.LoadLevel("MainMenu");
 	}
 
 	public void Reset() {

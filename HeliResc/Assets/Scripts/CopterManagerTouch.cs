@@ -18,9 +18,11 @@ public class CopterManagerTouch : MonoBehaviour {
 					minDamage = -5f,
 					currentFuel,
 					idleConsumption = 1f;
+
 	private GameObject hook;
 	private LevelManager manager;
 	private CargoManager cargo;
+	private GameManager gameManager;
 	private int 	rotationID1 = 255, 
 					rotationID2 = 255;
 
@@ -30,7 +32,7 @@ public class CopterManagerTouch : MonoBehaviour {
 						brokenCopter, 
 						explosion, 
 						splash;
-	
+
 	public bool 	isHookDead = false,
 					isHookDown = false, 
 					isKill = false, 
@@ -43,15 +45,15 @@ public class CopterManagerTouch : MonoBehaviour {
 					rotationSensitivity = 0.5f,
 					powerSensitivity = 0.5f,
 					powerMultiplier = 100f,
-					minPower = 0f,
-					maxPower = 120f,
 					initialPower = 75f,
 					hookDistance = 1.5f,
 					reelSpeed = 1.5f,
 					maxHealth = 100f,
 					healPerSecond = 20f,
 					maxFuel = 500f,
-					reFuelPerSecond = 100f;
+					reFuelPerSecond = 100f,
+					minPower = 0f,
+					maxPower = 120f;
 
 	public void resetPower() {
 		currentPower = initialPower;
@@ -59,15 +61,36 @@ public class CopterManagerTouch : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 		manager = GameObject.Find("LevelManagerO").GetComponent<LevelManager>();
-		cargo = GetComponent<CargoManager>();
+		gameManager.load();
 		copterBody = gameObject.GetComponent<Rigidbody2D>();
+		tempHoldTime = holdTime;
+
+		setupCopter(gameManager.getCopters(), gameManager.getCurrentCopter());
+	}
+	
+	public void setupCopter (string[,] copterArray, int copterNumber){
+		for (int h = 1; h < 10; h++) {
+			Debug.Log (int.Parse(copterArray[copterNumber,h]));
+		}
+		Debug.Log(gameManager.getPlatformLevel());
+		maxHealth = int.Parse(copterArray[copterNumber,15]);
+		copterBody.mass = int.Parse(copterArray[copterNumber,10]);
+		tiltSpeed = int.Parse(copterArray[copterNumber,16]);
+		returnSpeed = tiltSpeed/40;
+		maxTilt = int.Parse(copterArray[copterNumber,17]);
+		maxFuel = int.Parse(copterArray[copterNumber,8]) + (((int.Parse(copterArray[copterNumber,9]) - int.Parse(copterArray[copterNumber,8])) / 10) * int.Parse(copterArray[copterNumber,5]));
+		maxPower = int.Parse(copterArray[copterNumber,6]) + (((int.Parse(copterArray[copterNumber,7]) - int.Parse(copterArray[copterNumber,6])) / 10) * int.Parse(copterArray[copterNumber,4]));
+		reFuelPerSecond = maxFuel / ((14 - gameManager.getPlatformLevel()) / 2);
+		healPerSecond = maxHealth / ((14 - gameManager.getPlatformLevel()) / 2);
+		manager.cargoSize = int.Parse(copterArray[copterNumber,11]);
+		currentHealth = maxHealth;
+		currentFuel = maxFuel;
+		cargo = GetComponent<CargoManager>();
 		hookJoint = GetComponent<DistanceJoint2D> ();
 		hookJoint.anchor = hookAnchor.transform.localPosition;
 		copterScale = gameObject.transform.localScale.x;
-		tempHoldTime = holdTime;
-		currentHealth = maxHealth;
-		currentFuel = maxFuel;
 		resetPower();
 	}
 
@@ -257,6 +280,10 @@ public class CopterManagerTouch : MonoBehaviour {
 
 	public float getFuel () {
 		return currentFuel;
+	}
+
+	public float getReFuelSpeed () {
+		return reFuelPerSecond;
 	}
 
 	public float getPower () {

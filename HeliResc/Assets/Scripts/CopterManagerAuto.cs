@@ -6,7 +6,7 @@ public class CopterManagerAuto : MonoBehaviour {
 
 	private Rigidbody2D copterBody;
 	private DistanceJoint2D hookJoint;
-	private bool isHookDown = true, once = false;
+	private bool isHookDown = true;
 
 	public GameObject hookPrefab, hookAnchor;
 	private GameObject hook;
@@ -67,7 +67,6 @@ public class CopterManagerAuto : MonoBehaviour {
 		}
 
 		if (isHookDown && hook == null) {
-			once = true;
 			hook = Instantiate (hookPrefab, gameObject.transform.position + new Vector3 (0f, -0.3f), Quaternion.identity) as GameObject;
 			hookJoint.enabled = true;
 			hookJoint.distance = hookDistance;
@@ -75,7 +74,7 @@ public class CopterManagerAuto : MonoBehaviour {
 		}
 
 		if (gameObject.transform.position.x >= maxX) {
-			gameObject.transform.position = new Vector3(-(gameObject.transform.position.x), gameObject.transform.position.y+2f);
+			gameObject.transform.position = new Vector3(-(gameObject.transform.position.x), gameObject.transform.position.y + ((Random.value-0.5f)*3));
 			hook.transform.position = new Vector3(-(hook.transform.position.x), hook.transform.position.y);
 		}
 	}

@@ -6,7 +6,7 @@ public class CameraManager : MonoBehaviour {
 	private Vector3 cameraOriginal, target, zero = Vector3.zero;
 	private float deadZonePixels, targetX, targetY;
 
-	public GameObject copter;
+	private GameObject copter;
 	public float 	deadZonePercent = 0.2f, 
 					dampTime = 2f, 
 					maxSpeed = 20f,
@@ -14,6 +14,7 @@ public class CameraManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		if (copter == null) copter = GameObject.Find("Copter");
 		cameraOriginal = Camera.main.transform.position;
 		deadZonePixels = Screen.width * deadZonePercent;
 	}
