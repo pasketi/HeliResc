@@ -17,7 +17,18 @@ public class CopterManagerTouch : MonoBehaviour {
 					currentHealth,
 					minDamage = -5f,
 					currentFuel,
-					idleConsumption = 1f;
+					idleConsumption = 1f,
+					maxTilt = 75f, 
+					tiltSpeed = 50f, 
+					returnSpeed = 5f,
+					powerMultiplier = 100f,
+					initialPower = 75f,
+					maxHealth = 100f,
+					healPerSecond = 20f,
+					maxFuel = 500f,
+					reFuelPerSecond = 100f,
+					minPower = 0f,
+					maxPower = 120f;
 
 	private GameObject hook;
 	private LevelManager manager;
@@ -38,22 +49,11 @@ public class CopterManagerTouch : MonoBehaviour {
 					isKill = false, 
 					isSplash = false;
 
-	public float 	maxTilt = 75f, 
-					tiltSpeed = 50f, 
-					returnSpeed = 5f,
-					holdTime = 0.25f,
+	public float 	holdTime = 0.25f,
 					rotationSensitivity = 0.5f,
 					powerSensitivity = 0.5f,
-					powerMultiplier = 100f,
-					initialPower = 75f,
 					hookDistance = 1.5f,
-					reelSpeed = 1.5f,
-					maxHealth = 100f,
-					healPerSecond = 20f,
-					maxFuel = 500f,
-					reFuelPerSecond = 100f,
-					minPower = 0f,
-					maxPower = 120f;
+					reelSpeed = 1.5f;
 
 	public void resetPower() {
 		currentPower = initialPower;
@@ -61,7 +61,7 @@ public class CopterManagerTouch : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		if (GameObject.Find("GameManager").GetComponent<GameManager>() != null) gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 		manager = GameObject.Find("LevelManagerO").GetComponent<LevelManager>();
 		gameManager.load();
 		copterBody = gameObject.GetComponent<Rigidbody2D>();
@@ -71,10 +71,10 @@ public class CopterManagerTouch : MonoBehaviour {
 	}
 	
 	public void setupCopter (string[,] copterArray, int copterNumber){
-		for (int h = 1; h < 10; h++) {
+		/*for (int h = 1; h < 10; h++) {
 			Debug.Log (int.Parse(copterArray[copterNumber,h]));
 		}
-		Debug.Log(gameManager.getPlatformLevel());
+		Debug.Log(gameManager.getPlatformLevel());*/
 		maxHealth = int.Parse(copterArray[copterNumber,15]);
 		copterBody.mass = int.Parse(copterArray[copterNumber,10]);
 		tiltSpeed = int.Parse(copterArray[copterNumber,16]);
@@ -267,6 +267,7 @@ public class CopterManagerTouch : MonoBehaviour {
 	public void changeHealth (float amount) {
 		if (amount < minDamage){
 			currentHealth += amount;
+			if (!manager.isDamageTaken()) manager.damageTaken();
 			if (currentHealth <= 0) manager.levelFailed(1);
 		} else if (amount > 0f) {
 			if (currentHealth < maxHealth) currentHealth += amount;
@@ -277,24 +278,40 @@ public class CopterManagerTouch : MonoBehaviour {
 	public float getHealth (){
 		return currentHealth;
 	}
+	public float getMaxHealth (){
+		return maxHealth;
+	}
 
 	public float getFuel () {
 		return currentFuel;
+	}
+	public float getMaxFuel () {
+		return maxFuel;
 	}
 
 	public float getReFuelSpeed () {
 		return reFuelPerSecond;
 	}
 
+	public float getHealSpeed() {
+		return healPerSecond;
+	}
+
 	public float getPower () {
 		return currentPower;
+	}
+	public float getMinPower () {
+		return minPower;
+	}
+	public float getMaxPower () {
+		return maxPower;
 	}
 
 	public void changeFuel (float amount){
 		currentFuel += amount;
 	}
 
-	private void killHook () {
+	public void killHook () {
 		hookJoint.enabled = false;
 		hook.GetComponent<DestroyHookOverTime>().doom();
 		hook = null;

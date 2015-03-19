@@ -15,7 +15,9 @@ public class GameManager : MonoBehaviour {
 					playerStars = 0, 
 					playerCoins = 0, 
 					playerPlatform = 1,
-					currentCopter = 0;
+					currentCopter = 0,
+					lastStars = 0,
+					lastCoins = 0;
 
 	/*
 	 * An array of Copter statistics (IN STRING!!!)
@@ -136,6 +138,21 @@ public class GameManager : MonoBehaviour {
 			copters[i,5] = PlayerPrefs.GetInt("Copter"+i+"Fueltanklevel").ToString();
 			copters[i,12] = PlayerPrefs.GetInt("Copter"+i+"Ropelevel").ToString();
 		}
+	}
+
+	public void sendLevelEndInfo (int stars, int coins) {
+		lastCoins = coins;
+		lastStars = stars;
+	}
+	public int getAndNullLastLevelCoins () {
+		int tempCoins = lastCoins;
+		lastCoins = 0;
+		return tempCoins;
+	}
+	public int getAndNullLastLevelStars () {
+		int tempStars = lastStars;
+		lastStars = 0;
+		return tempStars;
 	}
 
 	public string getName () {

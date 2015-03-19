@@ -35,8 +35,8 @@ public class UIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		fuel.fillAmount = copter.getFuel () / copter.maxFuel;
-		power.value = copter.getPower () / (copter.maxPower-copter.minPower);
+		fuel.fillAmount = copter.getFuel () / copter.getMaxFuel();
+		power.value = copter.getPower () / (copter.getMaxPower()-copter.getMinPower());
 		saved.text = manager.getSavedCrates ().ToString () + "/" + manager.getCrateAmount ().ToString ();
 		cargo.text = manager.cargoCrates.ToString () + "/" + manager.cargoSize.ToString ();
 
@@ -45,12 +45,12 @@ public class UIManager : MonoBehaviour {
 		else
 			cargo.color = black;
 
-		if (copter.getFuel () / copter.maxFuel >= 0.5f)
-			fuel.color = new Color ((copter.maxFuel - copter.getFuel ()) / (copter.maxFuel - (copter.maxFuel / 2)), 1f, 0f);
+		if (copter.getFuel () / copter.getMaxFuel() >= 0.5f)
+			fuel.color = new Color ((copter.getMaxFuel() - copter.getFuel ()) / (copter.getMaxFuel() - (copter.getMaxFuel() / 2)), 1f, 0f);
 		else 
-			fuel.color = new Color (1f, (copter.getFuel () / (copter.maxFuel - (copter.maxFuel / 2))), 0f);
+			fuel.color = new Color (1f, (copter.getFuel () / (copter.getMaxFuel() - (copter.getMaxFuel() / 2))), 0f);
 
-		if (copter.getFuel () / copter.maxFuel < 0.3f)
+		if (copter.getFuel () / copter.getMaxFuel() < 0.3f)
 			lowFuel = true;
 		else {
 			lowFuel = false;

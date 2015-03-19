@@ -4,12 +4,13 @@ using System.Collections;
 
 public class LevelManager : MonoBehaviour {
 
-	private int savedCrates = 0, crateAmount;
+	private int savedCrates = 0, crateAmount, stars = 0;
 	private GameManager gameManager;
 	private GameObject copter;
+	public int levelCoinRewardPerStar = 200;
 	public GameObject pauseScreen, HUD, copterSpawnPoint;
 	public GameObject[] copters = new GameObject[GameObject.Find("GameManager").GetComponent<GameManager>().getCopterAmount()];
-	private bool win = false, lose = false, splash = false, gamePaused = false;
+	private bool win = false, lose = false, splash = false, gamePaused = false, takenDamage = false, once = false;
 	public float waterLevel = 0f, uiLiftPowerWidth = 0.1f, uiLiftPowerDeadZone = 0.05f, resetCountdown = 3f, crateSize;
 	public int cargoSize = 2, cargoCrates = 0;
 
@@ -45,7 +46,15 @@ public class LevelManager : MonoBehaviour {
 		}
 
 		if (win) {
-			Debug.Log("Victory!");
+			if (!once) {
+				Debug.Log("Victory!");
+				stars += 1;
+				if (!isDamageTaken()) stars += 1;
+				if (savedCrates == crateAmount) stars += 1;
+				if (stars < 3) gameManager.sendLevelEndInfo(stars, levelCoinRewardPerStar * stars);
+				else if (stars >= 3) gameManager.sendLevelEndInfo(stars, (levelCoinRewardPerStar * stars) + (levelCoinRewardPerStar / 2));
+				once = true;
+			}
 			resetCountdown -= Time.deltaTime;
 			if (resetCountdown <= 0f) Application.LoadLevel ("MainMenu");
 		}
@@ -87,6 +96,13 @@ public class LevelManager : MonoBehaviour {
 
 			Time.timeScale = 1f;
 		}
+	}
+
+	public bool isDamageTaken () {
+		return takenDamage;
+	}
+	public void damageTaken () {
+		takenDamage = true;
 	}
 
 	public bool getPaused () {
