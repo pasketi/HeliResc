@@ -348,4 +348,9 @@ public class CopterManagerTouch : MonoBehaviour {
 		currentHealth = 0f;
 		Destroy (gameObject);
 	}
+
+	void OnTriggerStay2D (Collider2D other) {
+		if (other.isTrigger == false)
+			changeHealth(-((maxHealth/2) * Time.deltaTime));
+	}
 }
