@@ -51,8 +51,6 @@ public class ScrollingMenus : MonoBehaviour {
 		for(int i = 0; i < menus.Count; i++){
 			canvasAnchorPoints[i] = menus[0].transform.position.x + (i * vecs[3].x);
 			panelAnchorPoints[i] = new Vector3(canvasAnchorPoints[i] - i * 4 * canvasAnchorPoints[0], menus[0].transform.position.y);
-			Debug.Log("Anchor point " + i + ": " + canvasAnchorPoints[i]);
-			Debug.Log("Panel anchor point " + i + ": " + panelAnchorPoints[i]);
 			menus[i].transform.position = new Vector3(canvasAnchorPoints[i], menus[i].transform.position.y);
 		}
 	}
@@ -61,13 +59,12 @@ public class ScrollingMenus : MonoBehaviour {
 		if(Input.GetMouseButtonDown(0)){
 			mouseStart = previousPosition = Input.mousePosition;
 			isDragging = true;
-			Debug.Log(mouseStart);
 		}
 		if(Input.GetMouseButtonUp(0)) {
 			mouseEnd = Input.mousePosition;
 			if(mouseEnd.x < mouseStart.x) {			//Player dragged from right to left
 				if(mouseStart.x - mouseEnd.x > swipeAmount)
-					current = current < menus.Count ? current + 1 : menus.Count;
+					current = current < menus.Count - 1 ? current + 1 : menus.Count - 1;
 			} else if(mouseEnd.x > mouseStart.x){	//Player dragged from left to right
 				if(mouseEnd.x - mouseStart.x > swipeAmount)
 					current = current > 0 ? current - 1 : 0;
@@ -92,6 +89,16 @@ public class ScrollingMenus : MonoBehaviour {
 				menuPanel.position = target;
 			}
 		}
+	}
 
+	public void ShowUpgrades() {
+		for (int i = 0; i < menus.Count; i++) {
+			if(menus[i].name.Equals("Upgrades")) {
+				current = i;
+				target = panelAnchorPoints[current];
+				isScrolling = true;
+				isDragging = false;
+			}
+		}
 	}
 }

@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 
 	void Awake(){
 		DontDestroyOnLoad(gameObject);
+		Debug.Log ("GameManager awake");
 	}
 
 	private const int copterAmount = 2; //FOR EVERY NEW COPTER, ADD 1 HERE
