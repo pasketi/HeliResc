@@ -247,8 +247,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private void updateMainMenuDebug() {
-		if (GameObject.Find("MainMenu") != null && GameObject.Find("MainMenu").transform.FindChild("DebugText") != null){
-			GameObject.Find("MainMenu").transform.FindChild("DebugText").GetComponent<Text>().text = copters[currentCopter,0]+"\nEngine: " + copters[currentCopter, 4]+
+		if (GameObject.Find("DebugText") != null){
+			GameObject.Find("DebugText").GetComponent<Text>().text = copters[currentCopter,0]+"\nEngine: " + copters[currentCopter, 4]+
 				"\nFuel: " + copters[currentCopter, 5]+
 				"\nPlatform: " + playerPlatform.ToString()+
 				"\nRope: " + copters[currentCopter, 12];
