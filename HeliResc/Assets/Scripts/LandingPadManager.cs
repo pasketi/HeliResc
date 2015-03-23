@@ -3,6 +3,10 @@ using System.Collections;
 
 public class LandingPadManager : MonoBehaviour {
 
+	public delegate void LandingEvent();
+	public event LandingEvent enterPlatform;
+	public event LandingEvent exitPlatform;
+
 	//private BoxCollider2D trigger;
 	private CargoManager cargo;
 
@@ -23,6 +27,7 @@ public class LandingPadManager : MonoBehaviour {
 		}
 
 		if (other.gameObject.transform.tag == "Copter") {
+			if(enterPlatform != null) enterPlatform();
 		    if (cargo.getCargoCrates() > 0) {
 				cargo.emptyCargo();
 				other.GetComponent<CopterManagerTouch>().resetPower();
@@ -42,6 +47,12 @@ public class LandingPadManager : MonoBehaviour {
 			if (other.GetComponent<CopterManagerTouch>().getFuel() < other.GetComponent<CopterManagerTouch>().getMaxFuel()) {
 				other.GetComponent<CopterManagerTouch>().changeFuel(other.GetComponent<CopterManagerTouch>().getReFuelSpeed()*Time.deltaTime);
 			}
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D other) {
+		if (other.gameObject.transform.tag == "Copter") {
+			if(enterPlatform != null) exitPlatform();
 		}
 	}
 }
