@@ -7,10 +7,13 @@ public class CameraManager : MonoBehaviour {
 	private float deadZonePixels, targetX, targetY;
 
 	private GameObject copter;
+	public bool hasBounds = false;
 	public float 	deadZonePercent = 0.2f, 
 					dampTime = 2f, 
 					maxSpeed = 20f,
-					maxY = 30f;
+					maxY = 30f,
+					mapBoundsLeft = 0f,
+					mapBoundsRight = 0f;
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +35,8 @@ public class CameraManager : MonoBehaviour {
 		}
 		if (copter != null && (Camera.main.WorldToScreenPoint(copter.transform.position).x >= Screen.width - deadZonePixels || Camera.main.WorldToScreenPoint(copter.transform.position).x <= deadZonePixels)){
 			targetX = copter.transform.position.x;
+			if (hasBounds && targetX < mapBoundsLeft) targetX = mapBoundsLeft;
+			else if (hasBounds && targetX > mapBoundsRight) targetX = mapBoundsRight;
 			target = new Vector3(targetX, targetY, cameraOriginal.z);
 		}
 

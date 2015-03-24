@@ -1,0 +1,176 @@
+fileFormatVersion: 2
+guid: a44f20ee63b12f04db4b03f80b7b7078
+timeCreated: 1427201561
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Arctic_Scene_Spritesheet_V2_0
+    21300002: Arctic_Scene_Spritesheet_V2_1
+    21300004: Arctic_Scene_Spritesheet_V2_2
+    21300006: Arctic_Scene_Spritesheet_V2_3
+    21300008: Arctic_Scene_Spritesheet_V2_4
+    21300010: Arctic_Scene_Spritesheet_V2_5
+    21300012: Arctic_Scene_Spritesheet_V2_6
+    21300014: Arctic_Scene_Spritesheet_V2_7
+    21300016: Arctic_Scene_Spritesheet_V2_8
+    21300018: Arctic_Scene_Spritesheet_V2_9
+    21300020: Arctic_Scene_Spritesheet_V2_10
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Arctic_Scene_Spritesheet_V2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 525
+        width: 1428
+        height: 203
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arctic_Scene_Spritesheet_V2_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 349
+        width: 1428
+        height: 176
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arctic_Scene_Spritesheet_V2_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 199
+        width: 1428
+        height: 150
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arctic_Scene_Spritesheet_V2_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 59
+        width: 306
+        height: 140
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arctic_Scene_Spritesheet_V2_4
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 102
+        width: 184
+        height: 97
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arctic_Scene_Spritesheet_V2_5
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 101
+        width: 306
+        height: 98
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arctic_Scene_Spritesheet_V2_6
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 4
+        width: 305
+        height: 97
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arctic_Scene_Spritesheet_V2_7
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 138
+        width: 521
+        height: 61
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arctic_Scene_Spritesheet_V2_8
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 66
+        width: 380
+        height: 72
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arctic_Scene_Spritesheet_V2_9
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 18
+        width: 440
+        height: 48
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arctic_Scene_Spritesheet_V2_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 480
+        height: 59
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
