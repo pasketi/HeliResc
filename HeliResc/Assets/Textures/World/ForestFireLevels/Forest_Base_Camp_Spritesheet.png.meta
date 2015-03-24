@@ -1,9 +1,12 @@
 fileFormatVersion: 2
 guid: 5830878b079df424d8be63a2dcc6efba
-timeCreated: 1427234381
+timeCreated: 1427236945
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Forest_Base_Camp_Spritesheet_0
+    21300002: Forest_Base_Camp_Spritesheet_1
+    21300004: Forest_Base_Camp_Spritesheet_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,14 +33,14 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -48,7 +51,37 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Forest_Base_Camp_Spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 374
+        width: 916
+        height: 90
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Forest_Base_Camp_Spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 61
+        height: 374
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Forest_Base_Camp_Spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 28
+        width: 204
+        height: 346
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 

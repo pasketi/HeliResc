@@ -1,0 +1,198 @@
+fileFormatVersion: 2
+guid: f63cbe3afd80e714ba52f96cf7608ad2
+timeCreated: 1427236178
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Clouds_Sprite3(1)_0
+    21300002: Clouds_Sprite3(1)_1
+    21300004: Clouds_Sprite3(1)_2
+    21300006: Clouds_Sprite3(1)_3
+    21300008: Clouds_Sprite3(1)_4
+    21300010: Clouds_Sprite3(1)_5
+    21300012: Clouds_Sprite3(1)_6
+    21300014: Clouds_Sprite3(1)_7
+    21300016: Clouds_Sprite3(1)_8
+    21300018: Clouds_Sprite3(1)_9
+    21300020: Clouds_Sprite3(1)_10
+    21300022: Clouds_Sprite3(1)_11
+    21300024: Clouds_Sprite3(1)_12
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Clouds_Sprite3(1)_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1664
+        width: 319
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Clouds_Sprite3(1)_1
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 1786
+        width: 581
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Clouds_Sprite3(1)_2
+      rect:
+        serializedVersion: 2
+        x: 1097
+        y: 1446
+        width: 821
+        height: 402
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Clouds_Sprite3(1)_3
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 1695
+        width: 121
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Clouds_Sprite3(1)_4
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 1623
+        width: 424
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Clouds_Sprite3(1)_5
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 1625
+        width: 169
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Clouds_Sprite3(1)_6
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 1140
+        width: 907
+        height: 455
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Clouds_Sprite3(1)_7
+      rect:
+        serializedVersion: 2
+        x: 1094
+        y: 982
+        width: 914
+        height: 445
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Clouds_Sprite3(1)_8
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 122
+        width: 904
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Clouds_Sprite3(1)_9
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 507
+        width: 905
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Clouds_Sprite3(1)_10
+      rect:
+        serializedVersion: 2
+        x: 1483
+        y: 267
+        width: 508
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Clouds_Sprite3(1)_11
+      rect:
+        serializedVersion: 2
+        x: 1593
+        y: 13
+        width: 436
+        height: 233
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Clouds_Sprite3(1)_12
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 587
+        width: 1092
+        height: 551
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
