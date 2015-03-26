@@ -16,9 +16,11 @@ public class CrateManager : MonoBehaviour {
 	private SpriteRenderer spriteRenderer, bgRenderer;
 	private DistanceJoint2D joint;
 	private HingeJoint2D hinge;
+	private Animator animator;
 	public float crateMass = 5f, inWaterModifier = 0.2f, lifeTimeInSeconds = 60f;
 
-	public Sprite 	Phase100, 	//MANDATORY, First sprite
+
+	/*public Sprite Phase100, 	//MANDATORY, First sprite
 					Phase66,	//four phase, max 2/3s left
 					Phase33, 	//four phase, max 1/3s left
 					Phase0,		//two phase, dead
@@ -27,7 +29,7 @@ public class CrateManager : MonoBehaviour {
 					Phase66BG,
 					Phase33BG,
 					Phase0BG, 
-					HookedBG;
+					HookedBG;*/
 	public bool 	inWater = false, 
 					inCargo = false, 
 					inMenu = false, 
@@ -46,18 +48,20 @@ public class CrateManager : MonoBehaviour {
 			cargoScript = GameObject.Find ("Copter").GetComponent<CargoManager> ();
 		}
 		crate = gameObject.transform.parent.gameObject;
-		spriteRenderer = crate.GetComponent<SpriteRenderer> ();
-		if (crate.transform.FindChild ("BackGround") != null)
-			bgRenderer = crate.transform.FindChild ("BackGround").GetComponent<SpriteRenderer> ();
+		animator = gameObject.transform.parent.GetComponent<Animator>();
+		Debug.Log(animator.name);
+		//spriteRenderer = crate.GetComponent<SpriteRenderer> ();
+		/*if (crate.transform.FindChild ("BackGround") != null)
+			bgRenderer = crate.transform.FindChild ("BackGround").GetComponent<SpriteRenderer> ();*/
 
-		if (Phase100 != null && Phase66 == null && Phase33== null && Phase0 == null){
+		if (animator.GetInteger("status") == null){
 			stationary = true;
-		} else if (Phase100 != null && Phase66 == null && Phase33 == null && Phase0 != null){
+		} else if (animator.GetInteger("status") == 1){
 			twoPhases = true;
-		} else if (Phase100 != null && Phase66 != null && Phase33 != null && Phase0 != null){
+		} else if (animator.GetInteger("status") == 3){
 			fourPhases = true;
 		}
-
+		
 		floatyValue = gameObject.transform.parent.GetComponent<Rigidbody2D> ().mass * 30f;
 		hinge = GetComponent<HingeJoint2D> ();
 	}
@@ -69,34 +73,34 @@ public class CrateManager : MonoBehaviour {
 
 			if (dying && crate.layer != 11) {
 				lifeTimeInSeconds -= Time.deltaTime;
-				if (lifeTimeInSeconds <= 0f) dead = true;
+				if (animator.GetFloat("lifeTime") != null) {
+					animator.SetFloat("lifeTime", lifeTimeInSeconds);
+					if (lifeTimeInSeconds <= 0f) {
+						lifeTimeInSeconds = 0f;
+						dead = true;
+					}
+				}
 			}
 
 			if (dying && twoPhases) {
 				if (lifeTimeInSeconds <= 0f) {
-					spriteRenderer.sprite = Phase0;
-					if (Phase0BG != null) bgRenderer.sprite = Phase0BG;
+					animator.SetInteger("status", 0);
 				} else {
-					spriteRenderer.sprite = Phase100;
-					if (Phase100BG != null) bgRenderer.sprite = Phase100BG;
+					animator.SetInteger("status", 1);
 				}
 			} else if (dying && fourPhases) {
-				if (lifeTimeInSeconds <= (maxLifeTimeInSeconds/3)*2) {
-					spriteRenderer.sprite = Phase66;
-					if (Phase66BG != null) bgRenderer.sprite = Phase66BG;
+				if (lifeTimeInSeconds <= 0f) {
+					animator.SetInteger("status", 0);
 				} else if (lifeTimeInSeconds <= (maxLifeTimeInSeconds/3)) {
-					spriteRenderer.sprite = Phase33;
-					if (Phase33BG != null) bgRenderer.sprite = Phase33BG;
-				} else if (lifeTimeInSeconds <= 0f) {
-					spriteRenderer.sprite = Phase0;
-					if (Phase0BG != null) bgRenderer.sprite = Phase0BG;
+					animator.SetInteger("status", 1);
+				} else if (lifeTimeInSeconds <= (maxLifeTimeInSeconds/3)*2) {
+					animator.SetInteger("status", 2);
 				} else {
-					spriteRenderer.sprite = Phase100;
-					if (Phase100BG != null) bgRenderer.sprite = Phase100BG;
+					animator.SetInteger("status", 3);
 				}
 			}
 
-			if (dying) {
+			/*if (dying) {
 				if (lifeTimeInSeconds < 10f) {
 					tempFlash += Time.deltaTime;
 					if (tempFlash >= flashTime) {
@@ -110,7 +114,7 @@ public class CrateManager : MonoBehaviour {
 				if ((lifeTimeInSeconds / maxLifeTimeInSeconds) > 0.5f) bgRenderer.color = new Color(1f, 1f, (lifeTimeInSeconds - (maxLifeTimeInSeconds / 2)) / (maxLifeTimeInSeconds - (maxLifeTimeInSeconds / 2)));
 				else if ((lifeTimeInSeconds / maxLifeTimeInSeconds) <= 0.5f) bgRenderer.color = new Color(1f, lifeTimeInSeconds / (maxLifeTimeInSeconds - (maxLifeTimeInSeconds / 2)), 0f);	
 				}
-			}
+			}*/
 
 			if ((!inCargo && copterScript != null && crate.layer == 11 && copterScript.isHookDead == true) || copterScript == null) {
 				Destroy (joint);
@@ -138,13 +142,15 @@ public class CrateManager : MonoBehaviour {
 			}
 
 			if (crate.layer == 11) {
-				spriteRenderer.sprite = Hooked;
+				/*spriteRenderer.sprite = Hooked;
 				if (bgRenderer != null)
-					bgRenderer.sprite = HookedBG;
+					bgRenderer.sprite = HookedBG;*/
+				animator.SetBool("isHooked", true);
 			} else {
-				spriteRenderer.sprite = Phase100;
+				/*spriteRenderer.sprite = Phase100;
 				if (bgRenderer != null)
-					bgRenderer.sprite = Phase100BG;
+					bgRenderer.sprite = Phase100BG;*/
+				animator.SetBool("isHooked", false);
 			}
 		} else {
 			if (crate.transform.position.y < 0f) {
@@ -157,7 +163,7 @@ public class CrateManager : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
-		if (!inMenu) {
+		if (!inMenu && !dead) {
 			if (copterScript != null && collision.collider.gameObject.CompareTag ("Hook") && copterScript.isHookDead == false) {
 				gameObject.transform.parent.parent = collision.collider.gameObject.transform;
 				gameObject.AddComponent <DistanceJoint2D> ();
