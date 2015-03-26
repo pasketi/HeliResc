@@ -9,11 +9,13 @@ public class ScrollingMenus : MonoBehaviour {
 	
 	public GameObject[] go;		//Order of canvases: 1. MainMenu 2.LevelEnd 3. Upgrades
 	public List<GameObject> menus;
-
+	
 	private float[] canvasAnchorPoints;
 	private Vector3[] panelAnchorPoints;
 	
 	public float scrollingSpeed = 10f;		//How fast the menus will scroll from one to another
+	public float slowedSpeed;
+	private float originalSpeed;
 	public bool showLevelEnd = false;
 	
 	private bool isScrolling;		//Is the menu moving to another view
@@ -34,7 +36,7 @@ public class ScrollingMenus : MonoBehaviour {
 		menuPanel = go[0].transform.parent;
 		Vector3[] vecs = new Vector3[4];
 		GetComponent<RectTransform>().GetWorldCorners(vecs);
-
+		
 		for(int i = 0; i < go.Length; i++) {
 			if(go[i].name.Equals("LevelEnd")) {
 				go[i].SetActive(showLevelEnd);
@@ -44,15 +46,19 @@ public class ScrollingMenus : MonoBehaviour {
 			else
 				menus.Add(go[i]);
 		}
-
+		
 		canvasAnchorPoints = new float[menus.Count];
 		panelAnchorPoints = new Vector3[menus.Count];
-
+		
 		for(int i = 0; i < menus.Count; i++){
 			canvasAnchorPoints[i] = menus[0].transform.position.x + (i * vecs[3].x);
 			panelAnchorPoints[i] = new Vector3(canvasAnchorPoints[i] - i * 4 * canvasAnchorPoints[0], menus[0].transform.position.y);
 			menus[i].transform.position = new Vector3(canvasAnchorPoints[i], menus[i].transform.position.y);
 		}
+		
+		scrollingSpeed = Screen.width * 1.25f;
+		originalSpeed = scrollingSpeed;
+		slowedSpeed = scrollingSpeed * 0.75f;
 	}
 	
 	void Update() {
@@ -82,15 +88,22 @@ public class ScrollingMenus : MonoBehaviour {
 		if(isScrolling) {
 			float step = Time.deltaTime * scrollingSpeed;
 			menuPanel.position = Vector3.MoveTowards(menuPanel.position, target, step);
-
+			
+			if(scrollingSpeed > slowedSpeed) {
+				scrollingSpeed *= 0.995f;
+			}
+			else
+				scrollingSpeed = slowedSpeed;
+			
 			if(Vector3.Distance(menuPanel.position, target) < 10) {		//if the panel is close enough, stop scrolling
 				isScrolling = false;
+				scrollingSpeed = originalSpeed;
 				Debug.Log ("Reach target");
 				menuPanel.position = target;
 			}
 		}
 	}
-
+	
 	public void ShowUpgrades() {
 		for (int i = 0; i < menus.Count; i++) {
 			if(menus[i].name.Equals("Upgrades")) {

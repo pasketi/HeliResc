@@ -7,6 +7,9 @@ public class LandingPadManager : MonoBehaviour {
 	public event LandingEvent enterPlatform;
 	public event LandingEvent exitPlatform;
 
+	private bool repair;
+	private bool refill;
+
 	//private BoxCollider2D trigger;
 	private CargoManager cargo;
 
@@ -41,11 +44,15 @@ public class LandingPadManager : MonoBehaviour {
 
 	void OnTriggerStay2D(Collider2D other){
 		if (other.gameObject.transform.tag == "Copter") {
-			if (other.GetComponent<CopterManagerTouch>().getHealth() < other.GetComponent<CopterManagerTouch>().getMaxHealth()) {
-				other.GetComponent<CopterManagerTouch>().changeHealth((float)other.GetComponent<CopterManagerTouch>().getHealSpeed()*Time.deltaTime);
+			if(repair) {
+				if (other.GetComponent<CopterManagerTouch>().getHealth() < other.GetComponent<CopterManagerTouch>().getMaxHealth()) {
+					other.GetComponent<CopterManagerTouch>().changeHealth((float)other.GetComponent<CopterManagerTouch>().getHealSpeed()*Time.deltaTime);
+				}
 			}
-			if (other.GetComponent<CopterManagerTouch>().getFuel() < other.GetComponent<CopterManagerTouch>().getMaxFuel()) {
-				other.GetComponent<CopterManagerTouch>().changeFuel(other.GetComponent<CopterManagerTouch>().getReFuelSpeed()*Time.deltaTime);
+			if(refill) {
+				if (other.GetComponent<CopterManagerTouch>().getFuel() < other.GetComponent<CopterManagerTouch>().getMaxFuel()) {
+					other.GetComponent<CopterManagerTouch>().changeFuel(other.GetComponent<CopterManagerTouch>().getReFuelSpeed()*Time.deltaTime);
+				}
 			}
 		}
 	}
@@ -54,5 +61,13 @@ public class LandingPadManager : MonoBehaviour {
 		if (other.gameObject.transform.tag == "Copter") {
 			if(enterPlatform != null) exitPlatform();
 		}
+	}
+
+	public void StartRepair() {
+		repair = true;
+	}
+	
+	public void StartRefill() {
+		refill = true;;
 	}
 }
