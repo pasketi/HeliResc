@@ -145,12 +145,17 @@ public class CrateManager : MonoBehaviour {
 				/*spriteRenderer.sprite = Hooked;
 				if (bgRenderer != null)
 					bgRenderer.sprite = HookedBG;*/
-				animator.SetBool("isHooked", true);
+				if (transform.parent.FindChild("LegHook").childCount > 0)
+					animator.SetBool ("otherHooked", true);
+				else
+					animator.SetBool ("otherHooked", false);
+				animator.SetBool ("isHooked", true);
 			} else {
 				/*spriteRenderer.sprite = Phase100;
 				if (bgRenderer != null)
 					bgRenderer.sprite = Phase100BG;*/
-				animator.SetBool("isHooked", false);
+				animator.SetBool ("isHooked", false);
+				animator.SetBool ("otherHooked", false);
 			}
 		} else {
 			if (crate.transform.position.y < 0f) {
@@ -172,7 +177,9 @@ public class CrateManager : MonoBehaviour {
 
 
 				joint.connectedBody = collision.collider.gameObject.GetComponent<Rigidbody2D> ();
-				joint.connectedAnchor = new Vector2 (0f, -0.3f);
+				if (joint.connectedBody.gameObject.name == "Hook(Clone)")
+					joint.connectedAnchor = new Vector2 (0f, -0.3f);
+				else joint.connectedAnchor = new Vector2 (0f, 0f);
 				joint.distance = 0f;
 				joint.maxDistanceOnly = false;
 				hinge.useLimits = false;
