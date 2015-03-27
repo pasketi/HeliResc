@@ -32,6 +32,6 @@ public class LevelMapButton : MonoBehaviour {
 	}
 
 	public void StartLevel() {
-		Application.LoadLevel(levelName);
+		Application.LoadLevel("Level"+levelIndex.ToString());
 	}
 }
