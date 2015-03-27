@@ -29,7 +29,7 @@ public class GetButtonMethods : MonoBehaviour {
 
 		btnChangeCopter.onClick.AddListener(() => g.swapCopter());
 	
-		btnPlay.onClick.AddListener (() => g.startGame("TestScene"));
+		btnPlay.onClick.AddListener (() => g.startGame("LevelMap"));
 	}
 	
 	// Update is called once per frame

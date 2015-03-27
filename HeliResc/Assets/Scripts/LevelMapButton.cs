@@ -8,6 +8,8 @@ public class LevelMapButton : MonoBehaviour {
 
 	public bool levelLocked;
 
+	public string levelName;
+
 	public Image[] stars;
 
 	public Sprite starUnlocked;
@@ -30,6 +32,6 @@ public class LevelMapButton : MonoBehaviour {
 	}
 
 	public void StartLevel() {
-		Application.LoadLevel("TestScene");
+		Application.LoadLevel(levelName);
 	}
 }
