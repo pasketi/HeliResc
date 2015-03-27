@@ -19,7 +19,7 @@ public class PlatformButtons: MonoBehaviour {
 		popup = GetComponent<Animator>();
 		popup.Play("default");
 		
-		copter = GetComponentInParent<Transform>();
+		//copter = GetComponentInParent<Transform>();
 		
 		rects = GetComponentsInChildren<RectTransform>();
 		if(rects == null)
