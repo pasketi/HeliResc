@@ -31,7 +31,13 @@ public class LevelMapButton : MonoBehaviour {
 		}
 	}
 
+	public void SetStars(int stars) {
+		if(!levelLocked)
+			starsAwarded = stars;
+	}
+
 	public void StartLevel() {
-		Application.LoadLevel("Level"+levelIndex.ToString());
+		if(!levelLocked) 
+			Application.LoadLevel("Level"+levelIndex.ToString());
 	}
 }

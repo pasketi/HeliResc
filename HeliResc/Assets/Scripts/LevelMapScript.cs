@@ -4,14 +4,34 @@ using System.Collections;
 
 public class LevelMapScript : MonoBehaviour {
 
-	public RectTransform t;	//Need the get this via script later
+	private RectTransform t;	//Reference to the button that will be centered on screen.
 
-	private RectTransform rect;
+	private RectTransform rect;	//Reference to the panel's rect transform
 
 	// Use this for initialization
 	void Awake () {
 		rect = GetComponent<RectTransform>();
 		rect.sizeDelta = new Vector2(Screen.width, Screen.height) * 2f;
+
+		int currentLevel = 1;
+
+		if(PlayerPrefs.HasKey("CurrentLevel"))
+		   currentLevel = PlayerPrefs.GetInt("CurrentLevel");
+		else
+			PlayerPrefs.SetInt("CurrentLevel", 1);
+
+		int i = 1;
+		while(transform.Find("LevelButton" + i.ToString()) != null) {
+			if(PlayerPrefs.HasKey("Level"+i.ToString()+"Stars")) {
+				transform.Find("LevelButton" + i.ToString()).GetComponent<LevelMapButton>().SetStars(PlayerPrefs.GetInt("Level"+i.ToString()+"Stars"));
+			}
+			else {
+				PlayerPrefs.SetInt("Level"+i.ToString()+"Stars", 0);
+			}
+			i++;
+		}
+
+		t = transform.Find("LevelButton" + currentLevel.ToString()).GetComponent<RectTransform>();
 
 		SetScrollRectPosition(t);
 	}
@@ -23,7 +43,12 @@ public class LevelMapScript : MonoBehaviour {
 	private void SetScrollRectPosition(RectTransform target) {
 		Vector3 middlePoint = new Vector3(Screen.width, Screen.height) * 0.5f;
 		
-		rect.anchoredPosition = (middlePoint - target.localPosition);
+		Vector3 newPos = (middlePoint - target.localPosition);
+
+		newPos.x = Mathf.Clamp(newPos.x, 0, Screen.width);
+		newPos.y = Mathf.Clamp(newPos.y, 0, Screen.height);
+
+		rect.anchoredPosition = newPos;
 	}
 
 }
