@@ -17,7 +17,7 @@ public class ScrollingMenus : MonoBehaviour {
 	public float slowedSpeed;
 	private float originalSpeed;
 	public bool showLevelEnd = false;
-	
+
 	private bool isScrolling;		//Is the menu moving to another view
 	private bool isDragging;		//Is the player dragging the screen
 	private Vector3 target;			//target point in world space
@@ -36,6 +36,10 @@ public class ScrollingMenus : MonoBehaviour {
 		menuPanel = go[0].transform.parent;
 		Vector3[] vecs = new Vector3[4];
 		GetComponent<RectTransform>().GetWorldCorners(vecs);
+
+		GameManager g = GameObject.Find("GameManager").GetComponent<GameManager>();
+		showLevelEnd = g.ShowLevelEnd;
+		current = g.CurrentMenu;
 		
 		for(int i = 0; i < go.Length; i++) {
 			if(go[i].name.Equals("LevelEnd")) {
@@ -55,6 +59,10 @@ public class ScrollingMenus : MonoBehaviour {
 			panelAnchorPoints[i] = new Vector3(canvasAnchorPoints[i] - i * 4 * canvasAnchorPoints[0], menus[0].transform.position.y);
 			menus[i].transform.position = new Vector3(canvasAnchorPoints[i], menus[i].transform.position.y);
 		}
+
+		current = Mathf.Clamp(current, 0, menus.Count - 1);
+		target = panelAnchorPoints[current];
+		menuPanel.position = target;
 		
 		scrollingSpeed = Screen.width * 1.25f;
 		originalSpeed = scrollingSpeed;

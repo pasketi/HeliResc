@@ -20,17 +20,6 @@ public class LevelMapScript : MonoBehaviour {
 		else
 			PlayerPrefs.SetInt("CurrentLevel", 1);
 
-		int i = 1;
-		while(transform.Find("LevelButton" + i.ToString()) != null) {
-			if(PlayerPrefs.HasKey("Level"+i.ToString()+"Stars")) {
-				transform.Find("LevelButton" + i.ToString()).GetComponent<LevelMapButton>().SetStars(PlayerPrefs.GetInt("Level"+i.ToString()+"Stars"));
-			}
-			else {
-				PlayerPrefs.SetInt("Level"+i.ToString()+"Stars", 0);
-			}
-			i++;
-		}
-
 		t = transform.Find("LevelButton" + currentLevel.ToString()).GetComponent<RectTransform>();
 
 		SetScrollRectPosition(t);

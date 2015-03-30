@@ -4,6 +4,13 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
+	private bool showLevelEnd = false;
+	public bool ShowLevelEnd { get { return showLevelEnd; } }
+
+	private int currentMenu = 0;
+	public int CurrentMenu { get { return currentMenu; } }
+
+
 	void Awake(){
 		DontDestroyOnLoad(gameObject);
 		Debug.Log ("GameManager awake");
@@ -282,5 +289,11 @@ public class GameManager : MonoBehaviour {
 		//Debug.Log("Engine Level: " + PlayerPrefs.GetInt("Copter"+currentCopter+"Enginelevel").ToString() + " Fuel Level: " + PlayerPrefs.GetInt("Copter"+currentCopter+"Fueltanklevel").ToString() + " Platform Level: " + playerPlatform);
 		save ();
 		Application.LoadLevel(levelName);
+	}
+
+	public void loadMainMenu(bool showLevelEnd, int menu = 0) {
+		this.showLevelEnd = showLevelEnd;
+		currentMenu = menu;
+		Application.LoadLevel("MainMenu");
 	}
 }

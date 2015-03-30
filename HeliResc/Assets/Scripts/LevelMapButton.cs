@@ -15,6 +15,8 @@ public class LevelMapButton : MonoBehaviour {
 	public Sprite starUnlocked;
 	public Sprite starLocked;
 
+	private string saveName;
+
 	[Range(0, 3)]
 	public int starsAwarded;
 
@@ -22,22 +24,44 @@ public class LevelMapButton : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		saveName = "Level" + levelIndex.ToString();
+
 		buttonText.text = levelIndex.ToString ();
 
-		if(!levelLocked) {
-			for(int i = 0; i < stars.Length; i++) {
+		if(PlayerPrefs.HasKey(saveName + "Locked"))
+			levelLocked = PlayerPrefsExt.GetBool(saveName + "Locked");
+		else {
+			PlayerPrefsExt.SetBool(saveName + "Locked", levelIndex > 1);
+		}
+
+		if(PlayerPrefs.HasKey(saveName + "Stars")) {
+			starsAwarded = PlayerPrefs.GetInt(saveName + "Stars");
+		}
+		else
+			SetStars(0);
+
+		for(int i = 0; i < stars.Length; i++) {
+			if(!levelLocked) {
 				stars[i].sprite = i < starsAwarded ? starUnlocked : starLocked;
+			}
+			else {
+				stars[i].sprite = starLocked;
 			}
 		}
 	}
 
+	public void SetLocked(bool locked) {
+		PlayerPrefsExt.SetBool(saveName + "Locked", locked);
+		levelLocked = locked;
+	}
+
 	public void SetStars(int stars) {
-		if(!levelLocked)
-			starsAwarded = stars;
+		PlayerPrefs.SetInt(saveName + "Stars", stars);
+		starsAwarded = stars;
 	}
 
 	public void StartLevel() {
 		if(!levelLocked) 
-			Application.LoadLevel("Level"+levelIndex.ToString());
+			Application.LoadLevel(saveName);
 	}
 }
