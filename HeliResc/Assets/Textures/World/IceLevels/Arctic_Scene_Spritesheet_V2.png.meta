@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a44f20ee63b12f04db4b03f80b7b7078
-timeCreated: 1427201561
+timeCreated: 1427793840
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -66,9 +66,9 @@ TextureImporter:
         x: 0
         y: 525
         width: 1428
-        height: 203
-      alignment: 0
-      pivot: {x: .5, y: .5}
+        height: 201
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Arctic_Scene_Spritesheet_V2_1
       rect:
@@ -77,8 +77,8 @@ TextureImporter:
         y: 349
         width: 1428
         height: 176
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Arctic_Scene_Spritesheet_V2_2
       rect:
@@ -87,8 +87,8 @@ TextureImporter:
         y: 199
         width: 1428
         height: 150
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Arctic_Scene_Spritesheet_V2_3
       rect:
@@ -97,8 +97,8 @@ TextureImporter:
         y: 59
         width: 306
         height: 140
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Arctic_Scene_Spritesheet_V2_4
       rect:
@@ -107,28 +107,28 @@ TextureImporter:
         y: 102
         width: 184
         height: 97
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Arctic_Scene_Spritesheet_V2_5
       rect:
         serializedVersion: 2
         x: 827
-        y: 101
+        y: 102
         width: 306
-        height: 98
-      alignment: 0
-      pivot: {x: .5, y: .5}
+        height: 97
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Arctic_Scene_Spritesheet_V2_6
       rect:
         serializedVersion: 2
         x: 920
-        y: 4
+        y: 3
         width: 305
-        height: 97
-      alignment: 0
-      pivot: {x: .5, y: .5}
+        height: 98
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Arctic_Scene_Spritesheet_V2_7
       rect:
