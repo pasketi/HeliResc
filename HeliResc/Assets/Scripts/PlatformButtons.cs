@@ -25,11 +25,11 @@ public class PlatformButtons: MonoBehaviour {
 		if(rects == null)
 			Debug.Log("rect array is null");
 		
-		float width = Screen.width * buttonSize;
+		//float width = Screen.width * buttonSize;
 		
-		foreach(RectTransform r in rects) {
-			r.sizeDelta = new Vector2(width, width);
-		}
+		RectTransform t = GetComponent<RectTransform> ();
+
+		t.sizeDelta = new Vector2 (Screen.width, Screen.height) * 0.5f;
 		
 		landing = GameObject.Find("LandingBoat").GetComponentInChildren<LandingPadManager>();
 		landing.enterPlatform += ShowPopup;
