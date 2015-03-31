@@ -22,8 +22,8 @@ public class IcePlatformManager : MonoBehaviour {
 		oMid.sprite = mid;
 		oRight.sprite = right;
 
-		oLeft.transform.localPosition = new Vector3 (-((left.textureRect.width / left.pixelsPerUnit)/2f) - (((mid.textureRect.width * lengthMultiplier) / mid.pixelsPerUnit)/2f), 0f);
-		oRight.transform.localPosition = new Vector3 (((right.textureRect.width / right.pixelsPerUnit)/2f) + (((mid.textureRect.width * lengthMultiplier) / mid.pixelsPerUnit)/2f) - 0.02f, 0f);
+		oLeft.transform.localPosition = new Vector3 (-((left.textureRect.width / left.pixelsPerUnit)/2f) - (((mid.textureRect.width * lengthMultiplier) / mid.pixelsPerUnit)/2f) + 0.1f, 0f);
+		oRight.transform.localPosition = new Vector3 (((right.textureRect.width / right.pixelsPerUnit)/2f) + (((mid.textureRect.width * lengthMultiplier) / mid.pixelsPerUnit)/2f) - 0.1f, 0f);
 		oRight.transform.localScale = new Vector3 (-1f, 1f, 1f);
 		oMid.transform.localScale = new Vector3 (lengthMultiplier, 1f, 1f);
 
