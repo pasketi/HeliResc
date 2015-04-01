@@ -12,7 +12,8 @@ public class BackgroundPanScript : MonoBehaviour {
 	void Start () {
 		sky = GetComponent<Skybox>();
 		cameraMinY = transform.position.y;
-		cameraMaxY = GetComponent<CameraManager>().maxY;
+		if (GetComponent<CameraManager>() != null) cameraMaxY = GetComponent<CameraManager>().maxY;
+		else cameraMaxY = 30f;
 		sky.material.SetTextureOffset("_FrontTex", new Vector2 (0f,yMin));
 	}
 	

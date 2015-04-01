@@ -17,9 +17,10 @@ public class LevelManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if (GameObject.Find("GameManager") != null){
+			Debug.Log("GameManager Found");
 			gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 			gameManager.load();
-			copters = new GameObject[GameObject.Find("GameManager").GetComponent<GameManager>().getCopterAmount()];
+			//copters = new GameObject[gameManager.getCopterAmount()];
 		}
 		crateAmount = countCrates();
 		crateSize = getCrateScale();
