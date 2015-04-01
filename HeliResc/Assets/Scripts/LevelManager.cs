@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour {
 	private GameObject copter;
 	public int levelCoinRewardPerStar = 200;
 	public GameObject pauseScreen, HUD, copterSpawnPoint, kamikazePelican;
-	public GameObject[] copters = new GameObject[GameObject.Find("GameManager").GetComponent<GameManager>().getCopterAmount()];
+	public GameObject[] copters;
 	private bool win = false, lose = false, splash = false, gamePaused = false, takenDamage = false, once = false, releaseThePelican = false;
 	public float waterLevel = 0f, uiLiftPowerWidth = 0.1f, uiLiftPowerDeadZone = 0.05f, resetCountdown = 3f, crateSize, mapBoundsLeft = -50f, mapBoundsRight = 50f;
 	public int cargoSize = 2, cargoCrates = 0;
@@ -20,6 +20,7 @@ public class LevelManager : MonoBehaviour {
 			gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 			gameManager.load();
 		}
+		copters = new GameObject[GameObject.Find("GameManager").GetComponent<GameManager>().getCopterAmount()];
 		crateAmount = countCrates();
 		crateSize = getCrateScale();
 		if (pauseScreen == null) pauseScreen = GameObject.Find("PauseScreen");
