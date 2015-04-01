@@ -19,8 +19,8 @@ public class LevelManager : MonoBehaviour {
 		if (GameObject.Find("GameManager") != null){
 			gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 			gameManager.load();
+			copters = new GameObject[GameObject.Find("GameManager").GetComponent<GameManager>().getCopterAmount()];
 		}
-		copters = new GameObject[GameObject.Find("GameManager").GetComponent<GameManager>().getCopterAmount()];
 		crateAmount = countCrates();
 		crateSize = getCrateScale();
 		if (pauseScreen == null) pauseScreen = GameObject.Find("PauseScreen");
