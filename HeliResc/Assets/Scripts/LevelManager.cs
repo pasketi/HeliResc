@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (savedCrates >= crateAmount) {
+		if (savedCrates >= crateAmount || Input.GetKeyDown(KeyCode.J)) {
 			win = true;
 		}
 
@@ -56,6 +56,9 @@ public class LevelManager : MonoBehaviour {
 				if (stars < 3) gameManager.sendLevelEndInfo(stars, levelCoinRewardPerStar * stars);
 				else if (stars >= 3) gameManager.sendLevelEndInfo(stars, (levelCoinRewardPerStar * stars) + (levelCoinRewardPerStar / 2));
 				once = true;
+				LevelEndInfo end = new LevelEndInfo();
+				end.itemsSaved = getSavedCrates();
+				gameManager.loadMainMenu(true, end, 1);
 			}
 			resetCountdown -= Time.deltaTime;
 			if (resetCountdown <= 0f) Application.LoadLevel ("MainMenu");

@@ -14,7 +14,7 @@ public class LevelMapBackButton : MonoBehaviour {
 
 		backButton = GetComponent<Button>();
 
-		backButton.onClick.AddListener(() => g.loadMainMenu(false, 2));
+		backButton.onClick.AddListener(() => g.loadMainMenu(false, null, 2));
 	}
 	
 	// Update is called once per frame

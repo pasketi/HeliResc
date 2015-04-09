@@ -94,14 +94,25 @@ public class CopterManagerTouch : MonoBehaviour {
 		resetPower();
 	}
 
+	void AutoHoover() {
+		Vector2 vel = copterBody.velocity;
+		if (!Mathf.Approximately(vel.y, 0)) {
+			float y = 0.25f * Mathf.Abs(vel.y);
+			y = Mathf.Clamp(y, 0.15f, 1);
+			currentPower -= Mathf.Sign(vel.y) * ( y );
+		}
+	}
+
 	//Update is called before void Update();
 	void FixedUpdate () {
 		copterAngle = gameObject.transform.eulerAngles.z;
+		if (Input.touchCount == 0)
+			AutoHoover ();
 	}
 
 	// Update is called once per frame
 	void Update () {
-
+		Debug.Log ("Current power: " + currentPower.ToString());
 		// START INPUT ----------------------------------------------------------------------------------
 
 		// Control system

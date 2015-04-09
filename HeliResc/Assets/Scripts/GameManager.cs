@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour {
 	private bool showLevelEnd = false;
 	public bool ShowLevelEnd { get { return showLevelEnd; } }
 
+	public LevelEndInfo levelEnd;
+
 	private int currentMenu = 0;
 	public int CurrentMenu { get { return currentMenu; } }
 
@@ -291,8 +293,9 @@ public class GameManager : MonoBehaviour {
 		Application.LoadLevel(levelName);
 	}
 
-	public void loadMainMenu(bool showLevelEnd, int menu = 0) {
+	public void loadMainMenu(bool showLevelEnd, LevelEndInfo end, int menu = 0) {
 		this.showLevelEnd = showLevelEnd;
+		levelEnd = end;
 		currentMenu = menu;
 		Application.LoadLevel("MainMenu");
 	}
