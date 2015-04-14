@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
 	private bool showLevelEnd = false;
 	public bool ShowLevelEnd { get { return showLevelEnd; } }
 
+    public Wallet wallet;
 	public LevelEndInfo levelEnd;
 
 	private int currentMenu = 0;
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour {
 
 	void Awake(){
 		DontDestroyOnLoad(gameObject);
+        wallet = SaveLoad.LoadWallet();
 		Debug.Log ("GameManager awake");
 	}
 

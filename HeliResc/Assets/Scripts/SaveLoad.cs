@@ -4,6 +4,19 @@ using System;
 
 public static class SaveLoad {
 
+    private static string strCoins = "CoinsAmount";
+
+    public static void SaveWallet(Wallet wallet) {
+        PlayerPrefs.SetInt(strCoins, wallet.Coins);
+    }
+
+    public static Wallet LoadWallet() {
+        if (PlayerPrefs.HasKey(strCoins))
+            return new Wallet(PlayerPrefs.GetInt(strCoins));
+        else
+            return new Wallet(0);
+    }
+
 	public static void SaveLevelInfo(LevelInfo info) {
 
         string name = "Level" + info.index.ToString();
