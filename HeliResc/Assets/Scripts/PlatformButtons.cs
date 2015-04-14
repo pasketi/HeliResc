@@ -12,7 +12,7 @@ public class PlatformButtons: MonoBehaviour {
 	
 	private RectTransform[] rects;
 	
-	private Transform copter;
+	private Transform target;
 	
 	// Use this for initialization
 	void Start () {
@@ -35,8 +35,9 @@ public class PlatformButtons: MonoBehaviour {
 		landing.enterPlatform += ShowPopup;
 		landing.exitPlatform += HidePopup;
 
-        copter = landing.gameObject.transform;
-	}
+        target = landing.gameObject.transform;
+        transform.position = target.position + Vector3.up * 1.5f;
+    }
 	
 	
 	/// <summary>
@@ -59,7 +60,6 @@ public class PlatformButtons: MonoBehaviour {
 	/// </summary>
 	public void ShowPopup()
 	{
-		transform.position = copter.position + Vector3.up;
 		popup.Play("ShowButtons");
 	}
 	
