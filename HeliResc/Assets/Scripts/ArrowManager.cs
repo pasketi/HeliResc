@@ -17,7 +17,7 @@ public class ArrowManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (copter == null) copter = GameObject.Find ("Copter");
-		if ((GameObject.Find("Hook(clone)") != null && GameObject.Find("Hook(clone)").transform.childCount <= 2) || GameObject.Find("LevelManagerO").GetComponent<LevelManager>().cargoCrates <= 2) {
+		if ((GameObject.Find("Hook(clone)") != null && ((GameObject.Find("Hook(clone)").transform.childCount) + (GameObject.Find("LevelManagerO").GetComponent<LevelManager>().cargoCrates) != 0))) {
 			foreach (GameObject current in targets) {
 				if (target == null) {
 					target = current;
