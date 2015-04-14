@@ -56,9 +56,7 @@ public class LevelManager : MonoBehaviour {
 				if (stars < 3) gameManager.sendLevelEndInfo(stars, levelCoinRewardPerStar * stars);
 				else if (stars >= 3) gameManager.sendLevelEndInfo(stars, (levelCoinRewardPerStar * stars) + (levelCoinRewardPerStar / 2));
 				once = true;
-				LevelEndInfo end = new LevelEndInfo();
-				end.itemsSaved = getSavedCrates();
-				gameManager.loadMainMenu(true, end, 1);
+                winLevel();
 			}
 			resetCountdown -= Time.deltaTime;
 			if (resetCountdown <= 0f) Application.LoadLevel ("MainMenu");
@@ -119,6 +117,19 @@ public class LevelManager : MonoBehaviour {
 	public bool getPaused () {
 		return gamePaused;
 	}
+
+    private void winLevel() {
+        LevelEndInfo end = new LevelEndInfo(true);
+        end.itemsSaved = getSavedCrates();
+
+        MissionObjectives mo = GameObject.Find("Objectives").GetComponent<MissionObjectives>();
+        if (mo == null) Debug.Log("Objectives not found");
+        end.star1 = mo.LevelObjective1();
+        end.star2 = mo.LevelObjective2();
+        end.star3 = mo.LevelObjective3();
+
+        gameManager.loadMainMenu(true, end, 1);
+    }
 
 	public void backToMainMenu () {
 		Time.timeScale = 1f;

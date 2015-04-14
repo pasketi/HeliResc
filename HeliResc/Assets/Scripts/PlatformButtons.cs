@@ -12,7 +12,7 @@ public class PlatformButtons: MonoBehaviour {
 	
 	private RectTransform[] rects;
 	
-	public Transform copter;
+	private Transform copter;
 	
 	// Use this for initialization
 	void Start () {
@@ -34,6 +34,8 @@ public class PlatformButtons: MonoBehaviour {
 		landing = GameObject.Find("LandingBoat").GetComponentInChildren<LandingPadManager>();
 		landing.enterPlatform += ShowPopup;
 		landing.exitPlatform += HidePopup;
+
+        copter = landing.gameObject.transform;
 	}
 	
 	
