@@ -14,19 +14,15 @@ public class LevelEndManager : MonoBehaviour {
 
 	private LevelEndInfo levelEnd;
 
-	void Start() {
-		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager>();
-		if (!gameManager.ShowLevelEnd)
-			return;
-		levelEnd = gameManager.levelEnd;
-		star1.sprite = levelEnd.star1 ? unlockedStar : lockedStar;
-		star2.sprite = levelEnd.star2 ? unlockedStar : lockedStar;
-		star3.sprite = levelEnd.star3 ? unlockedStar : lockedStar;
 
-		text.text = "You got " + levelEnd.itemsSaved.ToString() + " crates";
-	}
+    public void UpdateLevelEnd(GameManager gm) {
+        gameManager = gm;
 
-	void Update () {
-	
-	}
+        levelEnd = gameManager.levelEnd;
+        star1.sprite = levelEnd.star1 ? unlockedStar : lockedStar;
+        star2.sprite = levelEnd.star2 ? unlockedStar : lockedStar;
+        star3.sprite = levelEnd.star3 ? unlockedStar : lockedStar;
+
+        text.text = "You got " + levelEnd.itemsSaved.ToString() + " crates and earned " + levelEnd.collectedCoins.ToString() + " coins";
+    }
 }

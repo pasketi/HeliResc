@@ -35,6 +35,9 @@ public class LevelEndInfo : LevelInfo {
 
 	public string message;
 
+    private int reward;
+    public int Reward { set { reward = value; collectedCoins = value * itemsSaved; } }
+
 	public int collectedCoins;
 	public int itemsSaved;
 

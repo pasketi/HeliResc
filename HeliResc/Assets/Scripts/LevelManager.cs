@@ -7,6 +7,8 @@ public class LevelManager : MonoBehaviour {
 	private int savedCrates = 0, crateAmount, stars = 0;
 	private GameManager gameManager;
 	private GameObject copter;
+
+    private int reward = 1;
 	public int levelCoinRewardPerStar = 200;
 	public GameObject pauseScreen, HUD, copterSpawnPoint, kamikazePelican;
 	public GameObject[] copters;
@@ -121,6 +123,7 @@ public class LevelManager : MonoBehaviour {
     private void winLevel() {
         LevelEndInfo end = new LevelEndInfo(true);
         end.itemsSaved = getSavedCrates();
+        end.Reward = reward;
 
         MissionObjectives mo = GameObject.Find("Objectives").GetComponent<MissionObjectives>();
         if (mo == null) Debug.Log("Objectives not found");
@@ -155,6 +158,7 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void saveCrates (int amount) {
+        gameManager.wallet.AddMoney(amount * reward);
 		savedCrates += amount;
 	}
 

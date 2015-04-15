@@ -114,11 +114,17 @@ public class GameManager : MonoBehaviour {
 	
 	}
 
+    void OnLevelWasLoaded(int level) {
+        if (level == 1 && showLevelEnd) {
+            GameObject.Find("LevelEnd").GetComponent<LevelEndManager>().UpdateLevelEnd(this);
+        }
+    }
+
 	public void save () {
 		PlayerPrefs.SetInt("First", 1);
 		PlayerPrefs.SetString("Name", playerName);
-		PlayerPrefs.SetInt("Stars", playerStars);
-		PlayerPrefs.SetInt("Coins", playerCoins);
+		//PlayerPrefs.SetInt("Stars", playerStars);
+		//PlayerPrefs.SetInt("Coins", playerCoins);
 		PlayerPrefs.SetInt("Platform", playerPlatform);
 
 		//Currently selected copter
@@ -301,4 +307,8 @@ public class GameManager : MonoBehaviour {
 		currentMenu = menu;
 		Application.LoadLevel("MainMenu");
 	}
+
+    private void CheckEarnedStars() {
+
+    }
 }
