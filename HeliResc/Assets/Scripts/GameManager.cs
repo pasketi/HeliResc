@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private const int copterAmount = 2; //FOR EVERY NEW COPTER, ADD 1 HERE
+    public int CopterAmount { get { return copterAmount; } }
 
 	private string 	playerName = "Anonymous";
 	private int		playerFirst = 0,
@@ -117,6 +118,8 @@ public class GameManager : MonoBehaviour {
     void OnLevelWasLoaded(int level) {
         if (level == 1 && showLevelEnd) {
             GameObject.Find("LevelEnd").GetComponent<LevelEndManager>().UpdateLevelEnd(this);
+            SaveLoad.SaveWallet(wallet);
+
         }
     }
 
@@ -304,6 +307,10 @@ public class GameManager : MonoBehaviour {
 	public void loadMainMenu(bool showLevelEnd, LevelEndInfo end, int menu = 0) {
 		this.showLevelEnd = showLevelEnd;
 		levelEnd = end;
+        if (showLevelEnd) {
+            levelEnd.index = int.Parse(Application.loadedLevelName[Application.loadedLevelName.Length - 1].ToString());
+            Debug.Log(levelEnd.index);
+        }
 		currentMenu = menu;
 		Application.LoadLevel("MainMenu");
 	}

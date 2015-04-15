@@ -27,9 +27,13 @@ public static class SaveLoad {
         PlayerPrefsExt.SetBool(name + "Star3", info.star3);
 	}
 
+    public static void SaveUpgradeLevel(Upgrade u) {
+        PlayerPrefs.SetInt(u.name, u.CurrentLevel);
+    }
+
 	public static LevelInfo LoadLevelInfo(int index) {
         string level = "Level" + index.ToString();
-        bool locked = false;
+        bool locked = true;
         bool s1 = false;
         bool s2 = false;
         bool s3 = false;
@@ -41,10 +45,16 @@ public static class SaveLoad {
         }
         catch (Exception ex) {
             Debug.LogError("No key in player prefs: " + ex.Message);
+            return new LevelInfo(index, false, false, false, true);
         }
 
         LevelInfo info = new LevelInfo (index, s1, s2, s3, locked);
 		return info;
 	}
-	
+
+    public static int LoadUpgradeLevel(string name) {
+        if (PlayerPrefs.HasKey(name))
+            return PlayerPrefs.GetInt(name);
+        return 1;
+    }
 }

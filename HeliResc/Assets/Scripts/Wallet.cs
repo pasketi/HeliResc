@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Wallet {
 
@@ -7,13 +8,35 @@ public class Wallet {
     private int coins;
     public int Coins { get { return coins; } }
 
+    private string[] upNames =  { "Fuel", "Engine", "Rope" };
+    private int[] upPrices =    { 1, 2, 3 };
+    public static Dictionary<string, Upgrade> allUpgrades;
+
     public Wallet(int coinAmount) {
         coins = 0;
         AddMoney(coinAmount);
+
+        int copterAmount = manager.CopterAmount;
+
+        allUpgrades = new Dictionary<string, Upgrade>();
+        for (int i = 0; i < copterAmount; i++)
+        {
+            for (int j = 0; j < upNames.Length; j++)
+            {
+                Upgrade u = new Upgrade("Copter" + i.ToString() + upNames[j], upPrices[j]);
+                allUpgrades.Add(u.name, u);
+            }
+        }
     }
 
     public void AddMoney(int amount) {
         coins += amount;
+    }
+
+    private void Purchase(int amount) {
+        if (coins - amount >= 0)
+            coins -= amount;
+
     }
 
     public void SaveWallet() {
@@ -24,7 +47,15 @@ public class Wallet {
     /// Adds upgrade to players copter
     /// </summary>
     /// <returns>If the purchase was succesful</returns>
-    public bool BuyUpgrade() {
+    public bool BuyUpgrade(string upgrade) {
+        int copter = manager.getCurrentCopter();
+        Upgrade u = allUpgrades["Copter" + copter.ToString() + upgrade];
+        if (Coins >= u.upgradePrice) {
+            allUpgrades[u.name].CurrentLevel++;
+            Purchase(u.upgradePrice);
+            SaveLoad.SaveUpgradeLevel(u);
+            return true;
+        }
         return false;
     }
 

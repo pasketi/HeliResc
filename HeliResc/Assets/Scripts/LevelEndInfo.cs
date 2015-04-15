@@ -14,6 +14,11 @@ public class LevelInfo
 
     }
 
+    public LevelInfo(int i, bool l) {
+        index = i;
+        locked = l;
+    }
+
     public LevelInfo(int i, bool s1, bool s2, bool s3, bool l)
     {
         index = i;
@@ -23,6 +28,13 @@ public class LevelInfo
         star3 = s3;
 
         locked = l;
+    }
+
+    public void SetStars(bool s1 = false, bool s2 = false, bool s3 = false)
+    {
+        star1 = s1;
+        star2 = s2;
+        star3 = s3;
     }
 }
 
@@ -35,6 +47,8 @@ public class LevelEndInfo : LevelInfo {
 
 	public string message;
 
+    public bool passedLevel;
+
     private int reward;
     public int Reward { set { reward = value; collectedCoins = value * itemsSaved; } }
 
@@ -43,12 +57,9 @@ public class LevelEndInfo : LevelInfo {
 
 	public LevelEndInfo(bool passed) {
         locked = !passed;
+        passedLevel = passed;
         SetStars();
 	}
 
-	public void SetStars(bool s1 = false, bool s2 = false, bool s3 = false) {
-		star1 = s1;
-		star2 = s2;
-		star3 = s3;
-	}
+	
 }
