@@ -155,9 +155,9 @@ public class GameManager : MonoBehaviour {
 		//CopterLevels and unlocks
 		for (int i = 0; i < copterAmount; i++) {
 			copters[i,3] = PlayerPrefs.GetInt("Copter"+i+"Unlocked").ToString();
-			copters[i,4] = PlayerPrefs.GetInt("Copter"+i+"Enginelevel").ToString();
-			copters[i,5] = PlayerPrefs.GetInt("Copter"+i+"Fueltanklevel").ToString();
-			copters[i,12] = PlayerPrefs.GetInt("Copter"+i+"Ropelevel").ToString();
+			copters[i,4] = wallet.UpgradeLevel("Engine").ToString();
+			copters[i,5] = wallet.UpgradeLevel("Fuel").ToString();
+			copters[i,12] = wallet.UpgradeLevel("Rope").ToString();
 		}
 	}
 
@@ -237,9 +237,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void upgradeCurrentEngine () {
-		if (int.Parse(copters[currentCopter, 4]) < 10)
-			copters[currentCopter, 4] = (int.Parse(copters[currentCopter, 4]) + 1).ToString();
-		save ();
+        if (int.Parse(copters[currentCopter, 4]) < 10 && wallet.BuyUpgrade("Engine"))
+            copters[currentCopter, 4] = wallet.UpgradeLevel("Engine").ToString();//(int.Parse(copters[currentCopter, 4]) + 1).ToString();
+		//save ();
 		updateMainMenuDebug();
 	}
 

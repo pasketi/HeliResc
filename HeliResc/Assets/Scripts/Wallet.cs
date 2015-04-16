@@ -13,6 +13,7 @@ public class Wallet {
     public static Dictionary<string, Upgrade> allUpgrades;
 
     public Wallet(int coinAmount) {
+        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
         coins = 0;
         AddMoney(coinAmount);
 
@@ -43,11 +44,17 @@ public class Wallet {
         SaveLoad.SaveWallet(this);
     }
 
+    public int UpgradeLevel(string upgrade) {
+        int copter = manager.getCurrentCopter();
+        return allUpgrades["Copter" + copter.ToString() + upgrade].CurrentLevel;
+    }
+
     /// <summary>
     /// Adds upgrade to players copter
     /// </summary>
     /// <returns>If the purchase was succesful</returns>
     public bool BuyUpgrade(string upgrade) {
+        Debug.Log("Upgrade: " + upgrade);
         int copter = manager.getCurrentCopter();
         Upgrade u = allUpgrades["Copter" + copter.ToString() + upgrade];
         if (Coins >= u.upgradePrice) {

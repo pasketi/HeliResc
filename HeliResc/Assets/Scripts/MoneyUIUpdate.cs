@@ -15,6 +15,8 @@ public class MoneyUIUpdate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (Input.GetKeyDown(KeyCode.I))
+            manager.wallet.AddMoney(1);
         moneyText.text = "Money: " + manager.wallet.Coins.ToString();
 	}
 }

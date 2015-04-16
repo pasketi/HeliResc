@@ -11,10 +11,13 @@ public static class SaveLoad {
     }
 
     public static Wallet LoadWallet() {
-        if (PlayerPrefs.HasKey(strCoins))
+        if (PlayerPrefs.HasKey(strCoins)) {
             return new Wallet(PlayerPrefs.GetInt(strCoins));
-        else
+        }
+        else {
+            PlayerPrefs.SetInt(strCoins, 0);
             return new Wallet(0);
+        }
     }
 
 	public static void SaveLevelInfo(LevelInfo info) {
