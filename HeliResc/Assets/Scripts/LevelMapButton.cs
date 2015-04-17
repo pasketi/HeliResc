@@ -58,7 +58,7 @@ public class LevelMapButton : MonoBehaviour {
             buttonImage.sprite = buttonUnlocked;
             buttonText.text = levelIndex.ToString();
         }
-
+		levelLocked = levelInfo.locked;
 		
 	}
 
