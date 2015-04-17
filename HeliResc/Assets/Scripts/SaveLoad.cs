@@ -48,7 +48,10 @@ public static class SaveLoad {
         }
         catch (Exception ex) {
             Debug.LogError("No key in player prefs: " + ex.Message);
-            return new LevelInfo(index, false, false, false, true);
+            LevelInfo i = new LevelInfo(index, false, false, false, true);
+            i.locked = i.index < 2 ? false : true;
+            SaveLevelInfo(i);
+            return i;
         }
 
         LevelInfo info = new LevelInfo (index, s1, s2, s3, locked);
