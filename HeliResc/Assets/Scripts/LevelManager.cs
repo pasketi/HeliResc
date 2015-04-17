@@ -136,7 +136,7 @@ public class LevelManager : MonoBehaviour {
 
 	public void backToMainMenu () {
 		Time.timeScale = 1f;
-		Application.LoadLevel("MainMenu");
+		gameManager.loadMainMenu (false, null);
 	}
 
 	public void Reset() {
