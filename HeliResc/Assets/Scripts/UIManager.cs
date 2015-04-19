@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour {
 	private Image fuel, fuelBorder;
 	private Slider power;
 	private bool lowFuel = false;
-	private Text saved, cargo;
+	private Text saved, cargo, action;
 	private float 	flashLength = 0.25f,
 					tempTime = 0f;
 	private LevelManager manager;
@@ -28,9 +28,15 @@ public class UIManager : MonoBehaviour {
 
 		saved = transform.FindChild ("SavedBackground").FindChild ("Saved").GetComponent<Text> ();
 		cargo = transform.FindChild ("CargoBackground").FindChild ("Cargo").GetComponent<Text> ();
+		action = transform.FindChild ("ActionBackground").FindChild ("Action").GetComponent<Text> ();
 		power = transform.FindChild ("PowerMeter").FindChild("Power").GetComponent<Slider> ();
 		fuel = transform.FindChild ("Fuel").GetComponent<Image> ();
 		fuelBorder = fuel.transform.FindChild ("FuelMeter").GetComponent<Image>();
+
+		if (manager.levelAction != 0) 
+			transform.FindChild ("ActionBackground").FindChild ("IsKill").GetComponent<Button> ().onClick.AddListener(() => copter.useAction ());
+		else
+			transform.FindChild ("ActionBackground").FindChild ("IsKill").GetComponent<Button> ().onClick.AddListener(() => manager.levelFailed (1));
 	}
 	
 	// Update is called once per frame
@@ -39,6 +45,9 @@ public class UIManager : MonoBehaviour {
 		power.value = copter.getPower () / (copter.getMaxPower()-copter.getMinPower());
 		saved.text = manager.getSavedCrates ().ToString () + "/" + manager.getCrateAmount ().ToString ();
 		cargo.text = manager.cargoCrates.ToString () + "/" + manager.cargoSize.ToString ();
+		if (manager.levelAction != 0)
+			action.text = manager.getActionsLeft().ToString () + "/" + manager.maxActionsPerLevel.ToString ();
+		else action.text = "isKill";
 
 		if (manager.cargoCrates == manager.cargoSize)
 			cargo.color = red;

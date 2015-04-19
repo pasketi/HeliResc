@@ -8,13 +8,13 @@ public class LevelManager : MonoBehaviour {
 	private GameManager gameManager;
 	private GameObject copter;
 
-    private int reward = 1;
-	public int levelCoinRewardPerStar = 200;
+	private int reward = 1, actionsPerLevel = 0;
+	public int levelCoinRewardPerStar = 200, neededCrates = 0;
 	public GameObject pauseScreen, HUD, copterSpawnPoint, kamikazePelican;
 	public GameObject[] copters;
 	private bool win = false, lose = false, splash = false, gamePaused = false, takenDamage = false, once = false, releaseThePelican = false;
 	public float waterLevel = 0f, uiLiftPowerWidth = 0.1f, uiLiftPowerDeadZone = 0.05f, resetCountdown = 3f, crateSize, mapBoundsLeft = -50f, mapBoundsRight = 50f;
-	public int cargoSize = 2, cargoCrates = 0;
+	public int cargoSize = 2, cargoCrates = 0, levelAction = 0, maxActionsPerLevel = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +25,8 @@ public class LevelManager : MonoBehaviour {
 			//copters = new GameObject[gameManager.getCopterAmount()];
 		}
 		crateAmount = countCrates();
-		crateSize = getCrateScale();
+		//crateSize = getCrateScale();
+		actionsPerLevel = maxActionsPerLevel;
 		if (pauseScreen == null) pauseScreen = GameObject.Find("PauseScreen");
 		if (HUD == null) HUD = GameObject.Find("HUD");
 
@@ -73,7 +74,7 @@ public class LevelManager : MonoBehaviour {
 			if (resetCountdown <= 0f) Reset ();
 		}
 
-		if (!releaseThePelican && (GameObject.Find("Copter").transform.position.x <= mapBoundsLeft || GameObject.Find("Copter").transform.position.x >= mapBoundsRight)){
+		if (GameObject.Find("Copter") != null && !releaseThePelican && (GameObject.Find("Copter").transform.position.x <= mapBoundsLeft || GameObject.Find("Copter").transform.position.x >= mapBoundsRight)){
 			releaseThePelican = true;
 			if (GameObject.Find("Copter").transform.position.x <= mapBoundsLeft) Instantiate (kamikazePelican, new Vector3(mapBoundsLeft - 25f, Random.value * 15f, 0f), Quaternion.identity);
 			else if (GameObject.Find("Copter").transform.position.x >= mapBoundsRight) Instantiate (kamikazePelican, new Vector3(mapBoundsRight + 25f, Random.value * 15f, 0f), Quaternion.identity);
@@ -145,7 +146,8 @@ public class LevelManager : MonoBehaviour {
 
 	private int countCrates (){
 		var crates = GameObject.FindGameObjectsWithTag ("SaveableObject");
-		return crates.Length;
+		var actionableObjects = GameObject.FindGameObjectsWithTag ("ActionableObject");
+		return crates.Length + actionableObjects.Length;
 	}
 
 	private float getCrateScale() {
@@ -176,5 +178,13 @@ public class LevelManager : MonoBehaviour {
 
 	public void setCargoCrates(int amount) {
 		cargoCrates = amount;
+	}
+
+	public int getActionsLeft() {
+		return actionsPerLevel;
+	}
+
+	public void useAction() {
+		actionsPerLevel--;
 	}
 }

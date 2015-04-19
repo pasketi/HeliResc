@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -30,7 +30,7 @@ public class CopterManagerTouch : MonoBehaviour {
 					minPower = 0f,
 					maxPower = 120f;
 
-	private GameObject hook;
+	private GameObject hook, tempActionObject;
 	private LevelManager manager;
 	private CargoManager cargo;
 	private GameManager gameManager;
@@ -41,6 +41,7 @@ public class CopterManagerTouch : MonoBehaviour {
 	public GameObject 	hookPrefab, 
 						hookAnchor, 
 						brokenCopter, 
+						actionPrefab,
 						explosion, 
 						splash;
 
@@ -112,7 +113,7 @@ public class CopterManagerTouch : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		Debug.Log ("Current power: " + currentPower.ToString());
+		//Debug.Log ("Current power: " + currentPower.ToString());
 		// START INPUT ----------------------------------------------------------------------------------
 
 		// Control system
@@ -358,6 +359,18 @@ public class CopterManagerTouch : MonoBehaviour {
 		newCopter.GetComponent<ExplodeParts>().enabled = false;
 		currentHealth = 0f;
 		Destroy (gameObject);
+	}
+
+	public void useAction () {
+		if (manager.levelAction == 0)
+			manager.levelFailed (1);
+		else if (manager.levelAction == 1 && manager.getActionsLeft() >= 1) {
+			manager.useAction();
+			tempActionObject = Instantiate (actionPrefab, hookAnchor.transform.position, Quaternion.identity) as GameObject;
+			tempActionObject.GetComponent<Rigidbody2D> ().AddForce (gameObject.GetComponent<Rigidbody2D> ().velocity);
+			tempActionObject.GetComponent<Rigidbody2D>().AddTorque (2f*(Random.value -0.5f));
+			tempActionObject = null;
+		}
 	}
 
 	void OnTriggerStay2D (Collider2D other) {

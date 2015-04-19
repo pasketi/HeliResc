@@ -6,7 +6,7 @@ public class CrateManager : MonoBehaviour {
 	private LevelManager manager;
 	private CopterManagerTouch copterScript;
 	private CargoManager cargoScript;
-	private float floatyValue, maxLifeTimeInSeconds, flashTime = 0.25f, tempFlash = 0f; //buoancy?
+	private float floatyValue, maxLifeTimeInSeconds/*, flashTime = 0.25f, tempFlash = 0f*/; //buoancy?
 	private bool 	lastInWater = false,
 					stationary = false,
 					twoPhases = false,
@@ -68,6 +68,11 @@ public class CrateManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (tag == "ActionableObject" && crate.layer == 11) {
+			manager.saveCrates(1);
+			tag = "SavedObject";
+		}
 
 		if (!inMenu) {
 
@@ -145,17 +150,20 @@ public class CrateManager : MonoBehaviour {
 				/*spriteRenderer.sprite = Hooked;
 				if (bgRenderer != null)
 					bgRenderer.sprite = HookedBG;*/
-				if (transform.parent.FindChild("LegHook").childCount > 0)
-					animator.SetBool ("otherHooked", true);
-				else
-					animator.SetBool ("otherHooked", false);
+				if (animator.GetBool ("otherHooked") != null) {
+					if (transform.parent.FindChild("LegHook") != null && transform.parent.FindChild("LegHook").childCount > 0)
+						animator.SetBool ("otherHooked", true);
+					else
+						animator.SetBool ("otherHooked", false);
+				}
 				animator.SetBool ("isHooked", true);
 			} else {
 				/*spriteRenderer.sprite = Phase100;
 				if (bgRenderer != null)
 					bgRenderer.sprite = Phase100BG;*/
 				animator.SetBool ("isHooked", false);
-				animator.SetBool ("otherHooked", false);
+				if (animator.GetBool ("otherHooked") != false && animator.GetBool ("otherHooked") != true)
+					animator.SetBool ("otherHooked", false);
 			}
 		} else {
 			if (crate.transform.position.y < 0f) {
