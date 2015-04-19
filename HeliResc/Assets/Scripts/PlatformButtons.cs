@@ -35,7 +35,7 @@ public class PlatformButtons: MonoBehaviour {
 		landing.enterPlatform += ShowPopup;
 		landing.exitPlatform += HidePopup;
 
-        target = landing.gameObject.transform;
+        target = transform.parent;
         transform.position = target.position + Vector3.up * 1.5f;
     }
 	
