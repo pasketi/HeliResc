@@ -267,8 +267,10 @@ public class CopterManagerTouch : MonoBehaviour {
 			tempHoldTime = holdTime;
 		}
 
-		if ((gameObject.transform.position.y) < manager.getWaterLevel()){
+		if (gameManager.getCurrentCopter() != 1 && (gameObject.transform.position.y) < manager.getWaterLevel()){
 			manager.levelFailed(2);
+		} else if (gameManager.getCurrentCopter() == 1 && (gameObject.transform.position.y) < manager.getWaterLevel() + 0.3f){
+			GetComponent<Rigidbody2D> ().AddForce (Vector2.up * (GetComponent<Rigidbody2D> ().mass * 20f));
 		}
 
 		if (isKill) kill();
