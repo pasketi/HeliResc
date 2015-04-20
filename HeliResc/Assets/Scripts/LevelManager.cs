@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour {
 	private GameObject copter;
 
 	private int reward = 1, actionsPerLevel = 0;
+	private float graceTime = 10f;
 	public int levelCoinRewardPerStar = 200, neededCrates = 0;
 	public GameObject pauseScreen, HUD, copterSpawnPoint, kamikazePelican;
 	public GameObject[] copters;
@@ -78,6 +79,17 @@ public class LevelManager : MonoBehaviour {
 			releaseThePelican = true;
 			if (GameObject.Find("Copter").transform.position.x <= mapBoundsLeft) Instantiate (kamikazePelican, new Vector3(mapBoundsLeft - 25f, Random.value * 15f, 0f), Quaternion.identity);
 			else if (GameObject.Find("Copter").transform.position.x >= mapBoundsRight) Instantiate (kamikazePelican, new Vector3(mapBoundsRight + 25f, Random.value * 15f, 0f), Quaternion.identity);
+		}
+
+		if (GameObject.Find("Copter") != null && !releaseThePelican && GameObject.Find("Copter").GetComponent<CopterManagerTouch>().getFuel () == 0f) {
+			if (graceTime > 0f) graceTime -= Time.deltaTime;
+			else {
+				releaseThePelican = true;
+				int dir = Random.Range(0,2);
+				if (dir == 0) dir--;
+				else dir = 1;
+				Instantiate (kamikazePelican, new Vector3(GameObject.Find("Copter").transform.position.x + ((float) dir * 15f), Random.value * 15f, 0f), Quaternion.identity);
+			}
 		}
 	}
 

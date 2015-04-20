@@ -26,14 +26,18 @@ public class ObstacleManager : MonoBehaviour {
 					collision.gameObject.GetComponent<CopterManagerTouch>().changeHealth(-fixedDamageAmount);
 				}
 			} else GameObject.Find("LevelManagerO").GetComponent<LevelManager>().levelFailed(1);
+
+			if (diesOnContact && deathAnimation != null) 
+				Instantiate (deathAnimation, transform.position, Quaternion.identity);
+			if (diesOnContact) Destroy(gameObject);
 		}
 
 		if (collision.gameObject.transform.tag == "Hook") {
 			if (killsHook) GameObject.Find("Copter").GetComponent<CopterManagerTouch>().killHook();
-		}
 
-		if (diesOnContact && deathAnimation != null) 
-			Instantiate (deathAnimation, transform.position, Quaternion.identity);
-		if (diesOnContact) Destroy(gameObject);
+			if (diesOnContact && deathAnimation != null) 
+				Instantiate (deathAnimation, transform.position, Quaternion.identity);
+			if (diesOnContact) Destroy(gameObject);
+		}
 	}
 }
