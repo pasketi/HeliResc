@@ -22,10 +22,13 @@ public class MissionObjectives : MonoBehaviour {
         objectiveMethods.Add(Objective.GetItems, GetItems);
         objectiveMethods.Add(Objective.NoDamage, NoDamage);
         objectiveMethods.Add(Objective.PassLevel, PassLevel);
+        objectiveMethods.Add(Objective.HitTrigger, HitTrigger);
+        objectiveMethods.Add(Objective.Tutorial, Tutorial);
 
         LevelObjective1 = objectiveMethods[Objective1];
         LevelObjective2 = objectiveMethods[Objective2];
         LevelObjective3 = objectiveMethods[Objective3];
+
     }
 
     public bool GetItems()
@@ -47,6 +50,18 @@ public class MissionObjectives : MonoBehaviour {
         return true;
     }
 
+    public bool HitTrigger() {
+        ObjectiveTrigger[] triggers = GameObject.FindObjectsOfType<ObjectiveTrigger>();
+        if (triggers.Length == 1)
+            return triggers[0].triggered;
+        return false;
+    }
+
+    public bool Tutorial() {
+        TutorialScript t = GameObject.FindObjectOfType<TutorialScript>();
+        return t.FuelRepair;
+    }
+
     public LevelObjective GetMethod(Objective o) {
         return objectiveMethods[o];
     }
@@ -54,5 +69,7 @@ public class MissionObjectives : MonoBehaviour {
 public enum Objective {
     GetItems,
     NoDamage,
-    PassLevel
+    PassLevel,
+    HitTrigger,
+    Tutorial
 }

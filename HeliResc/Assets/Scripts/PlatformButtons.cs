@@ -3,8 +3,10 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class PlatformButtons: MonoBehaviour {
-	
-	private Animator popup;         //Reference to this game objects animator
+
+    public Animator fuelAnimator;
+    public Animator victoryAnimator;
+    public Animator repairAnimator;
 	
 	public float buttonSize;
 	
@@ -16,8 +18,8 @@ public class PlatformButtons: MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		popup = GetComponent<Animator>();
-		popup.Play("default");
+		//popup = GetComponent<Animator>();
+		//popup.Play("default");
 		
 		//copter = GetComponentInParent<Transform>();
 		
@@ -31,9 +33,11 @@ public class PlatformButtons: MonoBehaviour {
 
 		t.sizeDelta = new Vector2 (Screen.width, Screen.height) * 0.5f;
 		
-		landing = GameObject.Find("LandingBoat").GetComponentInChildren<LandingPadManager>();
-		landing.enterPlatform += ShowPopup;
-		landing.exitPlatform += HidePopup;
+		landing = transform.parent.parent.GetComponentInChildren<LandingPadManager>();
+        if (landing.Equals(null))
+            Debug.LogError("The landingpad manager was not found in platform buttons");
+		landing.enterPlatform += ShowAllButtons;
+		landing.exitPlatform += HideAllButtons;
 
         target = transform.parent;
         transform.position = target.position + Vector3.up * 1.5f;
@@ -44,26 +48,40 @@ public class PlatformButtons: MonoBehaviour {
 	/// Hides the popup window immeadiately
 	/// </summary>
 	public void Stop() {
-		popup.Play("default");
+		//popup.Play("default");
 	}
 	
 	/// <summary>
 	/// Plays the disable popup window animation
 	/// </summary>
-	public void HidePopup()
+	public void HideAllButtons()
 	{
-		popup.Play("HideButtons");
-	}
+        HideFuel();
+        Invoke("HideRepair", 0.1f);
+        Invoke("HideVictory", 0.2f);
+    }
 	
 	/// <summary>
 	/// Enables the popup window animation
 	/// </summary>
-	public void ShowPopup()
+	public void ShowAllButtons()
 	{
-		popup.Play("ShowButtons");
+        //StartCoroutine(ShowButtons());
+        ShowVictory();
+        Invoke("ShowRepair", 0.1f);
+        Invoke("ShowFuel", 0.2f);
 	}
-	
-	public void StartRepair() {
+
+    public void ShowRepair() { Debug.Log("Animation called: Repair"); repairAnimator.Play("ShowRepair"); }
+    public void ShowFuel() { Debug.Log("Animation called: Fuel"); fuelAnimator.Play("ShowFuel"); }
+    public void ShowVictory() { Debug.Log("Animation called: Victory"); victoryAnimator.Play("ShowVictory"); }
+
+
+    public void HideRepair() { repairAnimator.Play("HideRepair"); }
+    public void HideFuel() { fuelAnimator.Play("HideFuel"); }
+    public void HideVictory() { victoryAnimator.Play("HideVictory"); }
+
+    public void StartRepair() {
 		landing.StartRepair();
 	}
 	

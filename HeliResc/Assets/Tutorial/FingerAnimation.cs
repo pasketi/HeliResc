@@ -4,6 +4,8 @@ using System.Collections;
 
 public class FingerAnimation : MonoBehaviour {
 
+    TutorialScript tutorial;
+
     public RectTransform finger;
     public RectTransform copter;
 
@@ -21,7 +23,7 @@ public class FingerAnimation : MonoBehaviour {
 
     private bool showVertical;
 
-    private bool animate;
+    public bool finished;
 
     // Use this for initialization
     void Start () {
@@ -35,6 +37,9 @@ public class FingerAnimation : MonoBehaviour {
 
         showVertical = true;
         moveCopter = true;
+        finished = false;
+
+        tutorial = GameObject.Find("Tutorial").GetComponent<TutorialScript>();
 
         speed = 0.005f;
 
@@ -53,7 +58,10 @@ public class FingerAnimation : MonoBehaviour {
         if (showVertical)
             SwitchToHorizontal();
         else
+        {
+            finished = true;
             gameObject.SetActive(false);
+        }
     }
 
     private void SwitchToHorizontal() {
