@@ -33,7 +33,7 @@ public class PlatformButtons: MonoBehaviour {
 
 		t.sizeDelta = new Vector2 (Screen.width, Screen.height) * 0.5f;
 		
-		landing = transform.parent.parent.GetComponentInChildren<LandingPadManager>();
+		landing = transform.parent.parent.GetComponent<LandingPadManager>();
         if (landing.Equals(null))
             Debug.LogError("The landingpad manager was not found in platform buttons");
 		landing.enterPlatform += ShowAllButtons;
@@ -72,14 +72,31 @@ public class PlatformButtons: MonoBehaviour {
         Invoke("ShowFuel", 0.2f);
 	}
 
-    public void ShowRepair() { Debug.Log("Animation called: Repair"); repairAnimator.Play("ShowRepair"); }
-    public void ShowFuel() { Debug.Log("Animation called: Fuel"); fuelAnimator.Play("ShowFuel"); }
-    public void ShowVictory() { Debug.Log("Animation called: Victory"); victoryAnimator.Play("ShowVictory"); }
+    public void ShowRepair() { 
+		Debug.Log("Animation called: Repair"); 
+		repairAnimator.Play("ShowRepair"); 
+	}
+
+    public void ShowFuel() { 
+		Debug.Log("Animation called: Fuel"); 
+		fuelAnimator.Play("ShowFuel"); 
+	}
+
+    public void ShowVictory() { 
+		Debug.Log("Animation called: Victory"); 
+		victoryAnimator.Play("ShowVictory"); 
+	}
 
 
-    public void HideRepair() { repairAnimator.Play("HideRepair"); }
-    public void HideFuel() { fuelAnimator.Play("HideFuel"); }
-    public void HideVictory() { victoryAnimator.Play("HideVictory"); }
+    public void HideRepair() { 
+		repairAnimator.Play("HideRepair"); 
+	}
+    public void HideFuel() { 
+		fuelAnimator.Play("HideFuel"); 
+	}
+    public void HideVictory() { 
+		victoryAnimator.Play("HideVictory"); 
+	}
 
     public void StartRepair() {
 		landing.StartRepair();

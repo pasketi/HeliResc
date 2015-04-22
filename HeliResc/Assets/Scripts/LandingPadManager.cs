@@ -30,7 +30,7 @@ public class LandingPadManager : MonoBehaviour {
 		}
 
 		if (other.gameObject.transform.tag == "Copter") {
-			if(enterPlatform != null) enterPlatform();
+			if (enterPlatform != null) enterPlatform();
 		    if (cargo.getCargoCrates() > 0) {
 				cargo.emptyCargo();
 				other.GetComponent<CopterManagerTouch>().resetPower();
@@ -59,7 +59,7 @@ public class LandingPadManager : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D other) {
 		if (other.gameObject.transform.tag == "Copter") {
-			if(enterPlatform != null) exitPlatform();
+			if (exitPlatform != null) exitPlatform();
 		}
 	}
 
@@ -68,6 +68,6 @@ public class LandingPadManager : MonoBehaviour {
 	}
 	
 	public void StartRefill() {
-		refill = true;;
+		refill = true;
 	}
 }
