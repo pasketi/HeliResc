@@ -17,6 +17,6 @@ public class MoneyUIUpdate : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.I))
             manager.wallet.AddMoney(1);
-        moneyText.text = "Money: " + manager.wallet.Coins.ToString();
+        moneyText.text = manager.wallet.Coins.ToString();
 	}
 }

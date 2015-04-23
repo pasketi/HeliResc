@@ -124,7 +124,8 @@ public class ScrollingMenus : MonoBehaviour {
 	}
 
     public void ShowMainMenu() {
-        target = panelAnchorPoints[0];
+        current = 0;
+        target = panelAnchorPoints[current];
         isScrolling = true;
         isDragging = false;
     }
