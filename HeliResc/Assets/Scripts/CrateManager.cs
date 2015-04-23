@@ -177,7 +177,7 @@ public class CrateManager : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision){
 		if (!inMenu && !dead) {
-			if (copterScript != null && collision.collider.gameObject.CompareTag ("Hook") && copterScript.isHookDead == false) {
+			if (copterScript != null && collision.collider.gameObject.CompareTag ("Hook") && copterScript.isHookDead == false && transform.tag != "ActionableObject") {
 				gameObject.transform.parent.parent = collision.collider.gameObject.transform;
 				gameObject.AddComponent <DistanceJoint2D> ();
 
