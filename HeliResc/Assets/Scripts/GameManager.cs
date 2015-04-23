@@ -126,8 +126,6 @@ public class GameManager : MonoBehaviour {
 	public void save () {
 		PlayerPrefs.SetInt("First", 1);
 		PlayerPrefs.SetString("Name", playerName);
-		//PlayerPrefs.SetInt("Stars", playerStars);
-		//PlayerPrefs.SetInt("Coins", playerCoins);
 		PlayerPrefs.SetInt("Platform", playerPlatform);
 
 		//Currently selected copter
@@ -210,12 +208,6 @@ public class GameManager : MonoBehaviour {
 	public int getPlatformLevel () {
 		return playerPlatform;
 	}
-	public void upgradePlatformLevel () {
-		if (playerPlatform < 10)
-			playerPlatform += 1;
-		save ();
-		updateMainMenuDebug();
-	}
 
 	public string[,] getCopters () {
 		return copters;
@@ -239,21 +231,21 @@ public class GameManager : MonoBehaviour {
 
 	public void upgradeCurrentEngine () {
         if (int.Parse(copters[currentCopter, 4]) < 10 && wallet.BuyUpgrade("Engine"))
-            copters[currentCopter, 4] = wallet.UpgradeLevel("Engine").ToString();//(int.Parse(copters[currentCopter, 4]) + 1).ToString();
+            copters[currentCopter, 4] = wallet.UpgradeLevel("Engine").ToString();
 		//save ();
 		updateMainMenuDebug();
 	}
 
 	public void upgradeCurrentFuelTank () {
 		if (int.Parse(copters[currentCopter, 5]) < 10 && wallet.BuyUpgrade("Fuel"))
-			copters[currentCopter, 5] = wallet.UpgradeLevel("Fuel").ToString();//(int.Parse(copters[currentCopter, 5]) + 1).ToString();
+			copters[currentCopter, 5] = wallet.UpgradeLevel("Fuel").ToString();
         //save ();
 		updateMainMenuDebug();
 	}
 
 	public void upgradeCurrentRope () {
 		if (int.Parse(copters[currentCopter, 12]) < 10 && wallet.BuyUpgrade("Rope"))
-			copters[currentCopter, 12] = wallet.UpgradeLevel("Rope").ToString();//(int.Parse(copters[currentCopter, 12]) + 1).ToString();
+			copters[currentCopter, 12] = wallet.UpgradeLevel("Rope").ToString();
         //save ();
 		updateMainMenuDebug();
 	}

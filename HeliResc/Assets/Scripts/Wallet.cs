@@ -49,6 +49,12 @@ public class Wallet {
         return allUpgrades["Copter" + copter.ToString() + upgrade].CurrentLevel;
     }
 
+    public Upgrade GetUpgrade(string upgrade) {
+        int copter = manager.getCurrentCopter();
+        Upgrade u = allUpgrades["Copter" + copter.ToString() + upgrade];
+        return u;
+    }
+
     /// <summary>
     /// Adds upgrade to players copter
     /// </summary>
