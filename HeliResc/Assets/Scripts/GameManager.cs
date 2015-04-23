@@ -226,23 +226,6 @@ public class GameManager : MonoBehaviour {
 		else setCurrentCopter(0);
 	}
 
-	public void upgradeCurrentEngine () {
-        if (int.Parse(copters[currentCopter, 4]) < 10 && wallet.BuyUpgrade("Engine"))
-            copters[currentCopter, 4] = wallet.UpgradeLevel("Engine").ToString();
-		//save ();
-	}
-
-	public void upgradeCurrentFuelTank () {
-		if (int.Parse(copters[currentCopter, 5]) < 10 && wallet.BuyUpgrade("Fuel"))
-			copters[currentCopter, 5] = wallet.UpgradeLevel("Fuel").ToString();
-        //save ();
-	}
-
-	public void upgradeCurrentRope () {
-		if (int.Parse(copters[currentCopter, 12]) < 10 && wallet.BuyUpgrade("Rope"))
-			copters[currentCopter, 12] = wallet.UpgradeLevel("Rope").ToString();
-        //save ();
-	}
 	
 	public void resetUpgrades () {
 		copters[currentCopter, 4] = "1";
@@ -252,12 +235,19 @@ public class GameManager : MonoBehaviour {
 		save ();
 	}
 
+    private void UpdateUpgrades() {
+        copters[currentCopter, 4] = wallet.UpgradeLevel("Engine").ToString();
+        copters[currentCopter, 5] = wallet.UpgradeLevel("Fuel").ToString();
+        copters[currentCopter, 12] = wallet.UpgradeLevel("Rope").ToString();
+    }
+
     public Upgrade GetUpgrade(string upgrade) {
         return wallet.GetUpgrade(upgrade);
     }
 
     public bool BuyUpgrade(string upgrade) {
         bool bought = wallet.BuyUpgrade(upgrade);
+        UpdateUpgrades();
 
         return bought;
     }

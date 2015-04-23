@@ -18,9 +18,9 @@ public class GetButtonMethods : MonoBehaviour {
 	void Start () {
 		g = GameObject.Find ("GameManager").GetComponent<GameManager>();
 
-		btnUpFuel.onClick.AddListener(() => g.upgradeCurrentFuelTank());
-		btnUpEngine.onClick.AddListener(() => g.upgradeCurrentEngine());
-		btnUpRope.onClick.AddListener(() => g.upgradeCurrentRope());
+		//btnUpFuel.onClick.AddListener(() => g.upgradeCurrentFuelTank());
+		//btnUpEngine.onClick.AddListener(() => g.upgradeCurrentEngine());
+		//btnUpRope.onClick.AddListener(() => g.upgradeCurrentRope());
 
 		//btnResetUps.onClick.AddListener(() => g.resetUpgrades());
 		//btnResetAll.onClick.AddListener (() => g.resetData ());

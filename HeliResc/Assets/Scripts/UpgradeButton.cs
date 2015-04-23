@@ -19,8 +19,8 @@ public class UpgradeButton : MonoBehaviour {
     }
 
     public void PressedButton() {
-        if (gameManager.BuyUpgrade(upgradeName))
-            UpdateTextFields();
+        gameManager.BuyUpgrade(upgradeName);     
+        UpdateTextFields();
     }
 
     private void UpdateTextFields() {

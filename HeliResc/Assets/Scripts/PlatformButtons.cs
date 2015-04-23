@@ -11,6 +11,7 @@ public class PlatformButtons: MonoBehaviour {
 	public float buttonSize;
 	
 	private LandingPadManager landing;
+    private LevelManager levelManager;
 	
 	private RectTransform[] rects;
 	
@@ -32,7 +33,9 @@ public class PlatformButtons: MonoBehaviour {
 		RectTransform t = GetComponent<RectTransform> ();
 
 		t.sizeDelta = new Vector2 (Screen.width, Screen.height) * 0.5f;
-		
+
+        levelManager = GameObject.FindObjectOfType<LevelManager>();
+
 		landing = transform.parent.parent.GetComponent<LandingPadManager>();
         if (landing.Equals(null))
             Debug.LogError("The landingpad manager was not found in platform buttons");
@@ -106,5 +109,9 @@ public class PlatformButtons: MonoBehaviour {
 	public void StartRefill() {
 		landing.StartRefill();
 	}
+
+    public void PressFinish() {
+        levelManager.pressFinishButton();
+    }
 	
 }

@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour {
 	private GameManager gameManager;
 	private GameObject copter;
 
+    private MissionObjectives objectives;
+
 	private int reward = 1, actionsPerLevel = 0;
 	private float graceTime = 10f;
 	public int levelCoinRewardPerStar = 200, neededCrates = 0;
@@ -31,8 +33,11 @@ public class LevelManager : MonoBehaviour {
 		if (pauseScreen == null) pauseScreen = GameObject.Find("PauseScreen");
 		if (HUD == null) HUD = GameObject.Find("HUD");
 
-		//copter instantiate
-		if (copterSpawnPoint == null) copterSpawnPoint = GameObject.Find ("CopterSpawn");
+        objectives = GameObject.Find("Objectives").GetComponent<MissionObjectives>();
+        objectives.OnGameOver += levelFinished;
+
+        //copter instantiate
+        if (copterSpawnPoint == null) copterSpawnPoint = GameObject.Find ("CopterSpawn");
 		if (gameManager != null) copter = Instantiate (copters[gameManager.getCurrentCopter()], copterSpawnPoint.transform.position, Quaternion.identity) as GameObject;
 		else copter = Instantiate (copters[0], copterSpawnPoint.transform.position, Quaternion.identity) as GameObject;
 		copter.name = "Copter";
@@ -46,11 +51,7 @@ public class LevelManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (savedCrates >= crateAmount || Input.GetKeyDown(KeyCode.J)) {
-			win = true;
-		}
-
+	void Update () {		
 		if (win) {
 			if (!once) {
 				Debug.Log("Victory!");
@@ -133,16 +134,24 @@ public class LevelManager : MonoBehaviour {
 		return gamePaused;
 	}
 
+    private void levelFinished() {
+        winLevel();
+    }
+
+    public void pressFinishButton() {
+        winLevel();
+    }
+
     private void winLevel() {
         LevelEndInfo end = new LevelEndInfo(true);
         end.itemsSaved = getSavedCrates();
         end.Reward = reward;
+                
+        if (objectives == null) Debug.Log("Objectives not found");
 
-        MissionObjectives mo = GameObject.Find("Objectives").GetComponent<MissionObjectives>();
-        if (mo == null) Debug.Log("Objectives not found");
-        end.star1 = mo.LevelObjective1();
-        end.star2 = mo.LevelObjective2();
-        end.star3 = mo.LevelObjective3();
+        end.star1 = objectives.LevelObjective1();
+        end.star2 = objectives.LevelObjective2();
+        end.star3 = objectives.LevelObjective3();
 
         gameManager.loadMainMenu(true, end, 1);
     }

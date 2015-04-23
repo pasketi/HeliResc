@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 public class MissionObjectives : MonoBehaviour {
 
     public delegate bool LevelObjective();
+
+    public Action OnGameOver = () => { };
 
     public Objective Objective1;
     public Objective Objective2;
@@ -29,6 +32,13 @@ public class MissionObjectives : MonoBehaviour {
         LevelObjective2 = objectiveMethods[Objective2];
         LevelObjective3 = objectiveMethods[Objective3];
 
+    }
+
+    void Update() {
+        if (LevelObjective1())
+            if (LevelObjective2())
+                if (LevelObjective3())
+                    OnGameOver();
     }
 
     public bool GetItems()
