@@ -56,6 +56,7 @@ public class PlatformButtons: MonoBehaviour {
 	/// </summary>
 	public void HideAllButtons()
 	{
+        CancelInvoke();
         HideFuel();
         Invoke("HideRepair", 0.1f);
         Invoke("HideVictory", 0.2f);
@@ -66,7 +67,7 @@ public class PlatformButtons: MonoBehaviour {
 	/// </summary>
 	public void ShowAllButtons()
 	{
-        //StartCoroutine(ShowButtons());
+        CancelInvoke();
         ShowVictory();
         Invoke("ShowRepair", 0.1f);
         Invoke("ShowFuel", 0.2f);
