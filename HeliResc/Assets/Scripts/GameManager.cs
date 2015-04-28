@@ -256,6 +256,10 @@ public class GameManager : MonoBehaviour {
         return bought;
     }
 
+	public void BuyCopter(int index) {
+		wallet.BuyCopter ();
+	}
+
 	//CAREFUL!
 	public void resetData () {
 		PlayerPrefs.DeleteKey("First");

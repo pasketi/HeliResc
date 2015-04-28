@@ -6,6 +6,14 @@ public class CopterSelection : MonoBehaviour {
 
     private GameManager gameManager;
 
+	public Sprite[] copterSprites;
+
+	public Text engineText;
+	public Text fuelText;
+	public Text ropeText;
+	public Image copterInfoImage;
+	private GameObject copterInfoPanel;
+
     public GridLayoutGroup group;
     public GameObject copterEntry;
 
@@ -19,7 +27,18 @@ public class CopterSelection : MonoBehaviour {
         for(int i = 0; i < gameManager.CopterAmount; i++) {
             GameObject go = Instantiate(copterEntry) as GameObject;
             go.transform.SetParent(group.transform);
-            go.GetComponent<CopterEntryScript>().SetCopterInfo(i);
+            go.GetComponent<CopterEntryScript>().SetCopterInfo(i, copterSprites[i], this);
         }
+
+		copterInfoPanel = GameObject.Find("PanelCopterInfo");
+		copterInfoPanel.SetActive (false);
+	}
+
+	public void SetCopterInfoPanel(string engine, string fuel, string rope, int i) {
+		copterInfoPanel.SetActive (true);
+		copterInfoImage.sprite = copterSprites [i];
+		engineText.text = engine;
+		fuelText.text = fuel;
+		ropeText.text = rope;
 	}
 }

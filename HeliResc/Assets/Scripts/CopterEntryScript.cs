@@ -5,7 +5,9 @@ using System.Collections;
 public class CopterEntryScript : MonoBehaviour {
 
     public Text copterName;
+	public Text copterPrice;
     public Image copterImage;
+	public Button buttonInfo;
     public Button buttonBuy;
     public Button buttonSelect;
 
@@ -19,11 +21,15 @@ public class CopterEntryScript : MonoBehaviour {
 
     private int index;
 
+	private CopterSelection copterSelect;
+
     private GameManager gameManager;	
 	
-    public void SetCopterInfo(int index) {
+    public void SetCopterInfo(int index, Sprite s, CopterSelection copter) {
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+		copterSelect = copter;
 
         this.index = index;
 
@@ -31,12 +37,20 @@ public class CopterEntryScript : MonoBehaviour {
         string unlocked = copters[index, 3];
         bool copterUnlocked = int.Parse(unlocked) > 0;
 
-        buttonBuy.gameObject.SetActive(copterUnlocked);
-        buttonSelect.gameObject.SetActive(copterUnlocked);
+		copterPrice.text = copters [index, 1];        
 
         copterName.text = copters[index, 0];
 
+		copterImage.sprite = s;
+
         SetUpgrades();
+
+		buttonInfo.onClick.AddListener (() => SetInfoPanel());
+		buttonSelect.onClick.AddListener (() => PressSelect ());
+		buttonBuy.onClick.AddListener (() => PressBuy ());
+
+		buttonBuy.gameObject.SetActive(!copterUnlocked);
+		buttonSelect.gameObject.SetActive(copterUnlocked);
     }
 
     public void SetUpgrades() {
@@ -50,4 +64,20 @@ public class CopterEntryScript : MonoBehaviour {
 
         Debug.Log("Engine: " + engine +  "/" + maxEngine + "   Fuel: " + fuel + "/" + maxFuel + "   Rope: " + rope + "/" + maxRope);
     }
+
+	private void SetInfoPanel() {
+		SetUpgrades ();
+		string e = engine + "/" + maxEngine;
+		string f = fuel + "/" + maxFuel;
+		string r = rope + "/" + maxRope;
+		copterSelect.SetCopterInfoPanel (e, f, r, index);
+	}
+
+	private void PressBuy() {
+		gameManager.BuyCopter (index);
+	}
+
+	private void PressSelect() {
+		gameManager.setCurrentCopter (index);
+	}
 }
