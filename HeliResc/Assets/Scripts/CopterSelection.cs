@@ -19,6 +19,7 @@ public class CopterSelection : MonoBehaviour {
         for(int i = 0; i < gameManager.CopterAmount; i++) {
             GameObject go = Instantiate(copterEntry) as GameObject;
             go.transform.SetParent(group.transform);
+            go.GetComponent<CopterEntryScript>().SetCopterInfo(i);
         }
 	}
 	
