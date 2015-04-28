@@ -55,6 +55,12 @@ public class Wallet {
         return u;
     }
 
+    public Upgrade GetUpgrade(string upgrade, int index)
+    {        
+        Upgrade u = allUpgrades["Copter" + index.ToString() + upgrade];
+        return u;
+    }
+
     /// <summary>
     /// Adds upgrade to players copter
     /// </summary>

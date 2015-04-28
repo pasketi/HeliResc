@@ -17,11 +17,15 @@ public class CopterEntryScript : MonoBehaviour {
     private string rope;
     private string fuel;
 
+    private int index;
+
     private GameManager gameManager;	
 	
     public void SetCopterInfo(int index) {
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        this.index = index;
 
         string[,] copters = gameManager.getCopters();
         string unlocked = copters[index, 3];
@@ -32,12 +36,18 @@ public class CopterEntryScript : MonoBehaviour {
 
         copterName.text = copters[index, 0];
 
-        maxEngine = gameManager.GetUpgrade("Engine").maxLevel.ToString();
-        maxFuel = gameManager.GetUpgrade("Fuel").maxLevel.ToString();
-        maxRope = gameManager.GetUpgrade("Rope").maxLevel.ToString();
+        SetUpgrades();
+    }
 
-        engine = gameManager.GetUpgrade("Engine").CurrentLevel.ToString();
-        fuel = gameManager.GetUpgrade("Fuel").CurrentLevel.ToString();
-        rope = gameManager.GetUpgrade("Rope").CurrentLevel.ToString();
+    public void SetUpgrades() {
+        maxEngine = gameManager.GetUpgrade("Engine", index).maxLevel.ToString();
+        maxFuel = gameManager.GetUpgrade("Fuel", index).maxLevel.ToString();
+        maxRope = gameManager.GetUpgrade("Rope", index).maxLevel.ToString();
+
+        engine = gameManager.GetUpgrade("Engine", index).CurrentLevel.ToString();
+        fuel = gameManager.GetUpgrade("Fuel", index).CurrentLevel.ToString();
+        rope = gameManager.GetUpgrade("Rope", index).CurrentLevel.ToString();
+
+        Debug.Log("Engine: " + engine +  "/" + maxEngine + "   Fuel: " + fuel + "/" + maxFuel + "   Rope: " + rope + "/" + maxRope);
     }
 }

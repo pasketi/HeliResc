@@ -245,6 +245,10 @@ public class GameManager : MonoBehaviour {
         return wallet.GetUpgrade(upgrade);
     }
 
+    public Upgrade GetUpgrade(string upgrade, int i) {
+        return wallet.GetUpgrade(upgrade, i);
+    }
+
     public bool BuyUpgrade(string upgrade) {
         bool bought = wallet.BuyUpgrade(upgrade);
         UpdateUpgrades();

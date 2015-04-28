@@ -22,9 +22,4 @@ public class CopterSelection : MonoBehaviour {
             go.GetComponent<CopterEntryScript>().SetCopterInfo(i);
         }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
