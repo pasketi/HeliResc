@@ -75,9 +75,17 @@ public class CopterEntryScript : MonoBehaviour {
 
 	private void PressBuy() {
 		gameManager.BuyCopter (index);
+		UpdateUpgradeScreen ();
 	}
 
 	private void PressSelect() {
 		gameManager.setCurrentCopter (index);
+		UpdateUpgradeScreen ();
+	}
+
+	private void UpdateUpgradeScreen() {
+		UpgradeButton[] buttons = GameObject.FindObjectsOfType<UpgradeButton> ();
+		foreach (UpgradeButton ub in buttons)
+			ub.UpdateTextFields ();
 	}
 }

@@ -23,7 +23,7 @@ public class UpgradeButton : MonoBehaviour {
         UpdateTextFields();
     }
 
-    private void UpdateTextFields() {
+    public void UpdateTextFields() {
         Upgrade u = gameManager.GetUpgrade(upgradeName);
 
         upgradeLevel.text = u.CurrentLevel.ToString() + "/" + u.maxLevel.ToString();
