@@ -28,7 +28,9 @@ public class CopterManagerTouch : MonoBehaviour {
 					maxFuel = 500f,
 					reFuelPerSecond = 100f,
 					minPower = 0f,
-					maxPower = 120f;
+					maxPower = 120f,
+					ropeDurability = 100f,
+					ropeOvertime = 5f;
 
 	private GameObject hook, tempActionObject;
 	private LevelManager manager;
@@ -83,6 +85,7 @@ public class CopterManagerTouch : MonoBehaviour {
 		maxTilt = int.Parse(copterArray[copterNumber,17]);
 		maxFuel = int.Parse(copterArray[copterNumber,8]) + (((int.Parse(copterArray[copterNumber,9]) - int.Parse(copterArray[copterNumber,8])) / 10) * int.Parse(copterArray[copterNumber,5]));
 		maxPower = int.Parse(copterArray[copterNumber,6]) + (((int.Parse(copterArray[copterNumber,7]) - int.Parse(copterArray[copterNumber,6])) / 10) * int.Parse(copterArray[copterNumber,4]));
+		ropeDurability = int.Parse(copterArray[copterNumber,13]) + (((int.Parse(copterArray[copterNumber,14]) - int.Parse(copterArray[copterNumber,13])) / 10) * int.Parse(copterArray[copterNumber,12]));
 		reFuelPerSecond = maxFuel / ((14 - gameManager.getPlatformLevel()) / 2);
 		healPerSecond = maxHealth / ((14 - gameManager.getPlatformLevel()) / 2);
 		manager.cargoSize = int.Parse(copterArray[copterNumber,11]);
@@ -240,7 +243,7 @@ public class CopterManagerTouch : MonoBehaviour {
 			hookJoint.enabled = true;
 			hookJoint.distance = hookDistance;
 			hookJoint.connectedBody = hook.GetComponent<Rigidbody2D>();
-		} else if (!isHookDown && once && Vector2.Distance (hook.transform.position, hookAnchor.transform.position) < 0.1 && !isHookDead) {
+		} else if (hook != null && !isHookDown && once && Vector2.Distance (hook.transform.position, hookAnchor.transform.position) < 0.1 && !isHookDead) {
 			cargo.cargoHookedCrates (hook);
 			if (cargo.getCargoCrates() >= manager.cargoSize && hook.transform.childCount > 0){
 				isHookDown = true;
@@ -326,10 +329,12 @@ public class CopterManagerTouch : MonoBehaviour {
 	}
 
 	public void killHook () {
-		hookJoint.enabled = false;
-		hook.GetComponent<DestroyHookOverTime>().doom();
-		hook = null;
-		isHookDead = true;
+		if (hook != null){
+			hookJoint.enabled = false;
+			hook.GetComponent<DestroyHookOverTime>().doom();
+			hook = null;
+			isHookDead = true;
+		}
 	}
 
 	private void kill() {
@@ -378,5 +383,13 @@ public class CopterManagerTouch : MonoBehaviour {
 	void OnTriggerStay2D (Collider2D other) {
 		if (other.isTrigger == false)
 			changeHealth(-((maxHealth/2) * Time.deltaTime));
+	}
+
+	public void testHookMass (float weight){
+		if (weight > ropeDurability) {
+			ropeOvertime -= Time.deltaTime;
+			if (ropeOvertime <= 0f)
+				killHook();
+		} else ropeOvertime = 5f;
 	}
 }
