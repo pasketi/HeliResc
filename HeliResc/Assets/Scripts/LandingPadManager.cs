@@ -20,13 +20,12 @@ public class LandingPadManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.transform.tag == "Crate") {
-			cargo.saveHookedCrate(other.GetComponentInChildren<CrateManager>().crateMass);
-			Destroy(other.gameObject);
+			saveAllChildren (other.transform.parent.gameObject);
 		}
 
 		if (other.gameObject.transform.tag == "Copter") {
@@ -62,7 +61,18 @@ public class LandingPadManager : MonoBehaviour {
 			if (exitPlatform != null) exitPlatform();
 		}
 	}
-
+	
+	void saveAllChildren (GameObject hook) {
+		foreach (Transform child in hook.transform) {
+			if (child.tag == "Crate"){
+				if (child.FindChild("LegHook").childCount != 0)
+					saveAllChildren (child.transform.FindChild("LegHook").gameObject);
+				cargo.saveHookedCrate(child.GetComponentInChildren<CrateManager>().crateMass);
+				child.tag = "KillMe";
+			}
+		}
+	}
+	
 	public void StartRepair() {
 		repair = true;
 	}

@@ -65,7 +65,11 @@ public class CrateManager : MonoBehaviour {
 		floatyValue = gameObject.transform.parent.GetComponent<Rigidbody2D> ().mass * 30f;
 		hinge = GetComponent<HingeJoint2D> ();
 	}
-	
+
+	void FixedUpdate(){
+		if (crate.CompareTag("KillMe")) Destroy(crate);
+	}
+
 	// Update is called once per frame
 	void Update () {
 
@@ -121,7 +125,7 @@ public class CrateManager : MonoBehaviour {
 				}
 			}*/
 
-			if ((!inCargo && copterScript != null && crate.layer == 11 && copterScript.isHookDead == true) || copterScript == null) {
+			if (copterScript == null || (!inCargo && copterScript != null && crate.layer == 11 && copterScript.isHookDead == true)) {
 				Destroy (joint);
 				cargoScript.changeHookMass (-crateMass);
 				gameObject.GetComponent<Collider2D> ().enabled = true;
@@ -177,7 +181,7 @@ public class CrateManager : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision){
 		if (!inMenu && !dead) {
-			if (copterScript != null && collision.collider.gameObject.CompareTag ("Hook") && copterScript.isHookDead == false && transform.tag != "ActionableObject") {
+			if (copterScript != null && collision.collider.gameObject.CompareTag ("Hook") && copterScript.isHookDead == false && tag != "ActionableObject" && tag != "SavedObject") {
 				gameObject.transform.parent.parent = collision.collider.gameObject.transform;
 				gameObject.AddComponent <DistanceJoint2D> ();
 

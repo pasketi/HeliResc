@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour {
 		if (manager.levelAction != 0) 
 			transform.FindChild ("ActionBackground").FindChild ("IsKill").GetComponent<Button> ().onClick.AddListener(() => copter.useAction ());
 		else
-			transform.FindChild ("ActionBackground").FindChild ("IsKill").GetComponent<Button> ().onClick.AddListener(() => manager.levelFailed (1));
+			transform.FindChild ("ActionBackground").GetComponent<Image>().enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -47,7 +47,10 @@ public class UIManager : MonoBehaviour {
 		cargo.text = manager.cargoCrates.ToString () + "/" + manager.cargoSize.ToString ();
 		if (manager.levelAction != 0)
 			action.text = manager.getActionsLeft().ToString () + "/" + manager.maxActionsPerLevel.ToString ();
-		else action.text = "isKill";
+		else {
+			action.text = "";
+
+		}
 
 		if (manager.cargoCrates == manager.cargoSize)
 			cargo.color = red;

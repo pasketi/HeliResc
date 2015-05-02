@@ -40,6 +40,8 @@ public class CargoManager : MonoBehaviour {
 		foreach (Transform child in hook.transform) {
 			if (manager.cargoSize > cargoCrates){
 				if (child.tag == "Crate"){
+					if (child.FindChild("LegHook").childCount != 0)
+						cargoHookedCrates (child.FindChild("LegHook").gameObject);
 					cargoCrates += 1;
 					child.GetComponentInChildren<CrateManager>().inCargo = true;
 					child.parent = cargo;
