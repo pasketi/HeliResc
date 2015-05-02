@@ -18,17 +18,7 @@ public class PlatformButtons: MonoBehaviour {
 	private Transform target;
 	
 	// Use this for initialization
-	void Start () {
-		//popup = GetComponent<Animator>();
-		//popup.Play("default");
-		
-		//copter = GetComponentInParent<Transform>();
-		
-		rects = GetComponentsInChildren<RectTransform>();
-		if(rects == null)
-			Debug.Log("rect array is null");
-		
-		//float width = Screen.width * buttonSize;
+	void Awake () {
 		
 		RectTransform t = GetComponent<RectTransform> ();
 
@@ -57,7 +47,7 @@ public class PlatformButtons: MonoBehaviour {
 	/// <summary>
 	/// Plays the disable popup window animation
 	/// </summary>
-	public void HideAllButtons()
+	public void HideAllButtons(string name)
 	{
         CancelInvoke();
         HideFuel();
@@ -68,7 +58,7 @@ public class PlatformButtons: MonoBehaviour {
 	/// <summary>
 	/// Enables the popup window animation
 	/// </summary>
-	public void ShowAllButtons()
+	public void ShowAllButtons(string name)
 	{
         CancelInvoke();
         ShowVictory();
@@ -77,17 +67,14 @@ public class PlatformButtons: MonoBehaviour {
 	}
 
     public void ShowRepair() { 
-		Debug.Log("Animation called: Repair"); 
 		repairAnimator.Play("ShowRepair"); 
 	}
 
     public void ShowFuel() { 
-		Debug.Log("Animation called: Fuel"); 
 		fuelAnimator.Play("ShowFuel"); 
 	}
 
     public void ShowVictory() { 
-		Debug.Log("Animation called: Victory"); 
 		victoryAnimator.Play("ShowVictory"); 
 	}
 

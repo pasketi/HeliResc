@@ -3,11 +3,11 @@ using System.Collections;
 
 public class LandingPadManager : MonoBehaviour {
 
-	public delegate void LandingEvent();
-	public event LandingEvent enterPlatform;
-	public event LandingEvent exitPlatform;
+    public delegate void LandingEvent(string name);
+    public event LandingEvent enterPlatform = (string name) => { };
+    public event LandingEvent exitPlatform = (string name) => { };
 
-	private bool repair;
+    private bool repair;
 	private bool refill;
 
 	//private BoxCollider2D trigger;
@@ -29,8 +29,10 @@ public class LandingPadManager : MonoBehaviour {
 		}
 
 		if (other.gameObject.transform.tag == "Copter") {
-			if (enterPlatform != null) enterPlatform();
-		    if (cargo.getCargoCrates() > 0) {
+
+            if (enterPlatform != null) enterPlatform(transform.root.name);
+
+            if (cargo.getCargoCrates() > 0) {
 				cargo.emptyCargo();
 				other.GetComponent<CopterManagerTouch>().resetPower();
 			}
@@ -58,8 +60,8 @@ public class LandingPadManager : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D other) {
 		if (other.gameObject.transform.tag == "Copter") {
-			if (exitPlatform != null) exitPlatform();
-		}
+            if (exitPlatform != null) exitPlatform(transform.root.name);
+        }
 	}
 	
 	void saveAllChildren (GameObject hook) {
@@ -72,8 +74,14 @@ public class LandingPadManager : MonoBehaviour {
 			}
 		}
 	}
-	
-	public void StartRepair() {
+
+    public void ResetEvents()
+    {
+        enterPlatform = (string name) => { };
+        exitPlatform = (string name) => { };
+    }
+
+    public void StartRepair() {
 		repair = true;
 	}
 	

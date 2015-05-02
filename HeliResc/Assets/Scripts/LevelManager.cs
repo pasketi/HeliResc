@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour {
 	public int cargoSize = 2, cargoCrates = 0, levelAction = 0, maxActionsPerLevel = 0;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		if (GameObject.Find("GameManager") != null){
 			Debug.Log("GameManager Found");
 			gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
