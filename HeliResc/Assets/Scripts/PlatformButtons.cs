@@ -91,13 +91,16 @@ public class PlatformButtons: MonoBehaviour {
 
     public void StartRepair() {
 		landing.StartRepair();
+        EventManager.TriggerEvent("Repair");
 	}
 	
 	public void StartRefill() {
 		landing.StartRefill();
-	}
+        EventManager.TriggerEvent("Fuel");
+    }
 
     public void PressFinish() {
+        EventManager.TriggerEvent("Finish");
         levelManager.pressFinishButton();
     }
 	

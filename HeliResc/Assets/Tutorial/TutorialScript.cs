@@ -11,7 +11,7 @@ public class TutorialScript : MonoBehaviour {
     private bool tr1Enter, tr2Enter, tr3Enter;
 
     private TutorialPelican pelican;
-    private bool pelicanActive;
+    private bool pelicanCollided;
     public bool FuelRepair { get { return (useFuel && useRepair); } }
 
     private ObjectiveTrigger trigger;
@@ -21,6 +21,17 @@ public class TutorialScript : MonoBehaviour {
     private LandingPadManager[] landingPads;
 
     private string[] landingName = { "PalmIsland west", "LandingBoat2", "PalmIsland east", "LandingBoat" };
+
+    void OnEnable() {
+        EventManager.StartListening("Fuel", PressFuel);
+        EventManager.StartListening("Repair", PressRepair);
+        EventManager.StartListening("Finish", PressFinish);
+    }
+    void OnDisable() {
+        EventManager.StopListening("Fuel", PressFuel);
+        EventManager.StopListening("Repair", PressRepair);
+        EventManager.StopListening("Finish", PressFinish);
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -38,7 +49,9 @@ public class TutorialScript : MonoBehaviour {
             l.ResetEvents();
             l.enterPlatform += EnterPlatform;
             l.exitPlatform += ExitPlatform;
-        }
+        }        
+
+        StartCoroutine(Step1());
 	}
 	
 	// Update is called once per frame
@@ -54,22 +67,13 @@ public class TutorialScript : MonoBehaviour {
     }
     private void HitPelican(string tag) {
         Debug.Log("Pelican hit");
+        pelicanCollided = true;
         playerRB.isKinematic = false;
     }
 
-    public void TriggerExit(int trigger) {
-        switch (trigger) {
-            case 1:
-                useFuel = true;
-                break;
-            case 2:
-                useRepair = true;
-                break;
-            case 3:
-                useFinish = true;
-                break;
-        }
-    }
+    private void PressFuel() { useFuel = true; }
+    private void PressRepair() { useRepair = true; }
+    private void PressFinish() { useFinish = true; }
 
     public void TriggerEnter(int trigger)
     {
@@ -127,15 +131,12 @@ public class TutorialScript : MonoBehaviour {
         {
             case "LandingBoat2":
                 landing.HideFuel();
-                TriggerExit(1);
                 break;
             case "PalmIsland east":
                 landing.HideRepair();
-                TriggerExit(2);
                 break;
             case "LandingBoat":
                 landing.HideVictory();
-                TriggerExit(3);
                 break;
         }
     }
@@ -147,10 +148,13 @@ public class TutorialScript : MonoBehaviour {
     #region Step_Methods
     private IEnumerator Step1() {
         FingerAnimation finger = GameObject.FindObjectOfType<FingerAnimation>();
+        Debug.Log("Step1 start");
+
         getInput = false;
         while (!finger.finished) {
             yield return null;
         }
+        Debug.Log("Step1 end");
         StartCoroutine(Step2());
     }
     private IEnumerator Step2() {
@@ -158,8 +162,8 @@ public class TutorialScript : MonoBehaviour {
 
         while (!tr1Enter) {
             yield return null;
-        }        
-        
+        }
+        Debug.Log("Step2 end");
         StartCoroutine(Step3());
     }
     private IEnumerator Step3() {
@@ -170,14 +174,16 @@ public class TutorialScript : MonoBehaviour {
             yield return null;
         }
         playerRB.isKinematic = false;
+        Debug.Log("Step3 end");
         StartCoroutine(Step4());
     }
     private IEnumerator Step4() {
 
-        while (!pelicanActive)
+        while (!pelicanCollided)
         {
             yield return null;
         }
+        Debug.Log("Step4 end");
         StartCoroutine(Step5());
     }
     private IEnumerator Step5() {
@@ -186,7 +192,7 @@ public class TutorialScript : MonoBehaviour {
         {
             yield return null;
         }
-
+        Debug.Log("Step5 end");
         StartCoroutine(Step6());
     }
     private IEnumerator Step6() {
@@ -195,12 +201,14 @@ public class TutorialScript : MonoBehaviour {
         {
             yield return null;
         }
+        Debug.Log("Step6 end");
         StartCoroutine(Step7());
     }
     private IEnumerator Step7() {
         while (!useFinish) {
             yield return null;
         }
+        Debug.Log("Step7 end");
     }
     #endregion
 }
