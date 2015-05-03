@@ -48,6 +48,7 @@ public class ObstacleManager : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
+        
         if (other.gameObject.transform.tag == "Copter")
         {
             if (!instaKill)
@@ -65,9 +66,5 @@ public class ObstacleManager : MonoBehaviour {
         }
 
         ObstacleHit(gameObject.tag);        
-    }
-
-    private void HitCopter() {
-
     }
 }

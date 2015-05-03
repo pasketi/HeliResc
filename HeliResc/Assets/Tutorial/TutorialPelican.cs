@@ -29,6 +29,7 @@ public class TutorialPelican : MonoBehaviour {
             PelicanTriggered();
             if(go != null)
                 go.SetActive(true);
+            gameObject.SetActive(false);
         }
     }
 }

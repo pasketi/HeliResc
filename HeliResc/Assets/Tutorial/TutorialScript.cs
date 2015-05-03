@@ -49,9 +49,11 @@ public class TutorialScript : MonoBehaviour {
     private void Input() { }
 
     private void HitPelicanTrigger() {
+        Debug.Log("Pelican triggered");
         playerRB.isKinematic = true;
     }
     private void HitPelican(string tag) {
+        Debug.Log("Pelican hit");
         playerRB.isKinematic = false;
     }
 
