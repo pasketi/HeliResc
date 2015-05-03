@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 public class TutorialPelican : MonoBehaviour {
@@ -7,9 +8,14 @@ public class TutorialPelican : MonoBehaviour {
 
     private GameObject go;
 
+    public ObstacleManager obstacle;
+
+    public Action PelicanTriggered = () => { };
+
 	// Use this for initialization
 	void Start () {
         go = Instantiate(pelican) as GameObject;
+        obstacle = go.GetComponent<ObstacleManager>();
         go.SetActive(false);
 	}
 	
@@ -19,7 +25,9 @@ public class TutorialPelican : MonoBehaviour {
 	}
 
     void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.name.Equals("Copter"))
+        if (other.gameObject.name.Equals("Copter")) {
+            PelicanTriggered();
             go.SetActive(true);
+        }
     }
 }

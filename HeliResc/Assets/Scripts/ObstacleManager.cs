@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 public class ObstacleManager : MonoBehaviour {
+
+    public Action<string> ObstacleHit = (string obstacleTag) => { };
 
 	public GameObject deathAnimation;
 	public bool instaKill = false, fixedDamage = false, killsHook = false, diesOnContact = false;
@@ -18,7 +21,10 @@ public class ObstacleManager : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision) {
-		if (collision.gameObject.transform.tag == "Copter") {
+
+        ObstacleHit(gameObject.tag);
+
+        if (collision.gameObject.transform.tag == "Copter") {
 			if (!instaKill) {
 				if (!fixedDamage) { 
 					collision.gameObject.GetComponent<CopterManagerTouch>().changeHealth(-collision.relativeVelocity.magnitude * damageMultiplier);

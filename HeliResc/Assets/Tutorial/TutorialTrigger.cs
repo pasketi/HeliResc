@@ -15,7 +15,7 @@ public class TutorialTrigger : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag.Equals("Player")) {
             triggered = true;
-            tutorial.TriggerEntered(index);
+            tutorial.TriggerExit(index);
         }
     }
 }

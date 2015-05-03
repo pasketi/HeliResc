@@ -7,8 +7,12 @@ public class TutorialScript : MonoBehaviour {
 
     private bool getInput = false;
 
-    private bool trigger1, trigger2, trigger3; //Trigger 1 fuel, trigger 2 repair, trigger 3 goals
-    public bool FuelRepair { get { return (trigger1 && trigger2); } }
+    private bool useFuel, useRepair, useFinish; //Trigger 1 fuel, trigger 2 repair, trigger 3 goals
+    private bool tr1Enter, tr2Enter, tr3Enter;
+
+    private TutorialPelican pelican;
+    private bool pelicanActive;
+    public bool FuelRepair { get { return (useFuel && useRepair); } }
 
     private ObjectiveTrigger trigger;
 
@@ -21,6 +25,10 @@ public class TutorialScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         trigger = GameObject.FindObjectOfType<ObjectiveTrigger>();
+
+        pelican = GameObject.FindObjectOfType<TutorialPelican>();
+        pelican.PelicanTriggered += HitPelicanTrigger;
+        pelican.obstacle.ObstacleHit += HitPelican;
 
         playerRB = GameObject.Find("Copter").GetComponent<Rigidbody2D>();
 
@@ -40,16 +48,39 @@ public class TutorialScript : MonoBehaviour {
 
     private void Input() { }
 
-    public void TriggerEntered(int trigger) {
+    private void HitPelicanTrigger() {
+        playerRB.isKinematic = true;
+    }
+    private void HitPelican(string tag) {
+        playerRB.isKinematic = false;
+    }
+
+    public void TriggerExit(int trigger) {
         switch (trigger) {
             case 1:
-                trigger1 = true;
+                useFuel = true;
                 break;
             case 2:
-                trigger2 = true;
+                useRepair = true;
                 break;
             case 3:
-                trigger3 = true;
+                useFinish = true;
+                break;
+        }
+    }
+
+    public void TriggerEnter(int trigger)
+    {
+        switch (trigger)
+        {
+            case 1:
+                tr1Enter = true;
+                break;
+            case 2:
+                tr2Enter = true;
+                break;
+            case 3:
+                tr3Enter = true;
                 break;
         }
     }
@@ -65,12 +96,15 @@ public class TutorialScript : MonoBehaviour {
 
         switch (name) {
             case "LandingBoat2":
+                TriggerEnter(1);
                 landing.ShowFuel();
                 break;
             case "PalmIsland east":
+                TriggerEnter(2);
                 landing.ShowRepair();
                 break;
             case "LandingBoat":
+                TriggerEnter(3);
                 landing.ShowVictory();
                 break;
         }
@@ -91,15 +125,15 @@ public class TutorialScript : MonoBehaviour {
         {
             case "LandingBoat2":
                 landing.HideFuel();
-                TriggerEntered(1);
+                TriggerExit(1);
                 break;
             case "PalmIsland east":
                 landing.HideRepair();
-                TriggerEntered(2);
+                TriggerExit(2);
                 break;
             case "LandingBoat":
                 landing.HideVictory();
-                TriggerEntered(3);
+                TriggerExit(3);
                 break;
         }
     }
@@ -115,32 +149,50 @@ public class TutorialScript : MonoBehaviour {
     }
     private IEnumerator Step2() {
         getInput = true;
-        while (!trigger1) {
+
+        while (!tr1Enter) {
             yield return null;
-        }
+        }        
+        
         StartCoroutine(Step3());
     }
     private IEnumerator Step3() {
         getInput = false;
-        yield return null;
+        playerRB.isKinematic = true;
+        while (!useFuel)
+        {
+            yield return null;
+        }
+        playerRB.isKinematic = false;
         StartCoroutine(Step4());
     }
     private IEnumerator Step4() {
-        yield return null;
+
+        while (!pelicanActive)
+        {
+            yield return null;
+        }
         StartCoroutine(Step5());
     }
     private IEnumerator Step5() {
-        while (!trigger2) {
+
+        while (!tr2Enter)
+        {
             yield return null;
         }
+
         StartCoroutine(Step6());
     }
     private IEnumerator Step6() {
-        yield return null;
+
+        while (!useRepair)
+        {
+            yield return null;
+        }
         StartCoroutine(Step7());
     }
     private IEnumerator Step7() {
-        while (!trigger3) {
+        while (!useFinish) {
             yield return null;
         }
     }
