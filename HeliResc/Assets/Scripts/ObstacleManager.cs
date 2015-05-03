@@ -20,9 +20,7 @@ public class ObstacleManager : MonoBehaviour {
 	
 	}
 
-	void OnCollisionEnter2D(Collision2D collision) {
-
-        ObstacleHit(gameObject.tag);
+	void OnCollisionEnter2D(Collision2D collision) {        
 
         if (collision.gameObject.transform.tag == "Copter") {
 			if (!instaKill) {
@@ -45,5 +43,31 @@ public class ObstacleManager : MonoBehaviour {
 				Instantiate (deathAnimation, transform.position, Quaternion.identity);
 			if (diesOnContact) Destroy(gameObject);
 		}
-	}
+
+        ObstacleHit(gameObject.tag);
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.transform.tag == "Copter")
+        {
+            if (!instaKill)
+            {
+                if (fixedDamage)
+                {
+                    other.gameObject.GetComponent<CopterManagerTouch>().changeHealth(-fixedDamageAmount);
+                }
+            }
+            else GameObject.Find("LevelManagerO").GetComponent<LevelManager>().levelFailed(1);
+
+            if (diesOnContact && deathAnimation != null)
+                Instantiate(deathAnimation, transform.position, Quaternion.identity);
+            if (diesOnContact) Destroy(gameObject);
+        }
+
+        ObstacleHit(gameObject.tag);        
+    }
+
+    private void HitCopter() {
+
+    }
 }

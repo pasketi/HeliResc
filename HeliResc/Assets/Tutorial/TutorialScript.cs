@@ -138,6 +138,10 @@ public class TutorialScript : MonoBehaviour {
         }
     }
 
+    private void LockPlayer(bool lockPlayer) {
+        
+    }
+
     #region Step_Methods
     private IEnumerator Step1() {
         FingerAnimation finger = GameObject.FindObjectOfType<FingerAnimation>();

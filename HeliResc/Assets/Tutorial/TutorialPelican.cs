@@ -13,7 +13,7 @@ public class TutorialPelican : MonoBehaviour {
     public Action PelicanTriggered = () => { };
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         go = Instantiate(pelican) as GameObject;
         obstacle = go.GetComponent<ObstacleManager>();
         go.SetActive(false);
@@ -27,7 +27,8 @@ public class TutorialPelican : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.name.Equals("Copter")) {
             PelicanTriggered();
-            go.SetActive(true);
+            if(go != null)
+                go.SetActive(true);
         }
     }
 }
