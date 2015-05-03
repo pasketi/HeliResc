@@ -32,7 +32,7 @@ public class ObstacleManager : MonoBehaviour {
 			if (diesOnContact) Destroy(gameObject);
 		}
 
-		if (collision.gameObject.transform.tag == "Hook") {
+		if (collision.gameObject.transform.tag == "Hook" || collision.gameObject.transform.tag == "Crate") {
 			if (killsHook) GameObject.Find("Copter").GetComponent<CopterManagerTouch>().killHook();
 
 			if (diesOnContact && deathAnimation != null) 
