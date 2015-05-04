@@ -11,7 +11,8 @@ public class CrateManager : MonoBehaviour {
 					stationary = false,
 					twoPhases = false,
 					fourPhases = false,
-					flashWhite = false;
+					flashWhite = false,
+					onGround = true;
 	private GameObject crate;
 	private SpriteRenderer spriteRenderer, bgRenderer;
 	private DistanceJoint2D joint;
@@ -137,9 +138,15 @@ public class CrateManager : MonoBehaviour {
 				if (manager.getPaused () == false && !dead)
 					crate.GetComponent<Rigidbody2D> ().AddForce (Vector3.up * floatyValue);
 				inWater = true;
+				onGround = false;
+				if (animator.GetBool("inWater") != null) animator.SetBool("inWater", true);
 			} else {
 				inWater = false;
+
 			}
+
+			if (animator.GetBool("inWater") != null && onGround == false) animator.SetBool("inWater", true);
+			else if (animator.GetBool("inWater") != null && onGround == true) animator.SetBool("inWater", false);
 
 			if (crate != null && copterScript != null && crate.layer == 11 && inWater != lastInWater) {
 				lastInWater = inWater;
@@ -199,7 +206,7 @@ public class CrateManager : MonoBehaviour {
 				gameObject.GetComponent<Collider2D> ().enabled = false;
 				crate.layer = 11; //liftedCrate
 				cargoScript.changeHookMass (crateMass);
-			}
+			} else onGround = true;
 		}
 	}
 }
