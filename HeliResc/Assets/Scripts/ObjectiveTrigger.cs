@@ -16,7 +16,7 @@ public class ObjectiveTrigger : MonoBehaviour {
 	}
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag.Equals("Player")) {
+        if (other.tag.Equals("Copter")) {
             HitObjective();
         }
     }

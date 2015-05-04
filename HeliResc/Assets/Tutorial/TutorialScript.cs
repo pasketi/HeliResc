@@ -20,7 +20,7 @@ public class TutorialScript : MonoBehaviour {
 
     private LandingPadManager[] landingPads;
 
-    private string[] landingName = { "PalmIsland west", "LandingBoat2", "PalmIsland east", "LandingBoat" };
+    //private string[] landingName = { "PalmIsland west", "LandingBoat2", "PalmIsland east", "LandingBoat" };
 
     void OnEnable() {
         EventManager.StartListening("Fuel", PressFuel);
@@ -156,6 +156,7 @@ public class TutorialScript : MonoBehaviour {
         }
         Debug.Log("Step1 end");
         StartCoroutine(Step2());
+        StartCoroutine(Step7());
     }
     private IEnumerator Step2() {
         getInput = true;
@@ -202,13 +203,12 @@ public class TutorialScript : MonoBehaviour {
             yield return null;
         }
         Debug.Log("Step6 end");
-        StartCoroutine(Step7());
     }
     private IEnumerator Step7() {
+        Debug.Log("Step7 start");
         while (!useFinish) {
             yield return null;
-        }
-        Debug.Log("Step7 end");
+        }        
     }
     #endregion
 }
