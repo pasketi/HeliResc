@@ -8,13 +8,12 @@ public class TutorialScript : MonoBehaviour {
     private bool getInput = false;
 
     private bool useFuel, useRepair, useFinish; //Trigger 1 fuel, trigger 2 repair, trigger 3 goals
-    private bool tr1Enter, tr2Enter, tr3Enter;
+    private bool tr1Enter, tr2Enter;
 
     private TutorialPelican pelican;
     private bool pelicanCollided;
     public bool FuelRepair { get { return (useFuel && useRepair); } }
 
-    private ObjectiveTrigger trigger;
 
     private Rigidbody2D playerRB;
 
@@ -35,7 +34,6 @@ public class TutorialScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        trigger = GameObject.FindObjectOfType<ObjectiveTrigger>();
 
         pelican = GameObject.FindObjectOfType<TutorialPelican>();
         pelican.PelicanTriggered += HitPelicanTrigger;
@@ -84,10 +82,7 @@ public class TutorialScript : MonoBehaviour {
                 break;
             case 2:
                 tr2Enter = true;
-                break;
-            case 3:
-                tr3Enter = true;
-                break;
+                break;            
         }
     }
 
@@ -110,7 +105,6 @@ public class TutorialScript : MonoBehaviour {
                 landing.ShowRepair();
                 break;
             case "LandingBoat":
-                TriggerEnter(3);
                 landing.ShowVictory();
                 break;
         }
