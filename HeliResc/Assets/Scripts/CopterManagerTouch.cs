@@ -9,6 +9,7 @@ public class CopterManagerTouch : MonoBehaviour {
 	private DistanceJoint2D hookJoint;
 	private bool once = false;
     private bool autoHoover = true;
+    private bool useFuel = true;
 	private float 	currentAngle = 0f,  
 					copterAngle = 0f, 
 					copterScale = 0f, 
@@ -75,8 +76,8 @@ public class CopterManagerTouch : MonoBehaviour {
 
         LandingPadManager[] landings = GameObject.FindObjectsOfType<LandingPadManager>();
         foreach (LandingPadManager l in landings) {
-            l.enterPlatform += DisableAutoHoover;
-            l.exitPlatform += EnableAutoHoover;
+            l.enterPlatform += EnterPlatform;
+            l.exitPlatform += ExitPlatform;
         }
 	}
 	
@@ -114,13 +115,19 @@ public class CopterManagerTouch : MonoBehaviour {
 		}
 	}
 
-    private void DisableAutoHoover(string name) { autoHoover = false; }
-    private void EnableAutoHoover(string name) { autoHoover = true; }
+    private void EnterPlatform(string name) {
+        useFuel = false;
+        autoHoover = false;
+    }
+    private void ExitPlatform(string name) {
+        useFuel = true;
+        autoHoover = true;
+    }
 
     //Update is called before void Update();
     void FixedUpdate () {
 		copterAngle = gameObject.transform.eulerAngles.z;
-		if (Input.touchCount == 0)
+		if (Input.touchCount == 0 && autoHoover)
 			AutoHoover ();
 	}
 
@@ -335,7 +342,8 @@ public class CopterManagerTouch : MonoBehaviour {
 	}
 
 	public void changeFuel (float amount){
-		currentFuel += amount;
+        if((!copterBody.isKinematic && useFuel) || amount > 0)
+		    currentFuel += amount;
 	}
 
 	public void killHook () {

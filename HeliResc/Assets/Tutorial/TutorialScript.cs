@@ -5,8 +5,6 @@ using System;
 
 public class TutorialScript : MonoBehaviour {
 
-    private bool getInput = false;
-
     private bool useFuel, useRepair, useFinish; //Trigger 1 fuel, trigger 2 repair, trigger 3 goals
     private bool tr1Enter, tr2Enter;
 
@@ -51,13 +49,6 @@ public class TutorialScript : MonoBehaviour {
 
         StartCoroutine(Step1());
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (getInput) Input();
-	}
-
-    private void Input() { }
 
     private void HitPelicanTrigger() {
         Debug.Log("Pelican triggered");
@@ -144,16 +135,19 @@ public class TutorialScript : MonoBehaviour {
         FingerAnimation finger = GameObject.FindObjectOfType<FingerAnimation>();
         Debug.Log("Step1 start");
 
-        getInput = false;
+        playerRB.isKinematic = true;
+
         while (!finger.finished) {
             yield return null;
         }
         Debug.Log("Step1 end");
+
+        playerRB.isKinematic = false;
+
         StartCoroutine(Step2());
         StartCoroutine(Step7());
     }
     private IEnumerator Step2() {
-        getInput = true;
 
         while (!tr1Enter) {
             yield return null;
@@ -162,7 +156,6 @@ public class TutorialScript : MonoBehaviour {
         StartCoroutine(Step3());
     }
     private IEnumerator Step3() {
-        getInput = false;
         playerRB.isKinematic = true;
         while (!useFuel)
         {
