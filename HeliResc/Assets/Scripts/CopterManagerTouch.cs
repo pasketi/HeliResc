@@ -8,6 +8,7 @@ public class CopterManagerTouch : MonoBehaviour {
 	private Rigidbody2D copterBody;
 	private DistanceJoint2D hookJoint;
 	private bool once = false;
+    private bool autoHoover = true;
 	private float 	currentAngle = 0f,  
 					copterAngle = 0f, 
 					copterScale = 0f, 
@@ -71,6 +72,12 @@ public class CopterManagerTouch : MonoBehaviour {
 		tempHoldTime = holdTime;
 
 		setupCopter(gameManager.getCopters(), gameManager.getCurrentCopter());
+
+        LandingPadManager[] landings = GameObject.FindObjectsOfType<LandingPadManager>();
+        foreach (LandingPadManager l in landings) {
+            l.enterPlatform += DisableAutoHoover;
+            l.exitPlatform += EnableAutoHoover;
+        }
 	}
 	
 	public void setupCopter (string[,] copterArray, int copterNumber){
@@ -107,8 +114,11 @@ public class CopterManagerTouch : MonoBehaviour {
 		}
 	}
 
-	//Update is called before void Update();
-	void FixedUpdate () {
+    private void DisableAutoHoover(string name) { autoHoover = false; }
+    private void EnableAutoHoover(string name) { autoHoover = true; }
+
+    //Update is called before void Update();
+    void FixedUpdate () {
 		copterAngle = gameObject.transform.eulerAngles.z;
 		if (Input.touchCount == 0)
 			AutoHoover ();

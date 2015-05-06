@@ -61,6 +61,8 @@ public class LandingPadManager : MonoBehaviour {
 	void OnTriggerExit2D(Collider2D other) {
 		if (other.gameObject.transform.tag == "Copter") {
             if (exitPlatform != null) exitPlatform(transform.root.name);
+            repair = false;
+            refill = false;
         }
 	}
 	

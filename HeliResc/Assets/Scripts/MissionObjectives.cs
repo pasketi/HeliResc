@@ -32,14 +32,7 @@ public class MissionObjectives : MonoBehaviour {
         LevelObjective2 = objectiveMethods[Objective2];
         LevelObjective3 = objectiveMethods[Objective3];
 
-    }
-
-    void Update() {
-        if (LevelObjective1())
-            if (LevelObjective2())
-                if (LevelObjective3())
-                    OnGameOver();
-    }
+    }    
 
     public bool GetItems()
     {
@@ -56,7 +49,6 @@ public class MissionObjectives : MonoBehaviour {
     }
 
     public bool PassLevel() {
-        //TODO
         return true;
     }
 
