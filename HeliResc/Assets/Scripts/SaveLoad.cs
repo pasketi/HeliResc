@@ -40,20 +40,20 @@ public static class SaveLoad {
         bool s1 = false;
         bool s2 = false;
         bool s3 = false;
-        try {
+        if(PlayerPrefs.HasKey(level + "Locked")) {
             locked = PlayerPrefsExt.GetBool(level + "Locked");
             s1 = PlayerPrefsExt.GetBool(level + "Star1");
             s2 = PlayerPrefsExt.GetBool(level + "Star2");
             s3 = PlayerPrefsExt.GetBool(level + "Star3");
         }
-        catch (Exception ex) {
-            Debug.LogError("No key in player prefs: " + ex.Message);
+        else {
+            Debug.LogError("No key in player prefs");
             LevelInfo i = new LevelInfo(index, false, false, false, true);
             i.locked = i.index < 2 ? false : true;
             SaveLevelInfo(i);
             return i;
         }
-
+        Debug.Log("Loaded levelinfo of level " + index);
         LevelInfo info = new LevelInfo (index, s1, s2, s3, locked);
 		return info;
 	}

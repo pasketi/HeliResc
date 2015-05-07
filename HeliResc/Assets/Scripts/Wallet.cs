@@ -69,7 +69,7 @@ public class Wallet {
         Debug.Log("Upgrade: " + upgrade);
         int copter = manager.getCurrentCopter();
         Upgrade u = allUpgrades["Copter" + copter.ToString() + upgrade];
-        if (Coins >= u.upgradePrice) {
+        if (Coins >= u.upgradePrice && (u.CurrentLevel < u.maxLevel)) {
             allUpgrades[u.name].CurrentLevel++;
             Purchase(u.upgradePrice);
             SaveLoad.SaveUpgradeLevel(u);

@@ -111,7 +111,8 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (Input.GetKeyDown(KeyCode.Escape))
+            wallet.AddMoney(1);
 	}
 
     void OnLevelWasLoaded(int level) {
