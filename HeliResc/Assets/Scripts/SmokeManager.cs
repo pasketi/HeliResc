@@ -16,7 +16,7 @@ public class SmokeManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		foreach(ParticleSystem smoke in smokes){
-			smoke.emissionRate = (Random.value * 0.3f) + (float)(((float)((float)copterScript.getMaxHealth() - (float)copterScript.getHealth()) / (float)copterScript.getMaxHealth()) * (float)maxRate);
+			smoke.emissionRate = (float)(((float)((float)copterScript.getMaxHealth() - (float)copterScript.getHealth()) / (float)copterScript.getMaxHealth()) * (float)maxRate);
 		}
 	}
 }

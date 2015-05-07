@@ -9,7 +9,8 @@ public class CopterManagerTouch : MonoBehaviour {
 	private DistanceJoint2D hookJoint;
 	private bool once = false;
     private bool autoHoover = true;
-    private bool useFuel = true;
+    private bool 	useFuel = true,
+					rotorHit = false;
 	private float 	currentAngle = 0f,  
 					copterAngle = 0f, 
 					copterScale = 0f, 
@@ -295,17 +296,25 @@ public class CopterManagerTouch : MonoBehaviour {
 
 		if (isKill) kill();
 		if (isSplash) splashKill();
+
+		if (rotorHit) {
+			changeHealth (-(((float)maxHealth / 2f) * Time.deltaTime));
+		}
 	}
 
 	// Positive values to GAIN health and negative to LOSE health
 	public void changeHealth (float amount) {
-		if (amount < minDamage){
+		if (amount < minDamage || rotorHit) {
 			currentHealth += amount;
-			if (!manager.isDamageTaken()) manager.damageTaken();
-			if (currentHealth <= 0) manager.levelFailed(1);
+			if (!manager.isDamageTaken ())
+				manager.damageTaken ();
+			if (currentHealth <= 0)
+				manager.levelFailed (1);
 		} else if (amount > 0f) {
-			if (currentHealth < maxHealth) currentHealth += amount;
-			if (currentHealth > maxHealth) currentHealth = maxHealth;
+			if (currentHealth < maxHealth)
+				currentHealth += amount;
+			if (currentHealth > maxHealth)
+				currentHealth = maxHealth;
 		}
 	}
 
@@ -398,9 +407,14 @@ public class CopterManagerTouch : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerStay2D (Collider2D other) {
+	void OnTriggerEnter2D (Collider2D other) {
 		if (other.isTrigger == false)
-			changeHealth(-((maxHealth/2) * Time.deltaTime));
+			rotorHit = true;
+	}
+
+	void OnTriggerExit2D (Collider2D other) {
+		if (other.isTrigger == false)
+			rotorHit = false;
 	}
 
 	public void testHookMass (float weight){
