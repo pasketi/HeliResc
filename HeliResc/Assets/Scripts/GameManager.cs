@@ -290,7 +290,9 @@ public class GameManager : MonoBehaviour {
 		Application.LoadLevel(levelName);
 	}
 
-	public void loadMainMenu(bool showLevelEnd, LevelEndInfo end, int menu = 0) {
+    public void GameOver() { }
+
+	public void loadMainMenu(bool showLevelEnd, LevelEndInfo end = null, int menu = 0) {
 		this.showLevelEnd = showLevelEnd;
 		levelEnd = end;
         if (showLevelEnd) {
