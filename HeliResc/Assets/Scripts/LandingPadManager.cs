@@ -69,7 +69,7 @@ public class LandingPadManager : MonoBehaviour {
 	void saveAllChildren (GameObject hook) {
 		foreach (Transform child in hook.transform) {
 			if (child.tag == "Crate"){
-				if (child.FindChild("LegHook").childCount != 0)
+				if (child.FindChild("LegHook") != null && child.FindChild("LegHook").childCount != 0)
 					saveAllChildren (child.transform.FindChild("LegHook").gameObject);
 				cargo.saveHookedCrate(child.GetComponentInChildren<CrateManager>().crateMass);
 				child.tag = "KillMe";
