@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour {
 	public int levelCoinRewardPerStar = 200, neededCrates = 0;
 	public GameObject pauseScreen, HUD, copterSpawnPoint, kamikazePelican;
 	public GameObject[] copters;
+	public GameObject levelSplash;
 	private bool win = false, lose = false, splash = false, gamePaused = false, takenDamage = false, once = false, releaseThePelican = false;
 	public float waterLevel = 0f, uiLiftPowerWidth = 0.1f, uiLiftPowerDeadZone = 0.05f, resetCountdown = 3f, crateSize, mapBoundsLeft = -50f, mapBoundsRight = 50f;
 	public int cargoSize = 2, cargoCrates = 0, levelAction = 0, maxActionsPerLevel = 0;

@@ -87,6 +87,7 @@ public class CopterManagerTouch : MonoBehaviour {
 			Debug.Log (int.Parse(copterArray[copterNumber,h]));
 		}
 		Debug.Log(gameManager.getPlatformLevel());*/
+		splash = manager.levelSplash;
 		maxHealth = int.Parse(copterArray[copterNumber,15]);
 		copterBody.mass = int.Parse(copterArray[copterNumber,10]);
 		tiltSpeed = int.Parse(copterArray[copterNumber,16]);

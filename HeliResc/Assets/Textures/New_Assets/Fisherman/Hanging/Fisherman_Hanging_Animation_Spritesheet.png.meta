@@ -1,9 +1,17 @@
 fileFormatVersion: 2
 guid: a742fc29a7ee60840a101bd05a4a250b
-timeCreated: 1431026343
+timeCreated: 1431040122
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Fisherman_Hanging_Animation_Spritesheet_0
+    21300002: Fisherman_Hanging_Animation_Spritesheet_1
+    21300004: Fisherman_Hanging_Animation_Spritesheet_2
+    21300006: Fisherman_Hanging_Animation_Spritesheet_3
+    21300008: Fisherman_Hanging_Animation_Spritesheet_4
+    21300010: Fisherman_Hanging_Animation_Spritesheet_5
+    21300012: Fisherman_Hanging_Animation_Spritesheet_6
+    21300014: Fisherman_Hanging_Animation_Spritesheet_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,14 +38,14 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -48,7 +56,87 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Fisherman_Hanging_Animation_Spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 67
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Fisherman_Hanging_Animation_Spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 0
+        width: 67
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Fisherman_Hanging_Animation_Spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 0
+        width: 67
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Fisherman_Hanging_Animation_Spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 0
+        width: 67
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Fisherman_Hanging_Animation_Spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 0
+        width: 67
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Fisherman_Hanging_Animation_Spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 0
+        width: 67
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Fisherman_Hanging_Animation_Spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 0
+        width: 67
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Fisherman_Hanging_Animation_Spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 0
+        width: 67
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 
