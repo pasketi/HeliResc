@@ -116,6 +116,10 @@ public class GameManager : MonoBehaviour {
 	}
 
     void OnLevelWasLoaded(int level) {
+        if (level == 1 && !PlayerPrefs.HasKey("FirstLogin")) {
+            PlayerPrefsExt.SetBool("FirstLogin", true);
+            Application.LoadLevel("GameStory");
+        }
         if (level == 1 && showLevelEnd) {
             GameObject.Find("LevelEnd").GetComponent<LevelEndManager>().UpdateLevelEnd(this);
             SaveLoad.SaveWallet(wallet);

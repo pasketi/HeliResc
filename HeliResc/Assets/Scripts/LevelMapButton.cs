@@ -39,9 +39,7 @@ public class LevelMapButton : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {        
-        levelInfo = SaveLoad.LoadLevelInfo(levelIndex);
-
-        Debug.Log("Level " + levelIndex + " is locked: " + levelInfo.locked);
+        levelInfo = SaveLoad.LoadLevelInfo(levelIndex);        
 
         stars[0].sprite = levelInfo.star1 ? starUnlocked : starLocked;
         stars[1].sprite = levelInfo.star2 ? starUnlocked : starLocked;

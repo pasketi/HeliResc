@@ -12,6 +12,7 @@ public class TutorialScript : MonoBehaviour {
     private bool pelicanCollided;
     public bool FuelRepair { get { return (useFuel && useRepair); } }
 
+    public Image arrowImage;
 
     private Rigidbody2D playerRB;
 
@@ -135,6 +136,8 @@ public class TutorialScript : MonoBehaviour {
         FingerAnimation finger = GameObject.FindObjectOfType<FingerAnimation>();
         Debug.Log("Step1 start");
 
+        arrowImage.enabled = false;
+
         playerRB.isKinematic = true;
 
         while (!finger.finished) {
@@ -143,6 +146,8 @@ public class TutorialScript : MonoBehaviour {
         Debug.Log("Step1 end");
 
         playerRB.isKinematic = false;
+
+        arrowImage.enabled = true;
 
         StartCoroutine(Step2());
         StartCoroutine(Step7());

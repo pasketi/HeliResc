@@ -137,7 +137,7 @@ public class CopterManagerTouch : MonoBehaviour {
 		// START INPUT ----------------------------------------------------------------------------------
 
 		// Control system
-		if (Input.touchCount > 0) {
+		if (Input.touchCount > 0 && !copterBody.isKinematic) {
 			foreach (Touch touch in Input.touches){
 
 				//Copter press and Joystick initialization since both cannot happen during the same frame
