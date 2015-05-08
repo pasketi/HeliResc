@@ -27,7 +27,7 @@ public class CopterManagerTouch : MonoBehaviour {
 					powerMultiplier = 100f,
 					initialPower = 75f,
 					maxHealth = 100f,
-					healPerSecond = 20f,
+					healPerSecond = 50f,
 					maxFuel = 500f,
 					reFuelPerSecond = 100f,
 					minPower = 0f,
