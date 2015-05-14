@@ -45,7 +45,7 @@ public class LevelEndInfo : LevelInfo {
 	public string star2Objective;
 	public string star3Objective;
 
-	public string message;
+	public int endCondition;
 
     public bool passedLevel;
 
@@ -55,11 +55,19 @@ public class LevelEndInfo : LevelInfo {
 	public int collectedCoins;
 	public int itemsSaved;
 
-	public LevelEndInfo(bool passed) {
+	public LevelEndInfo(bool passed, int condition) {
         locked = !passed;
         passedLevel = passed;
+        endCondition = condition;
         SetStars();
 	}
+}
 
-	
+public class EndReason {
+    //This class is to enable auto complete
+    public static int winner = 1;
+    public static int passed = 2;
+    public static int drowned = 3;
+    public static int explode = 4;
+    public static int timeout = 5;
 }

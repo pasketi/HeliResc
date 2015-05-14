@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class LevelEndManager : MonoBehaviour {
 
@@ -10,6 +11,14 @@ public class LevelEndManager : MonoBehaviour {
 	public Image star1, star2, star3;
 
     public Image alsFace;
+
+    public Sprite drownedAl;
+    public Sprite explodedAl;
+    public Sprite winnerAl;
+    public Sprite passedAl;
+    public Sprite timeoutAl;
+
+    private Dictionary<int, Sprite> endFaces;
 
 	public Sprite unlockedStar;
 	public Sprite lockedStar;
@@ -27,12 +36,16 @@ public class LevelEndManager : MonoBehaviour {
     public void UpdateLevelEnd(GameManager gm) {
         gameManager = gm;
 
+        CreateFaceDictionary();
+
         levelEnd = gameManager.levelEnd;
 
         level = SaveLoad.LoadLevelInfo(levelEnd.index);
         next = SaveLoad.LoadLevelInfo(levelEnd.index + 1);
 
         starsEarned = 0;
+
+        alsFace.sprite = endFaces[levelEnd.endCondition];
 
         if (levelEnd.star1)
             starsEarned++;
@@ -63,8 +76,6 @@ public class LevelEndManager : MonoBehaviour {
         star2.sprite = lockedStar;
         star3.sprite = lockedStar;
 
-        alsFace.transform.Rotate(new Vector3(0,0, 180));
-
         message = "You have failed this level";
     }
     private void PassedLevel() {
@@ -82,6 +93,15 @@ public class LevelEndManager : MonoBehaviour {
             next.SetStars();
             SaveLoad.SaveLevelInfo(next);
         }
+    }
+
+    private void CreateFaceDictionary() {
+        endFaces = new Dictionary<int, Sprite>();
+        endFaces.Add(EndReason.drowned, drownedAl);
+        endFaces.Add(EndReason.explode, explodedAl);
+        endFaces.Add(EndReason.passed, passedAl);
+        endFaces.Add(EndReason.timeout, timeoutAl);
+        endFaces.Add(EndReason.winner, winnerAl);
     }
 
     public void PressRestart() {
