@@ -67,6 +67,10 @@ public class MissionObjectives : MonoBehaviour {
     public LevelObjective GetMethod(Objective o) {
         return objectiveMethods[o];
     }
+
+    public bool AnyObjectiveCompleted() {
+        return (LevelObjective1() || LevelObjective2() || LevelObjective3());
+    }
 }
 public enum Objective {
     GetItems,

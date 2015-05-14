@@ -9,6 +9,8 @@ public class LevelEndManager : MonoBehaviour {
 	public Text text;
 	public Image star1, star2, star3;
 
+    public Image alsFace;
+
 	public Sprite unlockedStar;
 	public Sprite lockedStar;
 
@@ -61,6 +63,8 @@ public class LevelEndManager : MonoBehaviour {
         star2.sprite = lockedStar;
         star3.sprite = lockedStar;
 
+        alsFace.transform.Rotate(new Vector3(0,0, 180));
+
         message = "You have failed this level";
     }
     private void PassedLevel() {
@@ -86,5 +90,9 @@ public class LevelEndManager : MonoBehaviour {
 
     public void PressLevelMap() {
         Application.LoadLevel("LevelMap");
+    }
+
+    public void PressNextLevel() {
+        Application.LoadLevel("Level" + (levelEnd.index + 1));
     }
 }

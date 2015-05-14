@@ -12,6 +12,8 @@ public class PlatformButtons: MonoBehaviour {
 	
 	private LandingPadManager landing;
     private LevelManager levelManager;
+
+    private MissionObjectives objectives;
 	
 	private RectTransform[] rects;
 	
@@ -31,6 +33,8 @@ public class PlatformButtons: MonoBehaviour {
             Debug.LogError("The landingpad manager was not found in platform buttons");
 		landing.enterPlatform += ShowAllButtons;
 		landing.exitPlatform += HideAllButtons;
+
+        objectives = GameObject.Find("Objectives").GetComponent<MissionObjectives>();
 
         target = transform.parent;
         transform.position = target.position + Vector3.up * 1.5f;
@@ -75,7 +79,8 @@ public class PlatformButtons: MonoBehaviour {
 	}
 
     public void ShowVictory() { 
-		victoryAnimator.Play("ShowVictory"); 
+        if(objectives.AnyObjectiveCompleted())
+		    victoryAnimator.Play("ShowVictory"); 
 	}
 
 

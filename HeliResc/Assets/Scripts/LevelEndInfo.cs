@@ -50,7 +50,7 @@ public class LevelEndInfo : LevelInfo {
     public bool passedLevel;
 
     private int reward;
-    public int Reward { set { reward = value; collectedCoins = value * itemsSaved; } }
+    public int Reward { set { reward = value; collectedCoins = value * itemsSaved; } get { return reward; } }
 
 	public int collectedCoins;
 	public int itemsSaved;
