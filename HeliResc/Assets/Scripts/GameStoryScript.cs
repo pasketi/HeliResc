@@ -11,6 +11,7 @@ public class GameStoryScript : MonoBehaviour {
 	}
 
     private void PressPlay() {
-        Application.LoadLevel("Level1");
+		PlayerPrefs.SetInt ("levelToLoad", 1);
+        Application.LoadLevel("IntroScreen");
     }
 }

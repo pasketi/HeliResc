@@ -106,6 +106,10 @@ public class LevelManager : MonoBehaviour {
 		win = true;
 	}
 
+	public bool allCratesCollected() {
+		return (savedCrates >= crateAmount);
+	}
+
 	public void pause () {
 		if (!gamePaused) {
 			gamePaused = true;

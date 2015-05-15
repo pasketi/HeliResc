@@ -63,7 +63,9 @@ public class LevelMapButton : MonoBehaviour {
 	}
 
 	public void StartLevel() {
-		if(!levelLocked) 
-			Application.LoadLevel("Level" + levelIndex.ToString());
+		if (!levelLocked) {
+			PlayerPrefs.SetInt("levelToLoad", levelIndex);
+			Application.LoadLevel ("IntroScreen");
+		}
 	}
 }
