@@ -52,11 +52,9 @@ public class TutorialScript : MonoBehaviour {
 	}
 
     private void HitPelicanTrigger() {
-        Debug.Log("Pelican triggered");
         playerRB.isKinematic = true;
     }
     private void HitPelican(string tag) {
-        Debug.Log("Pelican hit");
         pelicanCollided = true;
         playerRB.isKinematic = false;
     }
@@ -83,21 +81,20 @@ public class TutorialScript : MonoBehaviour {
         foreach (LandingPadManager l in landingPads) {            
             if (l.transform.root.name.Equals(name)) {                
                 landing = l.gameObject.GetComponentInChildren<PlatformButtons>();
-                Debug.Log(landing.transform.name);
             }
         }
 
         switch (name) {
             case "LandingBoat2":
                 TriggerEnter(1);
-                landing.ShowFuel();
+                landing.ShowFuel(true);
                 break;
             case "PalmIsland east":
                 TriggerEnter(2);
-                landing.ShowRepair();
+                landing.ShowRepair(true);
                 break;
             case "LandingBoat":
-                landing.ShowVictory();
+                landing.ShowVictory(true);
                 break;
         }
 
@@ -109,7 +106,6 @@ public class TutorialScript : MonoBehaviour {
             if (l.transform.root.name.Equals(name))
             {
                 landing = l.gameObject.GetComponentInChildren<PlatformButtons>();
-                Debug.Log(landing.transform.name);
             }
         }
 
@@ -125,6 +121,8 @@ public class TutorialScript : MonoBehaviour {
                 landing.HideVictory();
                 break;
         }
+
+        playerRB.isKinematic = false;
     }
 
     private void LockPlayer(bool lockPlayer) {
@@ -134,7 +132,6 @@ public class TutorialScript : MonoBehaviour {
     #region Step_Methods
     private IEnumerator Step1() {
         FingerAnimation finger = GameObject.FindObjectOfType<FingerAnimation>();
-        Debug.Log("Step1 start");
 
         arrowImage.enabled = false;
 
@@ -143,7 +140,6 @@ public class TutorialScript : MonoBehaviour {
         while (!finger.finished) {
             yield return null;
         }
-        Debug.Log("Step1 end");
 
         playerRB.isKinematic = false;
 
@@ -157,7 +153,6 @@ public class TutorialScript : MonoBehaviour {
         while (!tr1Enter) {
             yield return null;
         }
-        Debug.Log("Step2 end");
         StartCoroutine(Step3());
     }
     private IEnumerator Step3() {
@@ -167,7 +162,6 @@ public class TutorialScript : MonoBehaviour {
             yield return null;
         }
         playerRB.isKinematic = false;
-        Debug.Log("Step3 end");
         StartCoroutine(Step4());
     }
     private IEnumerator Step4() {
@@ -176,7 +170,6 @@ public class TutorialScript : MonoBehaviour {
         {
             yield return null;
         }
-        Debug.Log("Step4 end");
         StartCoroutine(Step5());
     }
     private IEnumerator Step5() {
@@ -185,7 +178,6 @@ public class TutorialScript : MonoBehaviour {
         {
             yield return null;
         }
-        Debug.Log("Step5 end");
         StartCoroutine(Step6());
     }
     private IEnumerator Step6() {
@@ -194,10 +186,8 @@ public class TutorialScript : MonoBehaviour {
         {
             yield return null;
         }
-        Debug.Log("Step6 end");
     }
     private IEnumerator Step7() {
-        Debug.Log("Step7 start");
         while (!useFinish) {
             yield return null;
         }        

@@ -71,18 +71,35 @@ public class PlatformButtons: MonoBehaviour {
 	}
 
     public void ShowRepair() { 
-		repairAnimator.Play("ShowRepair"); 
+		repairAnimator.Play("ShowRepair");
 	}
-
     public void ShowFuel() { 
 		fuelAnimator.Play("ShowFuel"); 
 	}
-
     public void ShowVictory() { 
         if(objectives.AnyObjectiveCompleted())
 		    victoryAnimator.Play("ShowVictory"); 
 	}
 
+    public void ShowRepair(bool glow)
+    {
+        repairAnimator.SetBool("Pump", glow);
+        repairAnimator.Play("ShowRepair");
+    }
+
+    public void ShowFuel(bool pump)
+    {
+        fuelAnimator.SetBool("Pump", pump);
+        fuelAnimator.Play("ShowFuel");        
+    }
+
+    public void ShowVictory(bool glow)
+    {
+        if (objectives.AnyObjectiveCompleted()) {
+            victoryAnimator.SetBool("Pump", glow);
+            victoryAnimator.Play("ShowVictory");           
+        }
+    }
 
     public void HideRepair() { 
 		repairAnimator.Play("HideRepair"); 
@@ -90,20 +107,18 @@ public class PlatformButtons: MonoBehaviour {
     public void HideFuel() { 
 		fuelAnimator.Play("HideFuel"); 
 	}
-    public void HideVictory() { 
-		victoryAnimator.Play("HideVictory"); 
+    public void HideVictory() {
+        if (objectives.AnyObjectiveCompleted())
+		    victoryAnimator.Play("HideVictory"); 
 	}
-
     public void StartRepair() {
 		landing.StartRepair();
         EventManager.TriggerEvent("Repair");
 	}
-	
 	public void StartRefill() {
 		landing.StartRefill();
         EventManager.TriggerEvent("Fuel");
     }
-
     public void PressFinish() {
         EventManager.TriggerEvent("Finish");
         levelManager.pressFinishButton();
