@@ -10,6 +10,7 @@ public class CopterEntryScript : MonoBehaviour {
 	public Button buttonInfo;
     public Button buttonBuy;
     public Button buttonSelect;
+    private Text selectedText;
 
     private string maxEngine;
     private string maxRope;
@@ -19,12 +20,20 @@ public class CopterEntryScript : MonoBehaviour {
     private string rope;
     private string fuel;
 
-    private int index;
+    public int index;
 
 	private CopterSelection copterSelect;
 
-    private GameManager gameManager;	
-	
+    private GameManager gameManager;
+
+    void OnEnable() {
+        EventManager.StartListening("SelectedCopter", UpdateSelected);
+    }
+
+    void OnDisable() {
+        EventManager.StopListening("SelectedCopter", UpdateSelected);
+    }
+
     public void SetCopterInfo(int index, Sprite s, CopterSelection copter) {
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -33,11 +42,15 @@ public class CopterEntryScript : MonoBehaviour {
 
         this.index = index;
 
+        selectedText = buttonSelect.GetComponentInChildren<Text>();
+
+        UpdateSelected();     
+
         string[,] copters = gameManager.getCopters();
         string unlocked = copters[index, 3];
         bool copterUnlocked = int.Parse(unlocked) > 0;
 
-		copterPrice.text = copters [index, 1];        
+		copterPrice.text = copters [index, 1];      
 
         copterName.text = copters[index, 0];
 
@@ -62,7 +75,7 @@ public class CopterEntryScript : MonoBehaviour {
         fuel = gameManager.GetUpgrade("Fuel", index).CurrentLevel.ToString();
         rope = gameManager.GetUpgrade("Rope", index).CurrentLevel.ToString();
 
-        Debug.Log("Engine: " + engine +  "/" + maxEngine + "   Fuel: " + fuel + "/" + maxFuel + "   Rope: " + rope + "/" + maxRope);
+        //Debug.Log("Engine: " + engine +  "/" + maxEngine + "   Fuel: " + fuel + "/" + maxFuel + "   Rope: " + rope + "/" + maxRope);
     }
 
 	private void SetInfoPanel() {
@@ -81,7 +94,22 @@ public class CopterEntryScript : MonoBehaviour {
 	private void PressSelect() {
 		gameManager.setCurrentCopter (index);
 		UpdateUpgradeScreen ();
+        EventManager.TriggerEvent("SelectedCopter");
 	}
+
+    private void UpdateSelected() {
+        Image i = GetComponent<Image>();
+        Color c = i.color;
+        if (gameManager.getCurrentCopter().Equals(index)) {
+            c.r = c.b = 0;
+            i.color = c;
+            selectedText.text = "Selected";
+        } else {
+            c.r = c.b = 255;
+            i.color = c;
+            selectedText.text = "Select";
+        }
+    }
 
 	private void UpdateUpgradeScreen() {
 		UpgradeButton[] buttons = GameObject.FindObjectsOfType<UpgradeButton> ();
