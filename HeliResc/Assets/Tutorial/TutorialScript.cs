@@ -207,8 +207,6 @@ public class TutorialScript : MonoBehaviour {
 
         float time = 0.05f;
 
-        Debug.Log(sprites[0].color.a);
-
         foreach (SpriteRenderer s in sprites)
         {
             Color c = s.color;
@@ -231,8 +229,6 @@ public class TutorialScript : MonoBehaviour {
         SpriteRenderer[] sprites = ballParent.GetComponentsInChildren<SpriteRenderer>();
 
         float time = 0.05f;
-
-        Debug.Log(sprites[0].color.a);
 
         foreach (SpriteRenderer s in sprites)
         {

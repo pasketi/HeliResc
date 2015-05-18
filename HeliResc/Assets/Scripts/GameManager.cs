@@ -267,19 +267,8 @@ public class GameManager : MonoBehaviour {
 
 	//CAREFUL!
 	public void resetData () {
-		PlayerPrefs.DeleteKey("First");
-		PlayerPrefs.DeleteKey("Name");
-		PlayerPrefs.DeleteKey("Stars");
-		PlayerPrefs.DeleteKey("Coins");
-		PlayerPrefs.DeleteKey("Platform");
-		PlayerPrefs.DeleteKey("Copter");
-		for (int i = 0; i < copterAmount; i++) {
-			PlayerPrefs.DeleteKey("Copter"+i+"Unlocked");
-			PlayerPrefs.DeleteKey("Copter"+i+"Enginelevel");
-			PlayerPrefs.DeleteKey("Copter"+i+"Fueltanklevel");
-			PlayerPrefs.DeleteKey("Copter"+i+"Ropelevel");
-		}
-		Application.LoadLevel("MainMenu");
+        PlayerPrefs.DeleteAll();        
+        Application.Quit();
 	}
 
 	

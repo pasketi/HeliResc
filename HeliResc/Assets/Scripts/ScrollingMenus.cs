@@ -80,13 +80,7 @@ public class ScrollingMenus : MonoBehaviour {
             copterSelectPos -= sizeDelta * 0.5f;
             //copterSelectPos.y += sizeDelta.y * 0.5f;
 
-            Debug.Log("Position: " + copterSelectPos);
-            Debug.Log("Size Delta: " + sizeDelta);
-
-            Rect copterRect = new Rect(copterSelectPos.x, copterSelectPos.y, sizeDelta.x, sizeDelta.y);
-
-            Debug.Log("Rect: " + copterRect);
-            Debug.Log("Input: " + Input.mousePosition);
+            Rect copterRect = new Rect(copterSelectPos.x, copterSelectPos.y, sizeDelta.x, sizeDelta.y);            
 
             if (!copterRect.Contains((Vector2)Input.mousePosition)) {
 			    mouseStart = previousPosition = Input.mousePosition;

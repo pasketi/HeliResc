@@ -120,6 +120,7 @@ public class CopterManagerTouch : MonoBehaviour {
     private void EnterPlatform(string name) {
         useFuel = false;
         autoHoover = false;
+        currentPower *= 0.75f;
     }
     private void ExitPlatform(string name) {
         useFuel = true;

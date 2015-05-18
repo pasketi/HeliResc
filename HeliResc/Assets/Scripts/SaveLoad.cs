@@ -53,7 +53,6 @@ public static class SaveLoad {
             SaveLevelInfo(i);
             return i;
         }
-        Debug.Log("Loaded levelinfo of level " + index);
         LevelInfo info = new LevelInfo (index, s1, s2, s3, locked);
 		return info;
 	}
