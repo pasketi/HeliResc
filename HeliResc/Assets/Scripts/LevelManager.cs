@@ -47,6 +47,8 @@ public class LevelManager : MonoBehaviour {
 		pauseScreen.SetActive(false);
 		HUD.SetActive(true);
 
+
+
 		// We are SO sorry
 		//Application.targetFrameRate = 30;
 	}
