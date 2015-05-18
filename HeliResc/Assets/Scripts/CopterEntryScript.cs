@@ -115,5 +115,5 @@ public class CopterEntryScript : MonoBehaviour {
 		UpgradeButton[] buttons = GameObject.FindObjectsOfType<UpgradeButton> ();
 		foreach (UpgradeButton ub in buttons)
 			ub.UpdateTextFields ();
-	}
+	}        
 }
