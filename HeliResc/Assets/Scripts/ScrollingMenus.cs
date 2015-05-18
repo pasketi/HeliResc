@@ -9,6 +9,8 @@ public class ScrollingMenus : MonoBehaviour {
 	
 	public GameObject[] go;		//Order of canvases: 1. MainMenu 2.LevelEnd 3. Upgrades
 	public List<GameObject> menus;
+
+    public RectTransform copterSelect;
 	
 	private float[] canvasAnchorPoints;
 	private Vector3[] panelAnchorPoints;
@@ -71,8 +73,25 @@ public class ScrollingMenus : MonoBehaviour {
 	
 	void Update() {
 		if(Input.GetMouseButtonDown(0)){
-			mouseStart = previousPosition = Input.mousePosition;
-			isDragging = true;
+
+            Vector2 sizeDelta = new Vector2(Screen.width * (copterSelect.anchorMax.x - copterSelect.anchorMin.x), Screen.height * (copterSelect.anchorMax.y - copterSelect.anchorMin.y));
+            Vector2 copterSelectPos = (Vector2)copterSelect.transform.position;
+            
+            copterSelectPos -= sizeDelta * 0.5f;
+            //copterSelectPos.y += sizeDelta.y * 0.5f;
+
+            Debug.Log("Position: " + copterSelectPos);
+            Debug.Log("Size Delta: " + sizeDelta);
+
+            Rect copterRect = new Rect(copterSelectPos.x, copterSelectPos.y, sizeDelta.x, sizeDelta.y);
+
+            Debug.Log("Rect: " + copterRect);
+            Debug.Log("Input: " + Input.mousePosition);
+
+            if (!copterRect.Contains((Vector2)Input.mousePosition)) {
+			    mouseStart = previousPosition = Input.mousePosition;
+			    isDragging = true; 
+            }
 		}
 		if(Input.GetMouseButtonUp(0)) {
 			mouseEnd = Input.mousePosition;

@@ -44,8 +44,13 @@ public class PlatformButtons: MonoBehaviour {
 	/// <summary>
 	/// Hides the popup window immeadiately
 	/// </summary>
-	public void Stop() {
-		//popup.Play("default");
+	public void Idle(bool fuel = true, bool repair = true, bool victory = true) {
+        if (fuel == true)
+            fuelAnimator.Play("ShowIdleFuel");
+        if (repair == true)
+            repairAnimator.Play("ShowIdleRepair");
+        if (victory == true)
+            victoryAnimator.Play("ShowIdleVictory");
 	}
 	
 	/// <summary>
@@ -86,13 +91,11 @@ public class PlatformButtons: MonoBehaviour {
         repairAnimator.SetBool("Pump", glow);
         repairAnimator.Play("ShowRepair");
     }
-
     public void ShowFuel(bool pump)
     {
         fuelAnimator.SetBool("Pump", pump);
         fuelAnimator.Play("ShowFuel");        
     }
-
     public void ShowVictory(bool glow)
     {
         if (objectives.AnyObjectiveCompleted()) {
