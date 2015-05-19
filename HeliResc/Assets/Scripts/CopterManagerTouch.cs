@@ -33,7 +33,8 @@ public class CopterManagerTouch : MonoBehaviour {
 					minPower = 0f,
 					maxPower = 120f,
 					ropeDurability = 100f,
-					ropeOvertime = 5f;
+					ropeOvertime = 5f,
+					hitFlashTime = 0f;
 
 	private GameObject hook, tempActionObject;
 	private LevelManager manager;
@@ -302,6 +303,14 @@ public class CopterManagerTouch : MonoBehaviour {
 		if (rotorHit) {
 			changeHealth (-(((float)maxHealth / 2f) * Time.deltaTime));
 		}
+
+		if (hitFlashTime > 0f) {
+			hitFlashTime -= Time.deltaTime;
+			gameObject.GetComponent<SpriteRenderer>().color = new Color (1f, 0.6f, 0.6f);
+		} else {
+			hitFlashTime = 0f;
+			gameObject.GetComponent<SpriteRenderer>().color = new Color (1f, 1f, 1f);
+		}
 	}
 
 	// Positive values to GAIN health and negative to LOSE health
@@ -312,6 +321,7 @@ public class CopterManagerTouch : MonoBehaviour {
 				manager.damageTaken ();
 			if (currentHealth <= 0)
 				manager.levelFailed (1);
+			hitFlashTime = 0.25f;
 		} else if (amount > 0f) {
 			if (currentHealth < maxHealth)
 				currentHealth += amount;
