@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
 					playerStars = 0, 
 					playerCoins = 0, 
 					playerPlatform = 1,
-					currentCopter = 0,
+					currentCopter = 1,  //0 == default, 1 = watercopter
 					lastStars = 0,
 					lastCoins = 0;
 
