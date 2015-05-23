@@ -4,7 +4,7 @@ using System.Collections;
 
 public class FingerAnimation : MonoBehaviour {
 
-
+    public Button okButton;     //Button to close the first tutorial screen
 
     private Animator animator;
 
@@ -15,6 +15,10 @@ public class FingerAnimation : MonoBehaviour {
 
     private bool clickedOnce;
 
+    void Awake() {
+        okButton.interactable = false;
+    }
+
     // Use this for initialization
     void Start () {
         
@@ -24,10 +28,12 @@ public class FingerAnimation : MonoBehaviour {
         animator = GetComponent<Animator>();
 
         animator.Play("FirstTip");
+
+        Invoke("ActivateButton", 2);
     }
 
-    void Update() {        
-       
+    private void ActivateButton() {
+        okButton.interactable = true;
     }
 
     public void ClickedOK() {                    

@@ -76,11 +76,11 @@ public class LevelEndManager : MonoBehaviour {
         star2.sprite = lockedStar;
         star3.sprite = lockedStar;
 
-        message = "You have failed this level";
+        message = "Next time I'll do better";
     }
     private void PassedLevel() {
 
-        message = "You win! Awesome job!";
+        message = "I did it! That was awesome!";
 
         star1.sprite = starsEarned > 0 ? unlockedStar : lockedStar;
         star2.sprite = starsEarned > 1 ? unlockedStar : lockedStar;

@@ -8,6 +8,8 @@ public class TutorialScript : MonoBehaviour {
     private bool useFuel, useRepair, useFinish; //Trigger 1 fuel, trigger 2 repair, trigger 3 goals
     private bool tr1Enter, tr2Enter;
 
+    public Animator pelicanAlertAnimator;   //Reference to the animator component of the pelican alert
+
     public GameObject balls1;
     public GameObject balls2;
     public GameObject balls3;
@@ -57,15 +59,16 @@ public class TutorialScript : MonoBehaviour {
 
     private void HitPelicanTrigger() {
         playerRB.isKinematic = true;
+        pelicanAlertAnimator.Play("PelicanAlert");
     }
     private void HitPelican(string tag) {
         pelicanCollided = true;
         playerRB.isKinematic = false;
     }
 
-    private void PressFuel() { useFuel = true; currentPlatformButtons.Idle(true, false, false); }
-    private void PressRepair() { useRepair = true; currentPlatformButtons.Idle(false, true, false); }
-    private void PressFinish() { useFinish = true; currentPlatformButtons.Idle(false, false, true); }
+    private void PressFuel() { useFuel = true; currentPlatformButtons.HideFuel(); }
+    private void PressRepair() { useRepair = true; currentPlatformButtons.HideRepair(); }
+    private void PressFinish() { useFinish = true; currentPlatformButtons.HideVictory(); }
 
     public void TriggerEnter(int trigger)
     {
@@ -169,12 +172,13 @@ public class TutorialScript : MonoBehaviour {
         //playerRB.isKinematic = false;
         StartCoroutine(Step4());
     }
-    private IEnumerator Step4() {
+    private IEnumerator Step4() {        
 
         while (!pelicanCollided)
         {
             yield return null;
         }
+
         StartCoroutine(Step5());
     }
     private IEnumerator Step5() {
@@ -228,7 +232,7 @@ public class TutorialScript : MonoBehaviour {
     {
         SpriteRenderer[] sprites = ballParent.GetComponentsInChildren<SpriteRenderer>();
 
-        float time = 0.05f;
+        float time = 0.3f;
 
         foreach (SpriteRenderer s in sprites)
         {

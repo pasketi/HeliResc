@@ -14,7 +14,7 @@ public class TutorialPelican : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        go = Instantiate(pelican) as GameObject;
+        go = Instantiate(pelican, transform.position, Quaternion.identity) as GameObject;
         obstacle = go.GetComponent<ObstacleManager>();
         go.SetActive(false);
 	}
