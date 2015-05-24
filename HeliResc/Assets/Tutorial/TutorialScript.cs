@@ -14,6 +14,8 @@ public class TutorialScript : MonoBehaviour {
     public GameObject balls2;
     public GameObject balls3;
 
+    public GameObject[] fingerPointers; //References to the gameobjects of fingers pointing the buttons
+
     private TutorialPelican pelican;
     private bool pelicanCollided;
     public bool FuelRepair { get { return (useFuel && useRepair); } }
@@ -52,7 +54,12 @@ public class TutorialScript : MonoBehaviour {
             l.ResetEvents();
             l.enterPlatform += EnterPlatform;
             l.exitPlatform += ExitPlatform;
-        }        
+        }
+
+        foreach (GameObject go in fingerPointers) {
+            go.GetComponentInChildren<Animator>().Play("FingerAnimation");
+            go.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+        }
 
         StartCoroutine(Step1());        
 	}
@@ -66,9 +73,21 @@ public class TutorialScript : MonoBehaviour {
         playerRB.isKinematic = false;
     }
 
-    private void PressFuel() { useFuel = true; currentPlatformButtons.HideFuel(); }
-    private void PressRepair() { useRepair = true; currentPlatformButtons.HideRepair(); }
-    private void PressFinish() { useFinish = true; currentPlatformButtons.HideVictory(); }
+    private void PressFuel() { 
+        useFuel = true; 
+        currentPlatformButtons.HideFuel();
+        StartCoroutine(FadeOutBalls(fingerPointers[0], 0.2f));
+    }
+    private void PressRepair() { 
+        useRepair = true; 
+        currentPlatformButtons.HideRepair();
+        StartCoroutine(FadeOutBalls(fingerPointers[1], 0.2f));
+    }
+    private void PressFinish() { 
+        useFinish = true; 
+        currentPlatformButtons.HideVictory();
+        StartCoroutine(FadeOutBalls(fingerPointers[2], 0.2f));
+    }
 
     public void TriggerEnter(int trigger)
     {
@@ -94,14 +113,17 @@ public class TutorialScript : MonoBehaviour {
         switch (name) {
             case "LandingBoat2":
                 TriggerEnter(1);
-                currentPlatformButtons.ShowFuel(true);
+                currentPlatformButtons.ShowFuel(false);
+                StartCoroutine(FadeInBalls(fingerPointers[0], 0.05f));
                 break;
             case "PalmIsland east":
                 TriggerEnter(2);
-                currentPlatformButtons.ShowRepair(true);
+                currentPlatformButtons.ShowRepair(false);
+                StartCoroutine(FadeInBalls(fingerPointers[1], 0.05f));
                 break;
             case "LandingBoat":
-                currentPlatformButtons.ShowVictory(true);
+                currentPlatformButtons.ShowVictory(false);
+                StartCoroutine(FadeInBalls(fingerPointers[2], 0.05f));
                 break;
         }
 
@@ -120,12 +142,15 @@ public class TutorialScript : MonoBehaviour {
         {
             case "LandingBoat2":
                 landing.HideFuel();
+                StartCoroutine(FadeOutBalls(fingerPointers[0], 0.2f));
                 break;
             case "PalmIsland east":
                 landing.HideRepair();
+                StartCoroutine(FadeOutBalls(fingerPointers[1], 0.2f));
                 break;
             case "LandingBoat":
                 landing.HideVictory();
+                StartCoroutine(FadeOutBalls(fingerPointers[2], 0.2f));
                 break;
         }
 
@@ -153,7 +178,7 @@ public class TutorialScript : MonoBehaviour {
     }
     private IEnumerator Step2() {
 
-        StartCoroutine(FadeInBalls(balls1));
+        StartCoroutine(FadeInBalls(balls1, 0.05f));
         while (!tr1Enter) {
             yield return null;
         }
@@ -162,13 +187,13 @@ public class TutorialScript : MonoBehaviour {
     private IEnumerator Step3() {
         //playerRB.isKinematic = true;
 
-        StartCoroutine(FadeOutBalls(balls1));
+        StartCoroutine(FadeOutBalls(balls1, 0.3f));
         while (!useFuel)
         {
             yield return null;
         }
-        
-        StartCoroutine(FadeInBalls(balls2));
+
+        StartCoroutine(FadeInBalls(balls2, 0.05f));
         //playerRB.isKinematic = false;
         StartCoroutine(Step4());
     }
@@ -190,26 +215,25 @@ public class TutorialScript : MonoBehaviour {
         StartCoroutine(Step6());
     }
     private IEnumerator Step6() {
-        StartCoroutine(FadeOutBalls(balls2));
+        StartCoroutine(FadeOutBalls(balls2, 0.3f));
         while (!useRepair)
         {
             yield return null;
         }
-        StartCoroutine(FadeInBalls(balls3));
+        StartCoroutine(FadeInBalls(balls3, 0.05f));
     }
     private IEnumerator Step7() {
-        StartCoroutine(FadeOutBalls(balls3));
+        StartCoroutine(FadeOutBalls(balls3, 0.3f));
         while (!useFinish) {
             yield return null;
         }        
     }
     #endregion
 
-    private IEnumerator FadeInBalls(GameObject ballParent)
+    private IEnumerator FadeInBalls(GameObject ballParent, float time)
     {
         SpriteRenderer[] sprites = ballParent.GetComponentsInChildren<SpriteRenderer>();
-
-        float time = 0.05f;
+        
 
         foreach (SpriteRenderer s in sprites)
         {
@@ -228,11 +252,9 @@ public class TutorialScript : MonoBehaviour {
             }
         }
     }
-    private IEnumerator FadeOutBalls(GameObject ballParent)
+    private IEnumerator FadeOutBalls(GameObject ballParent, float time)
     {
         SpriteRenderer[] sprites = ballParent.GetComponentsInChildren<SpriteRenderer>();
-
-        float time = 0.3f;
 
         foreach (SpriteRenderer s in sprites)
         {

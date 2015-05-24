@@ -27,10 +27,7 @@ public class IntroScreenScript : MonoBehaviour {
 		Application.LoadLevel ("Level" + levelToLoad.ToString());
 	}
 
-	public void PressBack() {
-		if (levelToLoad.Equals (1))
-			Application.LoadLevel ("GameStory");
-		else
-			Application.LoadLevel ("LevelMap");
+	public void PressBack() {		
+    	Application.LoadLevel ("LevelMap");
 	}
 }
