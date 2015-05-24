@@ -14,7 +14,7 @@ public class TutorialScript : MonoBehaviour {
     public GameObject balls2;
     public GameObject balls3;
 
-    public GameObject[] fingerPointers; //References to the gameobjects of fingers pointing the buttons
+    public GameObject fingerPointer; //References to the gameobjects of fingers pointing the buttons
 
     private TutorialPelican pelican;
     private bool pelicanCollided;
@@ -56,10 +56,9 @@ public class TutorialScript : MonoBehaviour {
             l.exitPlatform += ExitPlatform;
         }
 
-        foreach (GameObject go in fingerPointers) {
-            go.GetComponentInChildren<Animator>().Play("FingerAnimation");
-            go.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 1, 1, 0);
-        }
+
+        fingerPointer.GetComponentInChildren<Animator>().Play("FingerAnimation");
+        fingerPointer.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 1, 1, 0);        
 
         StartCoroutine(Step1());        
 	}
@@ -76,17 +75,17 @@ public class TutorialScript : MonoBehaviour {
     private void PressFuel() { 
         useFuel = true; 
         currentPlatformButtons.HideFuel();
-        StartCoroutine(FadeOutBalls(fingerPointers[0], 0.2f));
+        StartCoroutine(FadeOutBalls(fingerPointer, 0.2f));
     }
     private void PressRepair() { 
         useRepair = true; 
         currentPlatformButtons.HideRepair();
-        StartCoroutine(FadeOutBalls(fingerPointers[1], 0.2f));
+        StartCoroutine(FadeOutBalls(fingerPointer, 0.2f));
     }
     private void PressFinish() { 
         useFinish = true; 
         currentPlatformButtons.HideVictory();
-        StartCoroutine(FadeOutBalls(fingerPointers[2], 0.2f));
+        StartCoroutine(FadeOutBalls(fingerPointer, 0.2f));
     }
 
     public void TriggerEnter(int trigger)
@@ -106,6 +105,7 @@ public class TutorialScript : MonoBehaviour {
         currentPlatformButtons = null;
         foreach (LandingPadManager l in landingPads) {            
             if (l.transform.root.name.Equals(name)) {
+                Debug.Log(name + "Name was this");
                 currentPlatformButtons = l.gameObject.GetComponentInChildren<PlatformButtons>();
             }
         }
@@ -114,16 +114,16 @@ public class TutorialScript : MonoBehaviour {
             case "LandingBoat2":
                 TriggerEnter(1);
                 currentPlatformButtons.ShowFuel(false);
-                StartCoroutine(FadeInBalls(fingerPointers[0], 0.05f));
+                StartCoroutine(SetFingerPosition(0));
                 break;
             case "PalmIsland east":
                 TriggerEnter(2);
                 currentPlatformButtons.ShowRepair(false);
-                StartCoroutine(FadeInBalls(fingerPointers[1], 0.05f));
+                StartCoroutine(SetFingerPosition(1));
                 break;
             case "LandingBoat":
                 currentPlatformButtons.ShowVictory(false);
-                StartCoroutine(FadeInBalls(fingerPointers[2], 0.05f));
+                StartCoroutine(SetFingerPosition(2));
                 break;
         }
 
@@ -133,7 +133,7 @@ public class TutorialScript : MonoBehaviour {
         foreach (LandingPadManager l in landingPads)
         {
             if (l.transform.root.name.Equals(name))
-            {
+            {                
                 landing = l.gameObject.GetComponentInChildren<PlatformButtons>();
             }
         }
@@ -141,24 +141,39 @@ public class TutorialScript : MonoBehaviour {
         switch (name)
         {
             case "LandingBoat2":
-                landing.HideFuel();
-                StartCoroutine(FadeOutBalls(fingerPointers[0], 0.2f));
+                landing.HideFuel();                
                 break;
             case "PalmIsland east":
                 landing.HideRepair();
-                StartCoroutine(FadeOutBalls(fingerPointers[1], 0.2f));
                 break;
             case "LandingBoat":
                 landing.HideVictory();
-                StartCoroutine(FadeOutBalls(fingerPointers[2], 0.2f));
                 break;
         }
-
+        StartCoroutine(FadeOutBalls(fingerPointer, 0.2f));
         playerRB.isKinematic = false;
     }
 
-    private void LockPlayer(bool lockPlayer) {
-        
+    private IEnumerator SetFingerPosition(int index) {
+        yield return new WaitForSeconds(0.6f);
+
+        StartCoroutine(FadeInBalls(fingerPointer, 0.05f));
+
+        Transform t = null;
+        switch(index) {
+            case 0:
+                t = currentPlatformButtons.transform.Find("Fill Tank Button").Find("Position");
+                break;
+            case 1:
+                t = currentPlatformButtons.transform.Find("Repair Button").Find("Position");
+                break;
+            case 2:
+                t = currentPlatformButtons.transform.Find("Finish Button").Find("Position");
+                break;
+        }
+        Vector3 vec = new Vector3(1, 1, 0).normalized;
+        Debug.Log(t.position + " Position of the rect transform. Name: " + t.name);
+        fingerPointer.transform.position = t.position + (vec * 3);
     }
 
     #region Step_Methods

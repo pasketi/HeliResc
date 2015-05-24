@@ -29,7 +29,7 @@ public class FingerAnimation : MonoBehaviour {
 
         animator.Play("FirstTip");
 
-        Invoke("ActivateButton", 2);
+        Invoke("ActivateButton", 1.25f);
     }
 
     private void ActivateButton() {
