@@ -61,9 +61,9 @@ public class GameManager : MonoBehaviour {
 	private string[,] copters = new string[copterAmount,18]{
 		{
 			"DefaultCopter", 	//NAME
-			"0", 				//COST
+			"5", 				//COST
 			"1", 				//PLATFORM
-			"1", 				//UNLOCKED (0/1)
+			"0", 				//UNLOCKED (0/1)
 			"1", 				//ENGINE LEVEL
 			"1", 				//FUELTANK LEVEL
 			"100", 				//ENGINE DEFAULT VALUE
@@ -83,20 +83,20 @@ public class GameManager : MonoBehaviour {
 			"0", 				//COST
 			"1", 				//PLATFORM
 			"1", 				//UNLOCKED (0/1)
-			"1", 				//ENGINE LEVEL
-			"1", 				//FUELTANK LEVEL
+			"10", 				//ENGINE LEVEL
+			"10", 				//FUELTANK LEVEL
 			"100", 				//ENGINE DEFAULT VALUE
-			"200",				//ENGINE MAX VALUE
-			"300", 				//FUELTANK DEFAULT VALUE
-			"500",				//FUELTANK MAX VALUE
+			"100",				//ENGINE MAX VALUE
+			"600", 				//FUELTANK DEFAULT VALUE
+			"600",				//FUELTANK MAX VALUE
 			"15",				//WEIGHT
-			"2",				//CARGOSIZE
-			"1",				//ROPE LEVEL
-			"5",				//ROPE DEFAULT VALUE
-			"15",				//ROPE MAX VALUE
-			"100",				//MAXHEALTH / DURABILITY
-			"100",				//MAX TILT SPEED
-			"75"				//MAX TILT VALUE
+			"1",				//CARGOSIZE
+			"10",				//ROPE LEVEL
+			"2",				//ROPE DEFAULT VALUE
+			"2",				//ROPE MAX VALUE
+			"60",				//MAXHEALTH / DURABILITY
+			"80",				//MAX TILT SPEED
+			"50"				//MAX TILT VALUE
 		}
 	};
 
