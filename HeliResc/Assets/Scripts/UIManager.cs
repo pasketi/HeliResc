@@ -9,12 +9,15 @@ public class UIManager : MonoBehaviour {
 	private Text tempText;
 	private float scale = 0.1f;*/
 
+	public bool refill = false;
+
 	private Image fuel, fuelBorder;
 	private Slider power;
-	private bool lowFuel = false;
+	private bool 	lowFuel = false;
 	private Text saved, cargo, action;
 	private float 	flashLength = 0.25f,
-					tempTime = 0f;
+					tempTime = 0f,
+					cycle;
 	private LevelManager manager;
 	private CopterManagerTouch copter;
 	private Color	red = new Color(1f, 0f, 0f),
@@ -41,6 +44,10 @@ public class UIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		cycle = Mathf.Sin (Time.time*4);
+		if (cycle < 0)
+			cycle = -cycle;
+
 		fuel.fillAmount = copter.getFuel () / copter.getMaxFuel();
 		power.value = copter.getPower () / (copter.getMaxPower()-copter.getMinPower());
 		saved.text = manager.getSavedCrates ().ToString () + "/" + manager.getCrateAmount ().ToString ();
@@ -56,7 +63,7 @@ public class UIManager : MonoBehaviour {
 			cargo.color = red;
 		else
 			cargo.color = black;
-
+		
 		if (copter.getFuel () / copter.getMaxFuel() >= 0.5f)
 			fuel.color = new Color ((copter.getMaxFuel() - copter.getFuel ()) / (copter.getMaxFuel() - (copter.getMaxFuel() / 2)), 1f, 0f);
 		else 
@@ -69,16 +76,21 @@ public class UIManager : MonoBehaviour {
 			fuelBorder.color = white;
 		}
 
-
-		if (lowFuel) {
-			tempTime += Time.deltaTime;
-			if (tempTime >= flashLength) {
-				tempTime = 0f;
-				if (fuelBorder.color == white)
-					fuelBorder.color = red;
-				else if (fuelBorder.color == red)
-					fuelBorder.color = white;
+		if (!refill) {
+			if (lowFuel) {
+				tempTime += Time.deltaTime;
+				if (tempTime >= flashLength) {
+					tempTime = 0f;
+					if (fuelBorder.color == white)
+						fuelBorder.color = red;
+					else if (fuelBorder.color == red)
+						fuelBorder.color = white;
+				}
+			} else {
+				fuelBorder.color = white;
 			}
+		} else {
+			fuelBorder.color = new Color (cycle, 1f, cycle);
 		}
 	}
 }

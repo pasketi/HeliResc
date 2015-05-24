@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class LandingPadManager : MonoBehaviour {
@@ -7,8 +8,8 @@ public class LandingPadManager : MonoBehaviour {
     public event LandingEvent enterPlatform = (string name) => { };
     public event LandingEvent exitPlatform = (string name) => { };
 
-    private bool repair;
-	private bool refill;
+    private bool repair, refill;
+	private float cycle;
 
 	//private BoxCollider2D trigger;
 	private CargoManager cargo;
@@ -20,7 +21,6 @@ public class LandingPadManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
@@ -63,7 +63,8 @@ public class LandingPadManager : MonoBehaviour {
             if (exitPlatform != null) exitPlatform(transform.root.name);
             repair = false;
             refill = false;
-        }
+			GameObject.Find ("HUD").GetComponent<LandingPadManager> ().refill = false;
+		}
 	}
 	
 	void saveAllChildren (GameObject hook) {
@@ -89,5 +90,6 @@ public class LandingPadManager : MonoBehaviour {
 	
 	public void StartRefill() {
 		refill = true;
+		GameObject.Find ("HUD").GetComponent<UIManager> ().refill = true;
 	}
 }

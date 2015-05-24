@@ -27,9 +27,9 @@ public class CopterManagerTouch : MonoBehaviour {
 					powerMultiplier = 100f,
 					initialPower = 75f,
 					maxHealth = 100f,
-					healPerSecond = 50f,
+					healPerSecond = 200f,
 					maxFuel = 500f,
-					reFuelPerSecond = 100f,
+					reFuelPerSecond = 500f,
 					minPower = 0f,
 					maxPower = 120f,
 					ropeDurability = 100f,
@@ -97,8 +97,8 @@ public class CopterManagerTouch : MonoBehaviour {
 		maxFuel = int.Parse(copterArray[copterNumber,8]) + (((int.Parse(copterArray[copterNumber,9]) - int.Parse(copterArray[copterNumber,8])) / 10) * int.Parse(copterArray[copterNumber,5]));
 		maxPower = int.Parse(copterArray[copterNumber,6]) + (((int.Parse(copterArray[copterNumber,7]) - int.Parse(copterArray[copterNumber,6])) / 10) * int.Parse(copterArray[copterNumber,4]));
 		ropeDurability = int.Parse(copterArray[copterNumber,13]) + (((int.Parse(copterArray[copterNumber,14]) - int.Parse(copterArray[copterNumber,13])) / 10) * int.Parse(copterArray[copterNumber,12]));
-		reFuelPerSecond = maxFuel / ((14 - gameManager.getPlatformLevel()) / 2);
-		healPerSecond = maxHealth / ((14 - gameManager.getPlatformLevel()) / 2);
+		reFuelPerSecond = maxFuel / 2/*((14 - gameManager.getPlatformLevel()) / 2)*/;
+		healPerSecond = maxHealth / 2/*((14 - gameManager.getPlatformLevel()) / 2)*/;
 		manager.cargoSize = int.Parse(copterArray[copterNumber,11]);
 		currentHealth = maxHealth;
 		currentFuel = maxFuel;
