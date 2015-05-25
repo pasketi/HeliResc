@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour {
 	private string[,] copters = new string[copterAmount,18]{
 		{
 			"DefaultCopter", 	//NAME
-			"5", 				//COST
+			"3", 				//COST
 			"1", 				//PLATFORM
 			"0", 				//UNLOCKED (0/1)
 			"1", 				//ENGINE LEVEL
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour {
 			"1",				//CARGOSIZE
 			"10",				//ROPE LEVEL
 			"2",				//ROPE DEFAULT VALUE
-			"2",				//ROPE MAX VALUE
+			"6",				//ROPE MAX VALUE
 			"60",				//MAXHEALTH / DURABILITY
 			"80",				//MAX TILT SPEED
 			"25"				//MAX TILT VALUE
@@ -262,7 +262,11 @@ public class GameManager : MonoBehaviour {
     }
 
 	public void BuyCopter(int index) {
-		wallet.BuyCopter ();
+		if (wallet.BuyCopter (index)) {
+			copters[index,3] = "1";
+			loadMainMenu(false);
+		}
+		else Debug.Log("Not enough money :(");
 	}
 
 	//CAREFUL!

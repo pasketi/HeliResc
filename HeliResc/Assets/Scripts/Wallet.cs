@@ -82,7 +82,13 @@ public class Wallet {
     /// Unlocks a new copter if player has the money
     /// </summary>
     /// <returns>If the purchase was successful</returns>
-    public bool BuyCopter() {
-        return false;
+    public bool BuyCopter(int boughtCopter) {
+		string[,] copters = manager.getCopters();
+		if (Coins >= int.Parse(copters[boughtCopter, 1]) && copters[boughtCopter, 3] == "0") {
+			Purchase (int.Parse (copters[boughtCopter, 1]));
+			SaveLoad.SaveWallet(this);
+			return true;
+		} else
+        	return false;
     }
 }
