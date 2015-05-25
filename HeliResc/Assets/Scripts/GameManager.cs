@@ -266,6 +266,7 @@ public class GameManager : MonoBehaviour {
 	public void BuyCopter(int index) {
 		if (wallet.BuyCopter (index)) {
 			copters[index,3] = "1";
+            currentCopter = index;
             EventManager.TriggerEvent("CopterBought");
 		}
 		else Debug.Log("Not enough money :(");

@@ -73,8 +73,6 @@ public class CopterEntryScript : MonoBehaviour {
             pricePanel.SetActive(true);
         }
 
-        //buttonBuySelect.gameObject.SetActive(!copterUnlocked);
-        //buttonSelect.gameObject.SetActive(copterUnlocked);
     }
 
     private void BoughtCopterEvent() {
