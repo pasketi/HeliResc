@@ -246,6 +246,8 @@ public class GameManager : MonoBehaviour {
         copters[currentCopter, 12] = wallet.UpgradeLevel("Rope").ToString();
     }
 
+    private void UpdateCopters() { }
+
     public Upgrade GetUpgrade(string upgrade) {
         return wallet.GetUpgrade(upgrade);
     }
@@ -264,7 +266,7 @@ public class GameManager : MonoBehaviour {
 	public void BuyCopter(int index) {
 		if (wallet.BuyCopter (index)) {
 			copters[index,3] = "1";
-			loadMainMenu(false);
+            EventManager.TriggerEvent("CopterBought");
 		}
 		else Debug.Log("Not enough money :(");
 	}

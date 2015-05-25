@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CopterSelection : MonoBehaviour {
 
     private GameManager gameManager;
 
 	public Sprite[] copterSprites;
+
+    private Dictionary<int, CopterEntryScript> copterEntries;
 
 	public Text engineText;
 	public Text fuelText;
@@ -24,10 +27,15 @@ public class CopterSelection : MonoBehaviour {
         RectTransform t = transform as RectTransform;       
         group.cellSize = new Vector2(t.rect.width - 10, group.cellSize.y);
 
+        copterEntries = new Dictionary<int, CopterEntryScript>();
+
         for(int i = 0; i < gameManager.CopterAmount; i++) {
             GameObject go = Instantiate(copterEntry) as GameObject;
             go.transform.SetParent(group.transform);
-            go.GetComponent<CopterEntryScript>().SetCopterInfo(i, copterSprites[i], this);
+            CopterEntryScript script = go.GetComponent<CopterEntryScript>();
+            script.SetCopterInfo(i, copterSprites[i], this);
+
+            copterEntries.Add(i, script);
         }
 
 		copterInfoPanel = GameObject.Find("PanelCopterInfo");
@@ -41,4 +49,12 @@ public class CopterSelection : MonoBehaviour {
 		fuelText.text = fuel;
 		ropeText.text = rope;
 	}
+
+    /// <summary>
+    /// Set the buy/select button
+    /// </summary>
+    /// <param name="index"></param>
+    public void UpdateEntry(int index) {
+        copterEntries[index].SetCopterInfo(index, copterSprites[index], this);
+    }
 }

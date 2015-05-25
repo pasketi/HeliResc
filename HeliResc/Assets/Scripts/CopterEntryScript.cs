@@ -8,9 +8,9 @@ public class CopterEntryScript : MonoBehaviour {
 	public Text copterPrice;
     public Image copterImage;
 	public Button buttonInfo;
-    public Button buttonBuy;
-    public Button buttonSelect;
-    private Text selectedText;
+    public Button buttonBuySelect;
+    public GameObject pricePanel;
+    private Text buySelectText;
 
     private string maxEngine;
     private string maxRope;
@@ -28,10 +28,12 @@ public class CopterEntryScript : MonoBehaviour {
 
     void OnEnable() {
         EventManager.StartListening("SelectedCopter", UpdateSelected);
+        EventManager.StartListening("CopterBought", BoughtCopterEvent);
     }
 
     void OnDisable() {
         EventManager.StopListening("SelectedCopter", UpdateSelected);
+        EventManager.StopListening("CopterBought", BoughtCopterEvent);
     }
 
     public void SetCopterInfo(int index, Sprite s, CopterSelection copter) {
@@ -42,7 +44,7 @@ public class CopterEntryScript : MonoBehaviour {
 
         this.index = index;
 
-        selectedText = buttonSelect.GetComponentInChildren<Text>();
+        buySelectText = buttonBuySelect.GetComponentInChildren<Text>();
 
         UpdateSelected();     
 
@@ -59,11 +61,24 @@ public class CopterEntryScript : MonoBehaviour {
         SetUpgrades();
 
 		buttonInfo.onClick.AddListener (() => SetInfoPanel());
-		buttonSelect.onClick.AddListener (() => PressSelect ());
-		buttonBuy.onClick.AddListener (() => PressBuy ());
 
-		buttonBuy.gameObject.SetActive(!copterUnlocked);
-		buttonSelect.gameObject.SetActive(copterUnlocked);
+        if (copterUnlocked == true) {
+            buttonBuySelect.onClick.AddListener(() => PressSelect());
+            UpdateSelected();
+            pricePanel.SetActive(false);
+        }
+        else {
+            buttonBuySelect.onClick.AddListener(() => PressBuy());
+            buySelectText.text = "Buy";
+            pricePanel.SetActive(true);
+        }
+
+        //buttonBuySelect.gameObject.SetActive(!copterUnlocked);
+        //buttonSelect.gameObject.SetActive(copterUnlocked);
+    }
+
+    private void BoughtCopterEvent() {
+        copterSelect.UpdateEntry(index);
     }
 
     public void SetUpgrades() {
@@ -88,7 +103,7 @@ public class CopterEntryScript : MonoBehaviour {
 
 	private void PressBuy() {
 		gameManager.BuyCopter (index);
-		UpdateUpgradeScreen ();
+		//UpdateUpgradeScreen ();
 	}
 
 	private void PressSelect() {
@@ -103,11 +118,11 @@ public class CopterEntryScript : MonoBehaviour {
         if (gameManager.getCurrentCopter().Equals(index)) {
             c.r = c.b = 0;
             i.color = c;
-            selectedText.text = "Selected";
+            buySelectText.text = "Selected";
         } else {
             c.r = c.b = 255;
             i.color = c;
-            selectedText.text = "Select";
+            buySelectText.text = "Select";
         }
     }
 
