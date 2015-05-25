@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour {
 			"2",				//ROPE MAX VALUE
 			"60",				//MAXHEALTH / DURABILITY
 			"80",				//MAX TILT SPEED
-			"50"				//MAX TILT VALUE
+			"25"				//MAX TILT VALUE
 		}
 	};
 
