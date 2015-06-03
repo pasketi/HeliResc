@@ -14,7 +14,10 @@ public class TutorialScript : MonoBehaviour {
     public GameObject balls2;
     public GameObject balls3;
 
+    public GameObject[] arrows;
+
     public GameObject fingerPointer; //References to the gameobjects of fingers pointing the buttons
+    private bool onLandingPad;    
 
     private TutorialPelican pelican;
     private bool pelicanCollided;
@@ -102,6 +105,7 @@ public class TutorialScript : MonoBehaviour {
     }
 
     private void EnterPlatform(string name) {
+        onLandingPad = true;
         currentPlatformButtons = null;
         foreach (LandingPadManager l in landingPads) {            
             if (l.transform.root.name.Equals(name)) {
@@ -129,6 +133,7 @@ public class TutorialScript : MonoBehaviour {
 
     }
     private void ExitPlatform(string name) {
+        onLandingPad = false;
         PlatformButtons landing = null;
         foreach (LandingPadManager l in landingPads)
         {
@@ -141,30 +146,38 @@ public class TutorialScript : MonoBehaviour {
         switch (name)
         {
             case "LandingBoat2":
-                landing.HideFuel();                
+                landing.HideFuel();
+                if(useFuel == false)
+                    StartCoroutine(FadeOutBalls(fingerPointer, 0.2f));
                 break;
             case "PalmIsland east":
                 landing.HideRepair();
+                if(useRepair == false)
+                    StartCoroutine(FadeOutBalls(fingerPointer, 0.2f));
                 break;
             case "LandingBoat":
                 landing.HideVictory();
+                StartCoroutine(FadeOutBalls(fingerPointer, 0.2f));
                 break;
         }
-        StartCoroutine(FadeOutBalls(fingerPointer, 0.2f));
+        
         playerRB.isKinematic = false;
     }
 
     private IEnumerator SetFingerPosition(int index) {
         yield return new WaitForSeconds(0.6f);
 
-        StartCoroutine(FadeInBalls(fingerPointer, 0.05f));
+        if (onLandingPad == false) yield break;                 //Don't show the finger if not on landing pad or...
+        else if (index == 0 && useFuel == true) yield break;    //if already pressed fuel button and on the first landing pad or...
+        else if (index == 1 && useRepair == true) yield break;  //if pressed the repair button and on the repair platform
 
+        StartCoroutine(FadeInBalls(fingerPointer, 0.05f));        
         Transform t = null;
         switch(index) {
-            case 0:
+            case 0:                
                 t = currentPlatformButtons.transform.Find("Fill Tank Button").Find("Position");
                 break;
-            case 1:
+            case 1:               
                 t = currentPlatformButtons.transform.Find("Repair Button").Find("Position");
                 break;
             case 2:
@@ -256,6 +269,7 @@ public class TutorialScript : MonoBehaviour {
             c.a = 0;
             s.color = c;
         }
+        Debug.Log("Start time: " + Time.time);
         while (sprites[0].color.a < 1)
         {
             foreach (SpriteRenderer s in sprites)
@@ -266,6 +280,7 @@ public class TutorialScript : MonoBehaviour {
                 yield return null;
             }
         }
+        Debug.Log("End time: " + Time.time);
     }
     private IEnumerator FadeOutBalls(GameObject ballParent, float time)
     {

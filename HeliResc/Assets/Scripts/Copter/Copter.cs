@@ -55,6 +55,11 @@ public abstract class Copter : MonoBehaviour {
 
     //Decides what to do with input
     protected virtual void HandleInput(Touch touch) {
+        if (touch.phase.Equals(TouchPhase.Began)) {
+            foreach (KeyValuePair<string, Upgradable> entry in copterUpgrades) {
+                entry.Value.TapUpdate(touch);
+            }
+        }
         if (touch.phase.Equals(TouchPhase.Moved)) {
             foreach (KeyValuePair<string, Upgradable> entry in copterUpgrades) {
                 entry.Value.InputUpdate(touch);

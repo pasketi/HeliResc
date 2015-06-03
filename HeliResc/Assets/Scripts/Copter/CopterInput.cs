@@ -23,7 +23,6 @@ public class CopterInput {
         if (noInput == false)
             IdleUpdate();
     }
-
     public void DisableInput() {
         handleInput = false;
     }

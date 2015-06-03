@@ -15,13 +15,17 @@ public class Upgradable {
         Debug.Log("Upgrade added: " + name);
     }
 
+    //Updates every frame
     public virtual void Update() { 
     
     }
 
+    //Update every frame when the player holds his finger on the screen
     public virtual void InputUpdate(Touch touch) { 
         
     }
+    //Update when the touchphase is Began
+    public virtual void TapUpdate(Touch touch) { }
 
     public virtual void Upgrade() { 
     
