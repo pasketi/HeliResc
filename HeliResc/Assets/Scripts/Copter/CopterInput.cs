@@ -10,6 +10,8 @@ public class CopterInput {
     private bool noInput = false;
 
     public Action<Touch> InputUpdate = (Touch) => { };
+    public Action<Touch> TouchStart = (Touch) => { };
+    public Action<Touch> TouchEnd = (Touch) => { };
     public Action IdleUpdate = () => { };
 
     public void UpdateMethod() {
@@ -17,7 +19,17 @@ public class CopterInput {
         if(handleInput == true) {
             foreach (Touch t in Input.touches) {
                 noInput = true;
-                InputUpdate(t);
+                switch (t.phase) {
+                    case TouchPhase.Began:
+                        TouchStart(t);
+                        break;
+                    case TouchPhase.Moved:
+                        InputUpdate(t);
+                        break;
+                    case TouchPhase.Ended:
+                        TouchEnd(t);
+                        break;
+                }
             }
         }
         if (noInput == false)

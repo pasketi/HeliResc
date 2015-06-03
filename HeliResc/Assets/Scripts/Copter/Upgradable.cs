@@ -25,7 +25,8 @@ public class Upgradable {
         
     }
     //Update when the touchphase is Began
-    public virtual void TapUpdate(Touch touch) { }
+    public virtual void TouchStart(Touch touch) { }
+    public virtual void TouchEnd(Touch touch) { }
 
     public virtual void Upgrade() { 
     

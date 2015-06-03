@@ -17,6 +17,10 @@ public class Engine : Upgradable {
     public float maxTiltSpeed = 75;
     public float maxTiltValue = 100;
     public float returnSpeed = 5;  //Returns the copter back to 0 angle
+
+    public float holdTime = 0.25f;  //Time to limit the return speed
+    private float tempHoldTime = 0; //holder to calculate the time passed since player let go of the screen
+    private float persistence = 1;  //Limits the return speed
     
 
     //power related variables
@@ -27,6 +31,7 @@ public class Engine : Upgradable {
     public void Init(Copter copter) {
         base.Init(copter);
         tank = copter.fuelTank;
+        tempHoldTime = holdTime;
     }
 
     public override void Upgrade()
@@ -36,12 +41,27 @@ public class Engine : Upgradable {
 
     public override void Update()
     {
-        copterAngle = playerRb.transform.eulerAngles.z;
+        copterAngle = playerRb.transform.eulerAngles.z;        
+
+        //Flip the copter depending on its angle
+        if (playerRb.velocity.x > 0)
+        {
+            playerCopter.Direction(true);   //True means to turn right
+        }
+        else if (playerRb.velocity.x < 0)
+        {
+            playerCopter.Direction(false);
+        }
         Thrust();
     }
 
-    public override void TapUpdate(Touch touch) {
+    public override void TouchStart(Touch touch) {
         currentAngle = copterAngle;
+    }
+    public override void TouchEnd(Touch touch)
+    {
+        playerCopter.transform.localScale = new Vector3(Random.Range(0.5f,3), Random.Range(0.5f,3));
+        tempHoldTime = 0;
     }
 
     public override void InputUpdate(Touch touch) {
@@ -106,17 +126,7 @@ public class Engine : Upgradable {
         else if (currentAngle < 360f - maxTiltValue && currentAngle > 180f)
         {
             currentAngle = 360f - maxTiltValue;
-        }
-        //Flip the copter depending on its angle
-        if (currentAngle > 180f) 
-        { 
-            playerCopter.Direction(true);   //True means to turn right
-        }
-        else if (currentAngle < 180f)
-        { 
-            playerCopter.Direction(false); 
-        }
-        
+        }        
         
         if (copterAngle != currentAngle)
         { // Turn to currentAngle
@@ -172,12 +182,22 @@ public class Engine : Upgradable {
         { // Return to 0°
             if (copterAngle > 180f)
             {
-                playerRb.transform.Rotate(new Vector3(0f, 0f, returnSpeed * Time.deltaTime * (360f - copterAngle)));
+                playerRb.transform.Rotate(new Vector3(0f, 0f, returnSpeed * Time.deltaTime * (360f - copterAngle) * persistence));
             }
             else if (copterAngle < 180f)
             {
-                playerRb.transform.Rotate(new Vector3(0f, 0f, -(returnSpeed * Time.deltaTime) * copterAngle));
+                playerRb.transform.Rotate(new Vector3(0f, 0f, -(returnSpeed * Time.deltaTime) * copterAngle * persistence));
             }
+        }
+        if (tempHoldTime != holdTime)
+        {
+            tempHoldTime += Time.deltaTime;
+            persistence = tempHoldTime / holdTime;
+        }
+        if (tempHoldTime > holdTime)
+        {
+            persistence = 1f;
+            tempHoldTime = holdTime;
         }
     }
 }

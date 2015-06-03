@@ -40,6 +40,8 @@ public abstract class Copter : MonoBehaviour {
         copterUpgrades.Add(rope.name, rope);
 
         input.InputUpdate += HandleInput;
+        input.TouchStart += TouchStarted;
+        input.TouchEnd += TouchEnded;
         input.IdleUpdate += IdleInput;
 
         copterBody = GetComponent<Rigidbody2D>();
@@ -54,16 +56,19 @@ public abstract class Copter : MonoBehaviour {
     }    
 
     //Decides what to do with input
-    protected virtual void HandleInput(Touch touch) {
-        if (touch.phase.Equals(TouchPhase.Began)) {
-            foreach (KeyValuePair<string, Upgradable> entry in copterUpgrades) {
-                entry.Value.TapUpdate(touch);
-            }
+    protected virtual void HandleInput(Touch touch) {        
+        foreach (KeyValuePair<string, Upgradable> entry in copterUpgrades) {
+            entry.Value.InputUpdate(touch);
         }
-        if (touch.phase.Equals(TouchPhase.Moved)) {
-            foreach (KeyValuePair<string, Upgradable> entry in copterUpgrades) {
-                entry.Value.InputUpdate(touch);
-            }
+    }
+    protected void TouchStarted(Touch touch) {
+        foreach (KeyValuePair<string, Upgradable> entry in copterUpgrades) {
+            entry.Value.TouchStart(touch);
+        }
+    }
+    protected void TouchEnded(Touch touch) {
+        foreach (KeyValuePair<string, Upgradable> entry in copterUpgrades) {
+            entry.Value.TouchEnd(touch);
         }
     }
     //What happens if there is no input
