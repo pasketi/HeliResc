@@ -27,18 +27,15 @@ public abstract class Copter : MonoBehaviour {
 	// Use this for initialization
 	protected virtual void Start () {
         Debug.Log("Copter start");
+
+        copterUpgrades = new Dictionary<string, Upgradable>();
+
         cargo.Init(this);
         engine.Init(this);
         fuelTank.Init(this);
         rope.Init(this);
         input = new CopterInput();
-
-        copterUpgrades = new Dictionary<string, Upgradable>();
-        copterUpgrades.Add(cargo.name, cargo);
-        copterUpgrades.Add(engine.name, engine);
-        copterUpgrades.Add(fuelTank.name, fuelTank);
-        copterUpgrades.Add(rope.name, rope);
-
+        
         input.InputUpdate += HandleInput;
         input.TouchStart += TouchStarted;
         input.TouchEnd += TouchEnded;
@@ -46,29 +43,33 @@ public abstract class Copter : MonoBehaviour {
 
         copterBody = GetComponent<Rigidbody2D>();
         copterScale = transform.localScale.x;
-	}    
+	}
+
+    public void AddToDictionary(Upgradable u) {
+        copterUpgrades.Add(u.name, u);
+    }
 
     protected virtual void Update() {
         input.UpdateMethod();
-        foreach (KeyValuePair<string, Upgradable> entry in copterUpgrades) {
-            entry.Value.Update();
+        foreach (Upgradable entry in copterUpgrades.Values) {
+            entry.Update();
         }
     }    
 
     //Decides what to do with input
-    protected virtual void HandleInput(Touch touch) {        
-        foreach (KeyValuePair<string, Upgradable> entry in copterUpgrades) {
-            entry.Value.InputUpdate(touch);
+    protected virtual void HandleInput(MouseTouch touch) {        
+        foreach (Upgradable entry in copterUpgrades.Values) {
+            entry.InputUpdate(touch);
         }
     }
-    protected void TouchStarted(Touch touch) {
-        foreach (KeyValuePair<string, Upgradable> entry in copterUpgrades) {
-            entry.Value.TouchStart(touch);
+    protected void TouchStarted(MouseTouch touch) {
+        foreach (Upgradable entry in copterUpgrades.Values) {
+            entry.TouchStart(touch);
         }
     }
-    protected void TouchEnded(Touch touch) {
-        foreach (KeyValuePair<string, Upgradable> entry in copterUpgrades) {
-            entry.Value.TouchEnd(touch);
+    protected void TouchEnded(MouseTouch touch) {
+        foreach (Upgradable entry in copterUpgrades.Values) {
+            entry.TouchEnd(touch);
         }
     }
     //What happens if there is no input

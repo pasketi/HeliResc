@@ -34,13 +34,11 @@ public class Engine : Upgradable {
         tempHoldTime = holdTime;
     }
 
-    public override void Upgrade()
-    {
+    public override void Upgrade() {
         throw new System.NotImplementedException();
     }
 
-    public override void Update()
-    {
+    public override void Update() {
         copterAngle = playerRb.transform.eulerAngles.z;        
 
         //Flip the copter depending on its angle
@@ -55,16 +53,15 @@ public class Engine : Upgradable {
         Thrust();
     }
 
-    public override void TouchStart(Touch touch) {
+    public override void TouchStart(MouseTouch touch) {
         currentAngle = copterAngle;
     }
-    public override void TouchEnd(Touch touch)
-    {
+    public override void TouchEnd(MouseTouch touch) {
         playerCopter.transform.localScale = new Vector3(Random.Range(0.5f,3), Random.Range(0.5f,3));
         tempHoldTime = 0;
     }
 
-    public override void InputUpdate(Touch touch) {
+    public override void InputUpdate(MouseTouch touch) {
         Debug.Log("Copter engine update");
         HandleRotation(touch);
         HandlePower(touch);
@@ -90,7 +87,7 @@ public class Engine : Upgradable {
         IdleRotation();
     }
 
-    private void HandlePower(Touch touch) {
+    private void HandlePower(MouseTouch touch) {
         if (currentPower <= maxPower && currentPower >= minPower)
         {
             if (touch.deltaTime != 0f) currentPower += (((touch.deltaPosition.y / Screen.height) * (maxPower - minPower)) * powerSensitivity) * (Time.deltaTime / touch.deltaTime);
@@ -100,7 +97,7 @@ public class Engine : Upgradable {
         if (currentPower > maxPower) currentPower = maxPower;        
     }
 
-    private void HandleRotation(Touch touch) {                
+    private void HandleRotation(MouseTouch touch) {                
 
         if ((currentAngle < maxTiltValue
             || touch.deltaPosition.x < 0f)
