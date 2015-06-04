@@ -7,7 +7,7 @@ public class CargoSpace : Upgradable {
     public int maxCapacity;                 //Maximum amount of cargo to fit in the copter
     private int currentCargo;               //Current amount of cargo space used
 
-    public void Init(Copter copter) {
+    public override void Init(Copter copter) {
         base.Init(copter);
     }
 

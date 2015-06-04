@@ -9,8 +9,11 @@ public class Upgradable {
     protected Rigidbody2D playerRb;                     //Reference to player rigidbody
     protected Copter playerCopter;                      //Reference to Copter script of the current copter
 
+    public delegate void UpdateMethod();
+    public UpdateMethod UpdateDelegate = () => { };
+
     //Initializes the required members of the object
-    public void Init(Copter copter) {
+    public virtual void Init(Copter copter) {
         playerRb = copter.GetComponent<Rigidbody2D>();  //Get the reference to players rigidbody
         playerCopter = copter;
         playerCopter.AddToDictionary(this);             //Add the new Upgrade to the copters upgrade list
@@ -18,7 +21,7 @@ public class Upgradable {
 
     #region Update methods
     //Updates every frame
-    public virtual void Update() { }
+    public void Update() { UpdateDelegate(); }
     //Update every frame when the player holds his finger on the screen
     public virtual void InputUpdate(MouseTouch touch) { }
     //Update when the touchphase is Began

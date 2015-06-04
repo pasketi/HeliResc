@@ -73,7 +73,7 @@ public abstract class Copter : MonoBehaviour {
     }
     //What happens if there is no input
     protected virtual void IdleInput() {
-        engine.Idle();
+        engine.IdleInput();
     }
 
     public void Direction(bool faceRight) {

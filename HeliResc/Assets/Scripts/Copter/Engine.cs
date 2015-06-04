@@ -7,9 +7,7 @@ public class Engine : Upgradable {
     public float powerSensitivity;
     public float rotationSensitivity;
 
-    public float powerMultiplier;
-
-    private FuelTank tank;
+    public float powerMultiplier;    
 
     //rotation related variables
     public float currentAngle;
@@ -21,16 +19,21 @@ public class Engine : Upgradable {
     public float holdTime = 0.25f;  //Time to limit the return speed
     private float tempHoldTime = 0; //holder to calculate the time passed since player let go of the screen
     private float persistence = 1;  //Limits the return speed
-    
+
+    private bool hasFuel = true;
 
     //power related variables
     public float minPower;
     public float currentPower;
-    public float maxPower;    
+    public float maxPower;
+    public float CurrentPower { get { return currentPower; } }
 
-    public void Init(Copter copter) {
+    public override void Init(Copter copter) {
         base.Init(copter);
-        tank = copter.fuelTank;
+        
+        copter.fuelTank.TankDepleted += OutOfFuel;
+        UpdateDelegate = FuelUpdate;
+
         tempHoldTime = holdTime;
     }
 
@@ -38,7 +41,7 @@ public class Engine : Upgradable {
         throw new System.NotImplementedException();
     }
 
-    public override void Update() {
+    public void FuelUpdate() {
         copterAngle = playerRb.transform.eulerAngles.z;        
 
         //Flip the copter depending on its angle
@@ -49,6 +52,12 @@ public class Engine : Upgradable {
         else if (playerRb.velocity.x < 0)
         {
             playerCopter.Direction(false);
+        }
+        Thrust();
+    }
+    public void NoFuelUpdate() {
+        if (currentPower > 0f) { 
+            currentPower -= currentPower * (currentPower / maxPower) * Time.deltaTime * 3f; 
         }
         Thrust();
     }
@@ -68,20 +77,25 @@ public class Engine : Upgradable {
 
     private void AutoHoover() {
         Vector2 vel = playerRb.velocity;
-        if (!Mathf.Approximately(vel.y, 0))
-        {
+        if (!Mathf.Approximately(vel.y, 0)) {
             float y = 0.25f * Mathf.Abs(vel.y);
             y = Mathf.Clamp(y, 0.15f, 1);
             currentPower -= Mathf.Sign(vel.y) * (y);
         }
     }
 
+    private void OutOfFuel() {
+        UpdateDelegate = NoFuelUpdate;
+        hasFuel = false;
+    }
+
     private void Thrust() {
         playerRb.AddForce(playerRb.transform.up * (currentPower * powerMultiplier) * Time.deltaTime);
     }
 
-    public void Idle() {
-        AutoHoover();
+    public void IdleInput() {
+        if (hasFuel == true)
+            AutoHoover();
         IdleRotation();
     }
 
