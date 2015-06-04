@@ -14,7 +14,6 @@ public class Upgradable {
         playerRb = copter.GetComponent<Rigidbody2D>();  //Get the reference to players rigidbody
         playerCopter = copter;
         playerCopter.AddToDictionary(this);             //Add the new Upgrade to the copters upgrade list
-        Debug.Log("Upgrade added: " + name);
     }
 
     #region Update methods

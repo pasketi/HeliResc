@@ -53,16 +53,14 @@ public class Engine : Upgradable {
         Thrust();
     }
 
-    public override void TouchStart(MouseTouch touch) {
+    public override void TouchStart(MouseTouch touch) {        
         currentAngle = copterAngle;
     }
     public override void TouchEnd(MouseTouch touch) {
-        playerCopter.transform.localScale = new Vector3(Random.Range(0.5f,3), Random.Range(0.5f,3));
         tempHoldTime = 0;
     }
 
     public override void InputUpdate(MouseTouch touch) {
-        Debug.Log("Copter engine update");
         HandleRotation(touch);
         HandlePower(touch);
         
@@ -169,9 +167,7 @@ public class Engine : Upgradable {
                     }
                 }
             }
-        }
-        Debug.Log("Copter Angle: " + copterAngle);
-        Debug.Log("Current Angle: " + currentAngle);
+        }        
     }
 
     private void IdleRotation() {

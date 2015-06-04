@@ -20,7 +20,9 @@ public class CopterInput {
 #if UNITY_EDITOR
     public void UpdateMethod() {
         noInput = true;
-        if(handleInput == true && Input.GetMouseButton(0)) {
+        bool mouseUp = Input.GetMouseButtonUp(0);
+        
+        if(handleInput == true && (Input.GetMouseButton(0) || mouseUp)) {
             
             //If the mouse was just clicked assign current values to the variables
             if (Input.GetMouseButtonDown(0)) {
@@ -28,7 +30,7 @@ public class CopterInput {
                 previousTime = Time.time;
             }
 
-            MouseTouch t = MouseTouch.TransformMouse(Input.mousePosition, previousMouse, previousTime);
+            MouseTouch t = MouseTouch.TransformMouse(Input.mousePosition, previousMouse, previousTime, mouseUp);
             
             previousTime = Time.time;               //Set the values ready for next frame
             previousMouse = Input.mousePosition;    //Set the value ready for next frame
@@ -103,18 +105,19 @@ public class MouseTouch {
         return m;
     }
 
-    public static MouseTouch TransformMouse(Vector3 currentPos, Vector3 previousPos, float previousTime) {
+    public static MouseTouch TransformMouse(Vector3 currentPos, Vector3 previousPos, float previousTime, bool mouseUp) {
 
         MouseTouch m = new MouseTouch();
-
-        if (Input.GetMouseButton(0)) {
+        
+        if (Input.GetMouseButton(0)) {                        
             if (Input.GetMouseButtonDown(0))
                 m.phase = TouchPhase.Began;
-            else if (Input.GetMouseButtonUp(0))
-                m.phase = TouchPhase.Ended;
             else
                 m.phase = TouchPhase.Moved;
+        } else if (mouseUp) { 
+            m.phase = TouchPhase.Ended;
         }
+
         m.position = currentPos;
         m.deltaPosition = currentPos - previousPos;
         m.deltaTime = Time.time - previousTime;

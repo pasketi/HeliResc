@@ -26,7 +26,6 @@ public abstract class Copter : MonoBehaviour {
 
 	// Use this for initialization
 	protected virtual void Start () {
-        Debug.Log("Copter start");
 
         copterUpgrades = new Dictionary<string, Upgradable>();
 
