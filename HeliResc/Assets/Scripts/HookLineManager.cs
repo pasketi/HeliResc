@@ -11,15 +11,12 @@ public class HookLineManager : MonoBehaviour {
 		line = gameObject.GetComponent<LineRenderer> ();
 		line.sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
 		line.sortingLayerID = GetComponent<SpriteRenderer>().sortingLayerID;
+
+        anchor = GameObject.FindGameObjectWithTag("CopterHookLineAnchor");
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
-		if (anchor == GameObject.FindGameObjectWithTag ("CopterHookLineAnchor")) {
-		} else {
-			anchor = GameObject.FindGameObjectWithTag ("CopterHookLineAnchor");
-		}
+	void Update () {		
 
 		line.SetPosition (0, gameObject.transform.position);
 		line.SetPosition (1, anchor.transform.position);
