@@ -19,7 +19,7 @@ public class Rope : Upgradable {
     public override void Init(Copter copter) {
         base.Init(copter);
 
-        UpdateDelegate = HookInUpdate;
+        UpdateDelegate = HookInUpdate;                          //Start with the hook in the copter
 
         hasHook = true;
         hookJoint = playerRb.GetComponent<DistanceJoint2D>();
@@ -33,18 +33,23 @@ public class Rope : Upgradable {
 
     public override void TouchStart(MouseTouch touch) {
         if (playerRb.GetComponent<Collider2D>() == Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(touch.position)) && hasHook) {
-            if (hookOut) {
-                hookOut = false;
-            } else {
-                hookOut = true;
-            }
+            hookOut = !hookOut;
+            if (hookOut == true) UpdateDelegate = HookOutUpdate;    //Change the update method to a correct one
+            else UpdateDelegate = HookInUpdate;
         }
     }
 
     public void HookInUpdate() {
+        
+        if (hook != null && hasHook)
+        {
+            hookJoint.distance -= reelSpeed * Time.deltaTime;
+        }        
+    }
+    public void HookOutUpdate() {
         if (hookOut && hook == null && hasHook)
-        {            
-            hook.transform.position =  playerRb.transform.position + new Vector3(0f, -0.3f); 
+        {
+            hook.transform.position = playerRb.transform.position + new Vector3(0f, -0.3f);
             hook.transform.rotation = Quaternion.identity;
             hookJoint.enabled = true;
             hookJoint.distance = hookDistance;
@@ -65,10 +70,6 @@ public class Rope : Upgradable {
                 //once = false;
             }
         }
-        else if (!hookOut && hook != null && hasHook)
-        {
-            hookJoint.distance -= reelSpeed * Time.deltaTime;
-        }
         else if (hookOut && hookJoint.distance != hookDistance)
         {
             hookJoint.distance = hookDistance;
@@ -77,9 +78,6 @@ public class Rope : Upgradable {
         {
             //killHook();
         }
-    }
-    public void HookOutUpdate() { 
-        
     }
     public void HookDestroyedUpdate() { 
     

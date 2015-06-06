@@ -10,7 +10,7 @@ public class Upgradable {
     protected Copter playerCopter;                      //Reference to Copter script of the current copter
 
     public delegate void UpdateMethod();
-    public UpdateMethod UpdateDelegate = () => { };
+    public UpdateMethod UpdateDelegate = () => { };     //Delegate method to run in update. Replace with the method that should run as update
 
     //Initializes the required members of the object
     public virtual void Init(Copter copter) {

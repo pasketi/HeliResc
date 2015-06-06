@@ -4,18 +4,18 @@ using System.Collections;
 
 public class CopterInput {
 
-    private Copter copter;
+    private Copter copter;                  //reference to copter currently in game
 
-    private bool handleInput = true;
-    private bool noInput = true;
+    private bool handleInput = true;        //Should the input be reported
+    private bool noInput = true;            //Has there been any input
 
-    private Vector3 previousMouse;
-    private float previousTime;
+    private Vector3 previousMouse;          //For editor input to track deltaposition
+    private float previousTime;             //For editor input to track deltatime
 
-    public Action<MouseTouch> InputUpdate = (MouseTouch) => { };
-    public Action<MouseTouch> TouchStart = (MouseTouch) => { };
-    public Action<MouseTouch> TouchEnd = (MouseTouch) => { };
-    public Action IdleUpdate = () => { };
+    public Action<MouseTouch> InputUpdate = (MouseTouch) => { };    //Event to trigger when the mouse/touch has moved
+    public Action<MouseTouch> TouchStart = (MouseTouch) => { };     //Event when the mouseclick happens
+    public Action<MouseTouch> TouchEnd = (MouseTouch) => { };       //Event to trigger when mouse button goes up
+    public Action IdleUpdate = () => { };                           //Event when there is no input
 
 #if UNITY_EDITOR
     public void UpdateMethod() {
@@ -36,6 +36,8 @@ public class CopterInput {
             previousMouse = Input.mousePosition;    //Set the value ready for next frame
 
             noInput = false;
+
+            //Decide which event to trigger
             switch (t.phase) {
                 case TouchPhase.Began:
                     TouchStart(t);
@@ -58,6 +60,8 @@ public class CopterInput {
             foreach (Touch touch in Input.touches) {
                 noInput = false;
                 MouseTouch t = MouseTouch.TransformTouch(touch);        //Transform the unity touch to mouse touch
+
+                //Decide which event to trigger
                 switch (t.phase) {
                     case TouchPhase.Began:
                         TouchStart(t);
@@ -86,7 +90,7 @@ public class CopterInput {
 }
 
 /// <summary>
-/// Class to allow mouse input in editor
+/// Class to change mouse and touch input to the same type
 /// </summary>
 public class MouseTouch {
 
@@ -109,6 +113,7 @@ public class MouseTouch {
 
         MouseTouch m = new MouseTouch();
         
+        //Set the phase for the mousetouch
         if (Input.GetMouseButton(0)) {                        
             if (Input.GetMouseButtonDown(0))
                 m.phase = TouchPhase.Began;

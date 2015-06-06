@@ -18,7 +18,7 @@ public class FuelTank : Upgradable {
     public override void Init(Copter copter) {
         base.Init(copter);
 
-        UpdateDelegate = UpdateTank;    //Set the update method
+        UpdateDelegate = UseFuel;    //Set the update method
         currentFuel = maxCapacity;
     }
 
@@ -26,6 +26,7 @@ public class FuelTank : Upgradable {
         throw new System.NotImplementedException();
     }
 
+    //DELETE MAYHAPS?
     public void UpdateTank() {        
         if (useFuel == true) {
             UseFuel();
@@ -35,6 +36,7 @@ public class FuelTank : Upgradable {
     }
 
     public void FillTank() {
+        UpdateDelegate = FillTank;
         fill = true;
         useFuel = false;
     }
@@ -55,6 +57,7 @@ public class FuelTank : Upgradable {
             currentFuel = maxCapacity;
             fill = false;
             useFuel = true;                             //Start to use fuel again
+            UpdateDelegate = UseFuel;
         }
     }
 

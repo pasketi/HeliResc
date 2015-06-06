@@ -31,8 +31,8 @@ public class Engine : Upgradable {
     public override void Init(Copter copter) {
         base.Init(copter);
         
-        copter.fuelTank.TankDepleted += OutOfFuel;
-        UpdateDelegate = FuelUpdate;
+        copter.fuelTank.TankDepleted += OutOfFuel;      //Subscribe to the fuel tanks TankEmpty event
+        UpdateDelegate = FuelUpdate;                    //Start with having fuel
 
         tempHoldTime = holdTime;
     }
@@ -53,7 +53,7 @@ public class Engine : Upgradable {
         {
             playerCopter.Direction(false);
         }
-        Thrust();
+        Thrust();                           //Move the copter
     }
     public void NoFuelUpdate() {
         if (currentPower > 0f) { 
@@ -66,7 +66,7 @@ public class Engine : Upgradable {
         currentAngle = copterAngle;
     }
     public override void TouchEnd(MouseTouch touch) {
-        tempHoldTime = 0;
+        tempHoldTime = 0;       //Reset tempholdtime
     }
 
     public override void InputUpdate(MouseTouch touch) {
@@ -80,12 +80,12 @@ public class Engine : Upgradable {
         if (!Mathf.Approximately(vel.y, 0)) {
             float y = 0.25f * Mathf.Abs(vel.y);
             y = Mathf.Clamp(y, 0.15f, 1);
-            currentPower -= Mathf.Sign(vel.y) * (y);
+            currentPower -= Mathf.Sign(vel.y) * (y);    //Depending on the direction of copter velocity add more power or lower it
         }
     }
 
     private void OutOfFuel() {
-        UpdateDelegate = NoFuelUpdate;
+        UpdateDelegate = NoFuelUpdate;      //Change the update method
         hasFuel = false;
     }
 
@@ -94,6 +94,7 @@ public class Engine : Upgradable {
     }
 
     public void IdleInput() {
+        //If there is no input, autohoover and return the rotation back to 0
         if (hasFuel == true)
             AutoHoover();
         IdleRotation();
