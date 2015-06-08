@@ -4,7 +4,12 @@ using System.Collections.Generic;
 
 public abstract class Copter : MonoBehaviour {
 
-    protected GameManager gameManager;
+    public GameManager gameManager;
+    public LevelManager levelManager;
+
+    //Copter specific variables
+    public Sprite copterSprite;
+    public string name;
 
     //Upgradable items
     public CargoSpace cargo;
@@ -24,8 +29,22 @@ public abstract class Copter : MonoBehaviour {
             input.InputUpdate -= HandleInput;
     }
 
+    protected virtual void RegisterListeners() {        
+        foreach (Upgradable entry in copterUpgrades.Values) {
+            entry.RegisterListeners();
+        }
+    }
+    protected virtual void OnDisable() {
+        foreach (Upgradable entry in copterUpgrades.Values) {
+            entry.UnregisterListeners();
+        }
+    }
+
 	// Use this for initialization
 	protected virtual void Start () {
+
+        levelManager = GameObject.FindObjectOfType<LevelManager>();
+        gameManager = GameObject.FindObjectOfType<GameManager>();
 
         copterUpgrades = new Dictionary<string, Upgradable>();
 
@@ -34,7 +53,9 @@ public abstract class Copter : MonoBehaviour {
         fuelTank.Init(this);
         rope.Init(this);
         input = new CopterInput();
-        
+
+        RegisterListeners();
+
         input.InputUpdate += HandleInput;
         input.TouchStart += TouchStarted;
         input.TouchEnd += TouchEnded;
@@ -83,6 +104,13 @@ public abstract class Copter : MonoBehaviour {
             transform.localScale = new Vector3(-copterScale, transform.localScale.y);
         }
     }
+    public virtual void UseAction() { }
 
     public virtual void BuyUpgrade(string upgrade) { }
+    public virtual void SaveCopter() { }
+    public virtual Copter LoadCopter() { return this; }
+
+    public virtual GameObject CreateGameObject(GameObject prefab, Vector3 position, Quaternion rotation) {
+        return (Instantiate(prefab, position, rotation) as GameObject);
+    }
 }

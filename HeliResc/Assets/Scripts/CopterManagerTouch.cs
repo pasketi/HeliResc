@@ -74,7 +74,7 @@ public class CopterManagerTouch : MonoBehaviour {
 		copterBody = gameObject.GetComponent<Rigidbody2D>();
 		tempHoldTime = holdTime;
 
-		setupCopter(gameManager.getCopters(), gameManager.getCurrentCopter());
+		//setupCopter(gameManager.getCopters(), gameManager.getCurrentCopter());
 
         LandingPadManager[] landings = GameObject.FindObjectsOfType<LandingPadManager>();
         foreach (LandingPadManager l in landings) {
@@ -291,11 +291,11 @@ public class CopterManagerTouch : MonoBehaviour {
 			tempHoldTime = holdTime;
 		}
 
-		if (gameManager.getCurrentCopter() != 1 && (gameObject.transform.position.y) < manager.getWaterLevel()){
-			manager.levelFailed(2);
-		} else if (gameManager.getCurrentCopter() == 1 && (gameObject.transform.position.y) < manager.getWaterLevel() + 0.3f){
-			GetComponent<Rigidbody2D> ().AddForce (Vector2.up * (GetComponent<Rigidbody2D> ().mass * 20f));
-		}
+        //if (gameManager.getCurrentCopter() != 1 && (gameObject.transform.position.y) < manager.getWaterLevel()){
+        //    manager.levelFailed(2);
+        //} else if (gameManager.getCurrentCopter() == 1 && (gameObject.transform.position.y) < manager.getWaterLevel() + 0.3f){
+        //    GetComponent<Rigidbody2D> ().AddForce (Vector2.up * (GetComponent<Rigidbody2D> ().mass * 20f));
+        //}
 
 		if (isKill) kill();
 		if (isSplash) splashKill();

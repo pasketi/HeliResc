@@ -46,9 +46,9 @@ public class CopterEntryScript : MonoBehaviour {
 
         buySelectText = buttonBuySelect.GetComponentInChildren<Text>();
 
-        UpdateSelected();     
+        UpdateSelected();
 
-        string[,] copters = gameManager.getCopters();
+        string[,] copters = gameManager.getCopters(); return;
         string unlocked = copters[index, 3];
         bool copterUnlocked = int.Parse(unlocked) > 0;
 
@@ -113,7 +113,7 @@ public class CopterEntryScript : MonoBehaviour {
     private void UpdateSelected() {
         Image i = GetComponent<Image>();
         Color c = i.color;
-        if (gameManager.getCurrentCopter().Equals(index)) {
+        if (gameManager.CurrentCopterIndex.Equals(index)) {
             c.r = c.b = 0;
             i.color = c;
             buySelectText.text = "Selected";

@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour {
 	private int currentMenu = 0;
 	public int CurrentMenu { get { return currentMenu; } }
 
+    public GameObject[] copters;
+    public GameObject CurrentCopter { get { Debug.Log("Copter index " + CurrentCopterIndex); return copters[CurrentCopterIndex]; } }
+    public int CurrentCopterIndex { get { return Mathf.Clamp(currentCopter, 0, copters.Length - 1); } }
+
 
 	void Awake(){
 		DontDestroyOnLoad(gameObject);
@@ -58,7 +62,7 @@ public class GameManager : MonoBehaviour {
 	 * 17. MaxTilt
 	 * 
 	 */
-	private string[,] copters = new string[copterAmount,18]{
+	/*private string[,] copters = new string[copterAmount,18]{
 		{
 			"DefaultCopter", 	//NAME
 			"3", 				//COST
@@ -98,7 +102,7 @@ public class GameManager : MonoBehaviour {
 			"80",				//MAX TILT SPEED
 			"25"				//MAX TILT VALUE
 		}
-	};
+	};*/
 
 	// Use this for initialization
 	void Start () {
@@ -137,10 +141,10 @@ public class GameManager : MonoBehaviour {
 
 		//CopterLevels and unlocks
 		for (int i = 0; i < copterAmount; i++) {
-			PlayerPrefs.SetInt("Copter"+i+"Unlocked", int.Parse(copters[i,3]));
-			PlayerPrefs.SetInt("Copter"+i+"Enginelevel", int.Parse(copters[i,4]));
-			PlayerPrefs.SetInt("Copter"+i+"Fueltanklevel", int.Parse(copters[i,5]));
-			PlayerPrefs.SetInt("Copter"+i+"Ropelevel", int.Parse(copters[i,12]));
+            //PlayerPrefs.SetInt("Copter"+i+"Unlocked", int.Parse(copters[i,3]));
+            //PlayerPrefs.SetInt("Copter"+i+"Enginelevel", int.Parse(copters[i,4]));
+            //PlayerPrefs.SetInt("Copter"+i+"Fueltanklevel", int.Parse(copters[i,5]));
+            //PlayerPrefs.SetInt("Copter"+i+"Ropelevel", int.Parse(copters[i,12]));
 		}
 	}
 
@@ -156,10 +160,10 @@ public class GameManager : MonoBehaviour {
 
 		//CopterLevels and unlocks
 		for (int i = 0; i < copterAmount; i++) {
-			copters[i,3] = PlayerPrefs.GetInt("Copter"+i+"Unlocked").ToString();
-			copters[i,4] = wallet.UpgradeLevel("Engine").ToString();
-			copters[i,5] = wallet.UpgradeLevel("Fuel").ToString();
-			copters[i,12] = wallet.UpgradeLevel("Rope").ToString();
+            //copters[i,3] = PlayerPrefs.GetInt("Copter"+i+"Unlocked").ToString();
+            //copters[i,4] = wallet.UpgradeLevel("Engine").ToString();
+            //copters[i,5] = wallet.UpgradeLevel("Fuel").ToString();
+            //copters[i,12] = wallet.UpgradeLevel("Rope").ToString();
 		}
 	}
 
@@ -212,38 +216,39 @@ public class GameManager : MonoBehaviour {
 		return playerPlatform;
 	}
 
-	public string[,] getCopters () {
-		return copters;
-	}
+    public string[,] getCopters () {
+        return null;
+        //return copters;
+    }
 	public int getCopterAmount () {
 		return copterAmount;
 	}
 
-	public int getCurrentCopter () {
-		return currentCopter;
-	}
+    //public int getCurrentCopter () {
+    //    return currentCopter;
+    //}
 	public void setCurrentCopter (int copter){
 		currentCopter = copter;
 		save ();
 	}
-	public void swapCopter () {
-		if (currentCopter < getCopterAmount()-1) setCurrentCopter(currentCopter+1);
-		else setCurrentCopter(0);
-	}
+    //public void swapCopter () {
+    //    if (currentCopter < getCopterAmount()-1) setCurrentCopter(currentCopter+1);
+    //    else setCurrentCopter(0);
+    //}
 
 	
 	public void resetUpgrades () {
-		copters[currentCopter, 4] = "1";
-		copters[currentCopter, 5] = "1";
-		copters[currentCopter, 12] = "1";
+        //copters[currentCopter, 4] = "1";
+        //copters[currentCopter, 5] = "1";
+        //copters[currentCopter, 12] = "1";
 		playerPlatform = 1;
 		save ();
 	}
 
     private void UpdateUpgrades() {
-        copters[currentCopter, 4] = wallet.UpgradeLevel("Engine").ToString();
-        copters[currentCopter, 5] = wallet.UpgradeLevel("Fuel").ToString();
-        copters[currentCopter, 12] = wallet.UpgradeLevel("Rope").ToString();
+        //copters[currentCopter, 4] = wallet.UpgradeLevel("Engine").ToString();
+        //copters[currentCopter, 5] = wallet.UpgradeLevel("Fuel").ToString();
+        //copters[currentCopter, 12] = wallet.UpgradeLevel("Rope").ToString();
     }
 
     private void UpdateCopters() { }
@@ -265,7 +270,7 @@ public class GameManager : MonoBehaviour {
 
 	public void BuyCopter(int index) {
 		if (wallet.BuyCopter (index)) {
-			copters[index,3] = "1";
+			//copters[index,3] = "1";
             currentCopter = index;
             EventManager.TriggerEvent("CopterBought");
 		}
@@ -279,9 +284,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	
-	public void startGame (string levelName) {
-		//Debug.Log("Engine Level: " + copters[currentCopter,4] + " Fuel Level: " + copters[currentCopter,5] + " Platform Level: " + playerPlatform);
-		//Debug.Log("Engine Level: " + PlayerPrefs.GetInt("Copter"+currentCopter+"Enginelevel").ToString() + " Fuel Level: " + PlayerPrefs.GetInt("Copter"+currentCopter+"Fueltanklevel").ToString() + " Platform Level: " + playerPlatform);
+	public void startGame (string levelName) {		
 		save ();
 		Application.LoadLevel(levelName);
 	}

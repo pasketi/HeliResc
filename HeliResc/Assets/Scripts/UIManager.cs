@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour {
 					tempTime = 0f,
 					cycle;
 	private LevelManager manager;
-	private CopterManagerTouch copter;
+	private Copter copter;
 	private Color	red = new Color(1f, 0f, 0f),
 					black = new Color(0f, 0f, 0f),
 					white = new Color(1f, 1f, 1f);
@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		manager = GameObject.Find("LevelManagerO").GetComponent<LevelManager>();
-		copter = GameObject.Find ("Copter").GetComponent<CopterManagerTouch> ();
+		copter = GameObject.Find ("Copter").GetComponent<Copter> ();
 
 		saved = transform.FindChild ("SavedBackground").FindChild ("Saved").GetComponent<Text> ();
 		cargo = transform.FindChild ("CargoBackground").FindChild ("Cargo").GetComponent<Text> ();
@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour {
 		fuelBorder = fuel.transform.FindChild ("FuelMeter").GetComponent<Image>();
 
 		if (manager.levelAction != 0) 
-			transform.FindChild ("ActionBackground").FindChild ("IsKill").GetComponent<Button> ().onClick.AddListener(() => copter.useAction ());
+			transform.FindChild ("ActionBackground").FindChild ("IsKill").GetComponent<Button> ().onClick.AddListener(() => copter.UseAction ());
 		else
 			transform.FindChild ("ActionBackground").GetComponent<Image>().enabled = false;
 	}
@@ -48,8 +48,8 @@ public class UIManager : MonoBehaviour {
 		if (cycle < 0)
 			cycle = -cycle;
 
-		fuel.fillAmount = copter.getFuel () / copter.getMaxFuel();
-		power.value = copter.getPower () / (copter.getMaxPower()-copter.getMinPower());
+        fuel.fillAmount = copter.fuelTank.CurrentFuelPercentage;
+		power.value = copter.engine.CurrentPowerPercentage;
 		saved.text = manager.getSavedCrates ().ToString () + "/" + manager.getCrateAmount ().ToString ();
 		cargo.text = manager.cargoCrates.ToString () + "/" + manager.cargoSize.ToString ();
 		if (manager.levelAction != 0)
@@ -63,13 +63,13 @@ public class UIManager : MonoBehaviour {
 			cargo.color = red;
 		else
 			cargo.color = black;
-		
-		if (copter.getFuel () / copter.getMaxFuel() >= 0.5f)
-			fuel.color = new Color ((copter.getMaxFuel() - copter.getFuel ()) / (copter.getMaxFuel() - (copter.getMaxFuel() / 2)), 1f, 0f);
-		else 
-			fuel.color = new Color (1f, (copter.getFuel () / (copter.getMaxFuel() - (copter.getMaxFuel() / 2))), 0f);
 
-		if (copter.getFuel () / copter.getMaxFuel() < 0.3f)
+        if (copter.fuelTank.CurrentFuelPercentage >= 0.5f)
+			fuel.color = new Color ((copter.fuelTank.maxCapacity - copter.fuelTank.CurrentFuel) / (copter.fuelTank.maxCapacity * 0.5f), 1f, 0f);
+		else 
+			fuel.color = new Color (1f, (copter.fuelTank.CurrentFuel / (copter.fuelTank.maxCapacity * 0.5f)), 0f);
+
+        if (copter.fuelTank.CurrentFuelPercentage < 0.3f)
 			lowFuel = true;
 		else {
 			lowFuel = false;

@@ -29,6 +29,11 @@ public class Upgradable {
     //Update when the touchphase is Ended
     public virtual void TouchEnd(MouseTouch touch) { }
     #endregion
+
+    #region Event methods
+    public virtual void RegisterListeners() { }
+    public virtual void UnregisterListeners() { }
+    #endregion
     //Upgrade the object
     public virtual void Upgrade() { 
     

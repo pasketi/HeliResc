@@ -8,22 +8,28 @@ public class Rope : Upgradable {
     public float reelSpeed;             //Value of how fast the hook gets back to copter
 
     //Hook variables
-    public GameObject hook;             //The hook object to throw out
+    private GameObject hook;            //The hook object to throw out
+    public GameObject hookPrefab;       //The prefab to Instantiate
     public GameObject hookAnchor;       //Anchor of the hook. Needs to be set in inspector
     public float hookDistance = 1.5f;   //The distance of the hook from the anchor point
+    public float snapDistance = 3;      //The distance the rope will snap
     
     private DistanceJoint2D hookJoint;  //DistanceJoint component of the copter
     private bool hookOut;               //Is the hook out or inside the copter
     private bool hasHook;               //Determines if the copter has a hook or is it destroyed
 
-    public override void Init(Copter copter) {
-        base.Init(copter);
+    public bool HasHook { get { return hasHook; } }
 
-        UpdateDelegate = HookInUpdate;                          //Start with the hook in the copter
+    public override void Init(Copter copter) {
+        base.Init(copter);        
+
+        hook = playerCopter.CreateGameObject(hookPrefab, Vector3.zero, Quaternion.identity);
 
         hasHook = true;
         hookJoint = playerRb.GetComponent<DistanceJoint2D>();
         hookJoint.anchor = hookAnchor.transform.localPosition;
+
+        PushHookToCargo();
     }
 
     public override void Upgrade()
@@ -34,52 +40,60 @@ public class Rope : Upgradable {
     public override void TouchStart(MouseTouch touch) {
         if (playerRb.GetComponent<Collider2D>() == Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(touch.position)) && hasHook) {
             hookOut = !hookOut;
-            if (hookOut == true) UpdateDelegate = HookOutUpdate;    //Change the update method to a correct one
-            else UpdateDelegate = HookInUpdate;
+
+            if (hookOut == true) {              //Actions to take when hook is thrown                
+                ThrowHook();
+            } else {                            //Actions to take when hook is summoned back in                    
+                UpdateDelegate = ReelInUpdate; 
+            }            
         }
     }
 
-    public void HookInUpdate() {
-        
-        if (hook != null && hasHook)
-        {
+    public void ReelInUpdate() {        
+        if (hasHook == true) {
+            
             hookJoint.distance -= reelSpeed * Time.deltaTime;
+            if (hookJoint.distance <= reelSpeed * Time.deltaTime) {                                
+                PushHookToCargo();
+            }
         }        
     }
-    public void HookOutUpdate() {
-        if (hookOut && hook == null && hasHook)
-        {
-            hook.transform.position = playerRb.transform.position + new Vector3(0f, -0.3f);
-            hook.transform.rotation = Quaternion.identity;
-            hookJoint.enabled = true;
-            hookJoint.distance = hookDistance;
-            hookJoint.connectedBody = hook.GetComponent<Rigidbody2D>();
-        }
-        else if (hook != null && !hookOut && Vector2.Distance(hook.transform.position, hookAnchor.transform.position) < 0.1 && hasHook)
-        {
-            playerCopter.cargo.CargoHookedCrates(hook);
-            if (playerCopter.cargo.CurrentCargo >= playerCopter.cargo.maxCapacity && hook.transform.childCount > 0)
-            {
-                hookOut = true;
-                Debug.Log("Cargo full");
-            }
-            else if (hook.transform.childCount == 0)
-            {
-                hook.SetActive(false);
-                //Destroy(hook);
-                //once = false;
-            }
-        }
-        else if (hookOut && hookJoint.distance != hookDistance)
-        {
-            hookJoint.distance = hookDistance;
-        }
-        if (hasHook && hookOut && Vector2.Distance(hook.transform.position, hookAnchor.transform.position) > hookDistance * 2)
-        {
-            //killHook();
+    public void HookOutUpdate() {                       
+        if (hasHook && hookOut && Vector2.Distance(hook.transform.position, hookAnchor.transform.position) > snapDistance) {
+            KillHook();
         }
     }
     public void HookDestroyedUpdate() { 
     
+    }
+
+    private void PushHookToCargo() {
+
+        playerCopter.cargo.CargoHookedCrates(hook);
+        if (playerCopter.cargo.CargoFull && hook.transform.childCount > 0) {
+            hookOut = true;
+            ThrowHook();
+            UpdateDelegate = HookOutUpdate;
+            Debug.Log("Cargo full");
+        } else { 
+            hookJoint.enabled = false;
+            hookJoint.distance = 0;
+
+            UpdateDelegate = () => { };
+            hook.SetActive(false);
+        }
+    }
+
+    private void ThrowHook() {
+        
+        hook.SetActive(true);
+
+        hookJoint.enabled = true;
+        hookJoint.connectedBody = hook.GetComponent<Rigidbody2D>();
+        hookJoint.distance = hookDistance;
+        hook.transform.position = hookAnchor.transform.position;
+    }
+    private void KillHook() {
+        hasHook = false;
     }
 }

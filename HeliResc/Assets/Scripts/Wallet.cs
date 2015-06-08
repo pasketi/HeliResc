@@ -45,12 +45,12 @@ public class Wallet {
     }
 
     public int UpgradeLevel(string upgrade) {
-        int copter = manager.getCurrentCopter();
+        int copter = manager.CurrentCopterIndex;
         return allUpgrades["Copter" + copter.ToString() + upgrade].CurrentLevel;
     }
 
     public Upgrade GetUpgrade(string upgrade) {
-        int copter = manager.getCurrentCopter();
+        int copter = manager.CurrentCopterIndex;
         Upgrade u = allUpgrades["Copter" + copter.ToString() + upgrade];
         return u;
     }
@@ -67,7 +67,7 @@ public class Wallet {
     /// <returns>If the purchase was succesful</returns>
     public bool BuyUpgrade(string upgrade) {
         Debug.Log("Upgrade: " + upgrade);
-        int copter = manager.getCurrentCopter();
+        int copter = manager.CurrentCopterIndex;
         Upgrade u = allUpgrades["Copter" + copter.ToString() + upgrade];
         if (Coins >= u.upgradePrice && (u.CurrentLevel < u.maxLevel)) {
             allUpgrades[u.name].CurrentLevel++;

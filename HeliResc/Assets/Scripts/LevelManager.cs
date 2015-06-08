@@ -14,7 +14,6 @@ public class LevelManager : MonoBehaviour {
 	private float graceTime = 10f;
 	public int levelCoinRewardPerStar = 200, neededCrates = 0;
 	public GameObject pauseScreen, HUD, copterSpawnPoint, kamikazePelican;
-	public GameObject[] copters;
 	public GameObject levelSplash;
 	private bool win = false, lose = false, splash = false, gamePaused = false, takenDamage = false, once = false, releaseThePelican = false;
 	public float waterLevel = 0f, uiLiftPowerWidth = 0.1f, uiLiftPowerDeadZone = 0.05f, resetCountdown = 3f, crateSize, mapBoundsLeft = -50f, mapBoundsRight = 50f;
@@ -39,8 +38,8 @@ public class LevelManager : MonoBehaviour {
 
         //copter instantiate
         if (copterSpawnPoint == null) copterSpawnPoint = GameObject.Find ("CopterSpawn");
-		if (gameManager != null) copter = Instantiate (copters[gameManager.getCurrentCopter()], copterSpawnPoint.transform.position, Quaternion.identity) as GameObject;
-		else copter = Instantiate (copters[0], copterSpawnPoint.transform.position, Quaternion.identity) as GameObject;
+		if (gameManager != null) copter = Instantiate (gameManager.CurrentCopter, copterSpawnPoint.transform.position, Quaternion.identity) as GameObject;
+		//else copter = Instantiate (copters[0], copterSpawnPoint.transform.position, Quaternion.identity) as GameObject;
 		copter.name = "Copter";
 
 		resetCountdown = 3f;
@@ -85,7 +84,7 @@ public class LevelManager : MonoBehaviour {
 			else if (GameObject.Find("Copter").transform.position.x >= mapBoundsRight) Instantiate (kamikazePelican, new Vector3(mapBoundsRight + 25f, Random.value * 15f, 0f), Quaternion.identity);
 		}
 
-		if (GameObject.Find("Copter") != null && !releaseThePelican && GameObject.Find("Copter").GetComponent<CopterManagerTouch>().getFuel () == 0f) {
+		if (GameObject.Find("Copter") != null && !releaseThePelican && GameObject.Find("Copter").GetComponent<Copter>().fuelTank.CurrentFuel <= 0f) {
 			if (graceTime > 0f) graceTime -= Time.deltaTime;
 			else {
 				releaseThePelican = true;

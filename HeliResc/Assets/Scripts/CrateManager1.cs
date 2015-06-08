@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CrateManager : MonoBehaviour {
+public class CrateManager1 : MonoBehaviour {
 
 	private LevelManager manager;
-	private Copter copterScript;
-	
+	private CopterManagerTouch copterScript;
+	private CargoManager cargoScript;
 	private float floatyValue, maxLifeTimeInSeconds/*, flashTime = 0.25f, tempFlash = 0f*/; //buoancy?
 	private bool 	lastInWater = false,
 					stationary = false,
@@ -45,7 +45,8 @@ public class CrateManager : MonoBehaviour {
 		if (!inMenu) {
 			Time.timeScale = 1f;
 			manager = GameObject.Find ("LevelManagerO").GetComponent<LevelManager> ();
-			copterScript = GameObject.FindObjectOfType<Copter> ();			
+			copterScript = GameObject.Find ("Copter").GetComponent<CopterManagerTouch> ();
+			cargoScript = GameObject.Find ("Copter").GetComponent<CargoManager> ();
 		}
 		crate = gameObject.transform.parent.gameObject;
 		animator = gameObject.transform.parent.GetComponent<Animator>();
@@ -125,9 +126,9 @@ public class CrateManager : MonoBehaviour {
 				}
 			}*/
 
-            if (copterScript == null || (!inCargo && copterScript != null && crate.layer == 11 && copterScript.rope.HasHook == false)) {
+			if (copterScript == null || (!inCargo && copterScript != null && crate.layer == 11 && copterScript.isHookDead == true)) {
 				Destroy (joint);
-				copterScript.cargo.ChangeHookMass (-crateMass);
+				cargoScript.changeHookMass (-crateMass);
 				gameObject.GetComponent<Collider2D> ().enabled = true;
 				crate.layer = 10;
 				gameObject.transform.parent.parent = null;
@@ -150,9 +151,9 @@ public class CrateManager : MonoBehaviour {
 			if (crate != null && copterScript != null && crate.layer == 11 && inWater != lastInWater) {
 				lastInWater = inWater;
 				if (inWater && !inCargo) {
-					copterScript.cargo.ChangeHookMass ((-crateMass) + (crateMass * inWaterModifier));
+					cargoScript.changeHookMass ((-crateMass) + (crateMass * inWaterModifier));
 				} else if (!inWater || inCargo) {
-					copterScript.cargo.ChangeHookMass ((crateMass) + -(crateMass * inWaterModifier));
+					cargoScript.changeHookMass ((crateMass) + -(crateMass * inWaterModifier));
 				}
 			}
 
@@ -187,7 +188,7 @@ public class CrateManager : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision){
 		if (!inMenu && !dead) {
-			if (copterScript != null && collision.collider.gameObject.CompareTag ("Hook") && copterScript.rope.HasHook == true && tag != "ActionableObject" && tag != "SavedObject") {
+			if (copterScript != null && collision.collider.gameObject.CompareTag ("Hook") && copterScript.isHookDead == false && tag != "ActionableObject" && tag != "SavedObject") {
 				gameObject.transform.parent.parent = collision.collider.gameObject.transform;
 				gameObject.AddComponent <DistanceJoint2D> ();
 
@@ -204,7 +205,7 @@ public class CrateManager : MonoBehaviour {
 
 				gameObject.GetComponent<Collider2D> ().enabled = false;
 				crate.layer = 11; //liftedCrate
-				copterScript.cargo.ChangeHookMass (crateMass);
+				cargoScript.changeHookMass (crateMass);
 			} else onGround = true;
 		}
 	}

@@ -5,10 +5,12 @@ using System;
 [System.Serializable]
 public class FuelTank : Upgradable {
 
-    public float maxCapacity = 100;     //Maximum amount of fuel the player can have
-    public float spendingRate = 1;      //How much fuel is used
-    public float fillRate = 40;         //how much the tank is filled per second
-    public float currentFuel;          //The current amount of fuel    
+    public float maxCapacity = 100;                 //Maximum amount of fuel the player can have
+    public float spendingRate = 1;                  //How much fuel is used
+    public float fillRate = 40;                     //how much the tank is filled per second
+    public float currentFuel;                       //The current amount of fuel    
+    public float CurrentFuel { get { return currentFuel; } }
+    public float CurrentFuelPercentage { get { return currentFuel / maxCapacity; } }
 
     private bool useFuel = true;        //Should the copter spend fuel
     private bool fill = false;          //Fill the tank until it's full
@@ -36,7 +38,7 @@ public class FuelTank : Upgradable {
     }
 
     public void FillTank() {
-        UpdateDelegate = FillTank;
+        UpdateDelegate = FillFuel;
         fill = true;
         useFuel = false;
     }

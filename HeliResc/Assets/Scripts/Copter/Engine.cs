@@ -27,6 +27,7 @@ public class Engine : Upgradable {
     public float currentPower;
     public float maxPower;
     public float CurrentPower { get { return currentPower; } }
+    public float CurrentPowerPercentage { get { return currentPower / maxPower; } }
 
     public override void Init(Copter copter) {
         base.Init(copter);

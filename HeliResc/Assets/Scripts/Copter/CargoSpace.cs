@@ -4,16 +4,28 @@ using System.Collections;
 [System.Serializable]
 public class CargoSpace : Upgradable {
 
-    public int maxCapacity;                 //Maximum amount of cargo to fit in the copter
-    private int currentCargo;               //Current amount of cargo space used
-    public int CurrentCargo { get { return currentCargo; } }
+    public int maxCapacity;                                                 //Maximum amount of cargo to fit in the copter
+    public int currentCargo;                                                //Current amount of cargo space used
+    public int CurrentCargo { get { return currentCargo; } }                //Getter for current cargo
+    public bool CargoFull { get { return currentCargo >= maxCapacity; } }   //Boolean to check if cargo is full
 
-    private float copterMass;
+    private LevelManager manager;
+
+    public float copterMass;
     private float hookMass;
     private float cargoMass;
 
+    public override void RegisterListeners() {
+        EventManager.StartListening("EnterPlatform", UnloadAll);        
+    }
+    public override void UnregisterListeners() {
+        EventManager.StopListening("EnterPlatform", UnloadAll);        
+    }
+
     public override void Init(Copter copter) {
         base.Init(copter);
+        manager = copter.levelManager;
+        playerRb.mass = cargoMass + hookMass + copterMass; 
     }
 
     public override void Upgrade() {
@@ -58,17 +70,27 @@ public class CargoSpace : Upgradable {
                     //manager.setCargoCrates(cargoCrates);
                 }
             }
-            else { /*Fix the weird physics here*/}
+            else { /*Fix the weird physics here*/ }
         }
     }
+    public void UnloadAll() { 
+        
+    }    
 
     public void ChangeCargoMass(float crateMass)
     {
         cargoMass += crateMass;
+        playerRb.mass = cargoMass + hookMass + copterMass;
     }
 
     public void ChangeHookMass(float crateMass)
     {
         hookMass += crateMass;
+        playerRb.mass = cargoMass + hookMass + copterMass;
+    }
+    public void saveHookedCrate(float crateMass)
+    {
+        manager.saveCrates(1);
+        ChangeHookMass(-crateMass);
     }
 }
