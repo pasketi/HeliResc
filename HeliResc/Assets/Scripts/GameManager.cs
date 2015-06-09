@@ -106,6 +106,12 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+        Debug.Log("Lenght: " + copters.Length);
+        Debug.Log("Copter name: " + copters[0].GetComponent<Copter>().name);
+        Debug.Log("upgrades null: " + (copters[0].GetComponent<Copter>().Upgrades == null));
+        //Debug.Log("Copter name: " + copters[0].GetComponent<Copter>().name);
+
 		if (!PlayerPrefs.HasKey("First")) {
 			save ();
 		} else {

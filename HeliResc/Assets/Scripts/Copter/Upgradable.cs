@@ -9,6 +9,8 @@ public class Upgradable {
     protected Rigidbody2D playerRb;                     //Reference to player rigidbody
     protected Copter playerCopter;                      //Reference to Copter script of the current copter
 
+    public Upgrade upgrade;                             //Components upgrade information
+
     public delegate void UpdateMethod();
     public UpdateMethod UpdateDelegate = () => { };     //Delegate method to run in update. Replace with the method that should run as update
 
@@ -17,6 +19,8 @@ public class Upgradable {
         playerRb = copter.GetComponent<Rigidbody2D>();  //Get the reference to players rigidbody
         playerCopter = copter;
         playerCopter.AddToDictionary(this);             //Add the new Upgrade to the copters upgrade list
+
+        upgrade.Init(playerCopter.name + name);
     }
 
     #region Update methods

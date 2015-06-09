@@ -21,6 +21,7 @@ public abstract class Copter : MonoBehaviour {
     public Rope rope;
     public CopterHealth health;
     protected Dictionary<string, Upgradable> copterUpgrades;
+    public Dictionary<string, Upgradable> Upgrades { get { return copterUpgrades; } set { } }
 
     protected Rigidbody2D copterBody;
 
@@ -47,7 +48,7 @@ public abstract class Copter : MonoBehaviour {
     }
 
 	// Use this for initialization
-	protected virtual void Start () {
+	protected virtual void Awake () {
         
         levelManager = GameObject.FindObjectOfType<LevelManager>();
         gameManager = GameObject.FindObjectOfType<GameManager>();

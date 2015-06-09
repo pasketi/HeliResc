@@ -27,6 +27,6 @@ public class UpgradeButton : MonoBehaviour {
         Upgrade u = gameManager.GetUpgrade(upgradeName);
 
         upgradeLevel.text = u.CurrentLevel.ToString() + "/" + u.maxLevel.ToString();
-        price.text = u.upgradePrice.ToString();
+        price.text = u.UpgradePrice.ToString();
     }
 }

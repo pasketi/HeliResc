@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public class Upgrade {
 
+    [HideInInspector]
     public string name;
 
     //default level is 1
@@ -18,14 +20,18 @@ public class Upgrade {
         }
     }
 
-    public int upgradePrice;
+    public int startLevel;
+    public int priceMultiplier;
 
-    public Upgrade(string name, int price) {
+    public int UpgradePrice { get { return (priceMultiplier * (int)Mathf.Pow(2, currentLevel)); } }
+    
+    public void Init(string name) {
         this.name = name;
-        upgradePrice = price;
-        currentLevel = SaveLoad.LoadUpgradeLevel(name);
         
+        currentLevel = SaveLoad.LoadUpgradeLevel(name);
+        if (currentLevel < 0) currentLevel = startLevel;
+
         //Create the key for the upgrade
-        SaveLoad.SaveUpgradeLevel(this);
+        SaveLoad.SaveUpgrade(this);
     }
 }

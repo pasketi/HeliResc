@@ -30,7 +30,7 @@ public static class SaveLoad {
         PlayerPrefsExt.SetBool(name + "Star3", info.star3);
 	}
 
-    public static void SaveUpgradeLevel(Upgrade u) {
+    public static void SaveUpgrade(Upgrade u) {
         PlayerPrefs.SetInt(u.name, u.CurrentLevel);
     }
 
@@ -60,6 +60,6 @@ public static class SaveLoad {
     public static int LoadUpgradeLevel(string name) {
         if (PlayerPrefs.HasKey(name))
             return PlayerPrefs.GetInt(name);
-        return 1;
+        return -1;
     }
 }

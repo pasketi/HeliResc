@@ -7,26 +7,29 @@ public class Wallet {
     private GameManager manager;
     private int coins;
     public int Coins { get { return coins; } }
-
-    private string[] upNames =  { "Fuel", "Engine", "Rope" };
-    private int[] upPrices =    { 1, 2, 3 };
+        
     public static Dictionary<string, Upgrade> allUpgrades;
 
     public Wallet(int coinAmount) {
         manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        GameObject[] copters = manager.copters;
         coins = 0;
         AddMoney(coinAmount);
-
-        int copterAmount = manager.CopterAmount;
+        return;
+        Debug.Log("Wallet constructor");
 
         allUpgrades = new Dictionary<string, Upgrade>();
-        for (int i = 0; i < copterAmount; i++)
+        foreach (GameObject go in copters)
         {
-            for (int j = 0; j < upNames.Length; j++)
+            return;
+            Dictionary<string, Upgradable> ups = go.GetComponent<Copter>().Upgrades;
+            foreach (Upgradable up in ups.Values)
             {
-                Upgrade u = new Upgrade("Copter" + i.ToString() + upNames[j], upPrices[j]);
-                allUpgrades.Add(u.name, u);
-            }
+                //Upgrade u = up.upgrade;
+                //allUpgrades.Add(u.name, u);
+                Debug.Log((up == null) + " up is null");
+            }            
         }
     }
 
@@ -69,10 +72,10 @@ public class Wallet {
         Debug.Log("Upgrade: " + upgrade);
         int copter = manager.CurrentCopterIndex;
         Upgrade u = allUpgrades["Copter" + copter.ToString() + upgrade];
-        if (Coins >= u.upgradePrice && (u.CurrentLevel < u.maxLevel)) {
+        if (Coins >= u.UpgradePrice && (u.CurrentLevel < u.maxLevel)) {
             allUpgrades[u.name].CurrentLevel++;
-            Purchase(u.upgradePrice);
-            SaveLoad.SaveUpgradeLevel(u);
+            Purchase(u.UpgradePrice);
+            SaveLoad.SaveUpgrade(u);
             return true;
         }
         return false;
