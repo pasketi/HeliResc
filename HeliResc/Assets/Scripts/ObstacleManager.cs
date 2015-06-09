@@ -25,9 +25,9 @@ public class ObstacleManager : MonoBehaviour {
         if (collision.gameObject.transform.tag == "Copter") {
 			if (!instaKill) {
 				if (!fixedDamage) { 
-					collision.gameObject.GetComponent<CopterManagerTouch>().changeHealth(-collision.relativeVelocity.magnitude * damageMultiplier);
+					collision.gameObject.GetComponent<Copter>().health.TakeDamage(-collision.relativeVelocity.magnitude * damageMultiplier);
 				} else {
-					collision.gameObject.GetComponent<CopterManagerTouch>().changeHealth(-fixedDamageAmount);
+                    collision.gameObject.GetComponent<Copter>().health.TakeDamage(-fixedDamageAmount);
 				}
 			} else GameObject.Find("LevelManagerO").GetComponent<LevelManager>().levelFailed(1);
 
@@ -37,7 +37,7 @@ public class ObstacleManager : MonoBehaviour {
 		}
 
 		if (collision.gameObject.transform.tag == "Hook" || collision.gameObject.transform.tag == "Crate") {
-			if (killsHook) GameObject.Find("Copter").GetComponent<CopterManagerTouch>().killHook();
+            if (killsHook) collision.gameObject.GetComponent<Copter>().rope.KillHook();
 
 			if (diesOnContact && deathAnimation != null) 
 				Instantiate (deathAnimation, transform.position, Quaternion.identity);
@@ -55,7 +55,7 @@ public class ObstacleManager : MonoBehaviour {
             {
                 if (fixedDamage)
                 {
-                    other.gameObject.GetComponent<CopterManagerTouch>().changeHealth(-fixedDamageAmount);
+                    other.gameObject.GetComponent<Copter>().health.TakeDamage(-fixedDamageAmount);
                 }
             }
             else GameObject.Find("LevelManagerO").GetComponent<LevelManager>().levelFailed(1);

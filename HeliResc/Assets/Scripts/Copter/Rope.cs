@@ -16,9 +16,17 @@ public class Rope : Upgradable {
     
     private DistanceJoint2D hookJoint;  //DistanceJoint component of the copter
     private bool hookOut;               //Is the hook out or inside the copter
-    private bool hasHook;               //Determines if the copter has a hook or is it destroyed
+    private bool hasHook;               //Determines if the copter has a hook or is it destroyed    
 
     public bool HasHook { get { return hasHook; } }
+
+
+    public override void RegisterListeners() {
+        EventManager.StartListening("CopterExplode", KillHook);
+    }
+    public override void UnregisterListeners() {
+        EventManager.StopListening("CopterExplode", KillHook);
+    }
 
     public override void Init(Copter copter) {
         base.Init(copter);        
@@ -87,13 +95,16 @@ public class Rope : Upgradable {
     private void ThrowHook() {
         
         hook.SetActive(true);
-
+        hook.GetComponent<LineRenderer>().enabled = true;
         hookJoint.enabled = true;
         hookJoint.connectedBody = hook.GetComponent<Rigidbody2D>();
         hookJoint.distance = hookDistance;
         hook.transform.position = hookAnchor.transform.position;
     }
-    private void KillHook() {
+    public void KillHook() {
+        if (hookOut == false) return;
         hasHook = false;
+        hookJoint.enabled = false;
+        hook.GetComponent<LineRenderer>().enabled = false;        
     }
 }

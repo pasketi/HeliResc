@@ -21,9 +21,9 @@ public class HookLineManager : MonoBehaviour {
 		line.SetPosition (0, gameObject.transform.position);
 		line.SetPosition (1, anchor.transform.position);
 
-		if (GameObject.Find ("Copter") != null && GameObject.Find ("Copter").GetComponent<CopterManagerTouch> ().isHookDead) {
-			Destroy (line);
-			Destroy (this);
-		}
+        //if (GameObject.Find ("Copter") != null && GameObject.Find ("Copter").GetComponent<CopterManagerTouch> ().isHookDead) {
+        //    Destroy (line);
+        //    Destroy (this);
+        //}
 	}
 }

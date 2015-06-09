@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour {
 
     private MissionObjectives objectives;
 
+    private Copter copterScript;
+
 	private int reward = 1, actionsPerLevel = 0;
 	private float graceTime = 10f;
 	public int levelCoinRewardPerStar = 200, neededCrates = 0;
@@ -18,6 +20,15 @@ public class LevelManager : MonoBehaviour {
 	private bool win = false, lose = false, splash = false, gamePaused = false, takenDamage = false, once = false, releaseThePelican = false;
 	public float waterLevel = 0f, uiLiftPowerWidth = 0.1f, uiLiftPowerDeadZone = 0.05f, resetCountdown = 3f, crateSize, mapBoundsLeft = -50f, mapBoundsRight = 50f;
 	public int cargoSize = 2, cargoCrates = 0, levelAction = 0, maxActionsPerLevel = 0;
+
+    void OnEnable() {
+        EventManager.StartListening("CopterExplode", CopterExploded);
+        EventManager.StartListening("CopterSplash", CopterSplashed);
+    }
+    void OnDisable() {
+        EventManager.StopListening("CopterExplode", CopterExploded);
+        EventManager.StopListening("CopterSplash", CopterSplashed);
+    }
 
 	// Use this for initialization
 	void Awake () {
@@ -43,8 +54,8 @@ public class LevelManager : MonoBehaviour {
 		copter.name = "Copter";
 
 		resetCountdown = 3f;
-		pauseScreen.SetActive(false);
-		HUD.SetActive(true);
+		//pauseScreen.SetActive(false);
+		//HUD.SetActive(true);
 
 
 
@@ -68,15 +79,15 @@ public class LevelManager : MonoBehaviour {
 			resetCountdown -= Time.deltaTime;
 			if (resetCountdown <= 0f) Application.LoadLevel ("MainMenu");
 		}
-		if (lose) {
-			resetCountdown -= Time.deltaTime;
-			if (GameObject.Find("Copter") != null) GameObject.Find("Copter").GetComponent<CopterManagerTouch>().isKill = true;
-			if (resetCountdown <= 0f) loseLevel (EndReason.explode);
-		} else if (splash) {
-			resetCountdown -= Time.deltaTime;
-			if (GameObject.Find("Copter") != null) GameObject.Find("Copter").GetComponent<CopterManagerTouch>().isSplash = true;
-			if (resetCountdown <= 0f) loseLevel(EndReason.drowned);
-		}
+        //if (lose) {
+        //    resetCountdown -= Time.deltaTime;
+        //    //if (GameObject.Find("Copter") != null) GameObject.Find("Copter").GetComponent<CopterManagerTouch>().isKill = true;
+        //    if (resetCountdown <= 0f) loseLevel (EndReason.explode);
+        //} else if (splash) {
+        //    resetCountdown -= Time.deltaTime;
+        //    //if (GameObject.Find("Copter") != null) GameObject.Find("Copter").GetComponent<CopterManagerTouch>().isSplash = true;
+        //    if (resetCountdown <= 0f) loseLevel(EndReason.drowned);
+        //}
 
 		if (GameObject.Find("Copter") != null && !releaseThePelican && (GameObject.Find("Copter").transform.position.x <= mapBoundsLeft || GameObject.Find("Copter").transform.position.x >= mapBoundsRight)){
 			releaseThePelican = true;
@@ -95,6 +106,15 @@ public class LevelManager : MonoBehaviour {
 			}
 		}
 	}
+
+    private void CopterExploded() { 
+        lose = true;
+        Invoke("loseLevel", resetCountdown);
+    }
+    private void CopterSplashed() { 
+        splash = true;
+        Invoke("loseLevel", resetCountdown);
+    }    
 
 	public void levelFailed (int type) {
 		if (type == 1)
@@ -165,9 +185,13 @@ public class LevelManager : MonoBehaviour {
         gameManager.loadMainMenu(true, end, 1);
     }
 
-    private void loseLevel(int loseCondition) {        
-        LevelEndInfo end = new LevelEndInfo(false, loseCondition);
+    private void loseLevel() {
+        int loseCondition = 0;
+        if(lose == true) loseCondition = EndReason.explode;
+        else if(splash == true) loseCondition = EndReason.drowned;
 
+
+        LevelEndInfo end = new LevelEndInfo(false, loseCondition);
         gameManager.loadMainMenu(true, end, 1);
     }
 

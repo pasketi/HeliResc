@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 using System.Collections.Generic;
 
 public abstract class Copter : MonoBehaviour {
 
     public GameManager gameManager;
     public LevelManager levelManager;
+
+    protected Action UpdateMethod = () => { };
 
     //Copter specific variables
     public Sprite copterSprite;
@@ -16,6 +19,7 @@ public abstract class Copter : MonoBehaviour {
     public Engine engine;
     public FuelTank fuelTank;
     public Rope rope;
+    public CopterHealth health;
     protected Dictionary<string, Upgradable> copterUpgrades;
 
     protected Rigidbody2D copterBody;
@@ -33,18 +37,24 @@ public abstract class Copter : MonoBehaviour {
         foreach (Upgradable entry in copterUpgrades.Values) {
             entry.RegisterListeners();
         }
+        EventManager.StartListening("CopterSplash", TurnCopterOff);
     }
     protected virtual void OnDisable() {
         foreach (Upgradable entry in copterUpgrades.Values) {
             entry.UnregisterListeners();
         }
+        EventManager.StopListening("CopterSplash", TurnCopterOff);
     }
 
 	// Use this for initialization
 	protected virtual void Start () {
-
+        
         levelManager = GameObject.FindObjectOfType<LevelManager>();
         gameManager = GameObject.FindObjectOfType<GameManager>();
+
+        UpdateMethod = NormalUpdate;
+
+        copterSprite = GetComponent<SpriteRenderer>().sprite;
 
         copterUpgrades = new Dictionary<string, Upgradable>();
 
@@ -52,6 +62,7 @@ public abstract class Copter : MonoBehaviour {
         engine.Init(this);
         fuelTank.Init(this);
         rope.Init(this);
+        health.Init(this);
         input = new CopterInput();
 
         RegisterListeners();
@@ -64,17 +75,24 @@ public abstract class Copter : MonoBehaviour {
         copterBody = GetComponent<Rigidbody2D>();
         copterScale = transform.localScale.x;
 	}
+    protected virtual void Update() {
+        UpdateMethod();
+    }
 
     public void AddToDictionary(Upgradable u) {
         copterUpgrades.Add(u.name, u);
     }
-
-    protected virtual void Update() {
+    public void SetInputActive(bool active) {
+        if (active == true) input.EnableInput();
+        else input.DisableInput();
+    }
+    protected virtual void NormalUpdate() {
         input.UpdateMethod();
         foreach (Upgradable entry in copterUpgrades.Values) {
             entry.Update();
         }
-    }    
+    }
+    protected virtual void TurnedOffUpdate() { /*Update to run when copter is gone under water or turned off Add something here if needed.*/ }
 
     //Decides what to do with input
     protected virtual void HandleInput(MouseTouch touch) {        
@@ -82,7 +100,7 @@ public abstract class Copter : MonoBehaviour {
             entry.InputUpdate(touch);
         }
     }
-    protected void TouchStarted(MouseTouch touch) {
+    protected void TouchStarted(MouseTouch touch) {        
         foreach (Upgradable entry in copterUpgrades.Values) {
             entry.TouchStart(touch);
         }
@@ -104,6 +122,12 @@ public abstract class Copter : MonoBehaviour {
             transform.localScale = new Vector3(-copterScale, transform.localScale.y);
         }
     }
+    public virtual void TurnCopterOff() {
+        UpdateMethod = TurnedOffUpdate;
+    }
+    public virtual void Disable() {
+        gameObject.SetActive(false);
+    }
     public virtual void UseAction() { }
 
     public virtual void BuyUpgrade(string upgrade) { }
@@ -112,5 +136,5 @@ public abstract class Copter : MonoBehaviour {
 
     public virtual GameObject CreateGameObject(GameObject prefab, Vector3 position, Quaternion rotation) {
         return (Instantiate(prefab, position, rotation) as GameObject);
-    }
+    }    
 }

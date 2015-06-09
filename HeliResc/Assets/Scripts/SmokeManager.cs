@@ -3,20 +3,20 @@ using System.Collections;
 
 public class SmokeManager : MonoBehaviour {
 
-	private CopterManagerTouch copterScript;
+	private Copter copterScript;
 	private ParticleSystem[] smokes;
 	public float maxRate = 10f;
 
 	// Use this for initialization
 	void Start () {
-		copterScript = GameObject.Find ("Copter").GetComponent<CopterManagerTouch>();
+		copterScript = GameObject.Find ("Copter").GetComponent<Copter>();
 		smokes = GetComponentsInChildren<ParticleSystem>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		foreach(ParticleSystem smoke in smokes){
-			smoke.emissionRate = (float)(((float)((float)copterScript.getMaxHealth() - (float)copterScript.getHealth()) / (float)copterScript.getMaxHealth()) * (float)maxRate);
+            smoke.emissionRate = (((copterScript.health.maxHealth - copterScript.health.CurrentHealth) / copterScript.health.maxHealth) * maxRate);
 		}
 	}
 }
