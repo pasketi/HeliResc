@@ -80,13 +80,13 @@ public class CopterEntryScript : MonoBehaviour {
     }
 
     public void SetUpgrades() {
-        maxEngine = gameManager.GetUpgrade("Engine", index).maxLevel.ToString();
-        maxFuel = gameManager.GetUpgrade("Fuel", index).maxLevel.ToString();
-        maxRope = gameManager.GetUpgrade("Rope", index).maxLevel.ToString();
+        //maxEngine = gameManager.GetUpgrade("Engine", index).maxLevel.ToString();
+        //maxFuel = gameManager.GetUpgrade("Fuel", index).maxLevel.ToString();
+        //maxRope = gameManager.GetUpgrade("Rope", index).maxLevel.ToString();
 
-        engine = gameManager.GetUpgrade("Engine", index).CurrentLevel.ToString();
-        fuel = gameManager.GetUpgrade("Fuel", index).CurrentLevel.ToString();
-        rope = gameManager.GetUpgrade("Rope", index).CurrentLevel.ToString();
+        //engine = gameManager.GetUpgrade("Engine", index).CurrentLevel.ToString();
+        //fuel = gameManager.GetUpgrade("Fuel", index).CurrentLevel.ToString();
+        //rope = gameManager.GetUpgrade("Rope", index).CurrentLevel.ToString();
 
         //Debug.Log("Engine: " + engine +  "/" + maxEngine + "   Fuel: " + fuel + "/" + maxFuel + "   Rope: " + rope + "/" + maxRope);
     }

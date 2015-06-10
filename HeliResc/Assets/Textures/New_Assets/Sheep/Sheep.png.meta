@@ -1,12 +1,25 @@
 fileFormatVersion: 2
-guid: 7fdd5abaa9403b4408855ef195a81c12
-timeCreated: 1433851435
+guid: ea3a7d0e34607684bb67b9d19c3102eb
+timeCreated: 1433870582
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Sheep_0
-    21300002: Sheep_1
-    21300004: Sheep_2
+    21300000: sheep_0
+    21300002: sheep_1
+    21300004: sheep_2
+    21300006: sheep_3
+    21300008: sheep_4
+    21300010: sheep_5
+    21300012: sheep_6
+    21300014: sheep_7
+    21300016: sheep_8
+    21300018: sheep_9
+    21300020: sheep_10
+    21300022: sheep_11
+    21300024: sheep_12
+    21300026: sheep_13
+    21300028: sheep_14
+    21300030: sheep_15
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -46,39 +59,169 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 500
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Sheep_0
+    - name: sheep_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1012
-        width: 625
-        height: 506
+        y: 10500
+        width: 711
+        height: 700
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sheep_1
+    - name: sheep_1
       rect:
         serializedVersion: 2
         x: 0
-        y: 506
-        width: 625
-        height: 506
+        y: 9800
+        width: 711
+        height: 700
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sheep_2
+    - name: sheep_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 9100
+        width: 711
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sheep_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8400
+        width: 711
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sheep_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7700
+        width: 711
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sheep_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7000
+        width: 711
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sheep_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6300
+        width: 711
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sheep_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5600
+        width: 711
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sheep_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4900
+        width: 711
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sheep_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4200
+        width: 711
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sheep_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3500
+        width: 711
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sheep_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2800
+        width: 711
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sheep_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2100
+        width: 711
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sheep_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1400
+        width: 711
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sheep_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 700
+        width: 711
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sheep_15
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 625
-        height: 506
+        width: 711
+        height: 700
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

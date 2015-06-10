@@ -13,6 +13,7 @@ public abstract class Copter : MonoBehaviour {
     //Copter specific variables
     public Sprite copterSprite;
     public string name;
+    public bool unlocked;
 
     //Upgradable items
     public CargoSpace cargo;
@@ -54,7 +55,7 @@ public abstract class Copter : MonoBehaviour {
         gameManager = GameObject.FindObjectOfType<GameManager>();
 
         UpdateMethod = NormalUpdate;
-
+        
         copterSprite = GetComponent<SpriteRenderer>().sprite;
 
         copterUpgrades = new Dictionary<string, Upgradable>();

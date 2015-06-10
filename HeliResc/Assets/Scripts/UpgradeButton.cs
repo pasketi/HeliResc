@@ -4,29 +4,39 @@ using System.Collections;
 
 public class UpgradeButton : MonoBehaviour {
 
-    public string upgradeName;
+    public Upgrade upgrade;
+    public Upgrade Upgrade { set { upgrade = value; UpdateTextFields(); } }
 
-    public Text upgradeLevel;
-    public Text price;
+    //Sprites to show as the progress of the upgrades level instead of text like 1/10
+    public Sprite filledBallot;
+    public Sprite emptyBallot;  
 
-    private GameManager gameManager;
+    //Unity UI Elements
+    public Text txtUpgradeLevel;
+    public Text txtPrice;
+    public Image imgUpgradeSprite;
+    public RectTransform rectLevelBallots;
 
-	// Use this for initialization
-	void Start () {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
-        UpdateTextFields();
-    }
+    private GameManager gameManager;       
 
     public void PressedButton() {
-        gameManager.BuyUpgrade(upgradeName);     
+        gameManager.BuyUpgrade(upgrade);
         UpdateTextFields();
     }
 
     public void UpdateTextFields() {
-        Upgrade u = gameManager.GetUpgrade(upgradeName);
+        
+        txtUpgradeLevel.text = upgrade.CurrentLevel.ToString() + "/" + upgrade.maxLevel.ToString();
+        DrawBallots(upgrade.CurrentLevel, upgrade.maxLevel);
 
-        upgradeLevel.text = u.CurrentLevel.ToString() + "/" + u.maxLevel.ToString();
-        price.text = u.UpgradePrice.ToString();
+        txtPrice.text = upgrade.UpgradePrice.ToString();
+        imgUpgradeSprite.sprite = upgrade.upgradeSprite;
+        
+    }
+
+    private void DrawBallots(int level, int max) {
+        //instantiate as many empty ballots as the value of max and fill the amount of level variable
+
+        //TODO
     }
 }

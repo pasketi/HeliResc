@@ -21,7 +21,7 @@ public class CopterHealth : Upgradable {
     public override void Init(Copter copter) {
         base.Init(copter);
         currentHealth = maxHealth;
-        splashPrefab = playerCopter.levelManager.levelSplash;
+        splashPrefab = (playerCopter.levelManager == null) ? null : playerCopter.levelManager.levelSplash;
         UpdateDelegate = SplashUpdate;        
     }
 
