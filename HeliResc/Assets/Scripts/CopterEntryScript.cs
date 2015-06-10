@@ -26,58 +26,57 @@ public class CopterEntryScript : MonoBehaviour {
 
     private GameManager gameManager;
 
-    void OnEnable() {
-        EventManager.StartListening("SelectedCopter", UpdateSelected);
-        EventManager.StartListening("CopterBought", BoughtCopterEvent);
-    }
+    //void OnEnable() {
+    //    EventManager.StartListening("SelectedCopter", UpdateSelected);
+    //    EventManager.StartListening("CopterBought", BoughtCopterEvent);
+    //}
 
-    void OnDisable() {
-        EventManager.StopListening("SelectedCopter", UpdateSelected);
-        EventManager.StopListening("CopterBought", BoughtCopterEvent);
-    }
+    //void OnDisable() {
+    //    EventManager.StopListening("SelectedCopter", UpdateSelected);
+    //    EventManager.StopListening("CopterBought", BoughtCopterEvent);
+    //}
 
-    public void SetCopterInfo(int index, Sprite s, CopterSelection copter) {
+    //public void SetCopterInfo(int index, Sprite s, CopterSelection copter) {
 
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    //    gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-		copterSelect = copter;
+    //    copterSelect = copter;
 
-        this.index = index;
+    //    this.index = index;
 
-        buySelectText = buttonBuySelect.GetComponentInChildren<Text>();
+    //    buySelectText = buttonBuySelect.GetComponentInChildren<Text>();
 
-        UpdateSelected();
+    //    UpdateSelected();
 
-        string[,] copters = gameManager.getCopters(); return;
-        string unlocked = copters[index, 3];
-        bool copterUnlocked = int.Parse(unlocked) > 0;
+        
+    //    bool copterUnlocked = int.Parse(unlocked) > 0;
 
-		copterPrice.text = copters [index, 1];      
+    //    copterPrice.text = copters [index, 1];      
 
-        copterName.text = copters[index, 0];
+    //    copterName.text = copters[index, 0];
 
-		copterImage.sprite = s;
+    //    copterImage.sprite = s;
 
-        SetUpgrades();
+    //    SetUpgrades();
 
-		buttonInfo.onClick.AddListener (() => SetInfoPanel());
+    //    buttonInfo.onClick.AddListener (() => SetInfoPanel());
 
-        if (copterUnlocked == true) {
-            buttonBuySelect.onClick.AddListener(() => PressSelect());
-            UpdateSelected();
-            pricePanel.SetActive(false);
-        }
-        else {
-            buttonBuySelect.onClick.AddListener(() => PressBuy());
-            buySelectText.text = "Buy";
-            pricePanel.SetActive(true);
-        }
+    //    if (copterUnlocked == true) {
+    //        buttonBuySelect.onClick.AddListener(() => PressSelect());
+    //        UpdateSelected();
+    //        pricePanel.SetActive(false);
+    //    }
+    //    else {
+    //        buttonBuySelect.onClick.AddListener(() => PressBuy());
+    //        buySelectText.text = "Buy";
+    //        pricePanel.SetActive(true);
+    //    }
 
-    }
+    //}
 
-    private void BoughtCopterEvent() {
-        copterSelect.UpdateEntry(index);
-    }
+    //private void BoughtCopterEvent() {
+    //    copterSelect.UpdateEntry(index);
+    //}
 
     public void SetUpgrades() {
         //maxEngine = gameManager.GetUpgrade("Engine", index).maxLevel.ToString();
@@ -91,13 +90,13 @@ public class CopterEntryScript : MonoBehaviour {
         //Debug.Log("Engine: " + engine +  "/" + maxEngine + "   Fuel: " + fuel + "/" + maxFuel + "   Rope: " + rope + "/" + maxRope);
     }
 
-	private void SetInfoPanel() {
-		SetUpgrades ();
-		string e = engine + "/" + maxEngine;
-		string f = fuel + "/" + maxFuel;
-		string r = rope + "/" + maxRope;
-		copterSelect.SetCopterInfoPanel (e, f, r, index);
-	}
+    //private void SetInfoPanel() {
+    //    SetUpgrades ();
+    //    string e = engine + "/" + maxEngine;
+    //    string f = fuel + "/" + maxFuel;
+    //    string r = rope + "/" + maxRope;
+    //    copterSelect.SetCopterInfoPanel (e, f, r, index);
+    //}
 
 	private void PressBuy() {
 		gameManager.BuyCopter (index);
@@ -106,27 +105,27 @@ public class CopterEntryScript : MonoBehaviour {
 
 	private void PressSelect() {
 		gameManager.setCurrentCopter (index);
-		UpdateUpgradeScreen ();
+		//UpdateUpgradeScreen ();
         EventManager.TriggerEvent("SelectedCopter");
 	}
 
-    private void UpdateSelected() {
-        Image i = GetComponent<Image>();
-        Color c = i.color;
-        if (gameManager.CurrentCopterIndex.Equals(index)) {
-            c.r = c.b = 0;
-            i.color = c;
-            buySelectText.text = "Selected";
-        } else {
-            c.r = c.b = 255;
-            i.color = c;
-            buySelectText.text = "Select";
-        }
-    }
+    //private void UpdateSelected() {
+    //    Image i = GetComponent<Image>();
+    //    Color c = i.color;
+    //    if (gameManager.CurrentCopterIndex.Equals(index)) {
+    //        c.r = c.b = 0;
+    //        i.color = c;
+    //        buySelectText.text = "Selected";
+    //    } else {
+    //        c.r = c.b = 255;
+    //        i.color = c;
+    //        buySelectText.text = "Select";
+    //    }
+    //}
 
-	private void UpdateUpgradeScreen() {
-		UpgradeButton[] buttons = GameObject.FindObjectsOfType<UpgradeButton> ();
-		foreach (UpgradeButton ub in buttons)
-			ub.UpdateTextFields ();
-	}        
+    //private void UpdateUpgradeScreen() {
+    //    UpgradeButton[] buttons = GameObject.FindObjectsOfType<UpgradeButton> ();
+    //    foreach (UpgradeButton ub in buttons)
+    //        ub.UpdateTextFields ();
+    //}        
 }
