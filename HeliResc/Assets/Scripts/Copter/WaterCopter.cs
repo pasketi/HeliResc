@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TestCopter : Copter {
+public class WaterCopter : Copter {
 
-    public CopterWaterManager waterManager;
+    public CopterFloats floats;
 
     protected override void AddUpgradables() {
         base.AddUpgradables();
-        waterManager.Init(this);
+        floats.Init(this);
     }
 }

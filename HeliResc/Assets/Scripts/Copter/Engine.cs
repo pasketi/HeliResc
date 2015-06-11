@@ -209,4 +209,7 @@ public class Engine : Upgradable {
             tempHoldTime = holdTime;
         }
     }
+    protected override void GiveName() {
+        name = "Engine";
+    }
 }

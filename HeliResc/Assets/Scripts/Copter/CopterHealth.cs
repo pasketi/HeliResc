@@ -8,8 +8,7 @@ using System.Collections;
 public class CopterHealth : Upgradable {
     
     public GameObject explosionPrefab;
-    public GameObject brokenCopterPrefab;
-    private GameObject splashPrefab;
+    public GameObject brokenCopterPrefab;    
 
     public float maxHealth;
 
@@ -20,16 +19,10 @@ public class CopterHealth : Upgradable {
 
     public override void Init(Copter copter) {
         base.Init(copter);
-        currentHealth = maxHealth;
-        splashPrefab = (playerCopter.levelManager == null) ? null : playerCopter.levelManager.levelSplash;
-        UpdateDelegate = SplashUpdate;        
-    }
-
-    protected void SplashUpdate() {
-        if (playerRb.transform.position.y < playerCopter.levelManager.getWaterLevel() + 0.3f) {
-            Splash();            
-        }
-    }
+        
+        currentHealth = maxHealth;        
+               
+    }    
 
     public void TakeDamage(float damage) {
         currentHealth -= damage;
@@ -39,15 +32,7 @@ public class CopterHealth : Upgradable {
     }
     public void FixCopter() {
         currentHealth = maxHealth;
-    }
-
-    public virtual void Splash() {
-        UpdateDelegate = () => { };
-        Vector3 splashPos = new Vector3(playerCopter.transform.position.x, playerCopter.levelManager.getWaterLevel() + 0.5f);
-        playerCopter.CreateGameObject(splashPrefab, splashPos, Quaternion.identity);
-        playerCopter.SetInputActive(false);
-        EventManager.TriggerEvent("CopterSplash");
-    }
+    }    
 
     protected virtual void Explode() {        
         GameObject newCopter = playerCopter.CreateGameObject(brokenCopterPrefab, playerRb.transform.position, playerRb.transform.rotation);
@@ -62,5 +47,8 @@ public class CopterHealth : Upgradable {
 
         playerCopter.Disable();
         EventManager.TriggerEvent("CopterExplode");
-    }    
+    }
+    protected override void GiveName() {
+        name = "CopterHealth";
+    }
 }

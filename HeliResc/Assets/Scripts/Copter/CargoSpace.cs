@@ -24,6 +24,7 @@ public class CargoSpace : Upgradable {
 
     public override void Init(Copter copter) {
         base.Init(copter);
+        
         manager = copter.levelManager;
         playerRb.mass = cargoMass + hookMass + copterMass; 
     }
@@ -92,5 +93,8 @@ public class CargoSpace : Upgradable {
     {
         manager.saveCrates(1);
         ChangeHookMass(-crateMass);
+    }
+    protected override void GiveName() {
+        name = "CargoSpace";
     }
 }

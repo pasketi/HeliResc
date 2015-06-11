@@ -2,20 +2,22 @@
 using System.Collections;
 
 [System.Serializable]
-public class Upgradable {
+public abstract class Upgradable {
 
     public bool allowUpgrade;                           //Should this item be able to be upgraded
-    public string name;                                 //Identifying name of the object
+    protected string name;                              //Identifying name of the object
     protected Rigidbody2D playerRb;                     //Reference to player rigidbody
     protected Copter playerCopter;                      //Reference to Copter script of the current copter
 
     public Upgrade upgrade;                             //Components upgrade information
+    public string Name { get { return name; } }
 
     public delegate void UpdateMethod();
     public UpdateMethod UpdateDelegate = () => { };     //Delegate method to run in update. Replace with the method that should run as update
 
     //Initializes the required members of the object
     public virtual void Init(Copter copter) {
+        GiveName();
         playerRb = copter.GetComponent<Rigidbody2D>();  //Get the reference to players rigidbody
         playerCopter = copter;
         playerCopter.AddToDictionary(this);             //Add the new Upgrade to the copters upgrade list
@@ -42,4 +44,5 @@ public class Upgradable {
     public virtual void Upgrade() { 
     
     }
+    protected abstract void GiveName();
 }

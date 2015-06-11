@@ -29,8 +29,8 @@ public class Rope : Upgradable {
     }
 
     public override void Init(Copter copter) {
-        base.Init(copter);        
-
+        base.Init(copter);
+        
         hook = playerCopter.CreateGameObject(hookPrefab, Vector3.zero, Quaternion.identity);
 
         hasHook = true;
@@ -106,5 +106,8 @@ public class Rope : Upgradable {
         hasHook = false;
         hookJoint.enabled = false;
         hook.GetComponent<LineRenderer>().enabled = false;        
+    }
+    protected override void GiveName() {
+        name = "Rope";
     }
 }

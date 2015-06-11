@@ -60,11 +60,7 @@ public abstract class Copter : MonoBehaviour {
 
         copterUpgrades = new Dictionary<string, Upgradable>();
 
-        cargo.Init(this);
-        engine.Init(this);
-        fuelTank.Init(this);
-        rope.Init(this);
-        health.Init(this);
+        AddUpgradables();
         input = new CopterInput();
 
         RegisterListeners();
@@ -80,9 +76,15 @@ public abstract class Copter : MonoBehaviour {
     protected virtual void Update() {
         UpdateMethod();
     }
-
+    protected virtual void AddUpgradables() {
+        cargo.Init(this);
+        engine.Init(this);
+        fuelTank.Init(this);
+        rope.Init(this);
+        health.Init(this);
+    }
     public void AddToDictionary(Upgradable u) {
-        copterUpgrades.Add(u.name, u);
+        copterUpgrades.Add(u.Name, u);
     }
     public void SetInputActive(bool active) {
         if (active == true) input.EnableInput();

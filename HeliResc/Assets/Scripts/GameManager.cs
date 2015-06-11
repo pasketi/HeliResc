@@ -11,14 +11,14 @@ public class GameManager : MonoBehaviour {
     public Wallet wallet;
 	public LevelEndInfo levelEnd;
 
-	private int currentMenu = 0;
-	public int CurrentMenu { get { return currentMenu; } }
+    private int currentMenu = 0;                                                                            //The menu that is currently shown or being transitioned to
+	public int CurrentMenu { get { return currentMenu; } }                                                  //Getter for the current menu
 
     public GameObject[] copters;
-    public Dictionary<string, Copter> CopterScripts;
-    public GameObject CurrentCopter { get { return copters[CurrentCopterIndex]; } }
-    public Copter CurrentCopterScript { get { return CopterScripts[CurrentCopter.name]; } }
-    public int CurrentCopterIndex { get { return Mathf.Clamp(currentCopter, 0, copters.Length - 1); } }
+    public Dictionary<string, Copter> CopterScripts;                                                        //List of all copters Copter script. Access with the copters name
+    public GameObject CurrentCopter { get { return copters[CurrentCopterIndex]; } }                         //Returns the selected copter prefab
+    public Copter CurrentCopterScript { get { return CopterScripts[CurrentCopter.name]; } }                 //Return the selected copters Copter script
+    public int CurrentCopterIndex { get { return Mathf.Clamp(currentCopter, 0, copters.Length - 1); } }     //The currently selected copter
 
 
 	void Awake(){
@@ -26,12 +26,12 @@ public class GameManager : MonoBehaviour {
         wallet = SaveLoad.LoadWallet();
 	}
 
-	private const int copterAmount = 2; //FOR EVERY NEW COPTER, ADD 1 HERE
-    public int CopterAmount { get { return copterAmount; } }
+	//private const int copterAmount = 2; //FOR EVERY NEW COPTER, ADD 1 HERE
+    //public int CopterAmount { get { return copterAmount; } }
 
-	private string 	playerName = "Anonymous";
-	private int		playerFirst = 0,
-					playerStars = 0, 
+	//private string 	playerName = "Anonymous";
+	//private int		playerFirst = 0,
+    private int playerStars = 0, 
 					playerCoins = 0, 
 					playerPlatform = 1,
 					currentCopter = 1,  //0 == default, 1 = watercopter
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour {
 
 	public void save () {
 		PlayerPrefs.SetInt("First", 1);
-		PlayerPrefs.SetString("Name", playerName);
+		//PlayerPrefs.SetString("Name", playerName);
 		PlayerPrefs.SetInt("Platform", playerPlatform);
 
 		//Currently selected copter
@@ -87,8 +87,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void load () {
-		playerFirst = PlayerPrefs.GetInt("First", playerFirst);
-		playerName = PlayerPrefs.GetString("Name", playerName);
+		//playerFirst = PlayerPrefs.GetInt("First", playerFirst);
+		//playerName = PlayerPrefs.GetString("Name", playerName);
 		playerStars = PlayerPrefs.GetInt("Stars", playerStars);
 		playerCoins = PlayerPrefs.GetInt("Coins", playerCoins);
 		playerPlatform = PlayerPrefs.GetInt("Platform", playerPlatform);
@@ -97,12 +97,12 @@ public class GameManager : MonoBehaviour {
 		currentCopter = PlayerPrefs.GetInt("Copter", currentCopter);
 
 		//CopterLevels and unlocks
-		for (int i = 0; i < copterAmount; i++) {
+		//for (int i = 0; i < copterAmount; i++) {
             //copters[i,3] = PlayerPrefs.GetInt("Copter"+i+"Unlocked").ToString();
             //copters[i,4] = wallet.UpgradeLevel("Engine").ToString();
             //copters[i,5] = wallet.UpgradeLevel("Fuel").ToString();
             //copters[i,12] = wallet.UpgradeLevel("Rope").ToString();
-		}
+		//}
 	}
 
 	public void sendLevelEndInfo (int stars, int coins) {
@@ -120,13 +120,13 @@ public class GameManager : MonoBehaviour {
 		return tempStars;
 	}
 
-	public string getName () {
-		return playerName;
-	}
-	public void setName (string name) {
-		playerName = name;
-		save ();
-	}
+    //public string getName () {
+    //    return playerName;
+    //}
+    //public void setName (string name) {
+    //    playerName = name;
+    //    save ();
+    //}
 
 	public int getStars () {
 		return playerStars;
@@ -158,9 +158,9 @@ public class GameManager : MonoBehaviour {
         return null;
         //return copters;
     }
-	public int getCopterAmount () {
-		return copterAmount;
-	}
+    //public int getCopterAmount () {
+    //    return copterAmount;
+    //}
 
     //public int getCurrentCopter () {
     //    return currentCopter;

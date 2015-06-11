@@ -19,7 +19,7 @@ public class FuelTank : Upgradable {
 
     public override void Init(Copter copter) {
         base.Init(copter);
-
+        
         UpdateDelegate = UseFuel;    //Set the update method
         currentFuel = maxCapacity;
     }
@@ -62,5 +62,7 @@ public class FuelTank : Upgradable {
             UpdateDelegate = UseFuel;
         }
     }
-
+    protected override void GiveName() {
+        name = "FuelTank";
+    }
 }

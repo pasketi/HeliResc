@@ -8,15 +8,21 @@ public class CopterSelection : MonoBehaviour {
     private GameManager gameManager;
 
     private Dictionary<int, CopterEntryScript> copterEntries;
+    private Dictionary<string, Copter> allCopters;
+
 
 	public Text engineText;
 	public Text fuelText;
-	public Text ropeText;
-	public Image copterInfoImage;
-	private GameObject copterInfoPanel;
+    public Text ropeText;
+	
 
     public GridLayoutGroup group;
     public GameObject copterEntry;
+
+    void Start() {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        allCopters = gameManager.CopterScripts;
+    }
 
 	// Use this for initialization
     //void Start () {
