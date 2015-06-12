@@ -25,9 +25,9 @@ public class ObstacleManager : MonoBehaviour {
         if (collision.gameObject.transform.tag == "Copter") {
 			if (!instaKill) {
 				if (!fixedDamage) { 
-					collision.gameObject.GetComponent<Copter>().health.TakeDamage(-collision.relativeVelocity.magnitude * damageMultiplier);
+					collision.gameObject.GetComponent<Copter>().health.TakeDamage(collision.relativeVelocity.magnitude * damageMultiplier);
 				} else {
-                    collision.gameObject.GetComponent<Copter>().health.TakeDamage(-fixedDamageAmount);
+                    collision.gameObject.GetComponent<Copter>().health.TakeDamage(fixedDamageAmount);
 				}
 			} else GameObject.Find("LevelManagerO").GetComponent<LevelManager>().levelFailed(1);
 
@@ -55,7 +55,7 @@ public class ObstacleManager : MonoBehaviour {
             {
                 if (fixedDamage)
                 {
-                    other.gameObject.GetComponent<Copter>().health.TakeDamage(-fixedDamageAmount);
+                    other.gameObject.GetComponent<Copter>().health.TakeDamage(fixedDamageAmount);
                 }
             }
             else GameObject.Find("LevelManagerO").GetComponent<LevelManager>().levelFailed(1);

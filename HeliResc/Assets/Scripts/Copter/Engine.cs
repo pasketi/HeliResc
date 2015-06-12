@@ -21,13 +21,25 @@ public class Engine : Upgradable {
     private float persistence = 1;  //Limits the return speed
 
     private bool hasFuel = true;
+    private bool hasInput;
 
     //power related variables
     public float minPower;
     public float currentPower;
     public float maxPower;
+    [Range(0,1)]
+    public float snapToPlatformPower = 0.85f;                       //How hard the copter snaps to platform when entering its trigger. 
     public float CurrentPower { get { return currentPower; } }
     public float CurrentPowerPercentage { get { return currentPower / maxPower; } }
+
+    public override void RegisterListeners() {
+        EventManager.StartListening("EnterPlatform", EnterPlatform);
+        EventManager.StartListening("ExitPlatform", ExitPlatform);
+    }
+    public override void UnregisterListeners() {
+        EventManager.StopListening("EnterPlatform", EnterPlatform);
+        EventManager.StopListening("ExitPlatform", ExitPlatform);
+    }
 
     public override void Init(Copter copter) {
         base.Init(copter);
@@ -41,7 +53,10 @@ public class Engine : Upgradable {
     public override void Upgrade() {
         throw new System.NotImplementedException();
     }
-
+    public void PlatformUpdate() {
+        copterAngle = playerRb.transform.eulerAngles.z;
+        Thrust();
+    }
     public void FuelUpdate() {
         copterAngle = playerRb.transform.eulerAngles.z;        
 
@@ -65,15 +80,28 @@ public class Engine : Upgradable {
 
     public override void TouchStart(MouseTouch touch) {        
         currentAngle = copterAngle;
+        hasInput = true;
     }
     public override void TouchEnd(MouseTouch touch) {
         tempHoldTime = 0;       //Reset tempholdtime
+        hasInput = false;
     }
 
     public override void InputUpdate(MouseTouch touch) {
         HandleRotation(touch);
         HandlePower(touch);
         
+    }
+
+    private void EnterPlatform() {
+
+        UpdateDelegate = PlatformUpdate;
+        if (hasInput == true) return; //Do not snap if there is player input
+        currentPower *= snapToPlatformPower;
+        
+    }
+    private void ExitPlatform() {
+        UpdateDelegate = FuelUpdate;
     }
 
     private void AutoHoover() {
