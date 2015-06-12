@@ -10,6 +10,9 @@ public class CopterSelection : MonoBehaviour {
     private Dictionary<int, CopterEntryScript> copterEntries;
     private Dictionary<string, Copter> allCopters;
 
+    public Button b0;
+    public Button b1;
+    public Button b2;
 
 	public Text engineText;
 	public Text fuelText;
@@ -21,7 +24,13 @@ public class CopterSelection : MonoBehaviour {
 
     void Start() {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        allCopters = gameManager.CopterScripts;
+        b0.onClick.AddListener(() => SetCopter(0));
+        b1.onClick.AddListener(() => SetCopter(1));
+        b2.onClick.AddListener(() => SetCopter(2));
+    }
+
+    void SetCopter(int i) {
+        gameManager.setCurrentCopter(i);
     }
 
 	// Use this for initialization
