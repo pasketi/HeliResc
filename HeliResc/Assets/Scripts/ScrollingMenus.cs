@@ -9,8 +9,11 @@ public class ScrollingMenus : MonoBehaviour {
 	
 	public GameObject[] go;		//Order of canvases: 1. MainMenu 2.LevelEnd 3. Upgrades
 	public List<GameObject> menus;
-
+    
     public RectTransform copterSelect;
+    public RectTransform moneyPanel;        //Reference to money on top right corner
+    public float moneyScrollSpeed = 400;
+    private float moneyHideHeight;          //Height to hide the money panel
 	
 	private float[] canvasAnchorPoints;
 	private Vector3[] panelAnchorPoints;
@@ -26,6 +29,7 @@ public class ScrollingMenus : MonoBehaviour {
 	private Transform menuPanel;	//parent of the menu gameobjects
 	
 	private int current = 0;			//The index of the current menu
+    private int previousMenu = 0;       //Previous menus index
 	private Vector3 mouseStart;			//Position in screen space where player tapped the screen
 	private Vector3 mouseEnd;			//Position where player's tap ended
 	private float swipeAmount;			//Amount in percentage of the screen width how much the player should drag before changing the menu
@@ -33,6 +37,7 @@ public class ScrollingMenus : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+        
 		menus = new List<GameObject> ();
 		swipeAmount = Screen.width * .2f;
 		menuPanel = go[0].transform.parent;
@@ -69,9 +74,18 @@ public class ScrollingMenus : MonoBehaviour {
 		scrollingSpeed = Screen.width * 1.25f;
 		originalSpeed = scrollingSpeed;
 		slowedSpeed = scrollingSpeed * 0.75f;
+
+        moneyPanel.sizeDelta = new Vector2(Screen.width * 0.25f, Screen.height * 0.09f);    //Set the position of the money panel
+        moneyHideHeight = Screen.height * 0.35f;
+        if (current == 0) {
+            moneyPanel.anchoredPosition = new Vector2(0, moneyHideHeight);
+        }
+                
 	}
 	
 	void Update() {
+        
+        
 		if(Input.GetMouseButtonDown(0)){
 
             Vector2 sizeDelta = new Vector2(Screen.width * (copterSelect.anchorMax.x - copterSelect.anchorMin.x), Screen.height * (copterSelect.anchorMax.y - copterSelect.anchorMin.y));
@@ -88,17 +102,23 @@ public class ScrollingMenus : MonoBehaviour {
             }
 		}
 		if(Input.GetMouseButtonUp(0)) {
+            previousMenu = current;
 			mouseEnd = Input.mousePosition;
 			if(mouseEnd.x < mouseStart.x) {			//Player dragged from right to left
-				if(mouseStart.x - mouseEnd.x > swipeAmount)
-					current = current < menus.Count - 1 ? current + 1 : menus.Count - 1;
+                if (mouseStart.x - mouseEnd.x > swipeAmount) {
+                    current = current < menus.Count - 1 ? current + 1 : menus.Count - 1;
+                    StartCoroutine(SetMoneyPanelPosition());
+                }
 			} else if(mouseEnd.x > mouseStart.x){	//Player dragged from left to right
-				if(mouseEnd.x - mouseStart.x > swipeAmount)
-					current = current > 0 ? current - 1 : 0;
+                if (mouseEnd.x - mouseStart.x > swipeAmount) {
+                    current = current > 0 ? current - 1 : 0;
+                    StartCoroutine(SetMoneyPanelPosition());
+                }
 			}
 			isScrolling = true;
 			isDragging = false;
-			target = panelAnchorPoints[current];
+			target = panelAnchorPoints[current];            
+            
 		}
 		if(Input.GetMouseButton(0) && isDragging) {	//Move the panel when the player is dragging
 			menuPanel.position -= Vector3.right * ((Mathf.Abs(previousPosition.x) - Mathf.Abs(Input.mousePosition.x)));
@@ -124,8 +144,32 @@ public class ScrollingMenus : MonoBehaviour {
 			}
 		}
 	}
+
+    private IEnumerator SetMoneyPanelPosition() {
+        if (current == 0) { 
+            Vector2 v = Vector2.zero;
+            float previousTime = Time.time;
+            while (moneyPanel.anchoredPosition.y < moneyHideHeight) {
+                moneyPanel.anchoredPosition += Vector2.up * (Time.time-previousTime) * moneyScrollSpeed;
+                previousTime = Time.time;
+                yield return null;
+            }
+            moneyPanel.anchoredPosition = Vector2.up * moneyHideHeight;
+        }
+        else if (previousMenu == 0) {
+            Vector2 v = Vector2.zero;
+            float previousTime = Time.time;
+            while (moneyPanel.anchoredPosition.y > 0) {
+                moneyPanel.anchoredPosition -= Vector2.up * (Time.time - previousTime) * moneyScrollSpeed;
+                previousTime = Time.time;
+                yield return null;
+            }
+            moneyPanel.anchoredPosition = Vector2.zero;
+        }
+    }
 	
 	public void ShowUpgrades() {
+        previousMenu = current;
 		for (int i = 0; i < menus.Count; i++) {
 			if(menus[i].name.Equals("Upgrades")) {
 				current = i;
@@ -134,12 +178,18 @@ public class ScrollingMenus : MonoBehaviour {
 				isDragging = false;
 			}
 		}
+        StartCoroutine(SetMoneyPanelPosition());
 	}
 
     public void ShowMainMenu() {
-        current = 0;
+        previousMenu = current;
+        current = 1;
         target = panelAnchorPoints[current];
         isScrolling = true;
         isDragging = false;
+        StartCoroutine(SetMoneyPanelPosition());
+    }
+    public void ShowLevelMap() {
+        Application.LoadLevel("LevelMap");
     }
 }

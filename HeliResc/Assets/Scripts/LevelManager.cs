@@ -24,10 +24,12 @@ public class LevelManager : MonoBehaviour {
     void OnEnable() {
         EventManager.StartListening("CopterExplode", CopterExploded);
         EventManager.StartListening("CopterSplash", CopterSplashed);
+        EventManager.StartListening(SaveStrings.escape, backButton);
     }
     void OnDisable() {
         EventManager.StopListening("CopterExplode", CopterExploded);
         EventManager.StopListening("CopterSplash", CopterSplashed);
+        EventManager.StopListening(SaveStrings.escape, backButton);
     }
 
 	// Use this for initialization
@@ -148,6 +150,13 @@ public class LevelManager : MonoBehaviour {
 			Time.timeScale = 1f;
 		}
 	}
+    public void backButton() {
+        if (gamePaused == true) {
+            Application.LoadLevel("LevelMap");
+        } else {
+            pause();
+        }
+    }
 
 	public bool isDamageTaken () {
 		return takenDamage;
@@ -182,7 +191,7 @@ public class LevelManager : MonoBehaviour {
         end.star2 = objectives.LevelObjective2();
         end.star3 = objectives.LevelObjective3();
 
-        gameManager.loadMainMenu(true, end, 1);
+        gameManager.loadMainMenu(true, end, 2);
     }
 
     private void loseLevel() {
@@ -192,7 +201,7 @@ public class LevelManager : MonoBehaviour {
 
 
         LevelEndInfo end = new LevelEndInfo(false, loseCondition);
-        gameManager.loadMainMenu(true, end, 1);
+        gameManager.loadMainMenu(true, end, 2);
     }
 
 	public void backToMainMenu () {

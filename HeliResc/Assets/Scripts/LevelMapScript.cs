@@ -8,6 +8,13 @@ public class LevelMapScript : MonoBehaviour {
 
 	private RectTransform rect;	//Reference to the panel's rect transform
 
+    void OnEnable() {
+        EventManager.StartListening(SaveStrings.escape, BackButton);
+    }
+    void OnDisable() {
+        EventManager.StopListening(SaveStrings.escape, BackButton);
+    }
+
 	// Use this for initialization
 	void Awake () {
 		rect = GetComponent<RectTransform>();
@@ -40,4 +47,7 @@ public class LevelMapScript : MonoBehaviour {
 		rect.anchoredPosition = newPos;
 	}
 
+    private void BackButton() {
+        GameObject.Find("GameManager").GetComponent<GameManager>().loadMainMenu(false, null, 0);
+    }
 }

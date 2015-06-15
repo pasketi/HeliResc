@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public class SaveStrings {
 
-    public static string money = "Money";    
+    //Save strings
+    public static string money = "Money";
+    public static string autoHoover = "AutoHoover";
+    
+    //Event strings
+    public static string escape = "Escape";
 
 }

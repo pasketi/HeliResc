@@ -4,6 +4,13 @@ using System.Collections;
 
 public class GameStoryScript : MonoBehaviour {
 
+    void OnEnable() {
+        EventManager.StartListening(SaveStrings.escape, Application.Quit);   
+    }
+    void OnDisable() {
+        EventManager.StopListening(SaveStrings.escape, Application.Quit);
+    }
+
 	// Use this for initialization
 	void Awake () {
         Button b = GetComponent<Button>();

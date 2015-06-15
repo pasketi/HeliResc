@@ -22,6 +22,7 @@ public class Engine : Upgradable {
 
     private bool hasFuel = true;
     private bool hasInput;
+    private bool useAutoHoover = true;
 
     //power related variables
     public float minPower;
@@ -48,6 +49,7 @@ public class Engine : Upgradable {
         UpdateDelegate = FuelUpdate;                    //Start with having fuel
 
         tempHoldTime = holdTime;
+        useAutoHoover = PlayerPrefsExt.GetBool(SaveStrings.autoHoover);
     }
 
     public override void Upgrade() {
@@ -105,6 +107,7 @@ public class Engine : Upgradable {
     }
 
     private void AutoHoover() {
+        if (useAutoHoover == false) return;
         Vector2 vel = playerRb.velocity;
         if (!Mathf.Approximately(vel.y, 0)) {
             float y = 0.25f * Mathf.Abs(vel.y);

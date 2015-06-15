@@ -8,17 +8,20 @@ public class WhaleScript : MonoBehaviour {
     public GameObject waterDrop;
     public int amountPerSecond;
     public float time;
-
+    public ParticleSystem clouds;
     private List<GameObject> pool;
 
 	// Use this for initialization
 	void Start () {
+        clouds = GetComponentInChildren<ParticleSystem>();
+        
         pool = new List<GameObject>();
 
         int a = (int)(time * amountPerSecond);
         for (int i = 0; i < a; i++) {
             GameObject g = Instantiate(waterDrop) as GameObject;
             g.transform.parent = spawnPoint;
+            g.layer = LayerMask.NameToLayer("WaterDrop" + (i % 3).ToString());
             g.SetActive(false);
             pool.Add(g);
         }
@@ -30,11 +33,19 @@ public class WhaleScript : MonoBehaviour {
             Launch();
 	}
 
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.name.Equals("Copter")) {
+            Launch();
+        }
+    }
+
     void Launch() {
         StartCoroutine(Launcher());
     }
+    
 
     IEnumerator Launcher() {
+        clouds.Play();
         int amount = 3;
         float t = time / pool.Count * amount;
         float startTime = Time.time;
@@ -47,12 +58,13 @@ public class WhaleScript : MonoBehaviour {
                 pool[i+j].SetActive(true);
                 Rigidbody2D rb = pool[i + j].GetComponent<Rigidbody2D>();
                 rb.velocity = Vector2.right * Random.Range(-0.75f, 0.75f);
-                pool[i + j].transform.position = spawnPoint.position;                
+                pool[i + j].transform.position = spawnPoint.position;          
             }
             remainingTime -= (Time.time - startTime);
             startTime = Time.time;
             yield return null; // new WaitForSeconds(t);
         }
+        clouds.Stop();
         Debug.Log("End " + Time.time);
     }
 }

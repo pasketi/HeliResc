@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour {
     public GameObject[] copters;
     public Dictionary<string, Copter> CopterScripts;                                                        //List of all copters Copter script. Access with the copters name
     public GameObject CurrentCopter { get { return copters[CurrentCopterIndex]; } }                         //Returns the selected copter prefab
-    public Copter CurrentCopterScript { get { return CopterScripts[CurrentCopter.name]; } }                 //Return the selected copters Copter script
     public int CurrentCopterIndex { get { return Mathf.Clamp(currentCopter, 0, copters.Length - 1); } }     //The currently selected copter
 
 
@@ -36,8 +35,11 @@ public class GameManager : MonoBehaviour {
 					playerPlatform = 1,
 					currentCopter = 1,  //0 == default, 1 = watercopter
 					lastStars = 0,
-					lastCoins = 0;	
+					lastCoins = 0;
+
     
+    
+
 	// Use this for initialization
 	void Start () {
               
@@ -45,7 +47,7 @@ public class GameManager : MonoBehaviour {
         CopterScripts = new Dictionary<string,Copter>();
         foreach(GameObject go in copters){
             Copter c = Instantiate(go).GetComponent<Copter>();            
-            CopterScripts.Add(go.name, c);
+            CopterScripts.Add(c.name, c);
             c.Disable();
         }
      
@@ -55,15 +57,22 @@ public class GameManager : MonoBehaviour {
             load();
         }
 	}
-	
+    void OnDisable() {
+        EventManager.StopListening(SaveStrings.escape, Application.Quit);
+    }
 	// Update is called once per frame
 	void Update () {
-        
+
         if (Input.GetKeyDown(KeyCode.Escape))
-            wallet.AddMoney(1);
+            EventManager.TriggerEvent(SaveStrings.escape);
 	}
 
     void OnLevelWasLoaded(int level) {
+        
+        //Quit the game when player press back button
+        if(level == 1) EventManager.StartListening(SaveStrings.escape, Application.Quit);
+        else EventManager.StopListening(SaveStrings.escape, Application.Quit);
+
         if (level == 1 && !PlayerPrefs.HasKey("FirstLogin")) {
             PlayerPrefsExt.SetBool("FirstLogin", true);
             Application.LoadLevel("GameStory");

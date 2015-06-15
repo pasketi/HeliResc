@@ -17,8 +17,8 @@ public class UpgradeScreen : MonoBehaviour {
         rTransform = GetComponent<RectTransform>();        
 
         List<Upgrade> ups = new List<Upgrade>();
-        Copter c = GameObject.Find("GameManager").GetComponent<GameManager>().CurrentCopterScript;
-        
+        Copter c = null;// GameObject.Find("GameManager").GetComponent<GameManager>().CurrentCopterScript;
+        return;
         foreach (Upgradable u in c.Upgrades.Values) {
             if(u.allowUpgrade == true)
                 ups.Add(u.upgrade);
