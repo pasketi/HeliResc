@@ -6,6 +6,7 @@ public class WhaleScript : MonoBehaviour {
 
     public Transform spawnPoint;
     public GameObject waterDrop;
+    public GameObject waterDrop2;
     public int amountPerSecond;
     public float time;
     public ParticleSystem clouds;
@@ -19,7 +20,12 @@ public class WhaleScript : MonoBehaviour {
 
         int a = (int)(time * amountPerSecond);
         for (int i = 0; i < a; i++) {
-            GameObject g = Instantiate(waterDrop) as GameObject;
+            GameObject g = null;
+            if (i%3 == 0) {
+                g = Instantiate(waterDrop2) as GameObject;
+            } else {
+                g = Instantiate(waterDrop) as GameObject;
+            }
             g.transform.parent = spawnPoint;
             g.layer = LayerMask.NameToLayer("WaterDrop" + (i % 3).ToString());
             g.SetActive(false);
