@@ -191,7 +191,7 @@ public class TutorialScript : MonoBehaviour {
 
     #region Step_Methods
     private IEnumerator Step1() {
-        FingerAnimation finger = GameObject.FindObjectOfType<FingerAnimation>();
+        Tutorial1 finger = GameObject.FindObjectOfType<Tutorial1>();
 
         playerRB.isKinematic = true;
 
