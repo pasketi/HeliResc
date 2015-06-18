@@ -60,7 +60,7 @@ public class MissionObjectives : MonoBehaviour {
 
     public bool Tutorial() {
         TutorialScript t = GameObject.FindObjectOfType<TutorialScript>();
-        return t.FuelRepair;
+        return t.FuelUsed;
     }
 
     public LevelObjective GetMethod(Objective o) {

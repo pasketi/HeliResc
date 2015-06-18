@@ -10,9 +10,11 @@ public class ObstacleManager : MonoBehaviour {
 	public bool instaKill = false, fixedDamage = false, killsHook = false, diesOnContact = false;
 	public float damageMultiplier = 1f, fixedDamageAmount = 20f;
 
+    private Copter copter;
+
 	// Use this for initialization
 	void Start () {
-
+        copter = GameObject.Find("Copter").GetComponent<Copter>();
 	}
 	
 	// Update is called once per frame
@@ -37,7 +39,7 @@ public class ObstacleManager : MonoBehaviour {
 		}
 
 		if (collision.gameObject.transform.tag == "Hook" || collision.gameObject.transform.tag == "Crate") {
-            if (killsHook) collision.gameObject.GetComponent<Copter>().rope.KillHook();
+            if (killsHook) copter.rope.KillHook();
 
 			if (diesOnContact && deathAnimation != null) 
 				Instantiate (deathAnimation, transform.position, Quaternion.identity);

@@ -78,8 +78,8 @@ public class CopterManagerTouch : MonoBehaviour {
 
         LandingPadManager[] landings = GameObject.FindObjectsOfType<LandingPadManager>();
         foreach (LandingPadManager l in landings) {
-            l.enterPlatform += EnterPlatform;
-            l.exitPlatform += ExitPlatform;
+            //l.enterPlatform += EnterPlatform;
+            //l.exitPlatform += ExitPlatform;
         }
 	}
 	

@@ -5,10 +5,9 @@ using System;
 
 public class TutorialScript : MonoBehaviour {
 
-    private bool useFuel, useRepair, useFinish; //Trigger 1 fuel, trigger 2 repair, trigger 3 goals
+    private bool useFuel; //Trigger 1 fuel, trigger 2 repair, trigger 3 goals
     private bool tr1Enter, tr2Enter;
-
-    public Animator pelicanAlertAnimator;   //Reference to the animator component of the pelican alert
+    
 
     public GameObject balls1;
     public GameObject balls2;
@@ -18,10 +17,8 @@ public class TutorialScript : MonoBehaviour {
 
     public GameObject fingerPointer; //References to the gameobjects of fingers pointing the buttons
     private bool onLandingPad;    
-
-    private TutorialPelican pelican;
-    private bool pelicanCollided;
-    public bool FuelRepair { get { return (useFuel && useRepair); } }
+  
+    public bool FuelUsed { get { return (useFuel); } }
 
     private Rigidbody2D playerRB;
 
@@ -33,22 +30,15 @@ public class TutorialScript : MonoBehaviour {
 
     void OnEnable() {
         EventManager.StartListening("Fuel", PressFuel);
-        EventManager.StartListening("Repair", PressRepair);
-        EventManager.StartListening("Finish", PressFinish);
     }
     void OnDisable() {
         EventManager.StopListening("Fuel", PressFuel);
-        EventManager.StopListening("Repair", PressRepair);
-        EventManager.StopListening("Finish", PressFinish);
     }
 
 	// Use this for initialization
 	void Start () {
 
-        pelican = GameObject.FindObjectOfType<TutorialPelican>();
-        pelican.PelicanTriggered += HitPelicanTrigger;
-        pelican.obstacle.ObstacleHit += HitPelican;
-
+        
         playerRB = GameObject.Find("Copter").GetComponent<Rigidbody2D>();
 
         landingPads = GameObject.FindObjectsOfType<LandingPadManager>();
@@ -65,29 +55,10 @@ public class TutorialScript : MonoBehaviour {
 
         StartCoroutine(Step1());        
 	}
-
-    private void HitPelicanTrigger() {
-        playerRB.isKinematic = true;
-        pelicanAlertAnimator.Play("PelicanAlert");
-    }
-    private void HitPelican(string tag) {
-        pelicanCollided = true;
-        playerRB.isKinematic = false;
-    }
-
+    
     private void PressFuel() { 
         useFuel = true; 
         currentPlatformButtons.HideFuel();
-        StartCoroutine(FadeOutBalls(fingerPointer, 0.2f));
-    }
-    private void PressRepair() { 
-        useRepair = true; 
-        currentPlatformButtons.HideRepair();
-        StartCoroutine(FadeOutBalls(fingerPointer, 0.2f));
-    }
-    private void PressFinish() { 
-        useFinish = true; 
-        currentPlatformButtons.HideVictory();
         StartCoroutine(FadeOutBalls(fingerPointer, 0.2f));
     }
 
@@ -104,35 +75,28 @@ public class TutorialScript : MonoBehaviour {
         }
     }
 
-    private void EnterPlatform(string name) {
+    private void EnterPlatform(GameObject name) {
         onLandingPad = true;
         currentPlatformButtons = null;
         foreach (LandingPadManager l in landingPads) {            
-            if (l.transform.root.name.Equals(name)) {
-                Debug.Log(name + "Name was this");
+            if (l.transform.root.name.Equals(name.name)) {                
                 currentPlatformButtons = l.gameObject.GetComponentInChildren<PlatformButtons>();
             }
         }
 
-        switch (name) {
+        switch (name.name) {
             case "LandingBoat2":
                 TriggerEnter(1);
                 currentPlatformButtons.ShowFuel(false);
                 StartCoroutine(SetFingerPosition(0));
-                break;
-            case "PalmIsland east":
-                TriggerEnter(2);
-                currentPlatformButtons.ShowRepair(false);
-                StartCoroutine(SetFingerPosition(1));
-                break;
+                break;            
             case "LandingBoat":
-                currentPlatformButtons.ShowVictory(false);
-                StartCoroutine(SetFingerPosition(2));
+                //Winning code here: launch fireworks
                 break;
         }
 
     }
-    private void ExitPlatform(string name) {
+    private void ExitPlatform(GameObject name) {
         onLandingPad = false;
         PlatformButtons landing = null;
         foreach (LandingPadManager l in landingPads)
@@ -143,22 +107,13 @@ public class TutorialScript : MonoBehaviour {
             }
         }
 
-        switch (name)
+        switch (name.name)
         {
             case "LandingBoat2":
                 landing.HideFuel();
                 if(useFuel == false)
                     StartCoroutine(FadeOutBalls(fingerPointer, 0.2f));
-                break;
-            case "PalmIsland east":
-                landing.HideRepair();
-                if(useRepair == false)
-                    StartCoroutine(FadeOutBalls(fingerPointer, 0.2f));
-                break;
-            case "LandingBoat":
-                landing.HideVictory();
-                StartCoroutine(FadeOutBalls(fingerPointer, 0.2f));
-                break;
+                break;            
         }
         
         playerRB.isKinematic = false;
@@ -169,20 +124,12 @@ public class TutorialScript : MonoBehaviour {
 
         if (onLandingPad == false) yield break;                 //Don't show the finger if not on landing pad or...
         else if (index == 0 && useFuel == true) yield break;    //if already pressed fuel button and on the first landing pad or...
-        else if (index == 1 && useRepair == true) yield break;  //if pressed the repair button and on the repair platform
+        
 
         StartCoroutine(FadeInBalls(fingerPointer, 0.05f));        
         Transform t = null;
-        switch(index) {
-            case 0:                
-                t = currentPlatformButtons.transform.Find("Fill Tank Button").Find("Position");
-                break;
-            case 1:               
-                t = currentPlatformButtons.transform.Find("Repair Button").Find("Position");
-                break;
-            case 2:
-                t = currentPlatformButtons.transform.Find("Finish Button").Find("Position");
-                break;
+        if(index == 0) {                            
+            t = currentPlatformButtons.transform.Find("Fill Tank Button").Find("Position");                
         }
         Vector3 vec = new Vector3(1, 1, 0).normalized;
         Debug.Log(t.position + " Position of the rect transform. Name: " + t.name);
@@ -202,7 +149,6 @@ public class TutorialScript : MonoBehaviour {
         playerRB.isKinematic = false;        
 
         StartCoroutine(Step2());
-        StartCoroutine(Step7());
     }
     private IEnumerator Step2() {
 
@@ -222,40 +168,9 @@ public class TutorialScript : MonoBehaviour {
         }
 
         StartCoroutine(FadeInBalls(balls2, 0.05f));
-        //playerRB.isKinematic = false;
-        StartCoroutine(Step4());
-    }
-    private IEnumerator Step4() {        
-
-        while (!pelicanCollided)
-        {
-            yield return null;
-        }
-
-        StartCoroutine(Step5());
-    }
-    private IEnumerator Step5() {
-
-        while (!tr2Enter)
-        {
-            yield return null;
-        }
-        StartCoroutine(Step6());
-    }
-    private IEnumerator Step6() {
-        StartCoroutine(FadeOutBalls(balls2, 0.3f));
-        while (!useRepair)
-        {
-            yield return null;
-        }
-        StartCoroutine(FadeInBalls(balls3, 0.05f));
-    }
-    private IEnumerator Step7() {
-        StartCoroutine(FadeOutBalls(balls3, 0.3f));
-        while (!useFinish) {
-            yield return null;
-        }        
-    }
+    }    
+    
+    
     #endregion
 
     private IEnumerator FadeInBalls(GameObject ballParent, float time)
@@ -276,9 +191,9 @@ public class TutorialScript : MonoBehaviour {
             {
                 Color c = s.color;
                 c.a += time;
-                s.color = c;
-                yield return null;
+                s.color = c;                
             }
+            yield return null;
         }
         Debug.Log("End time: " + Time.time);
     }
@@ -298,9 +213,9 @@ public class TutorialScript : MonoBehaviour {
             {
                 Color c = s.color;
                 c.a -= time;
-                s.color = c;
-                yield return null;
+                s.color = c;               
             }
+            yield return null;
         }
     }
 }

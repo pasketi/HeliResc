@@ -58,7 +58,6 @@ public static class SaveLoad {
 	}
 
     public static int LoadUpgradeLevel(string name) {
-        Debug.Log("Has the key: " + name + ": " + PlayerPrefs.HasKey(name));
         if (PlayerPrefs.HasKey(name))
             return PlayerPrefs.GetInt(name);
         return -1;

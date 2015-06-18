@@ -4,9 +4,13 @@ using System.Collections;
 
 public class LandingPadManager : MonoBehaviour {
 
-    public delegate void LandingEvent(string name);
-    public event LandingEvent enterPlatform = (string name) => { };
-    public event LandingEvent exitPlatform = (string name) => { };
+    public delegate void LandingEvent(GameObject go);
+    public event LandingEvent enterPlatform = (GameObject platform) => { };
+    public event LandingEvent exitPlatform = (GameObject platform) => { };
+
+    public bool canWin = false;
+    private MissionObjectives objectives;
+    private LevelManager manager;
 
     private bool repair, refill;
 	private float cycle;
@@ -18,6 +22,8 @@ public class LandingPadManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		copter = GameObject.Find ("Copter").GetComponent<Copter>();
+        objectives = GameObject.FindObjectOfType<MissionObjectives>();
+        manager = GameObject.FindObjectOfType<LevelManager>();
 	}
 	
 	// Update is called once per frame
@@ -31,9 +37,16 @@ public class LandingPadManager : MonoBehaviour {
 
 		if (other.gameObject.transform.tag == "Copter") {
 
-            if (enterPlatform != null) enterPlatform(transform.root.name);
+            if (canWin == true) { 
+                bool win = objectives.AllObjectiveCompleted();
+                if (win == true)
+                    manager.levelPassed();
+            }
+
+            if (enterPlatform != null) enterPlatform(gameObject);
             EventManager.TriggerEvent("EnterPlatform");
-            
+                        
+
             //if (cargo.getCargoCrates() > 0) {
             //    cargo.emptyCargo();
             //    other.GetComponent<CopterManagerTouch>().resetPower();
@@ -62,8 +75,11 @@ public class LandingPadManager : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D other) {
 		if (other.gameObject.transform.tag == "Copter") {
-            if (exitPlatform != null) exitPlatform(transform.root.name);
+            
+            //Trigger the landing events
+            exitPlatform(gameObject);
             EventManager.TriggerEvent("ExitPlatform");
+            
             //repair = false;
             //refill = false;
 			GameObject.Find ("HUD").GetComponent<UIManager> ().refill = false;
@@ -83,8 +99,8 @@ public class LandingPadManager : MonoBehaviour {
 
     public void ResetEvents()
     {
-        enterPlatform = (string name) => { };
-        exitPlatform = (string name) => { };
+        enterPlatform = (GameObject platform) => { };
+        exitPlatform = (GameObject platform) => { };
     }
 
     public void StartRepair() {

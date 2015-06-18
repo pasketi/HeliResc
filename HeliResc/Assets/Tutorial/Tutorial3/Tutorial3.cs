@@ -8,13 +8,13 @@ public class Tutorial3 : MonoBehaviour {
 
     private Animator animator;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    // Use this for initialization
+    void Start() {
+        animator = GetComponent<Animator>();
+        animator.Play("HookAnimation");
+    }
+
+    public void ClickedOK() {
+        gameObject.SetActive(false);
+    }
 }
