@@ -27,16 +27,12 @@ public class FuelTank : Upgradable {
     public override void Upgrade() {
         throw new System.NotImplementedException();
     }
-
-    //DELETE MAYHAPS?
-    public void UpdateTank() {        
-        if (useFuel == true) {
-            UseFuel();
-        } else if (fill == true) {
-            FillFuel();
-        }
+    public void Kinematic(bool k) {
+        if (k == true)
+            UpdateDelegate = () => { };
+        else
+            UpdateDelegate = UseFuel;
     }
-
     public void FillTank() {
         UpdateDelegate = FillFuel;
         fill = true;

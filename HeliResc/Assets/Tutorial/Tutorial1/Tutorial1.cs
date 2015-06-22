@@ -30,6 +30,7 @@ public class Tutorial1 : MonoBehaviour {
         animator.Play("FirstTip");
 
         Invoke("ActivateButton", 1.25f);
+        GameObject.Find("Copter").GetComponent<Copter>().Kinematic(true);
     }
 
     private void ActivateButton() {
@@ -44,6 +45,7 @@ public class Tutorial1 : MonoBehaviour {
         } else {
             clickedOnce = true;
             text.text = "Tilt";
+            GameObject.Find("Copter").GetComponent<Copter>().Kinematic(false);
             animator.Play("SecondTip");
         }
     }

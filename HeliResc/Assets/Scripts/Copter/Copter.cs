@@ -129,6 +129,14 @@ public abstract class Copter : MonoBehaviour {
     public virtual void TurnCopterOff() {
         UpdateMethod = TurnedOffUpdate;
     }
+    public virtual void Kinematic(bool p) {
+        copterBody.isKinematic = p;
+        fuelTank.Kinematic(p);
+        if (p == true)
+            input.DisableInput();
+        else
+            input.EnableInput();
+    }
     public virtual void Disable() {
         gameObject.SetActive(false);
     }

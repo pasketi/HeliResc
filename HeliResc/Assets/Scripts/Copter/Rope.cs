@@ -23,9 +23,11 @@ public class Rope : Upgradable {
 
     public override void RegisterListeners() {
         EventManager.StartListening("CopterExplode", KillHook);
+        EventManager.StartListening("EnterPlatform", RestoreHook);
     }
     public override void UnregisterListeners() {
         EventManager.StopListening("CopterExplode", KillHook);
+        EventManager.StopListening("EnterPlatform", RestoreHook);
     }
 
     public override void Init(Copter copter) {
@@ -100,12 +102,16 @@ public class Rope : Upgradable {
         hookJoint.connectedBody = hook.GetComponent<Rigidbody2D>();
         hookJoint.distance = hookDistance;
         hook.transform.position = hookAnchor.transform.position;
+        UpdateDelegate = HookOutUpdate;
     }
     public void KillHook() {
         if (hookOut == false) return;
         hasHook = false;
         hookJoint.enabled = false;
         hook.GetComponent<LineRenderer>().enabled = false;        
+    }
+    protected virtual void RestoreHook() {
+        hasHook = true;
     }
     protected override void GiveName() {
         name = "Rope";

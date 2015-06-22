@@ -13,9 +13,11 @@ public class Tutorial2 : MonoBehaviour {
 	void Start () {
         animator = GetComponent<Animator>();
         animator.Play("FuelAnimation");
+        GameObject.Find("Copter").GetComponent<Copter>().Kinematic(true);
 	}
 
     public void ClickedOK() {
+        GameObject.Find("Copter").GetComponent<Copter>().Kinematic(false);
         gameObject.SetActive(false);
     }
 }

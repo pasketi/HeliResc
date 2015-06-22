@@ -9,6 +9,7 @@ public class FingerAnimation : MonoBehaviour {
     private Animator animator;
 
     private bool showVertical;
+    private Copter player;
 
     [HideInInspector]
     public bool finished;
@@ -16,7 +17,7 @@ public class FingerAnimation : MonoBehaviour {
     private bool clickedOnce;
 
     void Awake() {
-        okButton.interactable = false;
+        okButton.interactable = false;        
     }
 
     // Use this for initialization
@@ -25,11 +26,14 @@ public class FingerAnimation : MonoBehaviour {
         finished = false;
         clickedOnce = false;
 
+        
         animator = GetComponent<Animator>();
 
         animator.Play("FirstTip");
 
         Invoke("ActivateButton", 1.25f);
+        player = GameObject.Find("Copter").GetComponent<Copter>();
+        player.Kinematic(true);
     }
 
     private void ActivateButton() {
@@ -39,7 +43,8 @@ public class FingerAnimation : MonoBehaviour {
     public void ClickedOK() {                    
         if(clickedOnce == true)
         {
-            finished = true;            
+            finished = true;
+            player.Kinematic(false);
             gameObject.SetActive(false);
         } else {
             clickedOnce = true;

@@ -12,9 +12,11 @@ public class Tutorial3 : MonoBehaviour {
     void Start() {
         animator = GetComponent<Animator>();
         animator.Play("HookAnimation");
+        GameObject.Find("Copter").GetComponent<Copter>().Kinematic(true);
     }
 
     public void ClickedOK() {
+        GameObject.Find("Copter").GetComponent<Copter>().Kinematic(false);
         gameObject.SetActive(false);
     }
 }

@@ -63,19 +63,22 @@ public class Engine : Upgradable {
         copterAngle = playerRb.transform.eulerAngles.z;        
 
         //Flip the copter depending on its angle
-        if (playerRb.velocity.x > 0)
+        if (playerRb.velocity.x > 0.1f)
         {
             playerCopter.Direction(true);   //True means to turn right
         }
-        else if (playerRb.velocity.x < 0)
+        else if (playerRb.velocity.x < -0.1f)
         {
             playerCopter.Direction(false);
         }
         Thrust();                           //Move the copter
     }
     public void NoFuelUpdate() {
-        if (currentPower > 0f) { 
-            currentPower -= currentPower * (currentPower / maxPower) * Time.deltaTime * 3f; 
+        copterAngle = playerRb.transform.eulerAngles.z;
+        if (currentPower > 0f) {
+            currentPower -= currentPower * (currentPower / maxPower) * Time.deltaTime * 3f;
+        } else {
+            currentPower = 0;
         }
         Thrust();
     }
@@ -127,9 +130,10 @@ public class Engine : Upgradable {
 
     public void IdleInput() {
         //If there is no input, autohoover and return the rotation back to 0
-        if (hasFuel == true)
+        if (hasFuel == true) {
             AutoHoover();
-        IdleRotation();
+
+        } IdleRotation();
     }
 
     private void HandlePower(MouseTouch touch) {
