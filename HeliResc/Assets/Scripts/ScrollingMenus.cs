@@ -106,7 +106,7 @@ public class ScrollingMenus : MonoBehaviour {
 			mouseEnd = Input.mousePosition;
 			if(mouseEnd.x < mouseStart.x) {			//Player dragged from right to left
                 if (mouseStart.x - mouseEnd.x > swipeAmount) {
-                    current = current < menus.Count - 1 ? current + 1 : menus.Count - 1;
+                    current = current < menus.Count - 1 ? current + 1 : menus.Count - 1;                    
                     StartCoroutine(SetMoneyPanelPosition());
                 }
 			} else if(mouseEnd.x > mouseStart.x){	//Player dragged from left to right
@@ -139,8 +139,10 @@ public class ScrollingMenus : MonoBehaviour {
 			if(Vector3.Distance(menuPanel.position, target) < 10) {		//if the panel is close enough, stop scrolling
 				isScrolling = false;
 				scrollingSpeed = originalSpeed;
-				Debug.Log ("Reach target");
+
 				menuPanel.position = target;
+                if (current == (menus.Count - 1))
+                    Application.LoadLevel("LevelMap");
 			}
 		}
 	}

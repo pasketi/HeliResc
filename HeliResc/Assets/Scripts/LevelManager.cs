@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		if (GameObject.Find("GameManager") != null){
-			Debug.Log("GameManager Found");
+
 			gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 			gameManager.load();
 			//copters = new GameObject[gameManager.getCopterAmount()];
@@ -54,6 +54,9 @@ public class LevelManager : MonoBehaviour {
 		if (gameManager != null) copter = Instantiate (gameManager.CurrentCopter, copterSpawnPoint.transform.position, Quaternion.identity) as GameObject;
 		//else copter = Instantiate (copters[0], copterSpawnPoint.transform.position, Quaternion.identity) as GameObject;
 		copter.name = "Copter";
+        copterScript = copter.GetComponent<Copter>();
+        cargoSize = copterScript.cargo.maxCapacity;
+        
 
 		resetCountdown = 3f;
 		//pauseScreen.SetActive(false);
@@ -69,7 +72,7 @@ public class LevelManager : MonoBehaviour {
 	void Update () {		
 		if (win) {
 			if (!once) {
-				Debug.Log("Victory!");
+
 				stars += 1;
 				if (!isDamageTaken()) stars += 1;
 				if (savedCrates == crateAmount) stars += 1;

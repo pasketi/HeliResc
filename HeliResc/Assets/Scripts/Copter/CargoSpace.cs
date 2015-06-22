@@ -68,14 +68,19 @@ public class CargoSpace : Upgradable {
                     child.GetComponent<Renderer>().enabled = false;
                     child.GetComponent<Rigidbody2D>().isKinematic = true;
                     child.transform.localPosition = Vector3.zero;
-                    //manager.setCargoCrates(cargoCrates);
+                    manager.setCargoCrates(currentCargo);
                 }
             }
             else { /*Fix the weird physics here*/ }
         }
     }
-    public void UnloadAll() { 
-        
+    public void UnloadAll() {
+        manager.saveCrates(currentCargo);
+        currentCargo = 0;
+
+        cargoMass = 0;
+        playerRb.mass = cargoMass + hookMass + copterMass;
+        manager.setCargoCrates(currentCargo);
     }    
 
     public void ChangeCargoMass(float crateMass)

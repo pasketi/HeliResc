@@ -31,15 +31,15 @@ public class UIManager : MonoBehaviour {
 
 		saved = transform.FindChild ("SavedBackground").FindChild ("Saved").GetComponent<Text> ();
 		cargo = transform.FindChild ("CargoBackground").FindChild ("Cargo").GetComponent<Text> ();
-		action = transform.FindChild ("ActionBackground").FindChild ("Action").GetComponent<Text> ();
+		//action = transform.FindChild ("ActionBackground").FindChild ("Action").GetComponent<Text> ();
 		power = transform.FindChild ("PowerMeter").FindChild("Power").GetComponent<Slider> ();
 		fuel = transform.FindChild ("Fuel").GetComponent<Image> ();
 		fuelBorder = fuel.transform.FindChild ("FuelMeter").GetComponent<Image>();
 
-		if (manager.levelAction != 0) 
-			transform.FindChild ("ActionBackground").FindChild ("IsKill").GetComponent<Button> ().onClick.AddListener(() => copter.UseAction ());
-		else
-			transform.FindChild ("ActionBackground").GetComponent<Image>().enabled = false;
+        //if (manager.levelAction != 0) 
+        //    transform.FindChild ("ActionBackground").FindChild ("IsKill").GetComponent<Button> ().onClick.AddListener(() => copter.UseAction ());
+        //else
+        //    transform.FindChild ("ActionBackground").GetComponent<Image>().enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -52,12 +52,12 @@ public class UIManager : MonoBehaviour {
 		power.value = copter.engine.CurrentPowerPercentage;
 		saved.text = manager.getSavedCrates ().ToString () + "/" + manager.getCrateAmount ().ToString ();
 		cargo.text = manager.cargoCrates.ToString () + "/" + manager.cargoSize.ToString ();
-		if (manager.levelAction != 0)
-			action.text = manager.getActionsLeft().ToString () + "/" + manager.maxActionsPerLevel.ToString ();
-		else {
-			action.text = "";
+        //if (manager.levelAction != 0)
+        //    action.text = manager.getActionsLeft().ToString () + "/" + manager.maxActionsPerLevel.ToString ();
+        //else {
+        //    action.text = "";
 
-		}
+        //}
 
 		if (manager.cargoCrates == manager.cargoSize)
 			cargo.color = red;

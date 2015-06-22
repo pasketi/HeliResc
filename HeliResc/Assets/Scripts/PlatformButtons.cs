@@ -41,7 +41,7 @@ public class PlatformButtons: MonoBehaviour {
         if (landing.Equals(null))
             Debug.LogError("The landingpad manager was not found in platform buttons");
 
-        Debug.Log("Awake of platform buttons");
+
         target = transform.parent;
         transform.position = target.position + Vector3.up * 1.5f;
     }

@@ -82,7 +82,7 @@ public class Rope : Upgradable {
             hookOut = true;
             ThrowHook();
             UpdateDelegate = HookOutUpdate;
-            Debug.Log("Cargo full");
+
         } else { 
             hookJoint.enabled = false;
             hookJoint.distance = 0;

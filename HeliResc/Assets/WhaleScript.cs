@@ -4,13 +4,14 @@ using System.Collections.Generic;
 
 public class WhaleScript : MonoBehaviour {
 
-    public Transform spawnPoint;
+    public Transform spawnPoint;            //The hole on the neck of the whale
     public GameObject waterDrop;
-    public GameObject waterDrop2;
-    public int amountPerSecond;
-    public float time;
-    public ParticleSystem clouds;
-    private List<GameObject> pool;
+    public GameObject waterDrop2;           //Prefab water drop
+    public int amountPerSecond;             //How many per second
+    public float time;                      //how long to shoot bubbles
+    public ParticleSystem clouds;           
+    private List<GameObject> pool;          //List of all the waterDrops
+    private bool isShooting;
 
 	// Use this for initialization
 	void Start () {
@@ -51,26 +52,30 @@ public class WhaleScript : MonoBehaviour {
     
 
     IEnumerator Launcher() {
-        clouds.Play();
-        int amount = 3;
-        float t = time / pool.Count * amount;
-        float startTime = Time.time;
-        float remainingTime = time;
-        Debug.Log("Start " + startTime);
-        for (int i = 0; i < pool.Count; i += amount)
-        {
-            for (int j = 0; j < amount; j++)
+        if (isShooting == false) {
+            isShooting = true;
+            clouds.Play();
+            int amount = 3;
+            float t = time / pool.Count * amount;
+            float startTime = Time.time;
+            float remainingTime = time;
+            Debug.Log("Start " + startTime);
+            for (int i = 0; i < pool.Count; i += amount)
             {
-                pool[i+j].SetActive(true);
-                Rigidbody2D rb = pool[i + j].GetComponent<Rigidbody2D>();
-                rb.velocity = Vector2.right * Random.Range(-0.75f, 0.75f);
-                pool[i + j].transform.position = spawnPoint.position;          
+                for (int j = 0; j < amount; j++)
+                {
+                    pool[i + j].SetActive(true);
+                    Rigidbody2D rb = pool[i + j].GetComponent<Rigidbody2D>();
+                    rb.velocity = Vector2.right * Random.Range(-0.75f, 0.75f);
+                    pool[i + j].transform.position = spawnPoint.position;
+                }
+                remainingTime -= (Time.time - startTime);
+                startTime = Time.time;
+                yield return null; // new WaitForSeconds(t);
             }
-            remainingTime -= (Time.time - startTime);
-            startTime = Time.time;
-            yield return null; // new WaitForSeconds(t);
+            clouds.Stop();
+            Debug.Log("End " + Time.time);
+            isShooting = false;
         }
-        clouds.Stop();
-        Debug.Log("End " + Time.time);
     }
 }

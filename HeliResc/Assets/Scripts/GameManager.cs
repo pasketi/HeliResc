@@ -221,7 +221,7 @@ public class GameManager : MonoBehaviour {
 		levelEnd = end;
         if (showLevelEnd) {
             levelEnd.index = int.Parse(Application.loadedLevelName[Application.loadedLevelName.Length - 1].ToString());
-            Debug.Log(levelEnd.index);
+
         }
 		currentMenu = menu;
 		Application.LoadLevel("MainMenu");
