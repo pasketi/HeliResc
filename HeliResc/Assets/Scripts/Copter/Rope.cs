@@ -33,13 +33,28 @@ public class Rope : Upgradable {
     public override void Init(Copter copter) {
         base.Init(copter);
         
+        //hook = playerCopter.CreateGameObject(hookPrefab, Vector3.zero, Quaternion.identity);
+
+        CreateHook(hookPrefab, hookDistance, snapDistance);
+    }
+    
+    public virtual void CreateHook(GameObject newHook, float distance, float snapDistance) {
+        if(hook != null) {
+            hook.SetActive(false);
+            hook = null;
+        }        
+        hookPrefab = newHook;
         hook = playerCopter.CreateGameObject(hookPrefab, Vector3.zero, Quaternion.identity);
 
         hasHook = true;
         hookJoint = playerRb.GetComponent<DistanceJoint2D>();
         hookJoint.anchor = hookAnchor.transform.localPosition;
 
+        hookDistance = distance;
+        this.snapDistance = snapDistance;
+
         PushHookToCargo();
+        
     }
 
     public override void Upgrade()
@@ -77,10 +92,10 @@ public class Rope : Upgradable {
     
     }
 
-    private void PushHookToCargo() {
+    private void PushHookToCargo(bool forcePush = false) {
 
         playerCopter.cargo.CargoHookedCrates(hook);
-        if (playerCopter.cargo.CargoFull && hook.transform.childCount > 0) {
+        if (playerCopter.cargo.CargoFull && hook.transform.childCount > 0 && forcePush == false) {
             hookOut = true;
             ThrowHook();
             UpdateDelegate = HookOutUpdate;
