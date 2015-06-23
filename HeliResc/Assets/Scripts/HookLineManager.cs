@@ -6,14 +6,14 @@ public class HookLineManager : MonoBehaviour {
 	private LineRenderer line;
 	private Transform anchor;
     private Transform _t;
-    
+    private Rigidbody2D rb;
 
 	// Use this for initialization
 	void Start () {
 		line = gameObject.GetComponent<LineRenderer> ();
-		line.sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
+		line.sortingOrder = GetComponent<SpriteRenderer>().sortingOrder - 1;
 		line.sortingLayerID = GetComponent<SpriteRenderer>().sortingLayerID;
-
+        rb = GetComponent<Rigidbody2D>();
         anchor = GameObject.FindGameObjectWithTag("CopterHookLineAnchor").transform;
         _t = transform;
 	}
@@ -22,9 +22,8 @@ public class HookLineManager : MonoBehaviour {
 	void Update () {		
 
 		line.SetPosition (0, _t.position);
-		line.SetPosition (1, anchor.position);
+		line.SetPosition (1, anchor.position);        
 
-        
         float angle = Vector3.Angle(Vector3.up, (anchor.position - _t.position));       
         
         if(_t.position.x >= anchor.position.x)
