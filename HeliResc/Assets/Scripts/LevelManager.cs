@@ -244,9 +244,9 @@ public class LevelManager : MonoBehaviour {
 		return waterLevel;
 	}
 
-	public void setWaterLevel(float newWaterLevel) {
-		waterLevel = newWaterLevel;
-	}
+    //public void setWaterLevel(float newWaterLevel) {
+    //    waterLevel = newWaterLevel;
+    //}
 
 	public void setCargoCrates(int amount) {
 		cargoCrates = amount;

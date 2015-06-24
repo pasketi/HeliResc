@@ -66,7 +66,7 @@ public class WhaleScript : MonoBehaviour {
                 {
                     pool[i + j].SetActive(true);
                     Rigidbody2D rb = pool[i + j].GetComponent<Rigidbody2D>();
-                    rb.velocity = Vector2.right * Random.Range(-0.75f, 0.75f);
+                    rb.velocity = Vector2.right * Random.Range(-0.75f, 0.75f) + Vector2.up * Random.Range(4.5f, 7.5f);
                     pool[i + j].transform.position = spawnPoint.position;
                 }
                 remainingTime -= (Time.time - startTime);

@@ -14,9 +14,8 @@ public class SeracScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("CrushBall")) {
-            Debug.Log("Velocity: " + other.GetComponent<Rigidbody2D>().velocity);
             if(other.GetComponent<Rigidbody2D>().velocity.magnitude >= requiredForce)
-            Explode();
+                Explode();
         }
     }
 
