@@ -142,9 +142,9 @@ public class TutorialScript : MonoBehaviour {
 
         playerRB.isKinematic = true;
 
-        while (!finger.finished) {
-            yield return null;
-        }
+        //while (!finger.finished) {
+           yield return null;
+        //}
 
         playerRB.isKinematic = false;        
 

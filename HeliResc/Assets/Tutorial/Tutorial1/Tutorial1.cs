@@ -8,11 +8,6 @@ public class Tutorial1 : MonoBehaviour {
     public Text text;
     private Animator animator;
 
-    private bool showVertical;
-
-    [HideInInspector]
-    public bool finished;
-
     private bool clickedOnce;
 
     void Awake() {
@@ -22,7 +17,6 @@ public class Tutorial1 : MonoBehaviour {
     // Use this for initialization
     void Start () {
         
-        finished = false;
         clickedOnce = false;
 
         animator = GetComponent<Animator>();
@@ -40,12 +34,11 @@ public class Tutorial1 : MonoBehaviour {
     public void ClickedOK() {                    
         if(clickedOnce == true)
         {
-            finished = true;            
+            GameObject.Find("Copter").GetComponent<Copter>().Kinematic(false);
             gameObject.SetActive(false);
         } else {
             clickedOnce = true;
-            text.text = "Tilt";
-            GameObject.Find("Copter").GetComponent<Copter>().Kinematic(false);
+            text.text = "Tilt";            
             animator.Play("SecondTip");
         }
     }
