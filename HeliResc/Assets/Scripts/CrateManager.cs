@@ -99,13 +99,16 @@ public class CrateManager : MonoBehaviour {
 				}
 			} else if (dying && fourPhases) {
 				if (lifeTimeInSeconds <= 0f) {
+                    Transform t = transform.parent.Find("iceskull");
+                    if (t != null)
+                        t.GetComponent<SpriteRenderer>().enabled = true;
 					animator.SetInteger("status", 0);
 				} else if (lifeTimeInSeconds <= (maxLifeTimeInSeconds/3)) {
 					animator.SetInteger("status", 1);
 				} else if (lifeTimeInSeconds <= (maxLifeTimeInSeconds/3)*2) {
 					animator.SetInteger("status", 2);
 				} else {
-					animator.SetInteger("status", 3);
+					animator.SetInteger("status", 3);                    
 				}
 			}
 
@@ -148,6 +151,7 @@ public class CrateManager : MonoBehaviour {
 			else if (animator.GetBool("inWater") != null && onGround == true) animator.SetBool("inWater", false);
 
 			if (crate != null && copterScript != null && crate.layer == 11 && inWater != lastInWater) {
+                if (twoPhases == true) return;
 				lastInWater = inWater;
 				if (inWater && !inCargo) {
 					copterScript.cargo.ChangeHookMass ((-crateMass) + (crateMass * inWaterModifier));

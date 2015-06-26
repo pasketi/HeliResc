@@ -10,9 +10,15 @@ public class Tutorial3 : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        animator = GetComponent<Animator>();
-        animator.Play("HookAnimation");
+        //animator = GetComponent<Animator>();
+        //animator.Play("HookAnimation");
+        okButton.interactable = false;
+        Invoke("ActivateButton", 1);
         GameObject.Find("Copter").GetComponent<Copter>().Kinematic(true);
+    }
+    private void ActivateButton()
+    {
+        okButton.interactable = true;
     }
 
     public void ClickedOK() {

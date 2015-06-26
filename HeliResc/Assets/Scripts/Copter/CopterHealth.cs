@@ -31,8 +31,10 @@ public class CopterHealth : Upgradable {
     }
     public void FixCopter() {
         currentHealth = maxHealth;
-    }    
-
+    }
+    public virtual void Detonate() {
+        Explode();
+    }
     protected virtual void Explode() {        
         GameObject newCopter = playerCopter.CreateGameObject(brokenCopterPrefab, playerRb.transform.position, playerRb.transform.rotation);
         playerCopter.CreateGameObject(explosionPrefab, playerRb.transform.position, Quaternion.identity);

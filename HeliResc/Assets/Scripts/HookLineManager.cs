@@ -8,6 +8,15 @@ public class HookLineManager : MonoBehaviour {
     private Transform _t;
     private Rigidbody2D rb;
 
+    void OnEnable() {
+        EventManager.StartListening("CopterExplode", DisableLine);
+        EventManager.StartListening("EnterPlatform", DisableLine);
+    }
+    void OnDisable() {
+        EventManager.StopListening("CopterExplode", DisableLine);
+        EventManager.StopListening("EnterPlatform", DisableLine);
+    }
+
 	// Use this for initialization
 	void Start () {
 		line = gameObject.GetComponent<LineRenderer> ();
@@ -36,4 +45,11 @@ public class HookLineManager : MonoBehaviour {
         //    Destroy (this);
         //}
 	}
+
+    private void DisableLine() {
+        line.enabled = false;
+    }
+    private void EnableLine() {
+        line.enabled = true;
+    }
 }

@@ -21,9 +21,9 @@ public class Tutorial1 : MonoBehaviour {
 
         animator = GetComponent<Animator>();
 
-        animator.Play("FirstTip");
+        //animator.Play("FirstTip");
 
-        Invoke("ActivateButton", 1.25f);
+        Invoke("ActivateButton", 1);
         GameObject.Find("Copter").GetComponent<Copter>().Kinematic(true);
     }
 

@@ -62,7 +62,7 @@ public class Rope : Upgradable {
         throw new System.NotImplementedException();
     }
 
-    public override void TouchStart(MouseTouch touch) {
+    public override void TouchStart(MouseTouch touch) {        
         if (playerRb.GetComponent<Collider2D>() == Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(touch.position)) && hasHook) {
             hookOut = !hookOut;
 
@@ -119,14 +119,15 @@ public class Rope : Upgradable {
         hook.transform.position = hookAnchor.transform.position;
         UpdateDelegate = HookOutUpdate;
     }
-    public void KillHook() {
-        if (hookOut == false) return;
+    public void KillHook() {        
+        if (hookOut == false) return;        
+        hook.GetComponent<LineRenderer>().enabled = false;  
         hasHook = false;
-        hookJoint.enabled = false;
-        hook.GetComponent<LineRenderer>().enabled = false;        
+        hookJoint.enabled = false;              
     }
-    protected virtual void RestoreHook() {
+    protected virtual void RestoreHook() {       
         hasHook = true;
+        PushHookToCargo();
     }
     protected override void GiveName() {
         name = "Rope";

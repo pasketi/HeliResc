@@ -25,13 +25,17 @@ public class ObstacleManager : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D collision) {        
 
         if (collision.gameObject.transform.tag == "Copter") {
-			if (!instaKill) {
-				if (!fixedDamage) { 
-					collision.gameObject.GetComponent<Copter>().health.TakeDamage(collision.relativeVelocity.magnitude * damageMultiplier);
-				} else {
+            if (!instaKill) {
+                if (!fixedDamage) {
+                    collision.gameObject.GetComponent<Copter>().health.TakeDamage(collision.relativeVelocity.magnitude * damageMultiplier);
+                }
+                else {
                     collision.gameObject.GetComponent<Copter>().health.TakeDamage(fixedDamageAmount);
-				}
-			} else GameObject.Find("LevelManagerO").GetComponent<LevelManager>().levelFailed(1);
+                }
+            }
+            else {
+                copter.Detonate();
+            }
 
 			if (diesOnContact && deathAnimation != null) 
 				Instantiate (deathAnimation, transform.position, Quaternion.identity);

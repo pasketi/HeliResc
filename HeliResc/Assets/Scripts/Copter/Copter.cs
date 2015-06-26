@@ -126,6 +126,9 @@ public abstract class Copter : MonoBehaviour {
             transform.localScale = new Vector3(-copterScale, transform.localScale.y);
         }
     }
+    public virtual void Detonate() {
+        health.Detonate();
+    }
     public virtual void TurnCopterOff() {
         UpdateMethod = TurnedOffUpdate;
     }

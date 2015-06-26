@@ -32,7 +32,10 @@ public class LandingPadManager : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.transform.tag == "Crate") {
-			saveAllChildren (other.transform.parent.gameObject);
+            if (other.transform.parent != null)
+                saveAllChildren(other.transform.parent.gameObject);
+            else
+                saveAllChildren(other.gameObject);
 		}
 
 		if (other.gameObject.transform.tag == "Copter") {
@@ -87,6 +90,10 @@ public class LandingPadManager : MonoBehaviour {
 	}
 	
 	void saveAllChildren (GameObject hook) {
+        if (hook.tag.Equals("Crate")) {
+            copter.cargo.saveHookedCrate(hook.GetComponentInChildren<CrateManager>().crateMass);
+            hook.tag = "KillMe";
+        }
 		foreach (Transform child in hook.transform) {
 			if (child.tag == "Crate"){
 				if (child.FindChild("LegHook") != null && child.FindChild("LegHook").childCount != 0)
