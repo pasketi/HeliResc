@@ -125,7 +125,8 @@ public class Rope : Upgradable {
         hasHook = false;
         hookJoint.enabled = false;              
     }
-    protected virtual void RestoreHook() {       
+    protected virtual void RestoreHook() {
+        if (hasHook == true) return;
         hasHook = true;
         PushHookToCargo();
     }
