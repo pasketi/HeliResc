@@ -48,31 +48,29 @@ public class CargoSpace : Upgradable {
             return false;
     }
 
-    public void CargoHookedCrates(GameObject hook)
+    public void CargoHookedCrates(Transform hookChild)
     {
-        foreach (Transform child in hook.transform)
-        {
 
-            if (child.FindChild("LegHook") != null && child.FindChild("LegHook").childCount != 0)
-                CargoHookedCrates(child.FindChild("LegHook").gameObject);
-            if (maxCapacity > currentCargo)
+        Debug.Log("cargo: " + currentCargo);
+        if (hookChild.FindChild("LegHook") != null && hookChild.FindChild("LegHook").childCount != 0)
+            CargoHookedCrates(hookChild.FindChild("LegHook").gameObject.transform);
+        if (maxCapacity >= currentCargo)
+        {
+            if (hookChild.tag == "Crate")
             {
-                if (child.tag == "Crate")
-                {
-                    ChangeCargoMass(child.GetComponentInChildren<CrateManager>().crateMass);
-                    ChangeHookMass(-child.GetComponentInChildren<CrateManager>().crateMass);
-                    AddItemToCargo();
-                    child.GetComponentInChildren<CrateManager>().inCargo = true;
-                    child.parent = playerRb.transform;
-                    child.GetComponent<Collider2D>().enabled = false;
-                    child.GetComponent<Renderer>().enabled = false;
-                    child.GetComponent<Rigidbody2D>().isKinematic = true;
-                    child.transform.localPosition = Vector3.zero;
-                    manager.setCargoCrates(currentCargo);
-                }
+                ChangeCargoMass(hookChild.GetComponentInChildren<CrateManager>().crateMass);
+                ChangeHookMass(-hookChild.GetComponentInChildren<CrateManager>().crateMass);
+                AddItemToCargo();
+                hookChild.GetComponentInChildren<CrateManager>().inCargo = true;
+                hookChild.parent = playerRb.transform;
+                hookChild.GetComponent<Collider2D>().enabled = false;
+                hookChild.GetComponent<Renderer>().enabled = false;
+                hookChild.GetComponent<Rigidbody2D>().isKinematic = true;
+                hookChild.transform.localPosition = Vector3.zero;
+                manager.setCargoCrates(currentCargo);
             }
-            else { /*Fix the weird physics here*/ }
         }
+        else { /*Fix the weird physics here*/ }
     }
     public void UnloadAll() {
         manager.saveCrates(currentCargo);

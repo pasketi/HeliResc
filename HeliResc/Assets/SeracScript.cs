@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SeracScript : MonoBehaviour {
+public class SeracScript : ActionableObject {
     
     public float requiredForce = 3;
     public GameObject explosion;
@@ -15,12 +15,16 @@ public class SeracScript : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("CrushBall")) {
             if(other.GetComponent<Rigidbody2D>().velocity.magnitude >= requiredForce)
-                Explode();
+                UseAction();
         }
     }
 
-    private void Explode() {
+    public override void UseAction() {
         GameObject.FindObjectOfType<LevelManager>().saveCrates(1);
+        Explode();
+    }
+
+    private void Explode() {        
         GetComponent<SpriteRenderer>().enabled = false;
         foreach (Collider2D c in GetComponents<Collider2D>())
             c.enabled = false;

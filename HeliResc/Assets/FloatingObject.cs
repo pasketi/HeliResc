@@ -20,12 +20,13 @@ public class FloatingObject : MonoBehaviour {
         water = GameObject.FindGameObjectWithTag("waterLayer1").transform;
         scale = water.localScale.y * scaleMultiplier;
 
-        floatyValue = GetComponent<Rigidbody2D> ().mass * 30f;
 
         if (isStatic == true)
             UpdateMethod = StaticUpdate;
-        else
+        else {
+            floatyValue = GetComponent<Rigidbody2D>().mass * 30f;
             UpdateMethod = NonStaticUpdate;
+        }
 	}
 	
 	// Update is called once per frame

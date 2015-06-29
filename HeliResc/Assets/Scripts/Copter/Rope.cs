@@ -94,13 +94,19 @@ public class Rope : Upgradable {
 
     private void PushHookToCargo(bool forcePush = false) {
 
-        playerCopter.cargo.CargoHookedCrates(hook);
+        Debug.Log("Child count: " + hook.transform.childCount);
+        while (hook.transform.childCount > 0 && playerCopter.cargo.CargoFull == false) {
+            
+            Debug.Log("foreach loop");
+            playerCopter.cargo.CargoHookedCrates(hook.transform.GetChild(0));
+        }
+        Debug.Log("Cargo hooked crates");
         if (playerCopter.cargo.CargoFull && hook.transform.childCount > 0 && forcePush == false) {
             hookOut = true;
             ThrowHook();
             UpdateDelegate = HookOutUpdate;
 
-        } else { 
+        } else {
             hookJoint.enabled = false;
             hookJoint.distance = 0;
 

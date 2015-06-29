@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class SaveableObject : MonoBehaviour {
+public class SaveableObject : MonoBehaviour, IHookable {
 
     protected Action UpdateMethod = () => { };      //Event to update all necessary methods depending on the type of the object
 
@@ -13,12 +13,13 @@ public class SaveableObject : MonoBehaviour {
     protected Copter copter;                        //Reference to the player copter
     protected Rigidbody2D hookRb;
     protected bool hooked;
-    protected HingeJoint2D joint;                //Reference to own distance joint
+    protected HingeJoint2D joint;                   //Reference to own distance joint
 
     protected virtual void Start() {
 
         copter = GameObject.Find("Copter").GetComponent<Copter>();
         joint = GetComponent<HingeJoint2D>();
+        joint.enabled = false;
 
         if (useTimer == true) UpdateMethod += Timer;
     }
@@ -34,7 +35,7 @@ public class SaveableObject : MonoBehaviour {
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag.Equals("Hook") && hooked == false) {
+        if (other.tag.Equals("Hook") && hooked == false) {            
             hookRb = other.GetComponent<Rigidbody2D>();
             GrabHook();
         }
@@ -46,19 +47,28 @@ public class SaveableObject : MonoBehaviour {
     protected virtual void SaveItem() { 
     
     }
-    protected virtual void GrabHook() {
+    public virtual void GrabHook() {
         hooked = true;
-        GetComponent<Rigidbody2D>().mass = 0;
-        //GetComponent<FloatingObject>().enabled = false;
-        joint.enabled = true;        
-        transform.parent = hookRb.transform;
+
+        GetComponent<Collider2D>().isTrigger = false;
+        GetComponent<FloatingObject>().enabled = false;
+        joint.enabled = true;
+
+        hookRb.GetComponent<HookScript>().GrabHook(this);
+
         joint.connectedBody = hookRb;
-        joint.connectedAnchor = new Vector2(0f, -0.3f);
+        joint.connectedAnchor = new Vector2(0f, -0.1f);
         joint.anchor = new Vector2(0f, 1);
     }
-    protected virtual void DetachHook() {
+    public virtual void DetachHook() {
         hooked = false;
         joint.enabled = false;
-        transform.parent = null;
+        GetComponent<Collider2D>().isTrigger = true;
+        GetComponent<FloatingObject>().enabled = true;
     }
+}
+
+public interface IHookable {
+    void GrabHook();
+    void DetachHook();
 }

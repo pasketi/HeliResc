@@ -49,7 +49,10 @@ public class Engine : Upgradable {
         UpdateDelegate = FuelUpdate;                    //Start with having fuel
 
         tempHoldTime = holdTime;
-        useAutoHoover = PlayerPrefsExt.GetBool(SaveStrings.autoHoover);
+        if (PlayerPrefs.HasKey(SaveStrings.autoHoover))
+            useAutoHoover = PlayerPrefsExt.GetBool(SaveStrings.autoHoover);
+        else
+            useAutoHoover = true;
     }
 
     public override void Upgrade() {

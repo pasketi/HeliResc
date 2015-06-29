@@ -115,6 +115,9 @@ public class LandingPadManager : MonoBehaviour {
 	}
 	
 	public void StartRefill() {
+        if(copter == null)
+            copter = GameObject.Find("Copter").GetComponent<Copter>();
+        Debug.Log("Copter null: " + (copter == null));
         copter.fuelTank.FillTank();
 		refill = true;
 		GameObject.Find ("HUD").GetComponent<UIManager> ().refill = true;
