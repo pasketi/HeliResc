@@ -36,6 +36,7 @@ public class MissionObjectives : MonoBehaviour {
 
     public bool GetItems()
     {
+        Debug.Log("Get Items");
 		LevelManager manager = GameObject.FindObjectOfType<LevelManager>();
 		return manager.allCratesCollected ();
     }

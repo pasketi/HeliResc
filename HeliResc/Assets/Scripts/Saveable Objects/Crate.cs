@@ -3,5 +3,27 @@ using System.Collections;
 
 public class Crate : SaveableObject {
 
-	
+    public Sprite[] nonHookedSprites;   //assign the crate sprite to the first cell and bg to the second
+    public Sprite[] hookedSprites;      //Assign in inspector the hooked sprites. Crate sprite to the first and bg to the second
+    public SpriteRenderer crate;
+    public SpriteRenderer background;
+
+    public override void GrabHook() {
+        base.GrabHook();
+
+        crate.sprite = hookedSprites[0];
+        background.sprite = hookedSprites[1];
+    }
+
+    public override void DetachHook() {
+        base.DetachHook();
+
+        crate.sprite = nonHookedSprites[0];
+        background.sprite = nonHookedSprites[1];
+    }
+
+    public override void CargoItem() {
+        base.CargoItem();
+    }
+
 }

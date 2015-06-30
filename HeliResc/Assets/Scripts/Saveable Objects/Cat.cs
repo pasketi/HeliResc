@@ -3,13 +3,25 @@ using System.Collections;
 
 public class Cat : SaveableObject {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public GameObject hookedCat;
+    public GameObject nonHookedCat;
+    
+
+    public override void GrabHook() {
+        base.GrabHook();
+
+        hookedCat.SetActive(true);
+        nonHookedCat.SetActive(false);
+    }
+
+    public override void DetachHook() {
+        base.DetachHook();
+
+        hookedCat.SetActive(false);
+        nonHookedCat.SetActive(true);
+    }
+
+    public override void CargoItem() {
+        base.CargoItem();
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Rope : Upgradable {
@@ -17,6 +18,8 @@ public class Rope : Upgradable {
     private DistanceJoint2D hookJoint;  //DistanceJoint component of the copter
     private bool hookOut;               //Is the hook out or inside the copter
     private bool hasHook;               //Determines if the copter has a hook or is it destroyed    
+
+    private HookScript hookScript;      //The reference to the hook script of the hook
 
     public bool HasHook { get { return hasHook; } }
 
@@ -45,6 +48,7 @@ public class Rope : Upgradable {
         }        
         hookPrefab = newHook;
         hook = playerCopter.CreateGameObject(hookPrefab, Vector3.zero, Quaternion.identity);
+        hookScript = hook.GetComponent<HookScript>();
 
         hasHook = true;
         hookJoint = playerRb.GetComponent<DistanceJoint2D>();
@@ -53,7 +57,7 @@ public class Rope : Upgradable {
         hookDistance = distance;
         this.snapDistance = snapDistance;
 
-        PushHookToCargo();
+        PushHookToCargo(true);
         
     }
 
@@ -94,7 +98,27 @@ public class Rope : Upgradable {
 
     private void PushHookToCargo(bool forcePush = false) {
 
-        Debug.Log("Child count: " + hook.transform.childCount);
+        List<SaveableObject> hookedObject = new List<SaveableObject>();
+        if (forcePush == false) {
+            hookedObject = hookScript.HookedItems;
+        }
+        
+        hookedObject = playerCopter.cargo.CargoHookedCrates(hookedObject);
+        hookScript.ResetHook(hookedObject);
+
+        if (hookedObject.Count > 0) {
+            hookOut = true;
+            ThrowHook();
+            UpdateDelegate = HookOutUpdate;
+        } else {
+            hookJoint.enabled = false;
+            hookJoint.distance = 0;
+
+            UpdateDelegate = () => { };
+            hook.SetActive(false);
+        }
+         
+        /*Debug.Log("Child count: " + hook.transform.childCount);
         while (hook.transform.childCount > 0 && playerCopter.cargo.CargoFull == false) {
             
             Debug.Log("foreach loop");
@@ -112,7 +136,7 @@ public class Rope : Upgradable {
 
             UpdateDelegate = () => { };
             hook.SetActive(false);
-        }
+        }*/
     }
 
     private void ThrowHook() {
@@ -134,7 +158,7 @@ public class Rope : Upgradable {
     protected virtual void RestoreHook() {
         if (hasHook == true) return;
         hasHook = true;
-        PushHookToCargo();
+        PushHookToCargo(true);
     }
     protected override void GiveName() {
         name = "Rope";

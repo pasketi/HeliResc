@@ -32,16 +32,17 @@ public class LandingPadManager : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.transform.tag == "Crate") {
-            if (other.transform.parent != null)
-                saveAllChildren(other.transform.parent.gameObject);
-            else
-                saveAllChildren(other.gameObject);
+            SaveableObject s = other.GetComponent<SaveableObject>();
+            if (s != null) {
+                s.SaveItem();
+            }
 		}
 
 		if (other.gameObject.transform.tag == "Copter") {
-
+            Debug.Log("Copter entered" + canWin);
             if (canWin == true) { 
                 bool win = objectives.AllObjectiveCompleted();
+                Debug.Log("win");
                 if (win == true)
                     manager.levelPassed();
             }
@@ -117,7 +118,6 @@ public class LandingPadManager : MonoBehaviour {
 	public void StartRefill() {
         if(copter == null)
             copter = GameObject.Find("Copter").GetComponent<Copter>();
-        Debug.Log("Copter null: " + (copter == null));
         copter.fuelTank.FillTank();
 		refill = true;
 		GameObject.Find ("HUD").GetComponent<UIManager> ().refill = true;

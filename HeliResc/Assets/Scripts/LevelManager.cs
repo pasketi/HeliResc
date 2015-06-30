@@ -133,6 +133,7 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public bool allCratesCollected() {
+        Debug.Log("Saved crates: " + savedCrates + " crateamount: " + crateAmount);
 		return (savedCrates >= crateAmount);
 	}
 
@@ -217,8 +218,12 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	private int countCrates (){
-		var crates = GameObject.FindGameObjectsWithTag ("SaveableObject");
-		var actionableObjects = GameObject.FindGameObjectsWithTag ("ActionableObject");
+		//var crates = GameObject.FindGameObjectsWithTag ("SaveableObject");
+		//var actionableObjects = GameObject.FindGameObjectsWithTag ("ActionableObject");
+
+        var crates = GameObject.FindObjectsOfType<SaveableObject>();
+        var actionableObjects = GameObject.FindObjectsOfType<ActionableObject>();
+
 		return crates.Length + actionableObjects.Length;
 	}
 

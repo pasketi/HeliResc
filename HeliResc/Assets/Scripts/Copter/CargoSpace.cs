@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class CargoSpace : Upgradable {
@@ -7,9 +8,11 @@ public class CargoSpace : Upgradable {
     public int maxCapacity;                                                 //Maximum amount of cargo to fit in the copter
     public int currentCargo;                                                //Current amount of cargo space used
     public int CurrentCargo { get { return currentCargo; } }                //Getter for current cargo
+    public int SpaceInCargo { get { return maxCapacity - currentCargo; } }  //How much space in the cargo
     public bool CargoFull { get { return currentCargo >= maxCapacity; } }   //Boolean to check if cargo is full
 
     private LevelManager manager;
+    private int cargoValue;                                                 //The value of the items combined that are in the cargo
 
     public float copterMass;
     private float hookMass;
@@ -26,7 +29,7 @@ public class CargoSpace : Upgradable {
         base.Init(copter);
         
         manager = copter.levelManager;
-        playerRb.mass = cargoMass + hookMass + copterMass; 
+        //playerRb.mass = cargoMass + hookMass + copterMass; 
     }
 
     public override void Upgrade() {
@@ -46,6 +49,21 @@ public class CargoSpace : Upgradable {
         }
         else
             return false;
+    }
+
+    public List<SaveableObject> CargoHookedCrates(List<SaveableObject> savedObjects) {
+        if (savedObjects.Count <= 0) return new List<SaveableObject>();
+        while (currentCargo < maxCapacity && savedObjects.Count > 0) {
+            AddItemToCargo();
+            cargoValue += savedObjects[0].saveValue;
+            savedObjects[0].CargoItem();
+            savedObjects.RemoveAt(0);
+        }
+        manager.setCargoCrates(currentCargo);
+        if (savedObjects.Count > 0)
+            return savedObjects;
+        else
+            return new List<SaveableObject>();
     }
 
     public void CargoHookedCrates(Transform hookChild)
@@ -77,7 +95,7 @@ public class CargoSpace : Upgradable {
         currentCargo = 0;
 
         cargoMass = 0;
-        playerRb.mass = cargoMass + hookMass + copterMass;
+        //playerRb.mass = cargoMass + hookMass + copterMass;
         manager.setCargoCrates(currentCargo);
     }    
 

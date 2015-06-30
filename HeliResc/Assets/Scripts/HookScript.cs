@@ -10,6 +10,7 @@ public class HookScript : MonoBehaviour {
     private Rigidbody2D rb;                     //Reference to own rigidbody
     private List<SaveableObject> hookedItems;   //Items that are hanging in the hook
 
+
     //Getter for the list
     public List<SaveableObject> HookedItems { get { return hookedItems; } }
 
@@ -30,9 +31,9 @@ public class HookScript : MonoBehaviour {
 		line.sortingLayerID = GetComponent<SpriteRenderer>().sortingLayerID;
         rb = GetComponent<Rigidbody2D>();
         anchor = GameObject.FindGameObjectWithTag("CopterHookLineAnchor").transform;
-        _t = transform;
+        _t = transform;        
 
-        hookedItems = new List<SaveableObject>();
+        ResetHook(new List<SaveableObject>());
 	}
 	
 	// Update is called once per frame
@@ -52,6 +53,9 @@ public class HookScript : MonoBehaviour {
             _t.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         else
             _t.rotation = Quaternion.Euler(new Vector3(0, 0, 360 - angle));
+    }
+    public void ResetHook(List<SaveableObject> newList) {
+        hookedItems = newList;
     }
     public void GrabHook(SaveableObject obj) {
         if(hookedItems.Contains(obj) == false)
