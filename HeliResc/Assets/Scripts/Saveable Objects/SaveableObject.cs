@@ -40,7 +40,7 @@ public class SaveableObject : MonoBehaviour, IHookable {
 
     protected virtual void OnTriggerEnter2D(Collider2D other) {
         if (other.tag.Equals("Hook") && hooked == false) {
-            hookRb = GameObject.FindObjectOfType<HookScript>().GetComponent<Rigidbody2D>(); 
+            hookRb = other.GetComponent<Rigidbody2D>(); 
             GrabHook();
         }
     }
