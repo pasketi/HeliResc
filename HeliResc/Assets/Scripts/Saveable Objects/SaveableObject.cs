@@ -14,16 +14,20 @@ public class SaveableObject : MonoBehaviour, IHookable {
     public int saveValue;                           //How much money the player should get from saving the item
 
 
+    protected float timer;
     protected Copter copter;                        //Reference to the player copter
-    protected Rigidbody2D hookRb;
+    //protected Rigidbody2D hookRb;
     protected bool hooked;
     protected HingeJoint2D joint;                   //Reference to own distance joint
+    protected HookScript hookScript;
 
     protected virtual void Start() {
         
         copter = GameObject.Find("Copter").GetComponent<Copter>();
         joint = GetComponent<HingeJoint2D>();
         joint.enabled = false;
+
+        timer = timeToLive;
 
         if (useTimer == true) UpdateMethod += Timer;        
     }
@@ -39,16 +43,16 @@ public class SaveableObject : MonoBehaviour, IHookable {
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag.Equals("Hook") && hooked == false) {
-            hookRb = other.GetComponent<Rigidbody2D>(); 
-            GrabHook();
+        if (other.tag.Equals("Hook") && hooked == false) {            
+            GrabHook(other.GetComponent<Rigidbody2D>());
         }
     }
 
     protected virtual void Timer() {
-        timeToLive -= Time.deltaTime;
+        timer -= Time.deltaTime;
     }
     public virtual void CargoItem() {
+        hookScript.DetachHook(this);
         gameObject.SetActive(false);
     }
     public virtual void SaveItem() {
@@ -56,14 +60,15 @@ public class SaveableObject : MonoBehaviour, IHookable {
         manager.saveCrates(1);
         gameObject.SetActive(false);
     }
-    public virtual void GrabHook() {
+    public virtual void GrabHook(Rigidbody2D hookRb) {
         hooked = true;
 
         gameObject.layer = LayerMask.NameToLayer("liftedCrate");
         
         joint.enabled = true;
 
-        hookRb.GetComponent<HookScript>().GrabHook(this);
+        hookScript = hookRb.GetComponent<HookScript>();
+        hookScript.GrabHook(this);
 
         joint.connectedBody = hookRb;
         joint.connectedAnchor = connectedAnchor;
@@ -72,12 +77,12 @@ public class SaveableObject : MonoBehaviour, IHookable {
     public virtual void DetachHook() {
         hooked = false;
         joint.enabled = false;
-        gameObject.layer = LayerMask.NameToLayer("Crate");
+        gameObject.layer = LayerMask.NameToLayer("Crate");        
                 
     }
 }
 
 public interface IHookable {
-    void GrabHook();
+    void GrabHook(Rigidbody2D hookRb);
     void DetachHook();
 }

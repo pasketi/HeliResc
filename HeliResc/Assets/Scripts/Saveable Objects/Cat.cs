@@ -7,8 +7,8 @@ public class Cat : SaveableObject {
     public GameObject nonHookedCat;
     
 
-    public override void GrabHook() {
-        base.GrabHook();
+    public override void GrabHook(Rigidbody2D hookRb) {
+        base.GrabHook(hookRb);
 
         hookedCat.SetActive(true);
         nonHookedCat.SetActive(false);

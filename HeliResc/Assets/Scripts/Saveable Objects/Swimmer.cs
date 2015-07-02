@@ -3,13 +3,14 @@ using System.Collections;
 
 public class Swimmer : ActionableObject {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    protected Animator animator;
+
+    void Start() {
+        animator = GetComponent<Animator>();
+        //animator.SetBool("Saved", false);
+    }    
+
+    public override void UseAction() {
+        animator.Play("SavedSwimmer");
+    }
 }

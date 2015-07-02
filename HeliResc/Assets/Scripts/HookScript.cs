@@ -55,8 +55,20 @@ public class HookScript : MonoBehaviour {
             _t.rotation = Quaternion.Euler(new Vector3(0, 0, 360 - angle));
     }
     public void ResetHook(List<SaveableObject> newList) {
+        if (newList.Count > 0) {
+            Rigidbody2D r = rb;
+            foreach(SaveableObject so in newList){
+                IChainable chain = so as IChainable;
+                chain.Chain(r);
+                foreach (Transform t in so.transform) {
+                    if (t.tag.Equals("Hook"))
+                        r = t.GetComponent<Rigidbody2D>();
+                }
+            }
+        }
         hookedItems = newList;
     }
+            
     public void GrabHook(SaveableObject obj) {
         if(hookedItems.Contains(obj) == false)
             hookedItems.Add(obj);

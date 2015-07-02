@@ -109,7 +109,6 @@ public class Rope : Upgradable {
         if (hookedObject.Count > 0) {
             hookOut = true;
             ThrowHook();
-            UpdateDelegate = HookOutUpdate;
         } else {
             hookJoint.enabled = false;
             hookJoint.distance = 0;

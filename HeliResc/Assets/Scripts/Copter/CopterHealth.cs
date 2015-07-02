@@ -25,6 +25,7 @@ public class CopterHealth : Upgradable {
     }    
 
     public void TakeDamage(float damage) {
+        return;
         currentHealth -= damage;
         if (currentHealth <= 0)
             Explode();

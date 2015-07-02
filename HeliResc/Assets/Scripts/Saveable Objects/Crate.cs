@@ -8,8 +8,8 @@ public class Crate : SaveableObject {
     public SpriteRenderer crate;
     public SpriteRenderer background;
 
-    public override void GrabHook() {
-        base.GrabHook();
+    public override void GrabHook(Rigidbody2D hookRb) {
+        base.GrabHook(hookRb);
 
         crate.sprite = hookedSprites[0];
         background.sprite = hookedSprites[1];

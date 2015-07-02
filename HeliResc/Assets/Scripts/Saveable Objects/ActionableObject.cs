@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ActionableObject : MonoBehaviour, IActionable {
-	
-    public virtual void UseAction() { 
-    
-    }
+public abstract class ActionableObject : MonoBehaviour, IActionable {
+
+    public abstract void UseAction();
 }
 public interface IActionable
 {
