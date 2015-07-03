@@ -39,10 +39,8 @@ public class LandingPadManager : MonoBehaviour {
 		}
 
 		if (other.gameObject.transform.tag == "Copter") {
-            Debug.Log("Copter entered" + canWin);
             if (canWin == true) { 
-                bool win = objectives.AllObjectiveCompleted();
-                Debug.Log("win");
+                bool win = objectives.AllObjectiveCompleted();                
                 if (win == true)
                     manager.levelPassed();
             }

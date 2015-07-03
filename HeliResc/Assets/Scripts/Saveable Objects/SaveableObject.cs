@@ -20,11 +20,13 @@ public class SaveableObject : MonoBehaviour, IHookable {
     protected bool hooked;
     protected HingeJoint2D joint;                   //Reference to own distance joint
     protected HookScript hookScript;
+    protected FloatingObject floating;
 
     protected virtual void Start() {
         
         copter = GameObject.Find("Copter").GetComponent<Copter>();
         joint = GetComponent<HingeJoint2D>();
+        floating = GetComponent<FloatingObject>();
         joint.enabled = false;
 
         timer = timeToLive;
@@ -73,11 +75,14 @@ public class SaveableObject : MonoBehaviour, IHookable {
         joint.connectedBody = hookRb;
         joint.connectedAnchor = connectedAnchor;
         joint.anchor = anchorWhenHooked;
+
+        floating.enabled = false;
     }
     public virtual void DetachHook() {
         hooked = false;
         joint.enabled = false;
-        gameObject.layer = LayerMask.NameToLayer("Crate");        
+        gameObject.layer = LayerMask.NameToLayer("Crate");
+        floating.enabled = true;
                 
     }
 }

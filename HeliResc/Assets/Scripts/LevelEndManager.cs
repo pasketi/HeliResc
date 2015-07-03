@@ -30,6 +30,8 @@ public class LevelEndManager : MonoBehaviour {
 
     private string message;
 
+    private int[] levelIndexes = { 1, 2, 3, 41, 42, 43, 44, 51, 52, 53, 54, 6, 7, 81 };
+
     private int starsEarned;
 
 
@@ -41,7 +43,11 @@ public class LevelEndManager : MonoBehaviour {
         levelEnd = gameManager.levelEnd;
 
         level = SaveLoad.LoadLevelInfo(levelEnd.index);
-        next = SaveLoad.LoadLevelInfo(levelEnd.index + 1);
+        for (int i = 0; i < levelIndexes.Length; i++) {
+            if(levelIndexes[i] == levelEnd.index && levelEnd.index != 81)
+                next = SaveLoad.LoadLevelInfo(levelIndexes[i+1]);
+        }
+            
 
         starsEarned = 0;
 

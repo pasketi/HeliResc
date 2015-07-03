@@ -47,7 +47,7 @@ public static class SaveLoad {
             s3 = PlayerPrefsExt.GetBool(level + "Star3");
         }
         else {
-            Debug.LogError("No key in player prefs");
+            Debug.LogError("No key in player prefs. Creating the key");
             LevelInfo i = new LevelInfo(index, false, false, false, true);
             i.locked = i.index < 2 ? false : true;
             SaveLevelInfo(i);

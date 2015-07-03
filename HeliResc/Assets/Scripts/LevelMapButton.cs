@@ -56,7 +56,12 @@ public class LevelMapButton : MonoBehaviour {
         }
         else {
             buttonImage.sprite = buttonUnlocked;
-            buttonText.text = levelIndex.ToString();
+            string btnText = levelIndex.ToString();
+            if (btnText.Length > 1) {
+                btnText = btnText[0] + "-" + btnText[1];
+            }
+            //buttonText.text = levelIndex.ToString();
+            buttonText.text = btnText;
         }
 		levelLocked = levelInfo.locked;
 		
@@ -65,7 +70,7 @@ public class LevelMapButton : MonoBehaviour {
 	public void StartLevel() {
 		if (!levelLocked) {
 			PlayerPrefs.SetInt("levelToLoad", levelIndex);
-			Application.LoadLevel ("IntroScreen");
+			Application.LoadLevel ("Level"+levelIndex);
 		}
 	}
 }

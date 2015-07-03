@@ -55,14 +55,20 @@ public class HookScript : MonoBehaviour {
             _t.rotation = Quaternion.Euler(new Vector3(0, 0, 360 - angle));
     }
     public void ResetHook(List<SaveableObject> newList) {
-        if (newList.Count > 0) {
-            Rigidbody2D r = rb;
-            foreach(SaveableObject so in newList){
-                IChainable chain = so as IChainable;
-                chain.Chain(r);
-                foreach (Transform t in so.transform) {
-                    if (t.tag.Equals("Hook"))
-                        r = t.GetComponent<Rigidbody2D>();
+        if (newList.Count > 0)
+        {
+            if (newList[0] is IChainable)
+            {
+                Rigidbody2D r = rb;
+                foreach (SaveableObject so in newList)
+                {
+                    IChainable chain = so as IChainable;
+                    chain.Chain(r);
+                    foreach (Transform t in so.transform)
+                    {
+                        if (t.tag.Equals("Hook"))
+                            r = t.GetComponent<Rigidbody2D>();
+                    }
                 }
             }
         }

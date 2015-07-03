@@ -18,7 +18,6 @@ public class FisherMan : SaveableObject, IChainable {
 
     protected Rigidbody2D _rigidbody;
     protected Transform hookedTransform;
-    protected FloatingObject floating;
     protected bool dead;
     protected LevelManager manager;
 
@@ -27,7 +26,6 @@ public class FisherMan : SaveableObject, IChainable {
         base.Start();        
 
         manager = GameObject.FindObjectOfType<LevelManager>();
-        floating = GetComponent<FloatingObject>();
         _rigidbody = GetComponent<Rigidbody2D>();
         
         legs.SetActive(false);                
@@ -79,9 +77,7 @@ public class FisherMan : SaveableObject, IChainable {
 
     public override void GrabHook(Rigidbody2D hookRb) {
         if (dead == true) return;
-        hooked = true;        
-
-        //animator.Play("Hanging");
+        hooked = true;                
 
         gameObject.layer = LayerMask.NameToLayer("liftedCrate");
 
@@ -103,12 +99,14 @@ public class FisherMan : SaveableObject, IChainable {
         legs.SetActive(true);
 
         _rigidbody.constraints = RigidbodyConstraints2D.None;
+        floating.enabled = false;
     }
 
     public override void DetachHook() {
         base.DetachHook();
 
         _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        floating.enabled = true;
 
         FisherMan fm = hookedTransform.root.GetComponent<FisherMan>();
         if (fm != null) fm.HasDude = false;

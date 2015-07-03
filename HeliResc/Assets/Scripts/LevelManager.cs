@@ -133,7 +133,6 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public bool allCratesCollected() {
-        Debug.Log("Saved crates: " + savedCrates + " crateamount: " + crateAmount);
 		return (savedCrates >= crateAmount);
 	}
 

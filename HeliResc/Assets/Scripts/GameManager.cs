@@ -219,8 +219,9 @@ public class GameManager : MonoBehaviour {
 	public void loadMainMenu(bool showLevelEnd, LevelEndInfo end = null, int menu = 0) {
 		this.showLevelEnd = showLevelEnd;
 		levelEnd = end;
-        if (showLevelEnd) {
-            levelEnd.index = int.Parse(Application.loadedLevelName[Application.loadedLevelName.Length - 1].ToString());
+        if (showLevelEnd) {                      
+            //levelEnd.index = int.Parse(Application.loadedLevelName[Application.loadedLevelName.Length - 1].ToString());
+            levelEnd.index = PlayerPrefs.GetInt("levelToLoad");
 
         }
 		currentMenu = menu;
