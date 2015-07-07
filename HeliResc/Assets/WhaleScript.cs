@@ -56,7 +56,7 @@ public class WhaleScript : MonoBehaviour {
             isShooting = true;
             clouds.Play();
             int amount = 3;
-            float t = time / pool.Count * amount;
+
             float startTime = Time.time;
             float remainingTime = time;
             Debug.Log("Start " + startTime);

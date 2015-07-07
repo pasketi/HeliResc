@@ -41,9 +41,9 @@ public class LevelInfo
 public class LevelEndInfo : LevelInfo {
 
 
-	public string star1Objective;
-	public string star2Objective;
-	public string star3Objective;
+    public bool obj1Passed;
+    public bool obj2Passed;
+    public bool obj3Passed;
 
 	public int endCondition;
 
@@ -56,7 +56,6 @@ public class LevelEndInfo : LevelInfo {
 	public int itemsSaved;
 
 	public LevelEndInfo(bool passed, int condition) {
-        locked = !passed;
         passedLevel = passed;
         endCondition = condition;
         SetStars();

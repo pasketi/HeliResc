@@ -19,7 +19,7 @@ public class Rope : Upgradable {
     private bool hookOut;               //Is the hook out or inside the copter
     private bool hasHook;               //Determines if the copter has a hook or is it destroyed    
 
-    private HookScript hookScript;      //The reference to the hook script of the hook
+    private HookScript hookScript;      //The reference to the hook script of the hook    
 
     public bool HasHook { get { return hasHook; } }
 
@@ -104,6 +104,7 @@ public class Rope : Upgradable {
         }
         
         hookedObject = playerCopter.cargo.CargoHookedCrates(hookedObject);
+
         hookScript.ResetHook(hookedObject);
 
         if (hookedObject.Count > 0) {

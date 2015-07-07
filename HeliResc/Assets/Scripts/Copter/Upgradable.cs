@@ -22,7 +22,7 @@ public abstract class Upgradable {
         playerCopter = copter;
         playerCopter.AddToDictionary(this);             //Add the new Upgrade to the copters upgrade list
 
-        upgrade.Init(playerCopter.name + name);
+        upgrade.Init(playerCopter.copterName + name);
     }
 
     #region Update methods

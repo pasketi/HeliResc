@@ -149,7 +149,6 @@ public class ScrollingMenus : MonoBehaviour {
 
     private IEnumerator SetMoneyPanelPosition() {
         if (current == 0) { 
-            Vector2 v = Vector2.zero;
             float previousTime = Time.time;
             while (moneyPanel.anchoredPosition.y < moneyHideHeight) {
                 moneyPanel.anchoredPosition += Vector2.up * (Time.time-previousTime) * moneyScrollSpeed;
@@ -158,8 +157,7 @@ public class ScrollingMenus : MonoBehaviour {
             }
             moneyPanel.anchoredPosition = Vector2.up * moneyHideHeight;
         }
-        else if (previousMenu == 0) {
-            Vector2 v = Vector2.zero;
+        else if (previousMenu == 0) {            
             float previousTime = Time.time;
             while (moneyPanel.anchoredPosition.y > 0) {
                 moneyPanel.anchoredPosition -= Vector2.up * (Time.time - previousTime) * moneyScrollSpeed;

@@ -12,7 +12,7 @@ public abstract class Copter : MonoBehaviour {
 
     //Copter specific variables
     public Sprite copterSprite;
-    public string name;
+    public string copterName;
     public bool unlocked;
 
     //Upgradable items

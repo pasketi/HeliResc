@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour {
         CopterScripts = new Dictionary<string,Copter>();
         foreach(GameObject go in copters){
             Copter c = Instantiate(go).GetComponent<Copter>();            
-            CopterScripts.Add(c.name, c);
+            CopterScripts.Add(c.copterName, c);
             c.Disable();
         }
      
@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour {
         //Quit the game when player press back button
         if(level == 1) EventManager.StartListening(SaveStrings.escape, Application.Quit);
         else EventManager.StopListening(SaveStrings.escape, Application.Quit);
+
+        Time.timeScale = 1;
 
         if (level == 1 && !PlayerPrefs.HasKey("FirstLogin")) {
             PlayerPrefsExt.SetBool("FirstLogin", true);

@@ -51,7 +51,11 @@ public class UIManager : MonoBehaviour {
         fuel.fillAmount = copter.fuelTank.CurrentFuelPercentage;
 		power.value = copter.engine.CurrentPowerPercentage;
 		saved.text = manager.getSavedCrates ().ToString () + "/" + manager.getCrateAmount ().ToString ();
-		cargo.text = manager.cargoCrates.ToString () + "/" + manager.cargoSize.ToString ();
+
+        cargo.text = copter.cargo.CurrentCargo.ToString() + "/" + copter.cargo.maxCapacity.ToString();
+        //cargo.text = manager.cargoCrates.ToString () + "/" + manager.cargoSize.ToString ();
+
+
         //if (manager.levelAction != 0)
         //    action.text = manager.getActionsLeft().ToString () + "/" + manager.maxActionsPerLevel.ToString ();
         //else {
