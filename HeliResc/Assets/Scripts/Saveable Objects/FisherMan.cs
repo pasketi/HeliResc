@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FisherMan : SaveableObject, IChainable {
+public class FisherMan : HookableObject, IChainable {
 
     public GameObject legs;
     public Animator animator;

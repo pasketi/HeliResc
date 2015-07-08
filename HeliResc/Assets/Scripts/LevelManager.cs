@@ -220,10 +220,16 @@ public class LevelManager : MonoBehaviour {
 		//var crates = GameObject.FindGameObjectsWithTag ("SaveableObject");
 		//var actionableObjects = GameObject.FindGameObjectsWithTag ("ActionableObject");
 
-        var crates = GameObject.FindObjectsOfType<SaveableObject>();
+        var crates = GameObject.FindObjectsOfType<HookableObject>();
         var actionableObjects = GameObject.FindObjectsOfType<ActionableObject>();
 
-		return crates.Length + actionableObjects.Length;
+        int crateAmount = 0;
+        foreach (HookableObject ho in crates) {
+            if (ho.saveable)
+                crateAmount++;
+        }
+
+		return crateAmount + actionableObjects.Length;
 	}
 
 	private float getCrateScale() {

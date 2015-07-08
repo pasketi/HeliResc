@@ -2,16 +2,17 @@
 using System.Collections;
 using System;
 
-public class SaveableObject : MonoBehaviour, IHookable {
+public class HookableObject : MonoBehaviour, IHookable {
 
     protected Action UpdateMethod = () => { };      //Event to update all necessary methods depending on the type of the object
 
-    public bool canGrabHook;                        //Can the object be hooked
+    public bool saveable = true;                    //Can the object be hooked
     public bool useTimer;
     public float timeToLive = 60;
     public Vector2 anchorWhenHooked;                //Where the hingejoint anchor should be
     public Vector2 connectedAnchor;                 //how far from the hook the object should be
     public int saveValue;                           //How much money the player should get from saving the item
+    public int size = 1;                            //How much room in the cargo space the item will take
 
 
     protected float timer;

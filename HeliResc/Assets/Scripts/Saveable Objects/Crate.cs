@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Crate : SaveableObject {
+public class Crate : HookableObject {
 
     public Sprite[] nonHookedSprites;   //assign the crate sprite to the first cell and bg to the second
     public Sprite[] hookedSprites;      //Assign in inspector the hooked sprites. Crate sprite to the first and bg to the second

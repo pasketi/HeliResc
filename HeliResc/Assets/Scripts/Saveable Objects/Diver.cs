@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Diver : SaveableObject {
+public class Diver : HookableObject {
 
     protected Animator animator;
 

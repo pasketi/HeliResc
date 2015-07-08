@@ -32,7 +32,7 @@ public class LandingPadManager : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.transform.tag == "Crate") {
-            SaveableObject s = other.GetComponent<SaveableObject>();
+            HookableObject s = other.GetComponent<HookableObject>();
             if (s != null) {
                 s.SaveItem();
             }

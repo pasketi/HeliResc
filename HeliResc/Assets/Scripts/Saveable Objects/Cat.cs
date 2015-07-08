@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Cat : SaveableObject {
+public class Cat : HookableObject {
 
     public GameObject hookedCat;
     public GameObject nonHookedCat;

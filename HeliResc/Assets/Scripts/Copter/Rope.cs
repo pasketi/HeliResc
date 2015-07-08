@@ -98,7 +98,7 @@ public class Rope : Upgradable {
 
     private void PushHookToCargo(bool forcePush = false) {
 
-        List<SaveableObject> hookedObject = new List<SaveableObject>();
+        List<HookableObject> hookedObject = new List<HookableObject>();
         if (forcePush == false) {
             hookedObject = hookScript.HookedItems;
         }

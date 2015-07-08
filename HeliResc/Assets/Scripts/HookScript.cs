@@ -8,11 +8,11 @@ public class HookScript : MonoBehaviour {
 	private Transform anchor;                   //The anchor point
     private Transform _t;                       //Reference to own transform
     private Rigidbody2D rb;                     //Reference to own rigidbody
-    private List<SaveableObject> hookedItems;   //Items that are hanging in the hook
+    private List<HookableObject> hookedItems;   //Items that are hanging in the hook
 
 
     //Getter for the list
-    public List<SaveableObject> HookedItems { get { return hookedItems; } }
+    public List<HookableObject> HookedItems { get { return hookedItems; } }
 
     //Start listening to events
     void OnEnable() {
@@ -33,7 +33,7 @@ public class HookScript : MonoBehaviour {
         anchor = GameObject.FindGameObjectWithTag("CopterHookLineAnchor").transform;
         _t = transform;        
 
-        ResetHook(new List<SaveableObject>());
+        ResetHook(new List<HookableObject>());
 	}
 	
 	// Update is called once per frame
@@ -54,13 +54,13 @@ public class HookScript : MonoBehaviour {
         else
             _t.rotation = Quaternion.Euler(new Vector3(0, 0, 360 - angle));
     }
-    public void ResetHook(List<SaveableObject> newList) {
+    public void ResetHook(List<HookableObject> newList) {
         if (newList.Count > 0)
         {
             if (newList[0] is IChainable)
             {
                 Rigidbody2D r = rb;
-                foreach (SaveableObject so in newList)
+                foreach (HookableObject so in newList)
                 {
                     IChainable chain = so as IChainable;
                     chain.Chain(r);
@@ -75,11 +75,11 @@ public class HookScript : MonoBehaviour {
         hookedItems = newList;
     }
             
-    public void GrabHook(SaveableObject obj) {
+    public void GrabHook(HookableObject obj) {
         if(hookedItems.Contains(obj) == false)
             hookedItems.Add(obj);
     }
-    public void DetachHook(SaveableObject obj) {
+    public void DetachHook(HookableObject obj) {
         if(hookedItems.Contains(obj) == true)
             hookedItems.Remove(obj);
     }

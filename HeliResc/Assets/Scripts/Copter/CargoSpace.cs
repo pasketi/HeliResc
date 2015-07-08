@@ -14,6 +14,8 @@ public class CargoSpace : Upgradable {
     private LevelManager manager;
     private int cargoValue;                                                 //The value of the items combined that are in the cargo
 
+    private List<HookableObject> cargoItems;
+
     public float copterMass;
     private float hookMass;
     private float cargoMass;
@@ -27,7 +29,7 @@ public class CargoSpace : Upgradable {
 
     public override void Init(Copter copter) {
         base.Init(copter);
-        
+        cargoItems = new List<HookableObject>();
         manager = copter.levelManager;
         //playerRb.mass = cargoMass + hookMass + copterMass; 
     }
@@ -42,19 +44,20 @@ public class CargoSpace : Upgradable {
     /// </summary>
     /// <param name="size"></param>
     /// <returns>true if the task was successfull</returns>
-    public bool AddItemToCargo(int size = 1) {
-        if (currentCargo < maxCapacity) {
-            currentCargo += size;
+    public bool AddItemToCargo(HookableObject item) {
+        if (currentCargo+item.size <= maxCapacity) {
+            cargoItems.Add(item);
+            currentCargo += item.size;
             return true;
         }
         else
             return false;
     }
 
-    public List<SaveableObject> CargoHookedCrates(List<SaveableObject> savedObjects) {
-        if (savedObjects.Count <= 0) return new List<SaveableObject>();
+    public List<HookableObject> CargoHookedCrates(List<HookableObject> savedObjects) {
+        if (savedObjects.Count <= 0) return new List<HookableObject>();
         while (currentCargo < maxCapacity && savedObjects.Count > 0) {
-            AddItemToCargo();
+            AddItemToCargo(savedObjects[0]);
             cargoValue += savedObjects[0].saveValue;
             savedObjects[0].CargoItem();
             savedObjects.RemoveAt(0);
@@ -63,7 +66,7 @@ public class CargoSpace : Upgradable {
         if (savedObjects.Count > 0)
             return savedObjects;
         else
-            return new List<SaveableObject>();
+            return new List<HookableObject>();
     }
 
     public void CargoHookedCrates(Transform hookChild)
@@ -78,7 +81,7 @@ public class CargoSpace : Upgradable {
             {
                 ChangeCargoMass(hookChild.GetComponentInChildren<CrateManager>().crateMass);
                 ChangeHookMass(-hookChild.GetComponentInChildren<CrateManager>().crateMass);
-                AddItemToCargo();
+                //AddItemToCargo();
                 hookChild.GetComponentInChildren<CrateManager>().inCargo = true;
                 hookChild.parent = playerRb.transform;
                 hookChild.GetComponent<Collider2D>().enabled = false;
@@ -91,8 +94,14 @@ public class CargoSpace : Upgradable {
         else { /*Fix the weird physics here*/ }
     }
     public void UnloadAll() {
-        manager.saveCrates(currentCargo);
+        foreach (HookableObject ho in cargoItems) {
+            if (ho.saveable == true) { 
+                manager.saveCrates(1); 
+            }
+        }
+        
         currentCargo = 0;
+        cargoItems = new List<HookableObject>();
 
         cargoMass = 0;
         //playerRb.mass = cargoMass + hookMass + copterMass;
