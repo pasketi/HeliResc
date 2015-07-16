@@ -88,20 +88,20 @@ public class LandingPadManager : MonoBehaviour {
 		}
 	}
 	
-	void saveAllChildren (GameObject hook) {
-        if (hook.tag.Equals("Crate")) {
-            copter.cargo.saveHookedCrate(hook.GetComponentInChildren<CrateManager>().crateMass);
-            hook.tag = "KillMe";
-        }
-		foreach (Transform child in hook.transform) {
-			if (child.tag == "Crate"){
-				if (child.FindChild("LegHook") != null && child.FindChild("LegHook").childCount != 0)
-					saveAllChildren (child.transform.FindChild("LegHook").gameObject);
-				copter.cargo.saveHookedCrate(child.GetComponentInChildren<CrateManager>().crateMass);
-				child.tag = "KillMe";
-			}
-		}
-	}
+    //void saveAllChildren (GameObject hook) {
+    //    if (hook.tag.Equals("Crate")) {
+    //        copter.cargo.saveHookedCrate(hook.GetComponentInChildren<CrateManager>().crateMass);
+    //        hook.tag = "KillMe";
+    //    }
+    //    foreach (Transform child in hook.transform) {
+    //        if (child.tag == "Crate"){
+    //            if (child.FindChild("LegHook") != null && child.FindChild("LegHook").childCount != 0)
+    //                saveAllChildren (child.transform.FindChild("LegHook").gameObject);
+    //            copter.cargo.saveHookedCrate(child.GetComponentInChildren<CrateManager>().crateMass);
+    //            child.tag = "KillMe";
+    //        }
+    //    }
+    //}
 
     public void ResetEvents()
     {

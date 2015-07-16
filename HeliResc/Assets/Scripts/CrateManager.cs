@@ -130,7 +130,7 @@ public class CrateManager : MonoBehaviour {
 
             if (copterScript == null || (!inCargo && copterScript != null && crate.layer == 11 && copterScript.rope.HasHook == false)) {
 				Destroy (joint);
-				copterScript.cargo.ChangeHookMass (-crateMass);
+				//copterScript.cargo.ChangeHookMass (-crateMass);
 				gameObject.GetComponent<Collider2D> ().enabled = true;
 				crate.layer = 10;
 				gameObject.transform.parent.parent = null;
@@ -154,9 +154,9 @@ public class CrateManager : MonoBehaviour {
                 if (twoPhases == true) return;
 				lastInWater = inWater;
 				if (inWater && !inCargo) {
-					copterScript.cargo.ChangeHookMass ((-crateMass) + (crateMass * inWaterModifier));
+					//copterScript.cargo.ChangeHookMass ((-crateMass) + (crateMass * inWaterModifier));
 				} else if (!inWater || inCargo) {
-					copterScript.cargo.ChangeHookMass ((crateMass) + -(crateMass * inWaterModifier));
+					//copterScript.cargo.ChangeHookMass ((crateMass) + -(crateMass * inWaterModifier));
 				}
 			}
 
@@ -208,7 +208,7 @@ public class CrateManager : MonoBehaviour {
 
 				gameObject.GetComponent<Collider2D> ().enabled = false;
 				crate.layer = 11; //liftedCrate
-				copterScript.cargo.ChangeHookMass (crateMass);
+				//copterScript.cargo.ChangeHookMass (crateMass);
 			} else onGround = true;
 		}
 	}

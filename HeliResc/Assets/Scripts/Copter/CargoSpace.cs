@@ -16,9 +16,9 @@ public class CargoSpace : Upgradable {
 
     private List<HookableObject> cargoItems;
 
-    public float copterMass;
-    private float hookMass;
-    private float cargoMass;
+    protected float copterMass;
+    protected float hookMass;
+    protected float cargoMass;
 
     public override void RegisterListeners() {
         EventManager.StartListening("EnterPlatform", UnloadAll);        
@@ -31,7 +31,7 @@ public class CargoSpace : Upgradable {
         base.Init(copter);
         cargoItems = new List<HookableObject>();
         manager = copter.levelManager;
-        //playerRb.mass = cargoMass + hookMass + copterMass; 
+        copterMass = playerRb.mass;
     }
 
     public override void Upgrade() {
@@ -48,6 +48,8 @@ public class CargoSpace : Upgradable {
         if (currentCargo+item.size <= maxCapacity) {
             cargoItems.Add(item);
             currentCargo += item.size;
+            cargoMass += item.mass;
+            playerRb.mass = copterMass + cargoMass;
             return true;
         }
         else
@@ -55,12 +57,11 @@ public class CargoSpace : Upgradable {
     }
 
     public List<HookableObject> CargoHookedCrates(List<HookableObject> savedObjects) {
-        if (savedObjects.Count <= 0) return new List<HookableObject>();
-        while (currentCargo < maxCapacity && savedObjects.Count > 0) {
-            AddItemToCargo(savedObjects[0]);
-            cargoValue += savedObjects[0].saveValue;
-            savedObjects[0].CargoItem();
-            savedObjects.RemoveAt(0);
+        if (savedObjects.Count <= 0) return new List<HookableObject>();        
+        while (currentCargo < maxCapacity && savedObjects.Count > 0) {            
+            AddItemToCargo(savedObjects[0]);            //Add the item to the dictionary      
+            cargoValue += savedObjects[0].saveValue;    //Get the save value from the crate
+            savedObjects[0].CargoItem();                //Move item to cargo            
         }
         manager.setCargoCrates(currentCargo);
         if (savedObjects.Count > 0)
@@ -80,7 +81,7 @@ public class CargoSpace : Upgradable {
             if (hookChild.tag == "Crate")
             {
                 ChangeCargoMass(hookChild.GetComponentInChildren<CrateManager>().crateMass);
-                ChangeHookMass(-hookChild.GetComponentInChildren<CrateManager>().crateMass);
+                //ChangeHookMass(-hookChild.GetComponentInChildren<CrateManager>().crateMass);
                 //AddItemToCargo();
                 hookChild.GetComponentInChildren<CrateManager>().inCargo = true;
                 hookChild.parent = playerRb.transform;
@@ -111,19 +112,9 @@ public class CargoSpace : Upgradable {
     public void ChangeCargoMass(float crateMass)
     {
         cargoMass += crateMass;
-        playerRb.mass = cargoMass + hookMass + copterMass;
+        playerRb.mass = cargoMass + copterMass;
     }
-
-    public void ChangeHookMass(float crateMass)
-    {
-        hookMass += crateMass;
-        playerRb.mass = cargoMass + hookMass + copterMass;
-    }
-    public void saveHookedCrate(float crateMass)
-    {
-        manager.saveCrates(1);
-        ChangeHookMass(-crateMass);
-    }
+       
     protected override void GiveName() {
         name = "CargoSpace";
     }

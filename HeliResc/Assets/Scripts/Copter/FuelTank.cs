@@ -16,6 +16,7 @@ public class FuelTank : Upgradable {
     private bool fill = false;          //Fill the tank until it's full
 
     public Action TankDepleted = () => { };
+    public Action TankFilled = () => { };
 
     public override void Init(Copter copter) {
         base.Init(copter);
@@ -51,6 +52,7 @@ public class FuelTank : Upgradable {
     }
     private void FillFuel() {
         currentFuel += fillRate * Time.deltaTime;       //Add fuel to tank
+        TankFilled();
         if (currentFuel > maxCapacity) {                //Stop fill if the tank is already full
             currentFuel = maxCapacity;
             fill = false;

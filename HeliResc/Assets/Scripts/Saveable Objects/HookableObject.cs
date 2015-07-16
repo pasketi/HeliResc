@@ -13,6 +13,7 @@ public class HookableObject : MonoBehaviour, IHookable {
     public Vector2 connectedAnchor;                 //how far from the hook the object should be
     public int saveValue;                           //How much money the player should get from saving the item
     public int size = 1;                            //How much room in the cargo space the item will take
+    public float mass = 1;
 
 
     protected float timer;
@@ -23,9 +24,17 @@ public class HookableObject : MonoBehaviour, IHookable {
     protected HookScript hookScript;
     protected FloatingObject floating;
 
+    void OnEnable() {
+        EventManager.StartListening("HookDied", DetachHook);
+    }
+    void OnDisable() {
+        EventManager.StopListening("HookDied", DetachHook);
+    }
+
     protected virtual void Start() {
         
         copter = GameObject.Find("Copter").GetComponent<Copter>();
+        hookScript = copter.HookScript;
         joint = GetComponent<HingeJoint2D>();
         floating = GetComponent<FloatingObject>();
         joint.enabled = false;
@@ -69,8 +78,7 @@ public class HookableObject : MonoBehaviour, IHookable {
         gameObject.layer = LayerMask.NameToLayer("liftedCrate");
         
         joint.enabled = true;
-
-        hookScript = hookRb.GetComponent<HookScript>();
+        
         hookScript.GrabHook(this);
 
         joint.connectedBody = hookRb;
@@ -84,6 +92,7 @@ public class HookableObject : MonoBehaviour, IHookable {
         joint.enabled = false;
         gameObject.layer = LayerMask.NameToLayer("Crate");
         floating.enabled = true;
+        hookScript.DetachHook(this);
                 
     }
 }

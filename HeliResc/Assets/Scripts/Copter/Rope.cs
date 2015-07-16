@@ -14,12 +14,14 @@ public class Rope : Upgradable {
     public GameObject hookAnchor;       //Anchor of the hook. Needs to be set in inspector
     public float hookDistance = 1.5f;   //The distance of the hook from the anchor point
     public float snapDistance = 3;      //The distance the rope will snap
+    public float hookMass;              //The mass to assign to the rigidbody
     
     private DistanceJoint2D hookJoint;  //DistanceJoint component of the copter
     private bool hookOut;               //Is the hook out or inside the copter
     private bool hasHook;               //Determines if the copter has a hook or is it destroyed    
 
-    private HookScript hookScript;      //The reference to the hook script of the hook    
+    private HookScript hookScript;      //The reference to the hook script of the hook
+    public HookScript HookScript { get { return hookScript; } }
 
     public bool HasHook { get { return hasHook; } }
 
@@ -49,6 +51,7 @@ public class Rope : Upgradable {
         hookPrefab = newHook;
         hook = playerCopter.CreateGameObject(hookPrefab, Vector3.zero, Quaternion.identity);
         hookScript = hook.GetComponent<HookScript>();
+        hookScript.HookMass = hookMass;
 
         hasHook = true;
         hookJoint = playerRb.GetComponent<DistanceJoint2D>();
@@ -149,9 +152,9 @@ public class Rope : Upgradable {
         hook.transform.position = hookAnchor.transform.position;
         UpdateDelegate = HookOutUpdate;
     }
-    public void KillHook() {        
-        if (hookOut == false) return;        
-        hook.GetComponent<LineRenderer>().enabled = false;  
+    public void KillHook() {                
+        hook.GetComponent<LineRenderer>().enabled = false;
+        EventManager.TriggerEvent("HookDied");
         hasHook = false;
         hookJoint.enabled = false;              
     }

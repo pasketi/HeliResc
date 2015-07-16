@@ -24,10 +24,14 @@ public abstract class Copter : MonoBehaviour {
     protected Dictionary<string, Upgradable> copterUpgrades;
     public Dictionary<string, Upgradable> Upgrades { get { return copterUpgrades; } set { } }
 
+    public HookScript HookScript { get { return rope.HookScript; } }
+
     protected Rigidbody2D copterBody;
 
     protected CopterInput input;    //input class to control the copter
 
+    protected bool onPlatform;
+    public bool OnPlatform { get { return onPlatform; } }
     protected float copterScale;
 
     void OnDestroy() {
@@ -40,12 +44,16 @@ public abstract class Copter : MonoBehaviour {
             entry.RegisterListeners();
         }
         EventManager.StartListening("CopterSplash", TurnCopterOff);
+        EventManager.StartListening("EnterPlatform", EnterPlatform);
+        EventManager.StartListening("ExitPlatform", ExitPlatform);
     }
     protected virtual void OnDisable() {
         foreach (Upgradable entry in copterUpgrades.Values) {
             entry.UnregisterListeners();
         }
         EventManager.StopListening("CopterSplash", TurnCopterOff);
+        EventManager.StopListening("EnterPlatform", EnterPlatform);
+        EventManager.StopListening("ExitPlatform", ExitPlatform);
     }
 
 	// Use this for initialization
@@ -118,7 +126,12 @@ public abstract class Copter : MonoBehaviour {
     protected virtual void IdleInput() {
         engine.IdleInput();
     }
-
+    protected virtual void EnterPlatform() {
+        onPlatform = true;
+    }
+    protected virtual void ExitPlatform() {
+        onPlatform = false;
+    }
     public void Direction(bool faceRight) {
         if (faceRight == true) {
             transform.localScale = new Vector3(copterScale, transform.localScale.y);

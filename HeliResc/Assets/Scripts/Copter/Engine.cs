@@ -46,6 +46,7 @@ public class Engine : Upgradable {
         base.Init(copter);
         
         copter.fuelTank.TankDepleted += OutOfFuel;      //Subscribe to the fuel tanks TankEmpty event
+        copter.fuelTank.TankFilled += TankFilled;
         UpdateDelegate = FuelUpdate;                    //Start with having fuel
 
         tempHoldTime = holdTime;
@@ -112,8 +113,7 @@ public class Engine : Upgradable {
         UpdateDelegate = FuelUpdate;
     }
 
-    private void AutoHoover() {
-        if (useAutoHoover == false) return;
+    private void AutoHoover() {        
         Vector2 vel = playerRb.velocity;
         if (!Mathf.Approximately(vel.y, 0)) {
             float y = 0.25f * Mathf.Abs(vel.y);
@@ -126,6 +126,11 @@ public class Engine : Upgradable {
         UpdateDelegate = NoFuelUpdate;      //Change the update method
         hasFuel = false;
     }
+    private void TankFilled() {
+        hasFuel = true;
+        if (playerCopter.OnPlatform == true) UpdateDelegate = PlatformUpdate;
+        else UpdateDelegate = FuelUpdate;
+    }
 
     private void Thrust() {
         playerRb.AddForce(playerRb.transform.up * (currentPower * powerMultiplier) * Time.deltaTime);
@@ -133,10 +138,10 @@ public class Engine : Upgradable {
 
     public void IdleInput() {
         //If there is no input, autohoover and return the rotation back to 0
-        if (hasFuel == true) {
+        if (hasFuel == true && useAutoHoover == true) {
             AutoHoover();
-
-        } IdleRotation();
+            IdleRotation();
+        } 
     }
 
     private void HandlePower(MouseTouch touch) {

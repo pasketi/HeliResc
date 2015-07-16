@@ -13,6 +13,16 @@ public class HookScript : MonoBehaviour {
 
     //Getter for the list
     public List<HookableObject> HookedItems { get { return hookedItems; } }
+    public float HookMass { 
+        set {
+            if (rb == null)
+                rb = GetComponent<Rigidbody2D>();
+            rb.mass = value; 
+        } 
+        get { 
+            return rb.mass; 
+        }
+    }
 
     //Start listening to events
     void OnEnable() {
@@ -76,12 +86,16 @@ public class HookScript : MonoBehaviour {
     }
             
     public void GrabHook(HookableObject obj) {
-        if(hookedItems.Contains(obj) == false)
+        if (hookedItems.Contains(obj) == false) {
+            HookMass += obj.mass;
             hookedItems.Add(obj);
+        }
     }
     public void DetachHook(HookableObject obj) {
-        if(hookedItems.Contains(obj) == true)
+        if (hookedItems.Contains(obj) == true) {
+            HookMass -= obj.mass;
             hookedItems.Remove(obj);
+        }
     }
     private void DisableLine() {
         line.enabled = false;
