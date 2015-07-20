@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class LevelHandler : MonoBehaviour {
 
     public List<LevelSet> levelSets;
-    public List<LevelSet> LevelSets { get { return instance.levelSets; } }
+    public static List<LevelSet> LevelSets { get { return instance.levelSets; } }
     public static Dictionary<string, List<Level>> Levels;
 
     private static LevelHandler instance;
