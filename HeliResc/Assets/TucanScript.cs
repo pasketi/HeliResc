@@ -26,7 +26,10 @@ public class TucanScript : MonoBehaviour {
         leftTarget = _transform.position - new Vector3(patrolRange, 0);        
         target = new Vector3();
         scale = _transform.localScale;
-        Patrol = MoveRight;
+        if (scale.x > 0)
+            Patrol = MoveRight;
+        else
+            Patrol = MoveLeft;
 
 	}
 	
