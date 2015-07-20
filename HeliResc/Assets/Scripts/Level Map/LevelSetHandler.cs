@@ -6,7 +6,7 @@ public class LevelSetHandler : MonoBehaviour {
 
     public GameObject buttonPrefab; //Prefab of a button to open levels
     public LevelSet set;            //The kind of set the group has
-    public float circleRadius;      //The radius the buttons are going to be from the middle
+    public float circleRadius;      //The radius the buttons are going to be from the middle in percentage of the screen height
 
     void Start() {
         for (int i = 0; i < set.levelAmount; i++) {
@@ -29,10 +29,18 @@ public class LevelSetHandler : MonoBehaviour {
         vec.x = x;
         vec.y = y;
 
-        vec *= circleRadius;        
+		vec *= (circleRadius * Screen.height);
 
         RectTransform rect = GetComponent<RectTransform>();
 
         return transform.position + vec;
     }
+}
+
+[System.Serializable]
+public class LevelSet {
+	public string levelSetName;     //The identifier of the set. Crate, swimmer etc.
+	public int levelAmount;         //how many levels is in the set
+	public Sprite setImage;         //The image to show in the middle of the set
+	public int neededStars;			//How many stars is required to open the set
 }

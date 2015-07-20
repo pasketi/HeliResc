@@ -216,6 +216,10 @@ public class GameManager : MonoBehaviour {
 		Application.LoadLevel(levelName);
 	}
 
+	public static void LoadLevel(string level) {
+		Application.LoadLevel (level);
+	}
+
     public void GameOver() { }
 
 	public void loadMainMenu(bool showLevelEnd, LevelEndInfo end = null, int menu = 0) {

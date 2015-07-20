@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class LevelHandler : MonoBehaviour {
 
-    public List<LevelSet> levelSets;
-    public static List<LevelSet> LevelSets { get { return instance.levelSets; } }
     public static Dictionary<string, List<Level>> Levels;
 
     private static LevelHandler instance;
@@ -21,11 +19,4 @@ public class LevelHandler : MonoBehaviour {
 
 public class Level { 
     
-}
-
-[System.Serializable]
-public class LevelSet {
-    public string levelSetName;     //The identifier of the set. Crate, swimmer etc.
-    public int levelAmount;         //how many levels is in the set
-    public Sprite setImage;         //The image to show in the middle of the set
 }
