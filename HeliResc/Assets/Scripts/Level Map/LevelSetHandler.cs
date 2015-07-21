@@ -7,6 +7,7 @@ public class LevelSetHandler : MonoBehaviour {
     public GameObject buttonPrefab; //Prefab of a button to open levels
     public LevelSet set;            //The kind of set the group has
     public float circleRadius;      //The radius the buttons are going to be from the middle in percentage of the screen height
+    public Image setImage;          //The image to show in the middle of the button set
 
     void Start() {
         for (int i = 0; i < set.levelAmount; i++) {
@@ -17,6 +18,10 @@ public class LevelSetHandler : MonoBehaviour {
 
             handler.SetPosition(CalculateButtonPosition(i));
         }
+        if (set.setImage == null)
+            setImage.enabled = false;
+        else
+            setImage.sprite = set.setImage;
     }
 
     private Vector3 CalculateButtonPosition(int index) {
