@@ -43,9 +43,6 @@ public class Level {
         name = setName + id;
     }
 
-    public static void Save(Level level) { 
-    
-    }    
     public static Level Load(string setName, int id) {
         Level l = new Level(setName, id);
 
