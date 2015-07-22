@@ -13,6 +13,7 @@ public class CopterSelection : MonoBehaviour {
     public Button b0;
     public Button b1;
     public Button b2;
+	public Button b3;
 
 	public Text engineText;
 	public Text fuelText;
@@ -27,6 +28,7 @@ public class CopterSelection : MonoBehaviour {
         b0.onClick.AddListener(() => SetCopter(0));
         b1.onClick.AddListener(() => SetCopter(1));
         b2.onClick.AddListener(() => SetCopter(2));
+		b3.onClick.AddListener(() => SetCopter(3));
     }
 
     void SetCopter(int i) {
