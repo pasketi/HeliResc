@@ -185,14 +185,21 @@ public class LevelManager : MonoBehaviour {
         int condition = objectives.AllObjectiveCompleted() ? EndReason.winner : EndReason.passed;
 
         LevelEndInfo end = new LevelEndInfo(true, condition);
+        end.level = LevelHandler.CurrentLevel;
         end.itemsSaved = getSavedCrates();
         end.Reward = reward;
-                
-        if (objectives == null) Debug.Log("Objectives not found");
 
-        end.star1 = objectives.LevelObjective1();
-        end.star2 = objectives.LevelObjective2();
-        end.star3 = objectives.LevelObjective3();
+        LevelHandler.CompleteLevel(end.level);
+
+        RubyScript ruby = GameObject.FindObjectOfType<RubyScript>();
+
+        if (ruby == null) Debug.LogError("Ruby not found");
+        if (objectives == null) Debug.LogError("Objectives not found");
+
+        end.rubyFound = ruby.found;
+        end.obj1Passed = objectives.LevelObjective1();
+        end.obj2Passed = objectives.LevelObjective2();
+        end.obj3Passed = objectives.LevelObjective3();
 
         gameManager.loadMainMenu(true, end, 2);
     }

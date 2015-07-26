@@ -9,6 +9,7 @@ public class LevelEndManager : MonoBehaviour {
 
 	public Text text;
 	public Image star1, star2, star3;
+    public Image rubyImage;
 
     public Image alsFace;
 
@@ -22,15 +23,14 @@ public class LevelEndManager : MonoBehaviour {
 
 	public Sprite unlockedStar;
 	public Sprite lockedStar;
+    public Sprite unlockedRuby;
 
 	private LevelEndInfo levelEnd;
+    private Level level;
 
-    private LevelInfo level;
-    private LevelInfo next;
+    private Animator animator;
 
-    private string message;
-
-    private int[] levelIndexes = { 1, 2, 3, 41, 42, 43, 44, 51, 52, 53, 54, 6, 7, 81 };
+    private string message;    
 
     private int starsEarned;
 
@@ -41,41 +41,47 @@ public class LevelEndManager : MonoBehaviour {
         CreateFaceDictionary();
 
         levelEnd = gameManager.levelEnd;
-
-        level = SaveLoad.LoadLevelInfo(levelEnd.index);
-        for (int i = 0; i < levelIndexes.Length; i++) {
-            if(levelIndexes[i] == levelEnd.index && levelEnd.index != 81)
-                next = SaveLoad.LoadLevelInfo(levelIndexes[i+1]);
-        }
-            
+        level = levelEnd.level;
 
         starsEarned = 0;
 
         alsFace.sprite = endFaces[levelEnd.endCondition];
 
-        if (levelEnd.star1)
-            starsEarned++;
-        if (levelEnd.star2)
-            starsEarned++;
-        if (levelEnd.star3)
-            starsEarned++;
+        if (levelEnd.obj1Passed) starsEarned++;
+        if (levelEnd.obj2Passed) starsEarned++;
+        if (levelEnd.obj3Passed) starsEarned++;
 
+        level.star1 = levelEnd.obj1Passed || level.star1;
+        level.star2 = levelEnd.obj2Passed || level.star2;
+        level.star3 = levelEnd.obj3Passed || level.star3;
 
-        if (levelEnd.passedLevel) {
+        if (levelEnd.rubyFound == true)
+            rubyImage.sprite = unlockedRuby;
+
+        if (levelEnd.passedLevel == true) {
             PassedLevel();
         }
         else {
             FailedLevel();
-        }        
+        }
 
-        level.star1 = level.star1 || levelEnd.star1;
-        level.star2 = level.star2 || levelEnd.star2;
-        level.star3 = level.star3 || levelEnd.star3;
-
-        SaveLoad.SaveLevelInfo(level);
+        StartCoroutine(Animations(levelEnd.rubyFound));
 
         text.text = message;
     }
+
+    private IEnumerator Animations(bool showRuby) {
+        yield return null;
+    }
+    private IEnumerator CoinFlow(int amount) {
+        yield return null;
+    }
+    private IEnumerator StarsAnimation() {
+        yield return null;
+    }
+    private IEnumerator RubyFound() {
+        yield return null;
+    }    
 
     private void FailedLevel() {
         star1.sprite = lockedStar;
@@ -91,14 +97,7 @@ public class LevelEndManager : MonoBehaviour {
         star1.sprite = starsEarned > 0 ? unlockedStar : lockedStar;
         star2.sprite = starsEarned > 1 ? unlockedStar : lockedStar;
         star3.sprite = starsEarned > 2 ? unlockedStar : lockedStar;
-
-        if (next.locked)
-        {
-            PlayerPrefs.SetInt("CurrentLevel", next.index);
-            next.locked = false;
-            next.SetStars();
-            SaveLoad.SaveLevelInfo(next);
-        }
+        
     }
 
     private void CreateFaceDictionary() {
@@ -111,7 +110,7 @@ public class LevelEndManager : MonoBehaviour {
     }
 
     public void PressRestart() {
-        Application.LoadLevel("Level" + levelEnd.index);
+        //Application.LoadLevel("Level" + levelEnd.index);
     }
 
     public void PressLevelMap() {
@@ -119,6 +118,6 @@ public class LevelEndManager : MonoBehaviour {
     }
 
     public void PressNextLevel() {
-        Application.LoadLevel("Level" + (levelEnd.index + 1));
+        //Application.LoadLevel("Level" + (levelEnd.index + 1));
     }
 }

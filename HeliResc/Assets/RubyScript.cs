@@ -3,6 +3,8 @@ using System.Collections;
 
 public class RubyScript : MonoBehaviour {
 
+    public bool found;
+
     private Animator animator;
     private string rubyName;
 	// Use this for initialization
@@ -21,6 +23,7 @@ public class RubyScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag.Equals("Copter") || other.tag.Equals("Hook")) {
+            found = true;
             PlayerPrefsExt.SetBool(rubyName, true);
             animator.Play("Collected");
         }

@@ -21,7 +21,7 @@ public class LevelMapButton : MonoBehaviour {
 	public Sprite starLocked;
 
     //Contain all info of the level to be saved
-    private LevelInfo levelInfo;
+    //private LevelInfo levelInfo;
 
     //DELETE?
 	[Range(0, 3)]
@@ -39,31 +39,31 @@ public class LevelMapButton : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {        
-        levelInfo = SaveLoad.LoadLevelInfo(levelIndex);        
+        //levelInfo = SaveLoad.LoadLevelInfo(levelIndex);        
 
-        stars[0].sprite = levelInfo.star1 ? starUnlocked : starLocked;
-        stars[1].sprite = levelInfo.star2 ? starUnlocked : starLocked;
-        stars[2].sprite = levelInfo.star3 ? starUnlocked : starLocked;
+        //stars[0].sprite = levelInfo.star1 ? starUnlocked : starLocked;
+        //stars[1].sprite = levelInfo.star2 ? starUnlocked : starLocked;
+        //stars[2].sprite = levelInfo.star3 ? starUnlocked : starLocked;
 
-        for (int i = 0; i < stars.Length; i++) {
-            stars[i].enabled = !levelInfo.locked;         
-        }
+        //for (int i = 0; i < stars.Length; i++) {
+        //    stars[i].enabled = !levelInfo.locked;         
+        //}
 
-        if (levelInfo.locked)
-        {
-            buttonImage.sprite = buttonLocked;
-            buttonText.text = "";
-        }
-        else {
-            buttonImage.sprite = buttonUnlocked;
-            string btnText = levelIndex.ToString();
-            if (btnText.Length > 1) {
-                btnText = btnText[0] + "-" + btnText[1];
-            }
-            //buttonText.text = levelIndex.ToString();
-            buttonText.text = btnText;
-        }
-		levelLocked = levelInfo.locked;
+        //if (levelInfo.locked)
+        //{
+        //    buttonImage.sprite = buttonLocked;
+        //    buttonText.text = "";
+        //}
+        //else {
+        //    buttonImage.sprite = buttonUnlocked;
+        //    string btnText = levelIndex.ToString();
+        //    if (btnText.Length > 1) {
+        //        btnText = btnText[0] + "-" + btnText[1];
+        //    }
+        //    //buttonText.text = levelIndex.ToString();
+        //    buttonText.text = btnText;
+        //}
+        //levelLocked = levelInfo.locked;
 		
 	}
 

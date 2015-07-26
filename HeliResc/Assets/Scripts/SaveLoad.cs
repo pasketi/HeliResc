@@ -20,42 +20,42 @@ public static class SaveLoad {
         }
     }
 
-	public static void SaveLevelInfo(LevelInfo info) {
+    //public static void SaveLevelInfo(LevelInfo info) {
 
-        string name = "Level" + info.index.ToString();
+    //    string name = "Level" + info.index.ToString();
 
-        PlayerPrefsExt.SetBool(name + "Locked", info.locked);
-        PlayerPrefsExt.SetBool(name + "Star1", info.star1);
-        PlayerPrefsExt.SetBool(name + "Star2", info.star2);
-        PlayerPrefsExt.SetBool(name + "Star3", info.star3);
-	}
+    //    PlayerPrefsExt.SetBool(name + "Locked", info.locked);
+    //    PlayerPrefsExt.SetBool(name + "Star1", info.star1);
+    //    PlayerPrefsExt.SetBool(name + "Star2", info.star2);
+    //    PlayerPrefsExt.SetBool(name + "Star3", info.star3);
+    //}
 
     public static void SaveUpgrade(Upgrade u) {
         PlayerPrefs.SetInt(u.name, u.CurrentLevel);
     }
 
-	public static LevelInfo LoadLevelInfo(int index) {
-        string level = "Level" + index.ToString();
-        bool locked = true;
-        bool s1 = false;
-        bool s2 = false;
-        bool s3 = false;
-        if(PlayerPrefs.HasKey(level + "Locked")) {
-            locked = PlayerPrefsExt.GetBool(level + "Locked");
-            s1 = PlayerPrefsExt.GetBool(level + "Star1");
-            s2 = PlayerPrefsExt.GetBool(level + "Star2");
-            s3 = PlayerPrefsExt.GetBool(level + "Star3");
-        }
-        else {
-            Debug.LogError("No key in player prefs. Creating the key");
-            LevelInfo i = new LevelInfo(index, false, false, false, true);
-            i.locked = i.index < 2 ? false : true;
-            SaveLevelInfo(i);
-            return i;
-        }
-        LevelInfo info = new LevelInfo (index, s1, s2, s3, locked);
-		return info;
-	}
+    //public static LevelInfo LoadLevelInfo(int index) {
+    //    string level = "Level" + index.ToString();
+    //    bool locked = true;
+    //    bool s1 = false;
+    //    bool s2 = false;
+    //    bool s3 = false;
+    //    if(PlayerPrefs.HasKey(level + "Locked")) {
+    //        locked = PlayerPrefsExt.GetBool(level + "Locked");
+    //        s1 = PlayerPrefsExt.GetBool(level + "Star1");
+    //        s2 = PlayerPrefsExt.GetBool(level + "Star2");
+    //        s3 = PlayerPrefsExt.GetBool(level + "Star3");
+    //    }
+    //    else {
+    //        Debug.LogError("No key in player prefs. Creating the key");
+    //        LevelInfo i = new LevelInfo(index, false, false, false, true);
+    //        i.locked = i.index < 2 ? false : true;
+    //        SaveLevelInfo(i);
+    //        return i;
+    //    }
+    //    LevelInfo info = new LevelInfo (index, s1, s2, s3, locked);
+    //    return info;
+    //}
 
     public static int LoadUpgradeLevel(string name) {
         if (PlayerPrefs.HasKey(name))

@@ -1,15 +1,46 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class LevelSetHandler : MonoBehaviour {
 
-    public GameObject buttonPrefab; //Prefab of a button to open levels
-    public LevelSet set;            //The kind of set the group has
+    public GameObject lockedPanel;
+    public GameObject buttonPrefab; //Prefab of a button to open levels    
     public float circleRadius;      //The radius the buttons are going to be from the middle in percentage of the screen height
-    public Image setImage;          //The image to show in the middle of the button set
+    public Image setImage;          //The image UI-component in the middle of the button set
+    public string setName;
+
+    private LevelSet set;            //The kind of set the group has
 
     void Start() {
+
+        set = LevelHandler.GetLevelSet(setName);
+
+        int playerStars = 2;
+
+        if (playerStars > set.neededStars && set.unlocked) {
+            SetUnlocked();
+        }
+        else {
+            SetLocked(playerStars);
+        }
+    }
+
+    private void SetLocked(int playerStars) {
+        lockedPanel.SetActive(true);
+        setImage.enabled = false;
+
+        Text starText = lockedPanel.GetComponentInChildren<Text>();
+        starText.text = playerStars + "/" + set.neededStars;
+        Debug.Log("Text: " + (starText == null));
+    }
+
+    private void SetUnlocked() {
+
+        setImage.enabled = true;
+        lockedPanel.SetActive(false);
+
         for (int i = 0; i < set.levelAmount; i++) {
             GameObject go = Instantiate(buttonPrefab) as GameObject;
             go.transform.SetParent(transform);
@@ -48,4 +79,9 @@ public class LevelSet {
 	public int levelAmount;         //how many levels is in the set
 	public Sprite setImage;         //The image to show in the middle of the set
 	public int neededStars;			//How many stars is required to open the set
+    public bool unlocked;           //Is the set unlocked
+
+    public void Save() {
+        PlayerPrefsExt.SetBool(levelSetName + "Set", unlocked);
+    }
 }
