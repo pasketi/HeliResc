@@ -25,7 +25,7 @@ public class LevelHandler : MonoBehaviour {
             List<Level> l = new List<Level>();
             for (int i = 0; i < LevelSets[j].levelAmount; i++)
             {
-                l.Add(new Level(LevelSets[j].levelSetName, i));
+                l.Add(Level.Load(LevelSets[j].levelSetName, i));
             }
             Levels.Add(LevelSets[j].levelSetName, l);
         }
@@ -46,15 +46,23 @@ public class LevelHandler : MonoBehaviour {
         int id = l.id;
         List<Level> levels = Levels[l.setName];
         LevelSet nextSet = null;
+
+        Debug.Log("Level completed");
+
         //First unlock the next set.
         for (int i = 0; i < instance.LevelSets.Length; i++) { 
             if(i + 1 < instance.LevelSets.Length && instance.LevelSets[i].levelSetName.Equals(l.setName)) {
                 nextSet = instance.LevelSets[i + 1];
             }
         }
-        if (nextSet != null && nextSet.unlocked == false) {
+        if (nextSet != null) {
+            Debug.Log("Next Set");
             nextSet.unlocked = true;
             nextSet.Save();
+            Level nextLevel = Levels[nextSet.levelSetName][0];
+            nextLevel.unlocked = true;
+            Debug.Log(nextLevel.ToString());
+            Level.Save(nextLevel);
         }
         
         //Second unlock the next level in the current set if there is more levels
@@ -119,5 +127,15 @@ public class Level {
 
         if (PlayerPrefs.HasKey(name + "Unlocked")) { unlocked = PlayerPrefsExt.GetBool(name + "Unlocked"); }
         else { PlayerPrefsExt.SetBool(name + "Unlocked", false); }
+    }
+
+    public override string ToString()
+    {
+        string str = "Unlocked: " + unlocked;
+        str += " : Ruby: " + rubyFound;
+        str += " : Set name: " + setName;
+        str += " : ID: " + id;
+
+        return str;
     }
 }

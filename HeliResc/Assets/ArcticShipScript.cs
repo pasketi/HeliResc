@@ -23,6 +23,10 @@ public class ArcticShipScript : MonoBehaviour {
             if (speed > 0) speed *= -1;
         }
 
+        Vector3 scale = _transform.localScale;
+        if (speed > 0) scale.x *= -1;
+        _transform.localScale = scale;
+
         speedVector = new Vector3(speed * Time.fixedDeltaTime,0);
         Activate();
 	}

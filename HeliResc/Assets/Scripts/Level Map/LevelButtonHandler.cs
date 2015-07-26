@@ -22,6 +22,8 @@ public class LevelButtonHandler : MonoBehaviour {
         levelId = set.levelSetName + id;			//Set the identifier from the set name and the integer id
         level = Level.Load(set.levelSetName, id);
 
+        //Debug.Log(level.ToString());
+
         if(level.unlocked == true) {
             if (unlockedStars.Length != 3) Debug.LogError("The stars array is not the correct size");
 

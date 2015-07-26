@@ -59,7 +59,6 @@ public class WhaleScript : MonoBehaviour {
 
             float startTime = Time.time;
             float remainingTime = time;
-            Debug.Log("Start " + startTime);
             for (int i = 0; i < pool.Count; i += amount)
             {
                 for (int j = 0; j < amount; j++)
@@ -74,7 +73,6 @@ public class WhaleScript : MonoBehaviour {
                 yield return null; // new WaitForSeconds(t);
             }
             clouds.Stop();
-            Debug.Log("End " + Time.time);
             isShooting = false;
         }
     }
