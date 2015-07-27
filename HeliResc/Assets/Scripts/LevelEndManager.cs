@@ -7,7 +7,6 @@ public class LevelEndManager : MonoBehaviour {
 
 	private GameManager gameManager;
 
-	public Text text;
 	public Image star1, star2, star3;
     public Image rubyImage;
 
@@ -29,8 +28,6 @@ public class LevelEndManager : MonoBehaviour {
     private Level level;
 
     private Animator animator;
-
-    private string message;    
 
     private int starsEarned;
 
@@ -67,7 +64,6 @@ public class LevelEndManager : MonoBehaviour {
 
         StartCoroutine(Animations(levelEnd.rubyFound));
 
-        text.text = message;
     }
 
     private IEnumerator Animations(bool showRuby) {
@@ -88,12 +84,8 @@ public class LevelEndManager : MonoBehaviour {
         star2.sprite = lockedStar;
         star3.sprite = lockedStar;
 
-        message = "Next time I'll do better";
     }
     private void PassedLevel() {
-
-        message = "I did it! That was awesome!";
-
         star1.sprite = starsEarned > 0 ? unlockedStar : lockedStar;
         star2.sprite = starsEarned > 1 ? unlockedStar : lockedStar;
         star3.sprite = starsEarned > 2 ? unlockedStar : lockedStar;

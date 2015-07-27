@@ -2,25 +2,61 @@
 using System.Collections;
 
 public class StartMenuScript : MonoBehaviour {
+	    
+	public GameObject autoHooverOff;
+	public GameObject soundOff;
+	public GameObject musicOff;
 
-    public UnityEngine.UI.Text buttonText;
-    private bool ah;    
+    private bool autoHoover;
+	private bool sounds;
+	private bool music;
 
     void Start() {
-        if (PlayerPrefs.HasKey(SaveStrings.autoHoover))
-        {
-            ah = PlayerPrefsExt.GetBool(SaveStrings.autoHoover);
-        }
+		//Set autohoover on or off
+        if (PlayerPrefs.HasKey(SaveStrings.autoHoover)) autoHoover = PlayerPrefsExt.GetBool(SaveStrings.autoHoover);        
         else { 
-            ah = true;
-            PlayerPrefsExt.SetBool(SaveStrings.autoHoover, ah);
+            autoHoover = true;
+            PlayerPrefsExt.SetBool(SaveStrings.autoHoover, autoHoover);
         }
-        buttonText.text = ah ? "ON" : "OFF";
+
+		//Set music on or off
+		if (PlayerPrefs.HasKey (SaveStrings.music))
+			music = PlayerPrefsExt.GetBool (SaveStrings.music);
+		else {
+			music = true;
+			PlayerPrefsExt.SetBool(SaveStrings.music, music);
+		}
+
+		//Set sounds on or off
+		if (PlayerPrefs.HasKey (SaveStrings.sounds))
+			sounds = PlayerPrefsExt.GetBool (SaveStrings.sounds);
+		else {
+			sounds = true;
+			PlayerPrefsExt.SetBool(SaveStrings.sounds, sounds);
+		}
+
+		autoHooverOff.SetActive (!autoHoover);
+		soundOff.SetActive (!sounds);
+		musicOff.SetActive (!music);
     }
 
     public void AutoHoover() {
-        ah = !ah;
-        PlayerPrefsExt.SetBool(SaveStrings.autoHoover, ah);
-        buttonText.text = ah ? "ON" : "OFF";
+        autoHoover = !autoHoover;
+		autoHooverOff.SetActive (!autoHoover);
+        PlayerPrefsExt.SetBool(SaveStrings.autoHoover, autoHoover);
     }
+	public void Sounds() {
+		//TODO when the sounds are implemented
+
+		sounds = !sounds;
+		soundOff.SetActive (!sounds);
+		PlayerPrefsExt.SetBool(SaveStrings.sounds, sounds);
+	}
+	public void Music() {
+		//TODO when the sounds are implemented
+
+		music = !music;
+		musicOff.SetActive (!music);
+		PlayerPrefsExt.SetBool(SaveStrings.music, music);
+	}
 }
