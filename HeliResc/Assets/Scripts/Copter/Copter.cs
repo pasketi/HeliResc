@@ -175,7 +175,7 @@ public abstract class Copter : MonoBehaviour {
 		CopterInfo info = new CopterInfo ();
 
 		info.copterIndex = index;
-		info.copterSprite = copterSprite;
+		info.copterSprite = GetComponent<SpriteRenderer>().sprite;
 		info.copterName = copterName;
 		info.copterPrice = price;
 
