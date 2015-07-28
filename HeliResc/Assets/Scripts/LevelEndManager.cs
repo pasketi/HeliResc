@@ -38,7 +38,14 @@ public class LevelEndManager : MonoBehaviour {
         CreateFaceDictionary();
 
         levelEnd = gameManager.levelEnd;
+		if (levelEnd == null) {
+			Debug.LogError("Level end is null");
+		}
         level = levelEnd.level;
+
+		if (level == null) {
+			Debug.LogError("Level end is null");
+		}
 
         starsEarned = 0;
 
@@ -53,8 +60,9 @@ public class LevelEndManager : MonoBehaviour {
         level.star3 = levelEnd.obj3Passed || level.star3;
 
         if (levelEnd.rubyFound == true)
-            rubyImage.sprite = unlockedRuby;
-
+			rubyImage.sprite = unlockedRuby;
+		else
+			rubyImage.enabled = false;
         if (levelEnd.passedLevel == true) {
             PassedLevel();
         }

@@ -211,6 +211,8 @@ public class LevelManager : MonoBehaviour {
 
 
         LevelEndInfo end = new LevelEndInfo(false, loseCondition);
+		end.level = LevelHandler.CurrentLevel;
+		end.passedLevel = false;
         gameManager.loadMainMenu(true, end, 2);
     }
 
