@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
 	public int CurrentMenu { get { return currentMenu; } }                                                  //Getter for the current menu
 
     public GameObject[] copters;
-    public Dictionary<string, Copter> CopterScripts;                                                        //List of all copters Copter script. Access with the copters name
+    public Dictionary<int, Copter> CopterScripts;                                                        //List of all copters Copter script. Access with the copters name
     public GameObject CurrentCopter { get { return copters[CurrentCopterIndex]; } }                         //Returns the selected copter prefab
     public int CurrentCopterIndex { get { return Mathf.Clamp(currentCopter, 0, copters.Length - 1); } }     //The currently selected copter
 
@@ -44,10 +44,10 @@ public class GameManager : MonoBehaviour {
 	void Start () {
               
         
-        CopterScripts = new Dictionary<string,Copter>();
-        foreach(GameObject go in copters){
-            Copter c = Instantiate(go).GetComponent<Copter>();            
-            CopterScripts.Add(c.copterName, c);
+        CopterScripts = new Dictionary<int,Copter>();
+		for(int i = 0; i < copters.Length; i++){
+            Copter c = Instantiate(copters[i]).GetComponent<Copter>();            
+            CopterScripts.Add(i, c);
             c.Disable();
         }
      

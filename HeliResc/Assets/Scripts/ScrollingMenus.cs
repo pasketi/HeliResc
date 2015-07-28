@@ -75,7 +75,7 @@ public class ScrollingMenus : MonoBehaviour {
 		originalSpeed = scrollingSpeed;
 		slowedSpeed = scrollingSpeed * 0.75f;
 
-        moneyPanel.sizeDelta = new Vector2(Screen.width * 0.25f, Screen.height * 0.09f);    //Set the position of the money panel
+        moneyPanel.sizeDelta = new Vector2(Screen.width * 0.3f, Screen.height * 0.12f);    //Set the size of the money panel
         moneyHideHeight = Screen.height * 0.35f;
         if (current == 0) {
             moneyPanel.anchoredPosition = new Vector2(0, moneyHideHeight);

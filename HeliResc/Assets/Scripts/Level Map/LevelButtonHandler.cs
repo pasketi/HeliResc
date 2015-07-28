@@ -49,9 +49,9 @@ public class LevelButtonHandler : MonoBehaviour {
     }
 
 	public void LoadLevel() {
-        if (level.unlocked == true) {
+        //if (level.unlocked == true) {
             LevelHandler.UpdateCurrentLevel(level);
             GameManager.LoadLevel(levelId);
-        }
+        //}
 	}
 }

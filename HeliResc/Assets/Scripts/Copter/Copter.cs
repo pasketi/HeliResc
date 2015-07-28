@@ -14,6 +14,7 @@ public abstract class Copter : MonoBehaviour {
     public Sprite copterSprite;
     public string copterName;
     public bool unlocked;
+	public int price;
 
     //Upgradable items
     public CargoSpace cargo;
@@ -169,5 +170,22 @@ public abstract class Copter : MonoBehaviour {
 
     public virtual GameObject CreateGameObject(GameObject prefab, Vector3 position, Quaternion rotation) {
         return (Instantiate(prefab, position, rotation) as GameObject);
-    }    
+    }
+	public virtual CopterInfo GetCopterInfo() {
+		CopterInfo info = new CopterInfo ();
+
+		info.copterSprite = copterSprite;
+		info.copterName = copterName;
+		info.copterPrice = price;
+
+		return info;
+	}
+}
+
+public class CopterInfo {
+	public Sprite copterSprite;
+	public string copterName;
+	public int copterIndex;
+	public int copterPrice;
+
 }
