@@ -20,7 +20,7 @@ public class CopterSelection : MonoBehaviour {
 		group.cellSize = new Vector2 (t.rect.width, t.rect.height * 0.25f);
 
 		copterEntries = new Dictionary<int, CopterEntryScript> ();
-		allCopters = gameManager.CopterScripts;
+		allCopters = gameManager.CopterInfos;
 
 		for (int i = 0; i < gameManager.copters.Length; i++) {
 			GameObject go = Instantiate(copterEntry) as GameObject;

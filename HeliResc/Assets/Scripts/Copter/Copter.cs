@@ -171,9 +171,10 @@ public abstract class Copter : MonoBehaviour {
     public virtual GameObject CreateGameObject(GameObject prefab, Vector3 position, Quaternion rotation) {
         return (Instantiate(prefab, position, rotation) as GameObject);
     }
-	public virtual CopterInfo GetCopterInfo() {
+	public virtual CopterInfo GetCopterInfo(int index) {
 		CopterInfo info = new CopterInfo ();
 
+		info.copterIndex = index;
 		info.copterSprite = copterSprite;
 		info.copterName = copterName;
 		info.copterPrice = price;
