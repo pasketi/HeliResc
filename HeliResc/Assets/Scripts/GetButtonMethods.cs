@@ -15,7 +15,5 @@ public class GetButtonMethods : MonoBehaviour {
 
 		
 		btnResetAll.onClick.AddListener (() => g.resetData ());
-	
-		btnPlay.onClick.AddListener (() => g.startGame("LevelMap"));
 	}
 }

@@ -5,12 +5,15 @@ using System.Collections.Generic;
 public class SaveStrings {
 
     //Save strings
-    public static string money = "Money";
-    public static string autoHoover = "AutoHoover";
-	public static string music = "MusicOn";
-	public static string sounds = "SoundsOn";
+    public static string sMoney = 			"Money";
+    public static string sAutoHoover = 		"AutoHoover";
+	public static string sMusic = 			"MusicOn";
+	public static string sSounds = 			"SoundsOn";
+	public static string sSelectedCopter = 	"SelectedCopter";
+
     
     //Event strings
-    public static string escape = "Escape";
+    public static string eEscape = 			"Escape";
+	public static string eSelectCopter = 	"SelectCopter";
 
 }

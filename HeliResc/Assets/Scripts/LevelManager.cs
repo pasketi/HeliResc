@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -24,12 +24,12 @@ public class LevelManager : MonoBehaviour {
     void OnEnable() {
         EventManager.StartListening("CopterExplode", CopterExploded);
         EventManager.StartListening("CopterSplash", CopterSplashed);
-        EventManager.StartListening(SaveStrings.escape, backButton);
+        EventManager.StartListening(SaveStrings.eEscape, backButton);
     }
     void OnDisable() {
         EventManager.StopListening("CopterExplode", CopterExploded);
         EventManager.StopListening("CopterSplash", CopterSplashed);
-        EventManager.StopListening(SaveStrings.escape, backButton);
+        EventManager.StopListening(SaveStrings.eEscape, backButton);
     }
 
 	// Use this for initialization
@@ -76,8 +76,6 @@ public class LevelManager : MonoBehaviour {
 				stars += 1;
 				if (!isDamageTaken()) stars += 1;
 				if (savedCrates == crateAmount) stars += 1;
-				if (stars < 3) gameManager.sendLevelEndInfo(stars, levelCoinRewardPerStar * stars);
-				else if (stars >= 3) gameManager.sendLevelEndInfo(stars, (levelCoinRewardPerStar * stars) + (levelCoinRewardPerStar / 2));
 				once = true;
                 winLevel();
 			}

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,28 +17,19 @@ public class GameManager : MonoBehaviour {
     public GameObject[] copters;
     public Dictionary<int, CopterInfo> CopterInfos;                                                        	//List of all copters CopterInfo. Access with the index.
     public GameObject CurrentCopter { get { return copters[CurrentCopterIndex]; } }                         //Returns the selected copter prefab
-    public int CurrentCopterIndex { get { return Mathf.Clamp(currentCopter, 0, copters.Length - 1); } }     //The currently selected copter
+    public int CurrentCopterIndex { get { return Mathf.Clamp(currentCopter, 0, copters.Length - 1); }
+									set { currentCopter = Mathf.Clamp(value, 0, copters.Length); } }
+
+	private int currentCopter = 1;
+	private int playerStars;
+	private int playerCoins;
+
 
 
 	void Awake(){
 		DontDestroyOnLoad(gameObject);
         wallet = SaveLoad.LoadWallet();
 	}
-
-	//private const int copterAmount = 2; //FOR EVERY NEW COPTER, ADD 1 HERE
-    //public int CopterAmount { get { return copterAmount; } }
-
-	//private string 	playerName = "Anonymous";
-	//private int		playerFirst = 0,
-    private int playerStars = 0, 
-					playerCoins = 0, 
-					playerPlatform = 1,
-					currentCopter = 1,  //0 == default, 1 = watercopter
-					lastStars = 0,
-					lastCoins = 0;
-
-    
-    
 
 	// Use this for initialization
 	void Start () {
@@ -58,20 +49,20 @@ public class GameManager : MonoBehaviour {
         }
 	}
     void OnDisable() {
-        EventManager.StopListening(SaveStrings.escape, Application.Quit);
+        EventManager.StopListening(SaveStrings.eEscape, Application.Quit);
     }
 	// Update is called once per frame
 	void Update () {
 
         if (Input.GetKeyDown(KeyCode.Escape))
-            EventManager.TriggerEvent(SaveStrings.escape);
+            EventManager.TriggerEvent(SaveStrings.eEscape);
 	}
 
     void OnLevelWasLoaded(int level) {
         
         //Quit the game when player press back button
-        if(level == 1) EventManager.StartListening(SaveStrings.escape, Application.Quit);
-        else EventManager.StopListening(SaveStrings.escape, Application.Quit);
+        if(level == 1) EventManager.StartListening(SaveStrings.eEscape, Application.Quit);
+        else EventManager.StopListening(SaveStrings.eEscape, Application.Quit);
 
         Time.timeScale = 1;
 
@@ -89,8 +80,6 @@ public class GameManager : MonoBehaviour {
 
 	public void save () {
 		PlayerPrefs.SetInt("First", 1);
-		//PlayerPrefs.SetString("Name", playerName);
-		PlayerPrefs.SetInt("Platform", playerPlatform);
 
 		//Currently selected copter
 		PlayerPrefs.SetInt("Copter", currentCopter);
@@ -102,107 +91,12 @@ public class GameManager : MonoBehaviour {
 		//playerName = PlayerPrefs.GetString("Name", playerName);
 		playerStars = PlayerPrefs.GetInt("Stars", playerStars);
 		playerCoins = PlayerPrefs.GetInt("Coins", playerCoins);
-		playerPlatform = PlayerPrefs.GetInt("Platform", playerPlatform);
 
 		//Currently selected copter
-		currentCopter = PlayerPrefs.GetInt("Copter", currentCopter);
+		currentCopter = PlayerPrefs.GetInt(SaveStrings.sSelectedCopter, currentCopter);
 
-		//CopterLevels and unlocks
-		//for (int i = 0; i < copterAmount; i++) {
-            //copters[i,3] = PlayerPrefs.GetInt("Copter"+i+"Unlocked").ToString();
-            //copters[i,4] = wallet.UpgradeLevel("Engine").ToString();
-            //copters[i,5] = wallet.UpgradeLevel("Fuel").ToString();
-            //copters[i,12] = wallet.UpgradeLevel("Rope").ToString();
-		//}
-	}
 
-	public void sendLevelEndInfo (int stars, int coins) {
-		lastCoins = coins;
-		lastStars = stars;
-	}
-	public int getAndNullLastLevelCoins () {
-		int tempCoins = lastCoins;
-		lastCoins = 0;
-		return tempCoins;
-	}
-	public int getAndNullLastLevelStars () {
-		int tempStars = lastStars;
-		lastStars = 0;
-		return tempStars;
-	}
-
-    //public string getName () {
-    //    return playerName;
-    //}
-    //public void setName (string name) {
-    //    playerName = name;
-    //    save ();
-    //}
-
-	public int getStars () {
-		return playerStars;
-	}
-	private void setStars (int stars) {
-		playerStars = stars;
-		save ();
-	}
-	public void addStars (int stars) {
-		setStars (getStars() + stars);
-	}
-
-	public int getCoins () {
-		return playerCoins;
-	}
-	private void setCoins (int coins) {
-		playerCoins = coins;
-	}
-	public void addCoins (int coins) {
-		setCoins (getCoins() + coins);
-		save ();
-	}
-
-	public int getPlatformLevel () {
-		return playerPlatform;
-	}
-
-    public string[,] getCopters () {
-        return null;
-        //return copters;
-    }
-    //public int getCopterAmount () {
-    //    return copterAmount;
-    //}
-
-    //public int getCurrentCopter () {
-    //    return currentCopter;
-    //}
-	public void setCurrentCopter (int copter){
-		currentCopter = copter;
-		save ();
-	}
-    //public void swapCopter () {
-    //    if (currentCopter < getCopterAmount()-1) setCurrentCopter(currentCopter+1);
-    //    else setCurrentCopter(0);
-    //}
-
-	
-	public void resetUpgrades () {
-        //copters[currentCopter, 4] = "1";
-        //copters[currentCopter, 5] = "1";
-        //copters[currentCopter, 12] = "1";
-		playerPlatform = 1;
-		save ();
-	}        
-
-    public bool BuyUpgrade(Upgrade upgrade) {
-        //TODO
-
-        return false;
-    }
-
-	public void BuyCopter(int index) {
-		//TODO
-	}
+	}    
 
 	//CAREFUL!
 	public void resetData () {

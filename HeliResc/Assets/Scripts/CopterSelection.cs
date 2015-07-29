@@ -13,21 +13,45 @@ public class CopterSelection : MonoBehaviour {
     public GridLayoutGroup group;								//Reference to layoutgroup component of the copterlist
     public GameObject copterEntry;								//Prefab of the copter entry to add to the list
 
+	private int selectedCopter;									//Index of the selected copter
+
     void Start() {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
 		RectTransform t = transform as RectTransform;
 		group.cellSize = new Vector2 (t.rect.width, t.rect.height * 0.25f);
 
+		selectedCopter = gameManager.CurrentCopterIndex;
+
 		copterEntries = new Dictionary<int, CopterEntryScript> ();
 		allCopters = gameManager.CopterInfos;
 
-		for (int i = 0; i < gameManager.copters.Length; i++) {
+		for (int i = 0; i < allCopters.Count; i++) {
 			GameObject go = Instantiate(copterEntry) as GameObject;
 			go.transform.SetParent(group.transform);
 			CopterEntryScript script = go.GetComponent<CopterEntryScript>();
 			script.SetInfo(i, this, allCopters[i]);
+
+			if(i.Equals(selectedCopter)) script.ShowBackground(true);
+
 			copterEntries.Add(i, script);
 		}
     } 
+
+	public void UpdateSelected(int index) {
+		selectedCopter = index;
+		PlayerPrefs.SetInt (SaveStrings.sSelectedCopter, selectedCopter);
+		gameManager.CurrentCopterIndex = selectedCopter;
+
+		foreach (CopterEntryScript entry in copterEntries.Values) {
+			if(entry.index == selectedCopter) entry.ShowBackground(true);
+			else entry.ShowBackground(false);
+		}
+
+		UpdateCopterScreen ();
+	}
+
+	public void UpdateCopterScreen() {
+		CopterInfo info = allCopters [selectedCopter];
+	}
 }

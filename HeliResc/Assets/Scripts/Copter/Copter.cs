@@ -178,6 +178,7 @@ public abstract class Copter : MonoBehaviour {
 		info.copterSprite = GetComponent<SpriteRenderer>().sprite;
 		info.copterName = copterName;
 		info.copterPrice = price;
+		info.unlocked = unlocked;
 
 		return info;
 	}
@@ -188,5 +189,5 @@ public class CopterInfo {
 	public string copterName;
 	public int copterIndex;
 	public int copterPrice;
-
+	public bool unlocked;
 }

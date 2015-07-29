@@ -1,14 +1,14 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
 public class GameStoryScript : MonoBehaviour {
 
     void OnEnable() {
-        EventManager.StartListening(SaveStrings.escape, Application.Quit);   
+        EventManager.StartListening(SaveStrings.eEscape, Application.Quit);   
     }
     void OnDisable() {
-        EventManager.StopListening(SaveStrings.escape, Application.Quit);
+        EventManager.StopListening(SaveStrings.eEscape, Application.Quit);
     }
 
 	// Use this for initialization
@@ -19,6 +19,6 @@ public class GameStoryScript : MonoBehaviour {
 
     private void PressPlay() {
 		PlayerPrefs.SetInt ("levelToLoad", 1);
-        Application.LoadLevel("IntroScreen");
+        Application.LoadLevel("Tutorial1");
     }
 }

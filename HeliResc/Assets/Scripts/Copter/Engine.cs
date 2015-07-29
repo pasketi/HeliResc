@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
@@ -50,8 +50,8 @@ public class Engine : Upgradable {
         UpdateDelegate = FuelUpdate;                    //Start with having fuel
 
         tempHoldTime = holdTime;
-        if (PlayerPrefs.HasKey(SaveStrings.autoHoover))
-            useAutoHoover = PlayerPrefsExt.GetBool(SaveStrings.autoHoover);
+        if (PlayerPrefs.HasKey(SaveStrings.sAutoHoover))
+            useAutoHoover = PlayerPrefsExt.GetBool(SaveStrings.sAutoHoover);
         else
             useAutoHoover = true;
     }

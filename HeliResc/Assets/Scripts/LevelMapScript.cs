@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -9,10 +9,10 @@ public class LevelMapScript : MonoBehaviour {
 	private RectTransform rect;	//Reference to the panel's rect transform
 
     void OnEnable() {
-        EventManager.StartListening(SaveStrings.escape, BackButton);
+        EventManager.StartListening(SaveStrings.eEscape, BackButton);
     }
     void OnDisable() {
-        EventManager.StopListening(SaveStrings.escape, BackButton);
+        EventManager.StopListening(SaveStrings.eEscape, BackButton);
     }
 
 	// Use this for initialization

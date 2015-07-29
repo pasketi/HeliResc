@@ -97,6 +97,7 @@ public class ScrollingMenus : MonoBehaviour {
             Rect copterRect = new Rect(copterSelectPos.x, copterSelectPos.y, sizeDelta.x, sizeDelta.y);            
 
             if (!copterRect.Contains((Vector2)Input.mousePosition)) {
+				Debug.Log ("Copte rect not pressed");
 			    mouseStart = previousPosition = Input.mousePosition;
 			    isDragging = true; 
             }
@@ -104,6 +105,8 @@ public class ScrollingMenus : MonoBehaviour {
 		if(Input.GetMouseButtonUp(0)) {
             previousMenu = current;
 			mouseEnd = Input.mousePosition;
+			Debug.Log ("Mouse start: " + mouseStart);
+			Debug.Log("Mouse end: " + mouseEnd);
 			if(mouseEnd.x < mouseStart.x) {			//Player dragged from right to left
                 if (mouseStart.x - mouseEnd.x > swipeAmount) {
                     current = current < menus.Count - 1 ? current + 1 : menus.Count - 1;                    
@@ -118,7 +121,6 @@ public class ScrollingMenus : MonoBehaviour {
 			isScrolling = true;
 			isDragging = false;
 			target = panelAnchorPoints[current];            
-            
 		}
 		if(Input.GetMouseButton(0) && isDragging) {	//Move the panel when the player is dragging
 			menuPanel.position -= Vector3.right * ((Mathf.Abs(previousPosition.x) - Mathf.Abs(Input.mousePosition.x)));

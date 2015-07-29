@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -10,10 +10,10 @@ public class IntroScreenScript : MonoBehaviour {
 	private int levelToLoad = 1;
 
     void OnEnable() {
-        EventManager.StartListening(SaveStrings.escape, PressBack);
+        EventManager.StartListening(SaveStrings.eEscape, PressBack);
     }
     void OnDisable() {
-        EventManager.StopListening(SaveStrings.escape, PressBack);
+        EventManager.StopListening(SaveStrings.eEscape, PressBack);
     }
 
 	// Use this for initialization

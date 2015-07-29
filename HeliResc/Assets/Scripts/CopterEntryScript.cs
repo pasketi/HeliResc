@@ -12,6 +12,12 @@ public class CopterEntryScript : MonoBehaviour {
 	private Image backgroundImage;			//The background sprite. Turn off if the copter is not selected
     private GameManager gameManager;		//Reference to the game manager
 	private CopterInfo copter;				//The copter the button will show
+	
+
+	void Start() {
+		Button button = GetComponent<Button> ();
+		button.onClick.AddListener (() => SelectCopter ());
+	}
 
 	public void SetInfo(int index, CopterSelection select, CopterInfo copter) {
 
@@ -22,6 +28,15 @@ public class CopterEntryScript : MonoBehaviour {
 		copterSelect = select;
 		gameManager = GameObject.FindObjectOfType<GameManager> ();
 
+		backgroundImage.enabled = false;
 		copterImage.sprite = copter.copterSprite;
+	}
+
+	public void SelectCopter() {
+		Debug.Log ("Selected copter: " + index);
+		copterSelect.UpdateSelected (index);
+	}
+	public void ShowBackground(bool show) {
+		backgroundImage.enabled = show;
 	}
 }
