@@ -30,6 +30,11 @@ public class CopterEntryScript : MonoBehaviour {
 
 		backgroundImage.enabled = false;
 		copterImage.sprite = copter.copterSprite;
+		copterImage.color = copter.copterColor;
+
+		if (copter.unlocked == false) {
+			copterImage.color = Color.black;
+		}
 	}
 
 	public void SelectCopter() {

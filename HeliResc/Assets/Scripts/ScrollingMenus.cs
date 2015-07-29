@@ -107,12 +107,12 @@ public class ScrollingMenus : MonoBehaviour {
 			mouseEnd = Input.mousePosition;
 			Debug.Log ("Mouse start: " + mouseStart);
 			Debug.Log("Mouse end: " + mouseEnd);
-			if(mouseEnd.x < mouseStart.x) {			//Player dragged from right to left
+			if(mouseEnd.x < mouseStart.x && isDragging == true) {			//Player dragged from right to left
                 if (mouseStart.x - mouseEnd.x > swipeAmount) {
                     current = current < menus.Count - 1 ? current + 1 : menus.Count - 1;                    
                     StartCoroutine(SetMoneyPanelPosition());
                 }
-			} else if(mouseEnd.x > mouseStart.x){	//Player dragged from left to right
+			} else if(mouseEnd.x > mouseStart.x && isDragging == true){	//Player dragged from left to right
                 if (mouseEnd.x - mouseStart.x > swipeAmount) {
                     current = current > 0 ? current - 1 : 0;
                     StartCoroutine(SetMoneyPanelPosition());
@@ -131,7 +131,7 @@ public class ScrollingMenus : MonoBehaviour {
 		if(isScrolling) {
 			float step = Time.deltaTime * scrollingSpeed;
 			menuPanel.position = Vector3.MoveTowards(menuPanel.position, target, step);
-			
+
 			if(scrollingSpeed > slowedSpeed) {
 				scrollingSpeed *= 0.995f;
 			}

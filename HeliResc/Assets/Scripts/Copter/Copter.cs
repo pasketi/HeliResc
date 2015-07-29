@@ -15,6 +15,7 @@ public abstract class Copter : MonoBehaviour {
     public string copterName;
     public bool unlocked;
 	public int price;
+	public string description;
 
     //Upgradable items
     public CargoSpace cargo;
@@ -179,15 +180,26 @@ public abstract class Copter : MonoBehaviour {
 		info.copterName = copterName;
 		info.copterPrice = price;
 		info.unlocked = unlocked;
+		info.fuelAmount = fuelTank.maxCapacity;
+		info.enginePower = engine.maxPower;
+		info.cargoSpace = cargo.maxCapacity;
+		info.copterColor = GetComponent<SpriteRenderer> ().color;
+		info.description = description;
 
 		return info;
 	}
 }
 
 public class CopterInfo {
+
+	public string description;
+	public int cargoSpace;
+	public float enginePower;
+	public float fuelAmount;
 	public Sprite copterSprite;
 	public string copterName;
 	public int copterIndex;
 	public int copterPrice;
 	public bool unlocked;
+	public Color copterColor;
 }

@@ -14,9 +14,11 @@ public class CopterSelection : MonoBehaviour {
     public GameObject copterEntry;								//Prefab of the copter entry to add to the list
 
 	private int selectedCopter;									//Index of the selected copter
+	private CopterSpecsMenu specs;
 
     void Start() {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		specs = GameObject.FindObjectOfType<CopterSpecsMenu> ();
 
 		RectTransform t = transform as RectTransform;
 		group.cellSize = new Vector2 (t.rect.width, t.rect.height * 0.25f);
@@ -36,6 +38,8 @@ public class CopterSelection : MonoBehaviour {
 
 			copterEntries.Add(i, script);
 		}
+
+		specs.UpdateSpecs (allCopters [selectedCopter]);
     } 
 
 	public void UpdateSelected(int index) {
@@ -53,5 +57,7 @@ public class CopterSelection : MonoBehaviour {
 
 	public void UpdateCopterScreen() {
 		CopterInfo info = allCopters [selectedCopter];
+
+		specs.UpdateSpecs (info);
 	}
 }
