@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour {
 	public GameObject pauseScreen, HUD, copterSpawnPoint, kamikazePelican;
 	public GameObject levelSplash;
 	private bool win = false, lose = false, splash = false, gamePaused = false, takenDamage = false, once = false, releaseThePelican = false;
+	private bool exploded;
 	public float waterLevel = 0f, uiLiftPowerWidth = 0.1f, uiLiftPowerDeadZone = 0.05f, resetCountdown = 3f, crateSize, mapBoundsLeft = -50f, mapBoundsRight = 50f;
 	public int cargoSize = 2, cargoCrates = 0, levelAction = 0, maxActionsPerLevel = 0;
 
@@ -112,9 +113,11 @@ public class LevelManager : MonoBehaviour {
 
     private void CopterExploded() { 
         lose = true;
+		exploded = true;
         Invoke("loseLevel", resetCountdown);
     }
     private void CopterSplashed() { 
+		lose = true;
         splash = true;
         Invoke("loseLevel", resetCountdown);
     }    
@@ -204,8 +207,9 @@ public class LevelManager : MonoBehaviour {
 
     private void loseLevel() {
         int loseCondition = 0;
-        if(lose == true) loseCondition = EndReason.explode;
-        else if(splash == true) loseCondition = EndReason.drowned;
+        if(lose == true) loseCondition = EndReason.lose;
+        if(splash == true) loseCondition = EndReason.drowned;
+		if (exploded == true) loseCondition = EndReason.explode;
 
 
         LevelEndInfo end = new LevelEndInfo(false, loseCondition);

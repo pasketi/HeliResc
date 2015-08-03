@@ -10,6 +10,8 @@ public class SaveStrings {
 	public static string sMusic = 			"MusicOn";
 	public static string sSounds = 			"SoundsOn";
 	public static string sSelectedCopter = 	"SelectedCopter";
+	public static string sPlayerStars = 	"PlayerStars";
+	public static string sPlayerRubies = 	"PlayerRubies";
 
     
     //Event strings

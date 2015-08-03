@@ -35,7 +35,7 @@ public class HookScript : MonoBehaviour {
     }
 
 	// Use this for initialization
-	void Start () {
+	protected virtual void Start () {
 		line = gameObject.GetComponent<LineRenderer> ();
 		line.sortingOrder = GetComponent<SpriteRenderer>().sortingOrder - 1;    //Set the line to be drawn under hook
 		line.sortingLayerID = GetComponent<SpriteRenderer>().sortingLayerID;
@@ -85,13 +85,13 @@ public class HookScript : MonoBehaviour {
         hookedItems = newList;
     }
             
-    public void GrabHook(HookableObject obj) {
+    public virtual void GrabHook(HookableObject obj) {
         if (hookedItems.Contains(obj) == false) {
             HookMass += obj.mass;
             hookedItems.Add(obj);
         }
     }
-    public void DetachHook(HookableObject obj) {
+    public virtual void DetachHook(HookableObject obj) {
         if (hookedItems.Contains(obj) == true) {
             HookMass -= obj.mass;
             hookedItems.Remove(obj);

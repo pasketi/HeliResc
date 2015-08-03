@@ -70,4 +70,5 @@ public class EndReason {
     public static int drowned = 3;
     public static int explode = 4;
     public static int timeout = 5;
+	public static int lose = 6;
 }

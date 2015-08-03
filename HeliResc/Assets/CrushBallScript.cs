@@ -11,9 +11,6 @@ public class CrushBallScript : MonoBehaviour {
 	void Start () {
         GameObject.Find("Copter").GetComponent<Copter>().rope.CreateHook(ballPrefab, ballDistance, ballSnapDistance);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+
 }

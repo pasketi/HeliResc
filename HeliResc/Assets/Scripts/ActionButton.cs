@@ -14,8 +14,10 @@ public class ActionButton : MonoBehaviour {
     private Rigidbody2D copterRb;       //The rigidbody of the copter
 
 	void Start () {
+		manager = GameObject.FindObjectOfType<LevelManager> ();
+		Debug.Log (manager.levelAction);
         if (!(manager.levelAction > 0))
-            gameObject.SetActive(false);
+            transform.parent.gameObject.SetActive(false);
         copterAnchor = GameObject.Find("Copter").transform;
         copterRb = GameObject.Find("Copter").GetComponent<Rigidbody2D>();
         actionsLeft = maxActions;

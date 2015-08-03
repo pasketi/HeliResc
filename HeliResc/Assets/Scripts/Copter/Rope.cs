@@ -47,10 +47,15 @@ public class Rope : Upgradable {
         if(hook != null) {
             hook.SetActive(false);
             hook = null;
-        }        
-        hookPrefab = newHook;
+        }
+
+		//Destroy old hook if there is any
+		if(hook != null) GameObject.Destroy (hook);
+        
+		hookPrefab = newHook;
         hook = playerCopter.CreateGameObject(hookPrefab, Vector3.zero, Quaternion.identity);
         hookScript = hook.GetComponent<HookScript>();
+		Debug.Log ("Hook null" + (hookScript == null));
         hookScript.HookMass = hookMass;
 
         hasHook = true;

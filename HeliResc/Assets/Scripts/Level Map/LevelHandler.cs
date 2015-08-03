@@ -5,10 +5,12 @@ using System.Collections.Generic;
 public class LevelHandler : MonoBehaviour {
 
     public LevelSet[] LevelSets;
-    public static Dictionary<string, List<Level>> Levels;       //all the levels in the game. the key string is the name of the set of levels
+	public Level currentLevel;
+	public string currentSet;
+
+	public static Dictionary<string, List<Level>> Levels;       //all the levels in the game. the key string is the name of the set of levels
     public static Level CurrentLevel { get { return instance.currentLevel; } }
-    public Level currentLevel;
-    public string currentSet;
+	public static int LevelCount;
 
     private static LevelHandler instance;
 
@@ -16,6 +18,7 @@ public class LevelHandler : MonoBehaviour {
 	void Awake () {
         DontDestroyOnLoad(gameObject);
         instance = this;
+		LevelCount = 0;
 
         //Initialize the levels list
         Levels = new Dictionary<string, List<Level>>();
@@ -25,6 +28,7 @@ public class LevelHandler : MonoBehaviour {
             List<Level> l = new List<Level>();
             for (int i = 0; i < LevelSets[j].levelAmount; i++)
             {
+				LevelCount++;
                 l.Add(Level.Load(LevelSets[j].levelSetName, i));
             }
             Levels.Add(LevelSets[j].levelSetName, l);

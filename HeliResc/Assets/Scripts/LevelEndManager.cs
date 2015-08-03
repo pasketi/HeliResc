@@ -17,6 +17,7 @@ public class LevelEndManager : MonoBehaviour {
     public Sprite winnerAl;
     public Sprite passedAl;
     public Sprite timeoutAl;
+	public Sprite loserAl;
 
     private Dictionary<int, Sprite> endFaces;
 
@@ -55,6 +56,24 @@ public class LevelEndManager : MonoBehaviour {
         if (levelEnd.obj2Passed) starsEarned++;
         if (levelEnd.obj3Passed) starsEarned++;
 
+		//Save the amount of stars and rubies the player has earned from all levels
+		int playerStars = PlayerPrefs.GetInt(SaveStrings.sPlayerStars, 0);
+
+		if (level.star1 == false && levelEnd.obj1Passed == true)
+			playerStars++;
+		if (level.star2 == false && levelEnd.obj2Passed == true)
+			playerStars++;
+		if (level.star3 == false && levelEnd.obj3Passed == true)
+			playerStars++;
+
+		PlayerPrefs.SetInt (SaveStrings.sPlayerStars, playerStars);
+
+		if (level.rubyFound == false && levelEnd.rubyFound == true) {
+			int rubies = PlayerPrefs.GetInt(SaveStrings.sPlayerRubies) + 1;
+			PlayerPrefs.SetInt(SaveStrings.sPlayerRubies, rubies);
+		}
+
+		level.rubyFound = levelEnd.rubyFound || level.rubyFound;
         level.star1 = levelEnd.obj1Passed || level.star1;
         level.star2 = levelEnd.obj2Passed || level.star2;
         level.star3 = levelEnd.obj3Passed || level.star3;
@@ -71,6 +90,7 @@ public class LevelEndManager : MonoBehaviour {
         }
 
         StartCoroutine(Animations(levelEnd.rubyFound));
+		Level.Save (level);
 
     }
 
@@ -107,17 +127,15 @@ public class LevelEndManager : MonoBehaviour {
         endFaces.Add(EndReason.passed, passedAl);
         endFaces.Add(EndReason.timeout, timeoutAl);
         endFaces.Add(EndReason.winner, winnerAl);
+		endFaces.Add (EndReason.lose, loserAl);
     }
 
     public void PressRestart() {
-        //Application.LoadLevel("Level" + levelEnd.index);
+        Application.LoadLevel(level.name);
     }
 
     public void PressLevelMap() {
         Application.LoadLevel("LevelMap");
     }
 
-    public void PressNextLevel() {
-        //Application.LoadLevel("Level" + (levelEnd.index + 1));
-    }
 }
