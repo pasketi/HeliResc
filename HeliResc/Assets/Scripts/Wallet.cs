@@ -24,7 +24,7 @@ public class Wallet {
     /// </summary>
     /// <param name="price"></param>
     /// <returns>true if the player has the money</returns>
-    private bool Purchase(int price) {
+    public bool Purchase(int price) {
         if (coins - price >= 0) {
             coins -= price;
             return true;

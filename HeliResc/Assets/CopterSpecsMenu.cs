@@ -28,6 +28,7 @@ public class CopterSpecsMenu : MonoBehaviour {
 		DestroyBallots ();
 
 		copterImage.sprite = info.copterSprite;
+		copterImage.color = info.copterColor;
 		copterName.text = info.copterName;
 		copterDescription.text = info.description;
 

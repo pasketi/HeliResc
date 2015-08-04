@@ -8,7 +8,10 @@ public class PlayerPrefsExt {
 	}
 
 	public static bool GetBool(string key) {
-		return PlayerPrefs.GetInt(key) > 0;
+		if (PlayerPrefs.HasKey (key))
+			return PlayerPrefs.GetInt (key) > 0;
+		else
+			return false;
 	}
 
 }

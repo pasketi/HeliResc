@@ -13,9 +13,11 @@ public abstract class Copter : MonoBehaviour {
     //Copter specific variables
     public Sprite copterSprite;
     public string copterName;
-    public bool unlocked;
 	public int price;
 	public string description;
+	public bool unlocked;
+	public int requiredStars;
+	public int requiredRubies;
 
     //Upgradable items
     public CargoSpace cargo;
@@ -63,6 +65,7 @@ public abstract class Copter : MonoBehaviour {
         
         levelManager = GameObject.FindObjectOfType<LevelManager>();
         gameManager = GameObject.FindObjectOfType<GameManager>();
+		unlocked = PlayerPrefsExt.GetBool (copterName + "Unlocked") || unlocked;
 
         UpdateMethod = NormalUpdate;
         
@@ -164,9 +167,10 @@ public abstract class Copter : MonoBehaviour {
         gameObject.SetActive(false);
     }
     public virtual void UseAction() { }
-
-    public virtual void BuyUpgrade(string upgrade) { }
-    public virtual void SaveCopter() { }
+	
+    public virtual void SaveCopter() {
+		PlayerPrefsExt.SetBool (copterName + "Unlocked", unlocked);
+	}
     public virtual Copter LoadCopter() { return this; }
 
     public virtual GameObject CreateGameObject(GameObject prefab, Vector3 position, Quaternion rotation) {
@@ -175,22 +179,50 @@ public abstract class Copter : MonoBehaviour {
 	public virtual CopterInfo GetCopterInfo(int index) {
 		CopterInfo info = new CopterInfo ();
 
+		int pStars = PlayerPrefs.GetInt (SaveStrings.sPlayerStars, 0);
+		int pRuby = PlayerPrefs.GetInt (SaveStrings.sPlayerRubies, 0);
+
+		if (requiredStars != 0) {
+			info.buyable = (requiredStars <= pStars);
+		} else if (requiredRubies != 0) {
+			info.buyable = (requiredRubies <= pRuby);
+		} else
+			info.buyable = true;
+
+		info.unlocked = unlocked;
 		info.copterIndex = index;
 		info.copterSprite = GetComponent<SpriteRenderer>().sprite;
 		info.copterName = copterName;
 		info.copterPrice = price;
-		info.unlocked = unlocked;
 		info.fuelAmount = fuelTank.maxCapacity;
 		info.enginePower = engine.maxPower;
 		info.cargoSpace = cargo.maxCapacity;
 		info.copterColor = GetComponent<SpriteRenderer> ().color;
 		info.description = description;
+		info.requiredStars = requiredStars;
+		info.requiredRubies = requiredRubies;
 
 		return info;
 	}
 }
 
 public class CopterInfo {
+
+	public void Save() {
+		PlayerPrefsExt.SetBool (copterName + "Unlocked", unlocked);
+	}
+	public void Load() {
+		int pStars = PlayerPrefs.GetInt (SaveStrings.sPlayerStars, 0);
+		int pRuby = PlayerPrefs.GetInt (SaveStrings.sPlayerRubies, 0);
+		if (requiredStars != 0) {
+			buyable = (requiredStars <= pStars);
+		} else if (requiredRubies != 0) {
+			buyable = (requiredRubies <= pRuby);
+		} else
+			buyable = true;
+
+		unlocked = PlayerPrefsExt.GetBool (copterName + "Unlocked");
+	}
 
 	public string description;
 	public int cargoSpace;
@@ -200,6 +232,9 @@ public class CopterInfo {
 	public string copterName;
 	public int copterIndex;
 	public int copterPrice;
+	public int requiredStars;
+	public int requiredRubies;
 	public bool unlocked;
+	public bool buyable;
 	public Color copterColor;
 }

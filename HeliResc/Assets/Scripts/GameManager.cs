@@ -18,9 +18,9 @@ public class GameManager : MonoBehaviour {
     public Dictionary<int, CopterInfo> CopterInfos;                                                        	//List of all copters CopterInfo. Access with the index.
     public GameObject CurrentCopter { get { return copters[CurrentCopterIndex]; } }                         //Returns the selected copter prefab
     public int CurrentCopterIndex { get { return Mathf.Clamp(currentCopter, 0, copters.Length - 1); }
-									set { currentCopter = Mathf.Clamp(value, 0, copters.Length); } }
+									set { currentCopter = Mathf.Clamp(value, 0, copters.Length - 1); } }
 
-	private int currentCopter = 1;
+	private int currentCopter = 0;
 	private int playerStars;
 	private int playerCoins;
 
@@ -126,6 +126,12 @@ public class GameManager : MonoBehaviour {
         }
 		currentMenu = menu;
 		Application.LoadLevel("MainMenu");
+	}
+	public Dictionary<int, CopterInfo> GetCopterInfo() {
+		foreach (CopterInfo i in CopterInfos.Values) {
+			i.Load();
+		}
+		return CopterInfos;
 	}
 
     private void CheckEarnedStars() {

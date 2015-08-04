@@ -32,14 +32,41 @@ public class CopterEntryScript : MonoBehaviour {
 		copterImage.sprite = copter.copterSprite;
 		copterImage.color = copter.copterColor;
 
-		if (copter.unlocked == false) {
+		if (copter.unlocked == false && copter.buyable == false) {
 			copterImage.color = Color.black;
 		}
+	}
+	public void UpdateInfo(CopterInfo info) {
+		this.copter = info;
 	}
 
 	public void SelectCopter() {
 		Debug.Log ("Selected copter: " + index);
 		copterSelect.UpdateSelected (index);
+
+		ShowBackground (true);
+		if (copter.unlocked == true) {
+			
+			copterSelect.CopterUnlocked();
+			
+		} else if (copter.buyable == true) {
+
+			string buyText = copter.copterPrice.ToString();
+			copterSelect.CopterBuyable(buyText);
+			
+		} else {
+			string starText = "";
+			bool showStar = false;
+			if(copter.requiredStars > 0){
+				starText = PlayerPrefs.GetInt(SaveStrings.sPlayerStars) + "/" + copter.requiredStars.ToString();
+				showStar = true;
+			}
+			else if(copter.requiredRubies > 0){
+				starText = PlayerPrefs.GetInt(SaveStrings.sPlayerRubies) + "/" + copter.requiredRubies.ToString();
+			}
+			copterSelect.CopterLocked(starText, showStar);
+			
+		}
 	}
 	public void ShowBackground(bool show) {
 		backgroundImage.enabled = show;
