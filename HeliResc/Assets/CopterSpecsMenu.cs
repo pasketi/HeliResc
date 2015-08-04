@@ -28,17 +28,35 @@ public class CopterSpecsMenu : MonoBehaviour {
 		DestroyBallots ();
 
 		copterImage.sprite = info.copterSprite;
-		copterImage.color = info.copterColor;
-		copterName.text = info.copterName;
-		copterDescription.text = info.description;
 
-		int fuel = (int)(info.fuelAmount / 20);
-		int cargo = info.cargoSpace;
-		int engine = (int)(info.enginePower / 20);
+		if (info.unlocked == false && info.buyable == false) {
+			copterImage.color = Color.black;
+			copterName.text = "";
+			copterDescription.text = "";
 
-		CreateBallots (ballotPanelFuel, fuel);
-		CreateBallots (ballotPanelEngine, engine);
-		CreateBallots (ballotPanelCargo, cargo);
+			foreach(Image i in gameObject.GetComponentsInChildren<Image>()) {
+				i.enabled = false;
+			}
+			GetComponent<Image>().enabled = true;
+		} 
+		else {
+
+			foreach(Image i in gameObject.GetComponentsInChildren<Image>()) {
+				i.enabled = true;
+			}
+
+			copterImage.color = info.copterColor;
+			copterName.text = info.copterName;
+			copterDescription.text = info.description;
+
+			int fuel = (int)(info.fuelAmount / 20);
+			int cargo = info.cargoSpace;
+			int engine = (int)(info.enginePower / 20);
+
+			CreateBallots (ballotPanelFuel, fuel);
+			CreateBallots (ballotPanelEngine, engine);
+			CreateBallots (ballotPanelCargo, cargo);
+		}
 	}
 
 	private void CreateBallots(Transform tr, int amount) {
