@@ -104,7 +104,7 @@ public class CopterSelection : MonoBehaviour {
 			info.unlocked = true;
 			info.Save();
 			copterEntries[selectedCopter].UpdateInfo(info);
-			CopterUnlocked();
+			copterEntries[selectedCopter].SelectCopter();
 		}
 	}
 }

@@ -45,6 +45,7 @@ public class CopterHealth : Upgradable {
             part.angularVelocity += playerRb.angularVelocity;
         }
         newCopter.GetComponent<ExplodeParts>().enabled = true;
+		newCopter.transform.localScale = playerRb.transform.localScale;
         currentHealth = 0f;        
 
         playerCopter.Disable();
