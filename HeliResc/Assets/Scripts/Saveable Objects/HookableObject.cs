@@ -70,6 +70,7 @@ public class HookableObject : MonoBehaviour, IHookable {
     public virtual void SaveItem() {
         LevelManager manager = GameObject.FindObjectOfType<LevelManager>();
         manager.saveCrates(1);
+		hookScript.DetachHook (this);
         gameObject.SetActive(false);
     }
     public virtual void GrabHook(Rigidbody2D hookRb) {

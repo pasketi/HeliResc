@@ -32,7 +32,7 @@ public class FisherMan : HookableObject, IChainable {
 
         UpdateMethod += UpdateAnimator;
 	}
-
+	
     protected override void OnTriggerEnter2D(Collider2D other) {
         if(other.tag.Equals("Hook") && hooked == false && other.gameObject != legs) {
             
@@ -70,6 +70,7 @@ public class FisherMan : HookableObject, IChainable {
 
     protected void Die() {
         animator.Play("Dead");
+		dead = true;
         UpdateMethod = () => { };
         UpdateMethod += UpdateSkull;
         skullTransform.gameObject.SetActive(true);
