@@ -82,8 +82,6 @@ public class LandingPadManager : MonoBehaviour {
             exitPlatform(gameObject);
             EventManager.TriggerEvent("ExitPlatform");
             
-            //repair = false;
-            //refill = false;
 			GameObject.Find ("HUD").GetComponent<UIManager> ().refill = false;
 		}
 	}

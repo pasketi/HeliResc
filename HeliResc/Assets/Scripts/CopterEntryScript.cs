@@ -41,12 +41,13 @@ public class CopterEntryScript : MonoBehaviour {
 	}
 
 	public void SelectCopter() {
-		Debug.Log ("Selected copter: " + index);
 		copterSelect.UpdateSelected (index);
 
 		ShowBackground (true);
 		if (copter.unlocked == true) {
-			
+
+			gameManager.CurrentCopterIndex = index;
+			PlayerPrefs.SetInt(SaveStrings.sSelectedCopter, index);
 			copterSelect.CopterUnlocked();
 			
 		} else if (copter.buyable == true) {

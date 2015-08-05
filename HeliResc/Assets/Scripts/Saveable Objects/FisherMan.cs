@@ -77,6 +77,7 @@ public class FisherMan : HookableObject, IChainable {
 
     public override void GrabHook(Rigidbody2D hookRb) {
         if (dead == true) return;
+		if (useTimer == true) UpdateMethod -= Timer;
         hooked = true;                
 
         gameObject.layer = LayerMask.NameToLayer("liftedCrate");
@@ -105,6 +106,7 @@ public class FisherMan : HookableObject, IChainable {
     public override void DetachHook() {
         base.DetachHook();
 
+		if (useTimer == true) UpdateMethod += Timer;
         _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         floating.enabled = true;
 

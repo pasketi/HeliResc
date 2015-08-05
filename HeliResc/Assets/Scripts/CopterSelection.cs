@@ -81,7 +81,6 @@ public class CopterSelection : MonoBehaviour {
 
 	public void UpdateSelected(int index) {
 		selectedCopter = index;
-		PlayerPrefs.SetInt (SaveStrings.sSelectedCopter, selectedCopter);
 
 		foreach (CopterEntryScript entry in copterEntries.Values) {
 			entry.ShowBackground(false);
@@ -97,7 +96,6 @@ public class CopterSelection : MonoBehaviour {
 	}
 
 	public void PressSelect() {
-		gameManager.CurrentCopterIndex = selectedCopter;
 		GameManager.LoadLevel ("LevelMap");
 	}
 	public void PressBuy() {

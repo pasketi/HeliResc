@@ -55,7 +55,6 @@ public class Rope : Upgradable {
 		hookPrefab = newHook;
         hook = playerCopter.CreateGameObject(hookPrefab, Vector3.zero, Quaternion.identity);
         hookScript = hook.GetComponent<HookScript>();
-		Debug.Log ("Hook null" + (hookScript == null));
         hookScript.HookMass = hookMass;
 
         hasHook = true;

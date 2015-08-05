@@ -31,15 +31,26 @@ public class PlatformButtons: MonoBehaviour {
 
         fuelAnimator = GetComponentInChildren<Animator>();
 
-		RectTransform t = GetComponent<RectTransform> ();        
+		landing = transform.parent.parent.GetComponent<LandingPadManager>();
+		if (landing.Equals(null))
+			Debug.LogError("The landingpad manager was not found in platform buttons");
 
-		t.sizeDelta = new Vector2 (Screen.width, Screen.height) * 0.5f;
+		Vector3 landingScale = landing.transform.localScale;
+		Vector3 scale = transform.localScale;
+
+		//Set the scale of the canvas to match the platforms scale
+		scale.x /= landingScale.x;
+		scale.y /= landingScale.y;
+
+		transform.localScale = scale;
+
+		RectTransform t = GetComponent<RectTransform> ();
+
+		Vector2 canvasSize = new Vector2 (Screen.width, Screen.height) * 0.5f;
+
+		t.sizeDelta = canvasSize;
 
         levelManager = GameObject.FindObjectOfType<LevelManager>();
-
-		landing = transform.parent.parent.GetComponent<LandingPadManager>();
-        if (landing.Equals(null))
-            Debug.LogError("The landingpad manager was not found in platform buttons");
 
 
         target = transform.parent;
@@ -52,11 +63,7 @@ public class PlatformButtons: MonoBehaviour {
 	/// </summary>
 	public void Idle(bool fuel = true, bool repair = true, bool victory = true) {
         if (fuel == true)
-            fuelAnimator.Play("ShowIdleFuel");
-        //if (repair == true)
-        //    repairAnimator.Play("ShowIdleRepair");
-        //if (victory == true)
-        //    victoryAnimator.Play("ShowIdleVictory");
+            fuelAnimator.Play("ShowIdleFuel");         
 	}
 	
 	/// <summary>
@@ -66,8 +73,6 @@ public class PlatformButtons: MonoBehaviour {
 	{
         CancelInvoke();
         HideFuel();
-        Invoke("HideRepair", 0.1f);
-        Invoke("HideVictory", 0.2f);
     }
     public void StartRefill()
     {
@@ -76,64 +81,14 @@ public class PlatformButtons: MonoBehaviour {
     }
     public void ShowFuel()
     {
+		Debug.Log ("Fuel animation");
         fuelAnimator.Play("ShowFuel");
     }
-    public void ShowFuel(bool pump)
-    {
-        fuelAnimator.SetBool("Pump", pump);
-        fuelAnimator.Play("ShowFuel");
-    }
+    
     public void HideFuel()
     {
         if (fuelAnimator == null)
             fuelAnimator = GetComponentInChildren<Animator>();
         fuelAnimator.Play("HideFuel");
-    }
-    ///// <summary>
-    ///// Enables the popup window animation
-    ///// </summary>
-    //public void ShowAllButtons(string name)
-    //{
-    //    CancelInvoke();
-    //    ShowVictory();
-    //    Invoke("ShowRepair", 0.1f);
-    //    Invoke("ShowFuel", 0.2f);
-    //}
-
-    //public void ShowRepair() { 
-    //    repairAnimator.Play("ShowRepair");
-    //}
-    
-    //public void ShowVictory() { 
-    //    if(objectives.AnyObjectiveCompleted())
-    //        victoryAnimator.Play("ShowVictory"); 
-    //}
-
-    //public void ShowRepair(bool glow)
-    //{
-    //    repairAnimator.SetBool("Pump", glow);
-    //    repairAnimator.Play("ShowRepair");
-    //}
-    
-    //public void ShowVictory(bool glow)
-    //{
-    //    if (objectives.AnyObjectiveCompleted()) {
-    //        victoryAnimator.SetBool("Pump", glow);
-    //        victoryAnimator.Play("ShowVictory");           
-    //    }
-    //}
-
-    //public void HideRepair() { 
-    //    repairAnimator.Play("HideRepair"); 
-    //}
-    
-    //public void HideVictory() {
-    //    if (objectives.AnyObjectiveCompleted())
-    //        victoryAnimator.Play("HideVictory"); 
-    //}
-    //public void StartRepair() {
-    //    landing.StartRepair();
-    //    EventManager.TriggerEvent("Repair");
-    //}
-	    	
+    }	    	
 }

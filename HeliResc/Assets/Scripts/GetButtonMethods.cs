@@ -6,14 +6,14 @@ public class GetButtonMethods : MonoBehaviour {
 
 
 	public Button btnResetAll;
-	public Button btnPlay;
+	public Button btnCoins;
 
-	private GameManager g;
 	// Use this for initialization
 	void Start () {
-		g = GameObject.Find ("GameManager").GetComponent<GameManager>();
+		GameManager g = GameObject.Find ("GameManager").GetComponent<GameManager>();
 
 		
 		btnResetAll.onClick.AddListener (() => g.resetData ());
+		btnCoins.onClick.AddListener (() => g.wallet.AddMoney (5));
 	}
 }

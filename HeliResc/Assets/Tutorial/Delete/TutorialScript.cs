@@ -87,7 +87,7 @@ public class TutorialScript : MonoBehaviour {
         switch (name.name) {
             case "LandingBoat2":
                 TriggerEnter(1);
-                currentPlatformButtons.ShowFuel(false);
+                currentPlatformButtons.ShowFuel();
                 StartCoroutine(SetFingerPosition(0));
                 break;            
             case "LandingBoat":

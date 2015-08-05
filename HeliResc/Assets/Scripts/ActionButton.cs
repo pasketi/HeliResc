@@ -15,7 +15,6 @@ public class ActionButton : MonoBehaviour {
 
 	void Start () {
 		manager = GameObject.FindObjectOfType<LevelManager> ();
-		Debug.Log (manager.levelAction);
         if (!(manager.levelAction > 0))
             transform.parent.gameObject.SetActive(false);
         copterAnchor = GameObject.Find("Copter").transform;

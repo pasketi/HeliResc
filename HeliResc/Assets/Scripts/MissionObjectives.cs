@@ -42,8 +42,7 @@ public class MissionObjectives : MonoBehaviour {
 
     public bool NoDamage()
     {
-        //TODO
-        Debug.Log("No Damage");
+        //TODO        
         return false;
     }
 
