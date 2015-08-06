@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a742fc29a7ee60840a101bd05a4a250b
-timeCreated: 1431040122
+timeCreated: 1438874607
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -64,8 +64,8 @@ TextureImporter:
         y: 0
         width: 67
         height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Fisherman_Hanging_Animation_Spritesheet_1
       rect:
@@ -74,8 +74,8 @@ TextureImporter:
         y: 0
         width: 67
         height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Fisherman_Hanging_Animation_Spritesheet_2
       rect:
@@ -84,8 +84,8 @@ TextureImporter:
         y: 0
         width: 67
         height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Fisherman_Hanging_Animation_Spritesheet_3
       rect:
@@ -94,8 +94,8 @@ TextureImporter:
         y: 0
         width: 67
         height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Fisherman_Hanging_Animation_Spritesheet_4
       rect:
@@ -104,8 +104,8 @@ TextureImporter:
         y: 0
         width: 67
         height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Fisherman_Hanging_Animation_Spritesheet_5
       rect:
@@ -114,8 +114,8 @@ TextureImporter:
         y: 0
         width: 67
         height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Fisherman_Hanging_Animation_Spritesheet_6
       rect:
@@ -124,8 +124,8 @@ TextureImporter:
         y: 0
         width: 67
         height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Fisherman_Hanging_Animation_Spritesheet_7
       rect:
@@ -134,8 +134,8 @@ TextureImporter:
         y: 0
         width: 67
         height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

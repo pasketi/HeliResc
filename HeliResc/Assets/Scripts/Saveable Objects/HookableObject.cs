@@ -89,6 +89,8 @@ public class HookableObject : MonoBehaviour, IHookable {
         floating.enabled = false;
     }
     public virtual void DetachHook() {
+		if (hooked == false)
+			return;
         hooked = false;
         joint.enabled = false;
         gameObject.layer = LayerMask.NameToLayer("Crate");

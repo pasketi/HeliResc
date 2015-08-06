@@ -158,8 +158,9 @@ public class Rope : Upgradable {
     }
     public void KillHook() {                
         hook.GetComponent<LineRenderer>().enabled = false;
-        EventManager.TriggerEvent("HookDied");
+		EventManager.TriggerEvent("HookDied");
         hasHook = false;
+		hookOut = false;
         hookJoint.enabled = false;              
     }
     protected virtual void RestoreHook() {

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b432a4b7dbf015149aaf2f1e1b8c5a17
-timeCreated: 1431039626
+timeCreated: 1438875102
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -66,8 +66,8 @@ TextureImporter:
         y: 400
         width: 108
         height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Fisherman_Jump_Spritesheet_1
       rect:
@@ -76,8 +76,8 @@ TextureImporter:
         y: 400
         width: 108
         height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Fisherman_Jump_Spritesheet_2
       rect:
@@ -86,8 +86,8 @@ TextureImporter:
         y: 300
         width: 108
         height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Fisherman_Jump_Spritesheet_3
       rect:
@@ -96,8 +96,8 @@ TextureImporter:
         y: 300
         width: 108
         height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Fisherman_Jump_Spritesheet_4
       rect:
@@ -106,8 +106,8 @@ TextureImporter:
         y: 200
         width: 108
         height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Fisherman_Jump_Spritesheet_5
       rect:
@@ -116,8 +116,8 @@ TextureImporter:
         y: 200
         width: 108
         height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Fisherman_Jump_Spritesheet_6
       rect:
@@ -126,8 +126,8 @@ TextureImporter:
         y: 100
         width: 108
         height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Fisherman_Jump_Spritesheet_7
       rect:
@@ -136,8 +136,8 @@ TextureImporter:
         y: 100
         width: 108
         height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Fisherman_Jump_Spritesheet_8
       rect:
@@ -146,8 +146,8 @@ TextureImporter:
         y: 0
         width: 108
         height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Fisherman_Jump_Spritesheet_9
       rect:
@@ -156,8 +156,8 @@ TextureImporter:
         y: 0
         width: 108
         height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

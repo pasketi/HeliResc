@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 51a22e037ca114b4b9091bc3506db9f6
-timeCreated: 1431039990
+timeCreated: 1438875067
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -64,8 +64,8 @@ TextureImporter:
         y: 68
         width: 64
         height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Sleep_Spritesheet_1
       rect:
@@ -74,8 +74,8 @@ TextureImporter:
         y: 68
         width: 64
         height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Sleep_Spritesheet_2
       rect:
@@ -84,8 +84,8 @@ TextureImporter:
         y: 68
         width: 64
         height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Sleep_Spritesheet_3
       rect:
@@ -94,8 +94,8 @@ TextureImporter:
         y: 68
         width: 64
         height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Sleep_Spritesheet_4
       rect:
@@ -104,8 +104,8 @@ TextureImporter:
         y: 0
         width: 64
         height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Sleep_Spritesheet_5
       rect:
@@ -114,8 +114,8 @@ TextureImporter:
         y: 0
         width: 64
         height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Sleep_Spritesheet_6
       rect:
@@ -124,8 +124,8 @@ TextureImporter:
         y: 0
         width: 64
         height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Sleep_Spritesheet_7
       rect:
@@ -134,8 +134,8 @@ TextureImporter:
         y: 0
         width: 64
         height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

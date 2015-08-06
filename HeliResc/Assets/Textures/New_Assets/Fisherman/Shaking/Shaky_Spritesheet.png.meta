@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 41056046e74096d44a0e3bdd83294a6d
-timeCreated: 1431040037
+timeCreated: 1438875036
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -66,8 +66,8 @@ TextureImporter:
         y: 352
         width: 52
         height: 88
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Shaky_Spritesheet_1
       rect:
@@ -76,8 +76,8 @@ TextureImporter:
         y: 352
         width: 52
         height: 88
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Shaky_Spritesheet_2
       rect:
@@ -86,8 +86,8 @@ TextureImporter:
         y: 264
         width: 52
         height: 88
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Shaky_Spritesheet_3
       rect:
@@ -96,8 +96,8 @@ TextureImporter:
         y: 264
         width: 52
         height: 88
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Shaky_Spritesheet_4
       rect:
@@ -106,8 +106,8 @@ TextureImporter:
         y: 176
         width: 52
         height: 88
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Shaky_Spritesheet_5
       rect:
@@ -116,8 +116,8 @@ TextureImporter:
         y: 176
         width: 52
         height: 88
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Shaky_Spritesheet_6
       rect:
@@ -126,8 +126,8 @@ TextureImporter:
         y: 88
         width: 52
         height: 88
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Shaky_Spritesheet_7
       rect:
@@ -136,8 +136,8 @@ TextureImporter:
         y: 88
         width: 52
         height: 88
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Shaky_Spritesheet_8
       rect:
@@ -146,8 +146,8 @@ TextureImporter:
         y: 0
         width: 52
         height: 88
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Shaky_Spritesheet_9
       rect:
@@ -156,8 +156,8 @@ TextureImporter:
         y: 0
         width: 52
         height: 88
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

@@ -85,6 +85,7 @@ public abstract class Copter : MonoBehaviour {
 
         copterBody = GetComponent<Rigidbody2D>();
         copterScale = transform.localScale.x;
+		SaveCopter ();
 	}
     protected virtual void Update() {
         UpdateMethod();
