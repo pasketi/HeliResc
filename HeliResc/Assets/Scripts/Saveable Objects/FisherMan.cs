@@ -105,6 +105,7 @@ public class FisherMan : HookableObject, IChainable {
     }
 
     public override void DetachHook() {
+		if (hooked == false) return;
         base.DetachHook();
 
 		if (useTimer == true) UpdateMethod += Timer;
