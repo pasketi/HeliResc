@@ -9,7 +9,13 @@ public class LevelHandler : MonoBehaviour {
 	public string currentSet;
 
 	public static Dictionary<string, List<Level>> Levels;       //all the levels in the game. the key string is the name of the set of levels
-    public static Level CurrentLevel { get { return instance.currentLevel; } }
+	public static Level CurrentLevel { get { return instance.currentLevel; } 
+		set { 
+			instance.currentLevel = value;
+			PlayerPrefs.SetInt(SaveStrings.sCurrentLevelIndex, value.id);
+			PlayerPrefs.SetString(SaveStrings.sCurrentLevelSet, value.setName);
+		} 
+	}
 	public static int LevelCount;
 
     private static LevelHandler instance;
@@ -33,6 +39,9 @@ public class LevelHandler : MonoBehaviour {
             }
             Levels.Add(LevelSets[j].levelSetName, l);
         }
+
+		currentSet = PlayerPrefs.GetString (SaveStrings.sCurrentLevelSet, "Tutorial0");
+		currentLevel = Levels[currentSet][PlayerPrefs.GetInt(SaveStrings.sCurrentLevelIndex, 0)];
 	}
     public static LevelSet GetLevelSet(string name) {
         foreach (LevelSet s in instance.LevelSets) {
@@ -41,17 +50,12 @@ public class LevelHandler : MonoBehaviour {
         }
         return null;
     }
-    public static void UpdateCurrentLevel(Level l) {
-        instance.currentSet = l.setName;
-        instance.currentLevel = Levels[l.setName][l.id];
-    }
+    
     public static void CompleteLevel(Level l) {
         Level.Save(l);
-        int id = l.id;
         List<Level> levels = Levels[l.setName];
         LevelSet nextSet = null;
-
-        Debug.Log("Level completed");
+		CurrentLevel = l;
 
         //First unlock the next set.
         for (int i = 0; i < instance.LevelSets.Length; i++) { 
@@ -65,7 +69,6 @@ public class LevelHandler : MonoBehaviour {
             nextSet.Save();
             Level nextLevel = Levels[nextSet.levelSetName][0];
             nextLevel.unlocked = true;
-            Debug.Log(nextLevel.ToString());
             Level.Save(nextLevel);
         }
         
@@ -103,7 +106,7 @@ public class Level {
         Level l = new Level(setName, id);
 
         l.LoadInfo();
-        if (setName == "Tutorial" && id == 0)
+        if (setName == "Tutorial0" && id == 0)
             l.unlocked = true;
 
         return l;

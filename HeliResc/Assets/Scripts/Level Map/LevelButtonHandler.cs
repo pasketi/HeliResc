@@ -14,11 +14,9 @@ public class LevelButtonHandler : MonoBehaviour {
 
 	public Vector2 size;			//Size in percentage of the screen
     private string levelId;			//The name the level information is going to be saved
-    private int id;					//The number of the level in the set
     private Level level;            //Contains the information about the level the button will open
 
     public void Init(int id, LevelSet set) {
-        this.id = id;
         levelId = set.levelSetName + id;			//Set the identifier from the set name and the integer id
         level = Level.Load(set.levelSetName, id);
 
@@ -50,7 +48,7 @@ public class LevelButtonHandler : MonoBehaviour {
 
 	public void LoadLevel() {
         //if (level.unlocked == true) {
-            LevelHandler.UpdateCurrentLevel(level);
+            LevelHandler.CurrentLevel = level;
             GameManager.LoadLevel(levelId);
         //}
 	}

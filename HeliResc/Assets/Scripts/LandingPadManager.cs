@@ -12,7 +12,6 @@ public class LandingPadManager : MonoBehaviour {
     private MissionObjectives objectives;
     private LevelManager manager;
 
-    private bool repair, refill;
 	private float cycle;
 
 	//private BoxCollider2D trigger;
@@ -107,15 +106,12 @@ public class LandingPadManager : MonoBehaviour {
         exitPlatform = (GameObject platform) => { };
     }
 
-    public void StartRepair() {
-		repair = true;
-	}
+    
 	
 	public void StartRefill() {
         if(copter == null)
             copter = GameObject.Find("Copter").GetComponent<Copter>();
         copter.fuelTank.FillTank();
-		refill = true;
 		GameObject.Find ("HUD").GetComponent<UIManager> ().refill = true;
 	}
 }

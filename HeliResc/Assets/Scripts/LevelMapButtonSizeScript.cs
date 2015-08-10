@@ -9,7 +9,12 @@ public class LevelMapButtonSizeScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		RectTransform r = GetComponent<RectTransform>();
-		r.anchorMin -= v * .5f;
+
+		float size = GameObject.FindObjectOfType<LevelMapScript> ().size;
+
+		v /= size;
+
+		r.anchorMin -= v * (.5f);
 		r.anchorMax = r.anchorMin + v;
 	}
 }

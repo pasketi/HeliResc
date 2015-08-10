@@ -5,7 +5,7 @@ public class Shark : HookableObject {
 
     public float patrolRange;               //The amount of units the shark will move. Shark will start from middle Total range is 2 times the value of patrolrange
     public float speed;
-    public Collider2D collider;
+    public Collider2D _collider;
 
     protected Transform _transform;
     protected Rigidbody2D _rigidbody;
@@ -20,7 +20,7 @@ public class Shark : HookableObject {
         _transform = transform;
         _rigidbody = GetComponent<Rigidbody2D>();
         sharkScale = _transform.localScale;
-        collider.enabled = false;
+        _collider.enabled = false;
 
 
         leftLimit = _transform.position.x - patrolRange;
@@ -36,13 +36,13 @@ public class Shark : HookableObject {
 
     public override void GrabHook(Rigidbody2D hookRb) {
         UpdateMethod -= Patrolling;
-        collider.enabled = true;
+        _collider.enabled = true;
         _rigidbody.constraints = RigidbodyConstraints2D.None;
         base.GrabHook(hookRb);
     }
     public override void DetachHook() {
         UpdateMethod += Patrolling;
-        collider.enabled = false;
+        _collider.enabled = false;
         _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         base.DetachHook();
     }

@@ -7,7 +7,6 @@ public class LevelSetHandler : MonoBehaviour {
 
     public GameObject lockedPanel;
     public GameObject buttonPrefab; //Prefab of a button to open levels    
-    public float circleRadius;      //The radius the buttons are going to be from the middle in percentage of the screen height
     public Image setImage;          //The image UI-component in the middle of the button set
     public string setName;
 
@@ -40,14 +39,15 @@ public class LevelSetHandler : MonoBehaviour {
 
         setImage.enabled = true;
         lockedPanel.SetActive(false);
-
-        for (int i = 0; i < set.levelAmount; i++) {
+        
+		float mapSize = GameObject.FindObjectOfType<LevelMapScript> ().size;
+		for (int i = 0; i < set.levelAmount; i++) {
             GameObject go = Instantiate(buttonPrefab) as GameObject;
             go.transform.SetParent(transform);
             LevelButtonHandler handler = go.GetComponent<LevelButtonHandler>();
             handler.Init(i, set);
 
-            handler.SetPosition(CalculateButtonPosition(i));
+            handler.SetPosition(CalculateButtonPosition(i, mapSize));
         }
         if (set.setImage == null)
             setImage.enabled = false;
@@ -55,7 +55,7 @@ public class LevelSetHandler : MonoBehaviour {
             setImage.sprite = set.setImage;
     }
 
-    private Vector3 CalculateButtonPosition(int index) {
+    private Vector3 CalculateButtonPosition(int index, float mapSize) {
         Vector3 vec = new Vector2();
         float angle = (360f / set.levelAmount) * index * Mathf.Deg2Rad;
 
@@ -64,10 +64,20 @@ public class LevelSetHandler : MonoBehaviour {
 
         vec.x = x;
         vec.y = y;
+		float height = 0;
+		RectTransform rect = GetComponent<RectTransform>();
 
-		vec *= (circleRadius * Screen.height);
+		//Depending on the aspect ratio set the circle's radius from the rectangle's width or height
+		float h = ((rect.anchorMax.y - rect.anchorMin.y) * Screen.height);
+		float w = ((rect.anchorMax.x - rect.anchorMin.x) * Screen.width);
+		if (h <= w) {
+			height = (h * 0.5f * mapSize) * .99451f;
+		} else {
+			height = (w * 0.5f * mapSize) * .99451f;
+		}
 
-        RectTransform rect = GetComponent<RectTransform>();
+
+		vec *= (height);		 
 
         return transform.position + vec;
     }
