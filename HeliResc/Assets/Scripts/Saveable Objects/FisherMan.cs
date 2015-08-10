@@ -10,6 +10,10 @@ public class FisherMan : HookableObject, IChainable {
     public Vector2 chainConnectedAnchor;
     [HideInInspector]
     public bool HasDude;
+    [HideInInspector]
+    public bool grabLegs;
+    [HideInInspector]
+    public System.Collections.Generic.List<FisherMan> fishermenInLegs;
 
     protected string waterString = "inWater";
     protected string hookedString = "hooked";
@@ -23,7 +27,9 @@ public class FisherMan : HookableObject, IChainable {
 
 	// Use this for initialization
 	protected override void Start () {
-        base.Start();        
+        base.Start();
+
+        fishermenInLegs = new System.Collections.Generic.List<FisherMan>();
 
         manager = GameObject.FindObjectOfType<LevelManager>();
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -67,6 +73,15 @@ public class FisherMan : HookableObject, IChainable {
             Die();
         }
     }
+    public override void SaveItem() {
+        if (fishermenInLegs != null) { 
+            foreach(FisherMan f in fishermenInLegs)
+                if(f != null) 
+                    f.SaveItem(); 
+        }
+        base.SaveItem();
+        Destroy(gameObject);
+    }
 
     protected void Die() {
         animator.Play("Dead");
@@ -88,7 +103,10 @@ public class FisherMan : HookableObject, IChainable {
         joint.connectedBody = hookRb;
 
         if (hookRb.name.Equals("Legs")) {
-            hookRb.transform.root.GetComponent<FisherMan>().HasDude = true;
+            FisherMan fm = hookRb.transform.parent.GetComponent<FisherMan>();
+            fm.HasDude = true;
+            fm.fishermenInLegs.Add(this); 
+            grabLegs = true;
             joint.connectedAnchor = chainConnectedAnchor;
             joint.anchor = chainAnchor;
         }
@@ -111,8 +129,9 @@ public class FisherMan : HookableObject, IChainable {
 		if (useTimer == true) UpdateMethod += Timer;
         _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         floating.enabled = true;
-
-        FisherMan fm = hookedTransform.root.GetComponent<FisherMan>();
+        grabLegs = false;
+        fishermenInLegs = new System.Collections.Generic.List<FisherMan>();
+        FisherMan fm = hookedTransform.parent.GetComponent<FisherMan>();
         if (fm != null) fm.HasDude = false;
     }
     public void Chain(Rigidbody2D rb) {
