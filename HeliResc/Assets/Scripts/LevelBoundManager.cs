@@ -13,11 +13,11 @@ public class LevelBoundManager : MonoBehaviour {
 		line.sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
 		line.sortingLayerID = GetComponent<SpriteRenderer>().sortingLayerID;
 		if (gameObject.name == "Left") {
-			line.SetPosition (0, new Vector3 (manager.mapBoundsLeft + 10f, -5f));
-			line.SetPosition (1, new Vector3 (manager.mapBoundsLeft + 10f, 200f));
+			line.SetPosition (0, new Vector3 (manager.mapBoundsLeft, -5f));
+			line.SetPosition (1, new Vector3 (manager.mapBoundsLeft, 200f));
 		} else {
-			line.SetPosition (0, new Vector3 (manager.mapBoundsRight - 10f, -5f));
-			line.SetPosition (1, new Vector3 (manager.mapBoundsRight - 10f, 200f));
+			line.SetPosition (0, new Vector3 (manager.mapBoundsRight, -5f));
+			line.SetPosition (1, new Vector3 (manager.mapBoundsRight, 200f));
 		}
 	}
 	

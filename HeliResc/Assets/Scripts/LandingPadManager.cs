@@ -38,14 +38,15 @@ public class LandingPadManager : MonoBehaviour {
 		}
 
 		if (other.gameObject.transform.tag == "Copter") {
-            if (canWin == true) { 
+
+			if (enterPlatform != null) enterPlatform(gameObject);
+			EventManager.TriggerEvent("EnterPlatform");
+
+			if (canWin == true) { 
                 bool win = objectives.AllObjectiveCompleted();                
                 if (win == true)
                     manager.levelPassed();
-            }
-
-            if (enterPlatform != null) enterPlatform(gameObject);
-            EventManager.TriggerEvent("EnterPlatform");
+			}            
                         
 
             //if (cargo.getCargoCrates() > 0) {

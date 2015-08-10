@@ -215,7 +215,11 @@ public class LevelManager : MonoBehaviour {
         LevelEndInfo end = new LevelEndInfo(false, loseCondition);
 		end.level = LevelHandler.CurrentLevel;
 		end.passedLevel = false;
-        gameManager.loadMainMenu(true, end, 2);
+        
+		RubyScript ruby = GameObject.FindObjectOfType<RubyScript>();
+		end.rubyFound = ruby.found;
+
+		gameManager.loadMainMenu(true, end, 2);
     }
 
 	public void backToMainMenu () {

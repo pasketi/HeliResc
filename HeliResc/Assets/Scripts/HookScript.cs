@@ -27,11 +27,11 @@ public class HookScript : MonoBehaviour {
     //Start listening to events
     void OnEnable() {
         EventManager.StartListening("CopterExplode", DisableLine);
-        EventManager.StartListening("EnterPlatform", DisableLine);
+        //EventManager.StartListening("EnterPlatform", DisableLine);
     }
     void OnDisable() {
         EventManager.StopListening("CopterExplode", DisableLine);
-        EventManager.StopListening("EnterPlatform", DisableLine);
+        //EventManager.StopListening("EnterPlatform", DisableLine);
     }
 
 	// Use this for initialization
@@ -97,10 +97,10 @@ public class HookScript : MonoBehaviour {
             hookedItems.Remove(obj);
         }
     }
-    private void DisableLine() {
+    public void DisableLine() {
         line.enabled = false;
     }
-    private void EnableLine() {
+    public void EnableLine() {
         line.enabled = true;
     }
 }

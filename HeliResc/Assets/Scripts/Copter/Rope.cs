@@ -166,7 +166,8 @@ public class Rope : Upgradable {
     protected virtual void RestoreHook() {
         if (hasHook == true) return;
         hasHook = true;
-        PushHookToCargo(true);
+		if(hookOut == false)
+        	PushHookToCargo(true);
     }
     protected override void GiveName() {
         name = "Rope";
