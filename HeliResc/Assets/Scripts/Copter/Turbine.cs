@@ -5,6 +5,7 @@ using System.Collections;
 [System.Serializable]
 public class Turbine : Upgradable {
 
+	public bool createSwitchButton;			//Should the copter instantiate the switch button
 	public float horizontalForce;			//How much force to apply to the copter
 	public GameObject turboButtonPrefab;	//The UI button to place on the screen
 	public GameObject switchButtonPrefab;	//Switch button to place on the screen
@@ -20,22 +21,23 @@ public class Turbine : Upgradable {
 		if (hud == null)
 			return;
 
-		GameObject switchButton = copter.CreateGameObject (switchButtonPrefab, Vector3.zero, Quaternion.identity);
-		switchButton.transform.SetParent (hud.transform);
-		RectTransform swRect = switchButton.GetComponent<RectTransform> ();
-		swRect.anchoredPosition = new Vector2 (Screen.width * 0.9375f, Screen.height * 0.275f);
-		swRect.sizeDelta = new Vector2 (Screen.width * 0.075f, Screen.height * 0.125f);
+		if (createSwitchButton == true) {
+			GameObject switchButton = copter.CreateGameObject (switchButtonPrefab, Vector3.zero, Quaternion.identity);
+			switchButton.transform.SetParent (hud.transform);
+			RectTransform swRect = switchButton.GetComponent<RectTransform> ();
+			swRect.anchoredPosition = new Vector2 (Screen.width * 0.91f, Screen.height * 0.356f);
+			swRect.sizeDelta = new Vector2 (Screen.width * 0.095f, Screen.height * 0.178f);
 
-		Button b = switchButton.GetComponent<Button> ();
-		b.onClick.AddListener (() => SwitchDirection ());
-
+			Button b = switchButton.GetComponent<Button> ();
+			b.onClick.AddListener (() => SwitchDirection ());
+		}
 
 		GameObject button = copter.CreateGameObject (turboButtonPrefab, turboButtonPrefab.transform.position, Quaternion.identity);
 		button.transform.SetParent (hud.transform);
 		RectTransform rect = button.transform as RectTransform;
 
-		rect.anchoredPosition = new Vector2 (Screen.width * 0.9375f, Screen.height * 0.125f);
-		rect.sizeDelta = new Vector2 (Screen.width * 0.075f, Screen.height * 0.125f);
+		rect.anchoredPosition = new Vector2 (Screen.width * 0.91f, Screen.height * 0.178f);
+		rect.sizeDelta = new Vector2 (Screen.width * 0.095f, Screen.height * 0.178f);
 
 		buttonRectangle = new Rect ();
 
@@ -47,16 +49,8 @@ public class Turbine : Upgradable {
 
 		UpdateDelegate = TurbineUpdate;
 	}
-
-	public override void TouchStart (MouseTouch touch)
-	{
-		if (buttonRectangle.Contains (touch.position)) {
-			pressingButton = true;
-		}
-	}
+	
 	public override void InputUpdate (MouseTouch touch) {
-		if (pressingButton == false)
-			return;
 		if (buttonRectangle.Contains (touch.position)) {
 			pressingButton = true;
 		} else {
@@ -71,11 +65,12 @@ public class Turbine : Upgradable {
 			Debug.Log(force);
 			playerRb.AddForce(force);
 		}
+		pressingButton = false;
 	}
 
 	protected void SwitchDirection() {
 		Debug.Log ("Switch");
-		playerCopter.SwitchDirection();
+		playerCopter.Direction(true);
 	}
 
 	#region implemented abstract members of Upgradable

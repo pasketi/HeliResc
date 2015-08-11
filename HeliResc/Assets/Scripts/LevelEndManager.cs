@@ -59,12 +59,18 @@ public class LevelEndManager : MonoBehaviour {
 		//Save the amount of stars and rubies the player has earned from all levels
 		int playerStars = PlayerPrefs.GetInt(SaveStrings.sPlayerStars, 0);
 
-		if (level.star1 == false && levelEnd.obj1Passed == true)
+		if (level.star1 == false && levelEnd.obj1Passed == true) {
+			gameManager.wallet.AddMoney(10 + 10 * level.id);
 			playerStars++;
-		if (level.star2 == false && levelEnd.obj2Passed == true)
+		}
+		if (level.star2 == false && levelEnd.obj2Passed == true) {
+			gameManager.wallet.AddMoney(10 + 10 * level.id);
 			playerStars++;
-		if (level.star3 == false && levelEnd.obj3Passed == true)
+		}
+		if (level.star3 == false && levelEnd.obj3Passed == true) {
+			gameManager.wallet.AddMoney(10 + 10 * level.id);
 			playerStars++;
+		}
 
 		PlayerPrefs.SetInt (SaveStrings.sPlayerStars, playerStars);
 
