@@ -16,9 +16,9 @@ public class LevelSetHandler : MonoBehaviour {
 
         set = LevelHandler.GetLevelSet(setName);
 
-        int playerStars = 2;
+        int playerStars = PlayerPrefs.GetInt(SaveStrings.sPlayerStars);
 
-        if (playerStars > set.neededStars && set.unlocked) {
+        if (playerStars >= set.neededStars && set.unlocked) {
             SetUnlocked();
         }
         else {
@@ -93,5 +93,8 @@ public class LevelSet {
 
     public void Save() {
         PlayerPrefsExt.SetBool(levelSetName + "Set", unlocked);
+    }
+    public void Load() {
+        unlocked = PlayerPrefsExt.GetBool(levelSetName + "Set") || unlocked;
     }
 }

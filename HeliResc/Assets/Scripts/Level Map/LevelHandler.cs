@@ -16,6 +16,7 @@ public class LevelHandler : MonoBehaviour {
 			PlayerPrefs.SetString(SaveStrings.sCurrentLevelSet, value.setName);
 		} 
 	}
+    public static LevelSet[] levelSets { get { return instance.LevelSets; } }
 	public static int LevelCount;
 
     private static LevelHandler instance;
@@ -39,7 +40,9 @@ public class LevelHandler : MonoBehaviour {
             }
             Levels.Add(LevelSets[j].levelSetName, l);
         }
-
+        foreach (LevelSet set in LevelSets) {            
+            set.Load();
+        }
 		currentSet = PlayerPrefs.GetString (SaveStrings.sCurrentLevelSet, "Tutorial0");
 		currentLevel = Levels[currentSet][PlayerPrefs.GetInt(SaveStrings.sCurrentLevelIndex, 0)];
 	}
