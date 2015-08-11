@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Tutorial1 : MonoBehaviour {
-
+	
     public Button okButton;     //Button to close the first tutorial screen
     public Text text;
     private Animator animator;
@@ -42,4 +42,14 @@ public class Tutorial1 : MonoBehaviour {
             animator.Play("SecondTip");
         }
     }
+}
+public class Tutorial {
+	public static IEnumerator FadeOut(SpriteRenderer sprite, float time) {
+		Color c = sprite.color;
+		while (sprite.color.a > 0) {
+			c.a -= (time * Time.deltaTime);
+			sprite.color = c;
+			yield return null;
+		}
+	}
 }

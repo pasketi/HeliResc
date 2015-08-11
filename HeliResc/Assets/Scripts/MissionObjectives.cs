@@ -26,7 +26,6 @@ public class MissionObjectives : MonoBehaviour {
         objectiveMethods.Add(Objective.NoDamage, NoDamage);
         objectiveMethods.Add(Objective.PassLevel, PassLevel);
         objectiveMethods.Add(Objective.HitTrigger, HitTrigger);
-        objectiveMethods.Add(Objective.Tutorial, Tutorial);
 
         LevelObjective1 = objectiveMethods[Objective1];
         LevelObjective2 = objectiveMethods[Objective2];
@@ -55,12 +54,7 @@ public class MissionObjectives : MonoBehaviour {
         if (triggers.Length == 1)
             return triggers[0].triggered;
         return false;
-    }
-
-    public bool Tutorial() {
-        TutorialScript t = GameObject.FindObjectOfType<TutorialScript>();
-        return t.FuelUsed;
-    }
+    }    
 
     public LevelObjective GetMethod(Objective o) {
         return objectiveMethods[o];

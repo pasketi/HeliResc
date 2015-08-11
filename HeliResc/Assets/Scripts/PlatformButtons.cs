@@ -8,8 +8,6 @@ public class PlatformButtons: MonoBehaviour {
     //public Animator victoryAnimator;
     //public Animator repairAnimator;
 	
-	public float buttonSize;
-	
 	private LandingPadManager landing;
     private LevelManager levelManager;
 
