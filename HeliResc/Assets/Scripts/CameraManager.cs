@@ -7,11 +7,14 @@ public class CameraManager : MonoBehaviour {
 
 	public Vector2 minVelocity;			//Minimum velocity of the copter to start move the camera
 	public Vector2 maxVelocity;			//Maximum velocity of the copter. The camera moves with full speed when copter goes faster than this value 
-	public float dampTime = 2f;
-	public float maxY = 30f;			//The value to stop following the copter
+	
+    public float maxY = 30f;			//The value to stop following the copter
 	public float xBound;				//The value the copter can move to without moving the camera when going slower than minVelocity. Value is percentage of the screen width
 	public float yBound;
 	public float xDistance;				//The max value in unity units to move the camera when copter is going over minVelocity
+    public float yDistance;
+    public float acceleration = 10;
+    
 
 	private Vector3 cameraOriginal;		//Cameras position at the start
 	private Vector3 target;				//Target position to move the camera to
@@ -19,7 +22,7 @@ public class CameraManager : MonoBehaviour {
 	private float targetX;
 	private float targetY;
 
-	private float cameraSpeed = 30;
+	//private float cameraSpeed = 30;
 
 	private Transform copter;			//Reference to the copter transform to access its position
 	private Rigidbody2D copterRb;		//Reference to the copters rigidbody to access its velocity
@@ -38,6 +41,7 @@ public class CameraManager : MonoBehaviour {
 		GameObject go = GameObject.Find ("Copter");
 		copter = go.transform;
 		copterRb = go.GetComponent<Rigidbody2D> ();
+
 
 		//Calculate the width and height of the screen in unity units
 		float width = Vector3.Distance (Camera.main.ScreenToWorldPoint (Vector3.zero), Camera.main.ScreenToWorldPoint (Vector3.right * Screen.width));
@@ -66,12 +70,33 @@ public class CameraManager : MonoBehaviour {
 			targetX = copter.position.x;
 		}
 
-		targetY = copter.position.y;
+        if (vel.y >= minVelocity.y || vel.y <= -minVelocity.y) {
+            float y = Mathf.Sign(vel.y) * -yDistance;
+            if (Mathf.Abs(vel.y) < maxVelocity.y)
+                y *= Mathf.Clamp01(Mathf.Abs(vel.y) / maxVelocity.y);
+            targetY = copter.position.y - y;
+        } 
+        else if ((copter.position.y >= _transform.position.y + yBound) 
+                || (copter.position.y < _transform.position.y - yBound)) {
+            targetY = copter.position.y;
+        }
+
+        if(targetY < cameraOriginal.y) {
+            targetY = cameraOriginal.y;
+        }
+
 		target = new Vector3 (targetX, targetY, -10);
 
 		if (test != null) {
 			test.position = new Vector3(target.x, target.y);
 		}
+
+        Debug.Log("Distance to target: " + (Vector3.Distance(target, _transform.position) < .5f));
+
+        if (Camera.main.transform.position.x != target.x || Camera.main.transform.position.y != target.y) {
+            if(Vector3.Distance(target, _transform.position) > .5f)
+                _transform.Translate((target - _transform.position).normalized * acceleration * Time.deltaTime);
+        }
 
 		/*if (copter.position.y <= cameraOriginal.y*2){
 			targetY = cameraOriginal.y;
@@ -88,7 +113,6 @@ public class CameraManager : MonoBehaviour {
 			target = new Vector3(targetX, targetY, cameraOriginal.z);
 		}
 */
-		if (Camera.main.transform.position.x != target.x || Camera.main.transform.position.y != target.y) 
-			gameObject.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, target, ref zero, dampTime, 30);
+        
 	}
 }
