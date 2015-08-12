@@ -40,7 +40,7 @@ public class HookScript : MonoBehaviour {
 		line.sortingOrder = GetComponent<SpriteRenderer>().sortingOrder - 1;    //Set the line to be drawn under hook
 		line.sortingLayerID = GetComponent<SpriteRenderer>().sortingLayerID;
         rb = GetComponent<Rigidbody2D>();
-        anchor = GameObject.FindGameObjectWithTag("CopterHookLineAnchor").transform;
+        anchor = GameObject.Find("Copter").transform.Find("Anchor");
         _t = transform;        
 
         ResetHook(new List<HookableObject>());
