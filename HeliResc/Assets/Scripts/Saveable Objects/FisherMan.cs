@@ -25,6 +25,15 @@ public class FisherMan : HookableObject, IChainable {
     protected bool dead;
     protected LevelManager manager;
 
+    protected override void OnEnable()
+    {
+        EventManager.StartListening("HookDied", DetachHook);
+    }
+    protected override void OnDisable()
+    {
+        EventManager.StopListening("HookDied", DetachHook);
+    }
+
 	// Use this for initialization
 	protected override void Start () {
         base.Start();
@@ -122,17 +131,34 @@ public class FisherMan : HookableObject, IChainable {
         floating.enabled = false;
     }
 
-    public override void DetachHook() {
-		if (hooked == false) return;
-        base.DetachHook();
+    public override void DetachHook()
+    {
+        //if (hooked == false || dead == true) return;
 
-		if (useTimer == true) UpdateMethod += Timer;
-        _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-        floating.enabled = true;
+
+        Debug.Log("Detach");
+        joint.connectedBody = null;
+
+        hooked = false;
         grabLegs = false;
+        HasDude = false;
+        joint.enabled = false;
+        floating.enabled = true;
+
+        hookScript.DetachHook(this);
+        gameObject.layer = LayerMask.NameToLayer("Crate");
+
+        if (useTimer == true) UpdateMethod += Timer;
+        _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+
         fishermenInLegs = new System.Collections.Generic.List<FisherMan>();
-        FisherMan fm = hookedTransform.parent.GetComponent<FisherMan>();
-        if (fm != null) fm.HasDude = false;
+        if (!hookedTransform.tag.Equals("Hook"))
+        {
+            FisherMan fm = hookedTransform.parent.GetComponent<FisherMan>();
+            if (fm != null) fm.HasDude = false;
+        }
+
     }
     public void Chain(Rigidbody2D rb) {
         GrabHook(rb);

@@ -24,10 +24,10 @@ public class HookableObject : MonoBehaviour, IHookable {
     protected HookScript hookScript;
     protected FloatingObject floating;
 
-    void OnEnable() {
+    protected virtual void OnEnable() {
         EventManager.StartListening("HookDied", DetachHook);
     }
-    void OnDisable() {
+    protected virtual void OnDisable() {
         EventManager.StopListening("HookDied", DetachHook);
     }
 
