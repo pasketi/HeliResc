@@ -27,11 +27,13 @@ public class HookScript : MonoBehaviour {
     //Start listening to events
     void OnEnable() {
         EventManager.StartListening("CopterExplode", DisableLine);
+		EventManager.StartListening ("HookDied", HookDied);
         //EventManager.StartListening("EnterPlatform", DisableLine);
     }
     void OnDisable() {
         EventManager.StopListening("CopterExplode", DisableLine);
-        //EventManager.StopListening("EnterPlatform", DisableLine);
+		EventManager.StopListening ("HookDied", HookDied);
+		//EventManager.StopListening("EnterPlatform", DisableLine);
     }
 
 	// Use this for initialization
@@ -85,6 +87,13 @@ public class HookScript : MonoBehaviour {
         hookedItems = newList;
     }
             
+	private void HookDied() {
+		int count = hookedItems.Count;
+		for(int i = 0; i < count; i++) {
+			hookedItems[0].DetachHook();
+		}
+	}
+
     public virtual void GrabHook(HookableObject obj) {
         if (hookedItems.Contains(obj) == false) {
             HookMass += obj.mass;

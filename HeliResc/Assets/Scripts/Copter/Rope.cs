@@ -158,6 +158,7 @@ public class Rope : Upgradable {
     }
     public void KillHook() {                
         hook.GetComponent<LineRenderer>().enabled = false;
+		hookScript.tag = "Untagged";
         EventManager.TriggerEvent("HookDied");
         hasHook = false;
 		hookOut = false;

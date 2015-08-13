@@ -25,14 +25,14 @@ public class FisherMan : HookableObject, IChainable {
     protected bool dead;
     protected LevelManager manager;
 
-    protected override void OnEnable()
-    {
-        EventManager.StartListening("HookDied", DetachHook);
-    }
-    protected override void OnDisable()
-    {
-        EventManager.StopListening("HookDied", DetachHook);
-    }
+//    protected override void OnEnable()
+//    {
+//        EventManager.StartListening("HookDied", DetachHook);
+//    }
+//    protected override void OnDisable()
+//    {
+//        EventManager.StopListening("HookDied", DetachHook);
+//    }
 
 	// Use this for initialization
 	protected override void Start () {
@@ -49,6 +49,8 @@ public class FisherMan : HookableObject, IChainable {
 	}
 	
     protected override void OnTriggerEnter2D(Collider2D other) {
+		if (dead == true)
+			return;
         if(other.tag.Equals("Hook") && hooked == false && other.gameObject != legs) {
             
             HookScript hs = GameObject.FindObjectOfType<HookScript>();
@@ -74,6 +76,9 @@ public class FisherMan : HookableObject, IChainable {
 
     protected virtual void UpdateSkull() {
         skullTransform.localPosition = Vector3.up * 1.5f;
+		if (floating.IsInWater == true) {
+			floating.ChangeToStatic(true);
+		}
     }
 
     protected override void Timer() {
@@ -113,6 +118,7 @@ public class FisherMan : HookableObject, IChainable {
 
         if (hookRb.name.Equals("Legs")) {
             FisherMan fm = hookRb.transform.parent.GetComponent<FisherMan>();
+			if(fm.hooked == false) return;
             fm.HasDude = true;
             fm.fishermenInLegs.Add(this); 
             grabLegs = true;
@@ -133,10 +139,10 @@ public class FisherMan : HookableObject, IChainable {
 
     public override void DetachHook()
     {
-        //if (hooked == false || dead == true) return;
+        if (hooked == false || dead == true) return;
 
-
-        Debug.Log("Detach");
+		GetComponent<HingeJoint2D> ().enabled = false;
+        Debug.Log(gameObject.name);
         joint.connectedBody = null;
 
         hooked = false;
@@ -152,12 +158,7 @@ public class FisherMan : HookableObject, IChainable {
         _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
 
 
-        fishermenInLegs = new System.Collections.Generic.List<FisherMan>();
-        if (!hookedTransform.tag.Equals("Hook"))
-        {
-            FisherMan fm = hookedTransform.parent.GetComponent<FisherMan>();
-            if (fm != null) fm.HasDude = false;
-        }
+        fishermenInLegs = new System.Collections.Generic.List<FisherMan>();        
 
     }
     public void Chain(Rigidbody2D rb) {

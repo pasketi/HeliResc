@@ -37,6 +37,7 @@ public class FloatingObject : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log ("Floating");
         UpdateMethod();
 	}
 
@@ -57,4 +58,16 @@ public class FloatingObject : MonoBehaviour {
         
         }
     }
+
+	public void ChangeToStatic(bool isStatic) {
+		this.isStatic = isStatic;
+		if (isStatic == true) {
+			inWater = true;
+			UpdateMethod = StaticUpdate;
+		}
+		else {
+			floatyValue = GetComponent<Rigidbody2D>().mass * 30f;
+			UpdateMethod = NonStaticUpdate;
+		}
+	}
 }

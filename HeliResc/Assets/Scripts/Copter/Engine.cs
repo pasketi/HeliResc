@@ -24,6 +24,8 @@ public class Engine : Upgradable {
     private bool hasInput;
     private bool useAutoHoover = true;
 
+	private Transform copterTr;
+
     //power related variables
     public float minPower;
     public float currentPower;
@@ -45,6 +47,7 @@ public class Engine : Upgradable {
     public override void Init(Copter copter) {
         base.Init(copter);
         
+		copterTr = playerRb.transform;
         copter.fuelTank.TankDepleted += OutOfFuel;      //Subscribe to the fuel tanks TankEmpty event
         copter.fuelTank.TankFilled += TankFilled;
         UpdateDelegate = FuelUpdate;                    //Start with having fuel
@@ -60,11 +63,11 @@ public class Engine : Upgradable {
         throw new System.NotImplementedException();
     }
     public void PlatformUpdate() {
-        copterAngle = playerRb.transform.eulerAngles.z;
+		copterAngle = copterTr.eulerAngles.z;
         Thrust();
     }
     public void FuelUpdate() {
-        copterAngle = playerRb.transform.eulerAngles.z;        
+		copterAngle = copterTr.eulerAngles.z;        
 
         //Flip the copter depending on its angle
         if (playerRb.velocity.x > 0.1f)
@@ -79,7 +82,7 @@ public class Engine : Upgradable {
         Thrust();                           //Move the copter
     }
     public void NoFuelUpdate() {
-        copterAngle = playerRb.transform.eulerAngles.z;
+		copterAngle = copterTr.eulerAngles.z;
         if (currentPower > 0f) {
             currentPower -= currentPower * (currentPower / maxPower) * Time.deltaTime * 3f;
         } else {
@@ -134,7 +137,7 @@ public class Engine : Upgradable {
     }
 
     private void Thrust() {
-        playerRb.AddForce(playerRb.transform.up * (currentPower * powerMultiplier) * Time.deltaTime);
+		playerRb.AddForce(copterTr.up * (currentPower * powerMultiplier) * Time.deltaTime);
     }
 
     public void IdleInput() {
@@ -157,89 +160,87 @@ public class Engine : Upgradable {
 
     private void HandleRotation(MouseTouch touch) {                
 
-        if ((currentAngle < maxTiltValue
-            || touch.deltaPosition.x < 0f)
-            || (currentAngle > 360f - maxTiltValue
-            || touch.deltaPosition.x > 0f))
-        {
-            currentAngle -= touch.deltaPosition.x * rotationSensitivity;
-        }
+		if ((currentAngle < maxTiltValue
+			|| touch.deltaPosition.x < 0f)
+			|| (currentAngle > 360f - maxTiltValue
+			|| touch.deltaPosition.x > 0f)) {
+			currentAngle -= touch.deltaPosition.x * rotationSensitivity;
+		}
 
-        if (currentAngle < 0f)
-        {
-            currentAngle += 360f;
-        }
-        else if (currentAngle > 360f)
-        {
-            currentAngle -= 360f;
-        }
+		if (currentAngle < 0f) {
+			currentAngle += 360f;
+		} else if (currentAngle > 360f) {
+			currentAngle -= 360f;
+		}
 
-        if (currentAngle > maxTiltValue && currentAngle < 180f)
-        {
-            currentAngle = maxTiltValue;
-        }
-        else if (currentAngle < 360f - maxTiltValue && currentAngle > 180f)
-        {
-            currentAngle = 360f - maxTiltValue;
-        }        
+		if (currentAngle > maxTiltValue && currentAngle < 180f) {
+			currentAngle = maxTiltValue;
+		} else if (currentAngle < 360f - maxTiltValue && currentAngle > 180f) {
+			currentAngle = 360f - maxTiltValue;
+		}
+
+		Quaternion q = Quaternion.AngleAxis (currentAngle, Vector3.forward);
+
+		copterTr.rotation = Quaternion.RotateTowards (copterTr.rotation, q, Time.deltaTime * maxTiltSpeed);
         
-        if (copterAngle != currentAngle)
-        { // Turn to currentAngle
-            if (currentAngle < 180f)
-            {
-                if (copterAngle > 180f)
-                {
-                    // Rotate CCW
-                    playerRb.transform.Rotate(new Vector3(0f, 0f, maxTiltSpeed * Time.deltaTime));
-                }
-                else if (copterAngle < 180f)
-                {
-                    if (copterAngle < currentAngle)
-                    {
-                        // Rotate CCW
-                        playerRb.transform.Rotate(new Vector3(0f, 0f, maxTiltSpeed * Time.deltaTime));
-                    }
-                    else if (copterAngle > currentAngle)
-                    {
-                        // Rotate CW
-                        playerRb.transform.Rotate(new Vector3(0f, 0f, -maxTiltSpeed * Time.deltaTime));
-                    }
-                }
-            }
-            else if (currentAngle > 180f)
-            {
-                if (copterAngle < 180f)
-                {
-                    // Rotate CW
-                    playerRb.transform.Rotate(new Vector3(0f, 0f, -maxTiltSpeed * Time.deltaTime));
-                }
-                else if (copterAngle > 180f)
-                {
-                    if (copterAngle < currentAngle)
-                    {
-                        // Rotate CCW
-                        playerRb.transform.Rotate(new Vector3(0f, 0f, maxTiltSpeed * Time.deltaTime));
-                    }
-                    else if (copterAngle > currentAngle)
-                    {
-                        // Rotate CW
-                        playerRb.transform.Rotate(new Vector3(0f, 0f, -maxTiltSpeed * Time.deltaTime));
-                    }
-                }
-            }
-        }        
+//        if (copterAngle != currentAngle)
+//        { // Turn to currentAngle
+//            if (currentAngle < 180f)
+//            {
+//                if (copterAngle > 180f)
+//                {
+//                    // Rotate CCW
+//					//copterTr.Rotate(new Vector3(0f, 0f, maxTiltSpeed * Time.deltaTime));
+//                }
+//                else if (copterAngle < 180f)
+//                {
+//                    if (copterAngle < currentAngle)
+//                    {
+//                        // Rotate CCW
+//						//copterTr.Rotate(new Vector3(0f, 0f, maxTiltSpeed * Time.deltaTime));
+//                    }
+//                    else if (copterAngle > currentAngle)
+//                    {
+//                        // Rotate CW
+//						//copterTr.Rotate(new Vector3(0f, 0f, -maxTiltSpeed * Time.deltaTime));
+//                    }
+//                }
+//            }
+//            else if (currentAngle > 180f)
+//            {
+//                if (copterAngle < 180f)
+//                {
+//                    // Rotate CW
+//					//copterTr.Rotate(new Vector3(0f, 0f, -maxTiltSpeed * Time.deltaTime));
+//                }
+//                else if (copterAngle > 180f)
+//                {
+//                    if (copterAngle < currentAngle)
+//                    {
+//                        // Rotate CCW
+//						//copterTr.Rotate(new Vector3(0f, 0f, maxTiltSpeed * Time.deltaTime));
+//                    }
+//                    else if (copterAngle > currentAngle)
+//                    {
+//                        // Rotate CW
+//						//copterTr.Rotate(new Vector3(0f, 0f, -maxTiltSpeed * Time.deltaTime));
+//                    }
+//                }
+//            }
+//		}        
     }
 
     private void IdleRotation() {
+		Debug.Log ("Idle rotation");
         if (copterAngle != 0f)
         { // Return to 0°
             if (copterAngle > 180f)
             {
-                playerRb.transform.Rotate(new Vector3(0f, 0f, returnSpeed * Time.deltaTime * (360f - copterAngle) * persistence));
+				copterTr.Rotate(new Vector3(0f, 0f, returnSpeed * Time.deltaTime * (360f - copterAngle) * persistence));
             }
             else if (copterAngle < 180f)
             {
-                playerRb.transform.Rotate(new Vector3(0f, 0f, -(returnSpeed * Time.deltaTime) * copterAngle * persistence));
+				copterTr.Rotate(new Vector3(0f, 0f, -(returnSpeed * Time.deltaTime) * copterAngle * persistence));
             }
         }
         if (tempHoldTime != holdTime)
