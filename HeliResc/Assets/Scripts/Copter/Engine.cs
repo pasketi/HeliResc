@@ -231,7 +231,7 @@ public class Engine : Upgradable {
     }
 
     private void IdleRotation() {
-		Debug.Log ("Idle rotation");
+		//Debug.Log ("Idle rotation");
         if (copterAngle != 0f)
         { // Return to 0°
             if (copterAngle > 180f)

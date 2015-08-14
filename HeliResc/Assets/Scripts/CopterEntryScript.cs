@@ -43,7 +43,7 @@ public class CopterEntryScript : MonoBehaviour {
 	public void SelectCopter() {
 		copterSelect.UpdateSelected (index);
 
-		Debug.Log ("Copter: " + copter.copterName + " uncloked: " + copter.unlocked);
+//		Debug.Log ("Copter: " + copter.copterName + " uncloked: " + copter.unlocked);
 		ShowBackground (true);
 		if (copter.unlocked == true) {
 

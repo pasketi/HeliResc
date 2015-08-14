@@ -37,7 +37,7 @@ public class SailfishScript : MonoBehaviour {
         _transform.rotation = Quaternion.Euler(rotation);
         if (splashed == false) {
             if (_transform.position.y < waterLevel && _rigidbody.velocity.y < 0) {
-                Debug.Log("Splash");
+                //Debug.Log("Splash");
                 Splash();
             }
         }
