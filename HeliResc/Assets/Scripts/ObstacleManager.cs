@@ -42,7 +42,7 @@ public class ObstacleManager : MonoBehaviour {
 			if (diesOnContact) Destroy(gameObject);
 		}
 
-		if (collision.gameObject.transform.tag == "Hook") {
+		if (collision.gameObject.transform.tag == "Hook" || collision.gameObject.CompareTag("CrushBall")) {
             if (killsHook) copter.rope.KillHook();
 
 			if (diesOnContact && deathAnimation != null) 
