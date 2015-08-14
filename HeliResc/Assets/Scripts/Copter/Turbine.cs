@@ -27,6 +27,7 @@ public class Turbine : Upgradable {
 			RectTransform swRect = switchButton.GetComponent<RectTransform> ();
 			swRect.anchoredPosition = new Vector2 (Screen.width * 0.91f, Screen.height * 0.356f);
 			swRect.sizeDelta = new Vector2 (Screen.width * 0.095f, Screen.height * 0.178f);
+			swRect.localScale = Vector3.one;
 
 			Button b = switchButton.GetComponent<Button> ();
 			b.onClick.AddListener (() => SwitchDirection ());
@@ -38,6 +39,7 @@ public class Turbine : Upgradable {
 
 		rect.anchoredPosition = new Vector2 (Screen.width * 0.91f, Screen.height * 0.178f);
 		rect.sizeDelta = new Vector2 (Screen.width * 0.095f, Screen.height * 0.178f);
+		rect.localScale = Vector3.one;
 
 		buttonRectangle = new Rect ();
 

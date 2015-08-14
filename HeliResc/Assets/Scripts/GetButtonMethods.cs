@@ -14,6 +14,6 @@ public class GetButtonMethods : MonoBehaviour {
 
 		
 		btnResetAll.onClick.AddListener (() => g.resetData ());
-		btnCoins.onClick.AddListener (() => g.wallet.AddMoney (5));
+		btnCoins.onClick.AddListener (() => g.wallet.AddMoney (500));
 	}
 }
