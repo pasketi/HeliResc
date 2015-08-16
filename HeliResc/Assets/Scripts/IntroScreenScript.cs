@@ -4,10 +4,11 @@ using UnityEngine.UI;
 
 public class IntroScreenScript : MonoBehaviour {
 
-	public string[] introTexts;
-	public Text introText;
+    public Intro[] intro;
+    public Text[] challenges;
 
-	private int levelToLoad = 1;
+	public Text introText;
+    public Image introComic;
 
     void OnEnable() {
         EventManager.StartListening(SaveStrings.eEscape, PressBack);
@@ -18,16 +19,42 @@ public class IntroScreenScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if(PlayerPrefs.HasKey("levelToLoad"))
-			levelToLoad = PlayerPrefs.GetInt ("levelToLoad");
-		introText.text = introTexts [levelToLoad - 1];
-	}	
-	
-	public void PressPlay() {
-		Application.LoadLevel ("Level" + levelToLoad.ToString());
+        LevelSet set = LevelHandler.GetLevelSet();
+        Intro i = intro[set.setIndex];
+
+        if (i.showText == true) {
+            introText.enabled = true;
+            introComic.enabled = false;
+            introText.text = i.text;
+
+        }
+        else {
+            introText.enabled = false;
+            introComic.enabled = true;
+            introComic.sprite = i.sprite;
+        }
+
+        if (challenges.Length != 3) Debug.LogError("Missing references to challege texts");
+        else {
+            challenges[0].text = set.challenge1;
+            challenges[1].text = set.challenge2;
+            challenges[2].text = set.challenge3;
+        }
+	}
+
+    public void PressPlay()
+    {
+		GameManager.LoadLevel (LevelHandler.CurrentLevel.name);
 	}
 
 	public void PressBack() {		
     	Application.LoadLevel ("LevelMap");
 	}
+
+    [System.Serializable]
+    public class Intro {
+        public bool showText;
+        public Sprite sprite;
+        public string text;
+    }
 }

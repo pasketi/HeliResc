@@ -14,7 +14,7 @@ public class SailfishScript : MonoBehaviour {
     private bool splashed;              //Have the fish already splashed
 
     private Vector2 forceVector;        //A vector to add force to the fish, takes the jumpforce variable as y-component
-    private float startPosition;        //The starting point from which the fish should start the jump
+    private Vector2 startPosition;        //The starting point from which the fish should start the jump
 
     void Start() {
         copter = GameObject.Find("Copter").GetComponent<Copter>();
@@ -26,13 +26,15 @@ public class SailfishScript : MonoBehaviour {
         waterLevel = GameObject.FindObjectOfType<LevelManager>().getWaterLevel();
 
         splashed = true;
-        startPosition = _transform.position.y;
+        startPosition = _transform.position;
     }
 
     void Update() {
         //Rotate the fish according its direction, pointing either up or down
         Vector3 rotation = new Vector3(0, 0, -90);
         rotation.z *= Mathf.Sign(_rigidbody.velocity.y);
+
+        _transform.position = new Vector3(startPosition.x, _transform.position.y);
 
         _transform.rotation = Quaternion.Euler(rotation);
         if (splashed == false) {
@@ -41,7 +43,7 @@ public class SailfishScript : MonoBehaviour {
                 Splash();
             }
         }
-        if (_transform.position.y < startPosition)
+        if (_transform.position.y < startPosition.y)
             Jump();
     }
 

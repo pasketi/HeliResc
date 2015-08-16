@@ -9,7 +9,7 @@ public class LevelSetHandler : MonoBehaviour {
     public GameObject buttonPrefab; //Prefab of a button to open levels    
     public Image setImage;          //The image UI-component in the middle of the button set
     public string setName;
-
+    
     private LevelSet set;            //The kind of set the group has
 
     void Start() {
@@ -84,12 +84,18 @@ public class LevelSetHandler : MonoBehaviour {
 }
 
 [System.Serializable]
-public class LevelSet {
+public class LevelSet {   
+
 	public string levelSetName;     //The identifier of the set. Crate, swimmer etc.
 	public int levelAmount;         //how many levels is in the set
 	public Sprite setImage;         //The image to show in the middle of the set
 	public int neededStars;			//How many stars is required to open the set
+    public int setIndex;            //the index of the set in the list of level sets
     public bool unlocked;           //Is the set unlocked
+
+    public string challenge1;
+    public string challenge2;
+    public string challenge3;
 
     public void Save() {
         PlayerPrefsExt.SetBool(levelSetName + "Set", unlocked);

@@ -84,16 +84,24 @@ public class LevelEndManager : MonoBehaviour {
         level.star2 = levelEnd.obj2Passed || level.star2;
         level.star3 = levelEnd.obj3Passed || level.star3;
 
-        if (levelEnd.rubyFound == true)
-			rubyImage.sprite = unlockedRuby;
-		else
-			rubyImage.enabled = false;
-        if (levelEnd.passedLevel == true) {
+        if (levelEnd.passedLevel == true)
+        {
             PassedLevel();
         }
-        else {
+        else
+        {
             FailedLevel();
         }
+
+        if (levelEnd.rubyFound == true)
+        {
+            rubyImage.sprite = unlockedRuby;
+        }
+        else
+        {
+            rubyImage.enabled = false;
+        }
+        
 
         StartCoroutine(Animations(levelEnd.rubyFound));
 		Level.Save (level);

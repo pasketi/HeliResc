@@ -195,12 +195,13 @@ public class LevelManager : MonoBehaviour {
         RubyScript ruby = GameObject.FindObjectOfType<RubyScript>();
 
         if (ruby == null) Debug.LogError("Ruby not found");
+        else { end.rubyFound = ruby.found; }
         if (objectives == null) Debug.LogError("Objectives not found");
-
-        end.rubyFound = ruby.found;
-        end.obj1Passed = objectives.LevelObjective1();
-        end.obj2Passed = objectives.LevelObjective2();
-        end.obj3Passed = objectives.LevelObjective3();
+        else {
+            end.obj1Passed = objectives.LevelObjective1();
+            end.obj2Passed = objectives.LevelObjective2();
+            end.obj3Passed = objectives.LevelObjective3();
+        }
 
         gameManager.loadMainMenu(true, end, 2);
     }

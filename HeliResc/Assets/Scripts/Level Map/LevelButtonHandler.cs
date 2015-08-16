@@ -49,7 +49,10 @@ public class LevelButtonHandler : MonoBehaviour {
 	public void LoadLevel() {
         if (level.unlocked == true) {
             LevelHandler.CurrentLevel = level;
-            GameManager.LoadLevel(levelId);
+            if (level.id > 0)
+                GameManager.LoadLevel(levelId);
+            else
+                GameManager.LoadLevel("IntroScreen");
         }
 	}
 }

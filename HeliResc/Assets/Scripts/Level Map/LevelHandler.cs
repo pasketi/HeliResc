@@ -12,11 +12,12 @@ public class LevelHandler : MonoBehaviour {
 	public static Level CurrentLevel { get { return instance.currentLevel; } 
 		set { 
 			instance.currentLevel = value;
+            instance.currentSet = value.setName;
 			PlayerPrefs.SetInt(SaveStrings.sCurrentLevelIndex, value.id);
 			PlayerPrefs.SetString(SaveStrings.sCurrentLevelSet, value.setName);
 		} 
 	}
-    public static LevelSet[] levelSets { get { return instance.LevelSets; } }
+    public static LevelSet[] levelSets { get { return instance.LevelSets; } }    
 	public static int LevelCount;
 
     private static LevelHandler instance;
@@ -32,6 +33,7 @@ public class LevelHandler : MonoBehaviour {
         //LevelSetHandler[] sets = GameObject.FindObjectsOfType<LevelSetHandler>();
         for (int j = 0; j < LevelSets.Length; j++ )
         {
+            LevelSets[j].setIndex = j;
             List<Level> l = new List<Level>();
             for (int i = 0; i < LevelSets[j].levelAmount; i++)
             {
@@ -46,7 +48,9 @@ public class LevelHandler : MonoBehaviour {
 		currentSet = PlayerPrefs.GetString (SaveStrings.sCurrentLevelSet, "Tutorial0");
 		currentLevel = Levels[currentSet][PlayerPrefs.GetInt(SaveStrings.sCurrentLevelIndex, 0)];
 	}
-    public static LevelSet GetLevelSet(string name) {
+    public static LevelSet GetLevelSet(string name = "") {
+        if (name.Equals(""))
+            name = instance.currentSet;
         foreach (LevelSet s in instance.LevelSets) {
             if (s.levelSetName.Equals(name))
                 return s;
@@ -66,13 +70,15 @@ public class LevelHandler : MonoBehaviour {
                 nextSet = instance.LevelSets[i + 1];
             }
         }
-        if (nextSet != null) {
+        if (nextSet != null && nextSet.unlocked == false) {
             Debug.Log("Next Set");
             nextSet.unlocked = true;
             nextSet.Save();
             Level nextLevel = Levels[nextSet.levelSetName][0];
-            nextLevel.unlocked = true;
-            Level.Save(nextLevel);
+            if (nextLevel.unlocked == false) {
+                nextLevel.unlocked = true;
+                Level.Save(nextLevel);
+            }
         }
         
         //Second unlock the next level in the current set if there is more levels
