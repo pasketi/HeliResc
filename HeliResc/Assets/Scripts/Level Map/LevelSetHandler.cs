@@ -95,7 +95,8 @@ public class LevelSet {
 
     public string challenge1;
     public string challenge2;
-    public string challenge3;
+    public string challenge3;               //Description of the level challenges 1, 2 and 3
+    public float[] levelTimeChallenges;     //Array that contains the time limits for each level in the set
 
     public void Save() {
         PlayerPrefsExt.SetBool(levelSetName + "Set", unlocked);
