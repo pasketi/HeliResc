@@ -21,10 +21,10 @@ public class CargoSpace : Upgradable {
     protected float cargoMass;
 
     public override void RegisterListeners() {
-        EventManager.StartListening("EnterPlatform", UnloadAll);        
+        EventManager.StartListening(SaveStrings.eEnterPlatform, UnloadAll);        
     }
     public override void UnregisterListeners() {
-        EventManager.StopListening("EnterPlatform", UnloadAll);        
+        EventManager.StopListening(SaveStrings.eEnterPlatform, UnloadAll);        
     }
 
     public override void Init(Copter copter) {

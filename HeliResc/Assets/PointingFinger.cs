@@ -7,12 +7,12 @@ public class PointingFinger : MonoBehaviour {
     private Transform _transform;
 
 	void OnEnable() {
-		EventManager.StartListening ("EnterPlatform", EnterPlatform);
-		EventManager.StartListening ("ExitPlatform", ExitPlatform);
+		EventManager.StartListening (SaveStrings.eEnterPlatform, EnterPlatform);
+		EventManager.StartListening (SaveStrings.eExitPlatform, ExitPlatform);
 	}
 	void OnDisable() {
-		EventManager.StopListening ("EnterPlatform", EnterPlatform);
-		EventManager.StopListening ("ExitPlatform", ExitPlatform);
+		EventManager.StopListening (SaveStrings.eEnterPlatform, EnterPlatform);
+		EventManager.StopListening (SaveStrings.eExitPlatform, ExitPlatform);
 	}
 
     void Start() {

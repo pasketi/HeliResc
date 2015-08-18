@@ -40,7 +40,7 @@ public class LandingPadManager : MonoBehaviour {
 		if (other.gameObject.transform.tag == "Copter") {
 
 			if (enterPlatform != null) enterPlatform(gameObject);
-			EventManager.TriggerEvent("EnterPlatform");
+			EventManager.TriggerEvent(SaveStrings.eEnterPlatform);
 
 			if (canWin == true) { 
                 bool win = objectives.AllObjectiveCompleted();                
@@ -80,7 +80,7 @@ public class LandingPadManager : MonoBehaviour {
             
             //Trigger the landing events
             exitPlatform(gameObject);
-            EventManager.TriggerEvent("ExitPlatform");
+            EventManager.TriggerEvent(SaveStrings.eExitPlatform);
             
 			GameObject.Find ("HUD").GetComponent<UIManager> ().refill = false;
 		}

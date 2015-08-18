@@ -49,7 +49,7 @@ public class CopterHealth : Upgradable {
         currentHealth = 0f;        
 
         playerCopter.Disable();
-        EventManager.TriggerEvent("CopterExplode");
+        EventManager.TriggerEvent(SaveStrings.eCopterExplode);
     }
     protected override void GiveName() {
         name = "CopterHealth";

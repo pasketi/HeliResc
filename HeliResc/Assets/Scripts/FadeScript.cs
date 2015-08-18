@@ -9,12 +9,12 @@ public class FadeScript : MonoBehaviour {
     public float speedOut = 2;
 
     void OnEnable() {
-        EventManager.StartListening("Fade In", FadeIn);
-        EventManager.StartListening("Fade Out", FadeOut);
+        EventManager.StartListening(SaveStrings.eFadeIn, FadeIn);
+        EventManager.StartListening(SaveStrings.eFadeOut, FadeOut);
     }
     void OnDisable() {
-        EventManager.StopListening("Fade In", FadeIn);
-        EventManager.StopListening("Fade Out", FadeOut);
+        EventManager.StopListening(SaveStrings.eFadeIn, FadeIn);
+        EventManager.StopListening(SaveStrings.eFadeOut, FadeOut);
     }
 
 	// Use this for initialization
@@ -24,9 +24,9 @@ public class FadeScript : MonoBehaviour {
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.K))
-            EventManager.TriggerEvent("Fade In");
+            EventManager.TriggerEvent(SaveStrings.eFadeIn);
         if (Input.GetKeyDown(KeyCode.L))
-            EventManager.TriggerEvent("Fade Out");
+            EventManager.TriggerEvent(SaveStrings.eFadeOut);
     }
 
     private void FadeIn() {

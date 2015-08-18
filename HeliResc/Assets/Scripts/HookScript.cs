@@ -26,13 +26,13 @@ public class HookScript : MonoBehaviour {
 
     //Start listening to events
     void OnEnable() {
-        EventManager.StartListening("CopterExplode", DisableLine);
-		EventManager.StartListening ("HookDied", HookDied);
+        EventManager.StartListening(SaveStrings.eCopterExplode, DisableLine);
+		EventManager.StartListening (SaveStrings.eHookDied, HookDied);
         //EventManager.StartListening("EnterPlatform", DisableLine);
     }
     void OnDisable() {
-        EventManager.StopListening("CopterExplode", DisableLine);
-		EventManager.StopListening ("HookDied", HookDied);
+        EventManager.StopListening(SaveStrings.eCopterExplode, DisableLine);
+		EventManager.StopListening (SaveStrings.eHookDied, HookDied);
 		//EventManager.StopListening("EnterPlatform", DisableLine);
     }
 

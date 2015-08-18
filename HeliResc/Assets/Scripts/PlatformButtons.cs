@@ -16,12 +16,12 @@ public class PlatformButtons: MonoBehaviour {
 	private Transform target;
 
     void OnEnable() {
-        EventManager.StartListening("EnterPlatform", ShowFuel);
-        EventManager.StartListening("ExitPlatform", HideFuel);
+        EventManager.StartListening(SaveStrings.eEnterPlatform, ShowFuel);
+        EventManager.StartListening(SaveStrings.eExitPlatform, HideFuel);
     }
     void OnDisable() {
-        EventManager.StopListening("EnterPlatform", ShowFuel);
-        EventManager.StopListening("ExitPlatform", HideFuel);
+        EventManager.StopListening(SaveStrings.eEnterPlatform, ShowFuel);
+        EventManager.StopListening(SaveStrings.eExitPlatform, HideFuel);
     }
 
 	// Use this for initialization
@@ -75,7 +75,6 @@ public class PlatformButtons: MonoBehaviour {
     public void StartRefill()
     {
         landing.StartRefill();
-        EventManager.TriggerEvent("Fuel");
     }
     public void ShowFuel()
     {

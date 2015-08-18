@@ -36,12 +36,12 @@ public class Engine : Upgradable {
     public float CurrentPowerPercentage { get { return currentPower / maxPower; } }
 
     public override void RegisterListeners() {
-        EventManager.StartListening("EnterPlatform", EnterPlatform);
-        EventManager.StartListening("ExitPlatform", ExitPlatform);
+        EventManager.StartListening(SaveStrings.eEnterPlatform, EnterPlatform);
+        EventManager.StartListening(SaveStrings.eExitPlatform, ExitPlatform);
     }
     public override void UnregisterListeners() {
-        EventManager.StopListening("EnterPlatform", EnterPlatform);
-        EventManager.StopListening("ExitPlatform", ExitPlatform);
+        EventManager.StopListening(SaveStrings.eEnterPlatform, EnterPlatform);
+        EventManager.StopListening(SaveStrings.eExitPlatform, ExitPlatform);
     }
 
     public override void Init(Copter copter) {

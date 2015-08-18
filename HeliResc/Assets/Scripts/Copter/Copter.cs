@@ -47,17 +47,17 @@ public abstract class Copter : MonoBehaviour {
         foreach (Upgradable entry in copterUpgrades.Values) {
             entry.RegisterListeners();
         }
-        EventManager.StartListening("CopterSplash", TurnCopterOff);
-        EventManager.StartListening("EnterPlatform", EnterPlatform);
-        EventManager.StartListening("ExitPlatform", ExitPlatform);
+        EventManager.StartListening(SaveStrings.eCopterSplash, TurnCopterOff);
+        EventManager.StartListening(SaveStrings.eEnterPlatform, EnterPlatform);
+        EventManager.StartListening(SaveStrings.eExitPlatform, ExitPlatform);
     }
     protected virtual void OnDisable() {
         foreach (Upgradable entry in copterUpgrades.Values) {
             entry.UnregisterListeners();
         }
-        EventManager.StopListening("CopterSplash", TurnCopterOff);
-        EventManager.StopListening("EnterPlatform", EnterPlatform);
-        EventManager.StopListening("ExitPlatform", ExitPlatform);
+        EventManager.StopListening(SaveStrings.eCopterSplash, TurnCopterOff);
+        EventManager.StopListening(SaveStrings.eEnterPlatform, EnterPlatform);
+        EventManager.StopListening(SaveStrings.eExitPlatform, ExitPlatform);
     }
 
 	// Use this for initialization

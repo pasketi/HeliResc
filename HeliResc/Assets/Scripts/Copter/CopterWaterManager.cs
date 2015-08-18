@@ -24,7 +24,7 @@ public class CopterWaterManager : Upgradable {
         Vector3 splashPos = new Vector3(playerCopter.transform.position.x, playerCopter.levelManager.getWaterLevel() + 0.5f);
         playerCopter.CreateGameObject(splashPrefab, splashPos, Quaternion.identity);
         playerCopter.SetInputActive(false);
-        EventManager.TriggerEvent("CopterSplash");
+        EventManager.TriggerEvent(SaveStrings.eCopterSplash);
     }
     protected override void GiveName() {
         name = "WaterManager";

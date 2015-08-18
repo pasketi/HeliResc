@@ -30,13 +30,13 @@ public class LevelManager : MonoBehaviour {
 	public int cargoSize = 2, cargoCrates = 0, levelAction = 0, maxActionsPerLevel = 0;
 
     void OnEnable() {
-        EventManager.StartListening("CopterExplode", CopterExploded);
-        EventManager.StartListening("CopterSplash", CopterSplashed);
+        EventManager.StartListening(SaveStrings.eCopterExplode, CopterExploded);
+        EventManager.StartListening(SaveStrings.eCopterSplash, CopterSplashed);
         EventManager.StartListening(SaveStrings.eEscape, backButton);
     }
     void OnDisable() {
-        EventManager.StopListening("CopterExplode", CopterExploded);
-        EventManager.StopListening("CopterSplash", CopterSplashed);
+        EventManager.StopListening(SaveStrings.eCopterExplode, CopterExploded);
+        EventManager.StopListening(SaveStrings.eCopterSplash, CopterSplashed);
         EventManager.StopListening(SaveStrings.eEscape, backButton);
     }
 

@@ -18,5 +18,12 @@ public class SaveStrings {
     //Event strings
     public static string eEscape = 			"Escape";
 	public static string eSelectCopter = 	"SelectCopter";
+    public static string eCopterExplode =   "CopterExplode";
+    public static string eCopterSplash =    "CopterSplash";
+    public static string eExitPlatform =    "ExitPlatform";
+    public static string eEnterPlatform =   "EnterPlatform";
+    public static string eFadeIn =          "FadeIn";
+    public static string eFadeOut =         "FadeOut";
+    public static string eHookDied =        "HookDied";
 
 }

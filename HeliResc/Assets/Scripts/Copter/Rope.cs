@@ -27,12 +27,12 @@ public class Rope : Upgradable {
 
 
     public override void RegisterListeners() {
-        EventManager.StartListening("CopterExplode", KillHook);
-        EventManager.StartListening("EnterPlatform", RestoreHook);
+        EventManager.StartListening(SaveStrings.eCopterExplode, KillHook);
+        EventManager.StartListening(SaveStrings.eEnterPlatform, RestoreHook);
     }
     public override void UnregisterListeners() {
-        EventManager.StopListening("CopterExplode", KillHook);
-        EventManager.StopListening("EnterPlatform", RestoreHook);
+        EventManager.StopListening(SaveStrings.eCopterExplode, KillHook);
+        EventManager.StopListening(SaveStrings.eEnterPlatform, RestoreHook);
     }
 
     public override void Init(Copter copter) {
@@ -159,7 +159,7 @@ public class Rope : Upgradable {
     public void KillHook() {                
         hook.GetComponent<LineRenderer>().enabled = false;
 		hookScript.tag = "Untagged";
-        EventManager.TriggerEvent("HookDied");
+        EventManager.TriggerEvent(SaveStrings.eHookDied);
         hasHook = false;
 		hookOut = false;
         hookJoint.enabled = false;              
