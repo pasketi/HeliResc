@@ -104,6 +104,7 @@ public class Level {
     public bool star3;
     public bool rubyFound;
     public bool unlocked;
+	public float levelTimeChallenge;
 
     public Level(string setName, int id) {
         this.setName = setName;
@@ -113,6 +114,8 @@ public class Level {
 
     public static Level Load(string setName, int id) {
         Level l = new Level(setName, id);
+
+		l.levelTimeChallenge = LevelHandler.GetLevelSet (setName).levelTimeChallenges [id];
 
         l.LoadInfo();
         if (setName == "Tutorial0" && id == 0)

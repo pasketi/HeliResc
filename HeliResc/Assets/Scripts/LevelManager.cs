@@ -8,6 +8,13 @@ public class LevelManager : MonoBehaviour {
 	private GameManager gameManager;
 	private GameObject copter;
 
+	public GameState gameState;								//Keeps track of the state of the game. Is the level in pregame, running or postgame
+	public float pregameTimer;								//How long should the pregame last
+	public float LevelTimer { get { return levelTimer; } }	//Getter for the level timer
+	private float levelTimer;								//The time when gamestate is changed to running
+
+
+
     private MissionObjectives objectives;
 
     private Copter copterScript;
@@ -35,6 +42,8 @@ public class LevelManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+		gameState = GameState.PreGame;
+
 		if (GameObject.Find("GameManager") != null){
 
 			gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -42,47 +51,45 @@ public class LevelManager : MonoBehaviour {
 			//copters = new GameObject[gameManager.getCopterAmount()];
 		}
 		crateAmount = countCrates();
-		//crateSize = getCrateScale();
 		actionsPerLevel = maxActionsPerLevel;
 		if (pauseScreen == null) pauseScreen = GameObject.Find("PauseScreen");
 		if (HUD == null) HUD = GameObject.Find("HUD");
 
         objectives = GameObject.Find("Objectives").GetComponent<MissionObjectives>();
-        objectives.OnGameOver += levelFinished;
-
-        //copter instantiate
+		        
+		//copter instantiate
         if (copterSpawnPoint == null) copterSpawnPoint = GameObject.Find ("CopterSpawn");
 		if (gameManager != null) copter = Instantiate (gameManager.CurrentCopter, copterSpawnPoint.transform.position, Quaternion.identity) as GameObject;
-		//else copter = Instantiate (copters[0], copterSpawnPoint.transform.position, Quaternion.identity) as GameObject;
+
 		copter.name = "Copter";
         copterScript = copter.GetComponent<Copter>();
         cargoSize = copterScript.cargo.maxCapacity;
         
 
 		resetCountdown = 3f;
-		//pauseScreen.SetActive(false);
-		//HUD.SetActive(true);
-
-
-
-		// We are SO sorry
-		//Application.targetFrameRate = 30;
+		if (GameObject.FindObjectOfType<TutorialScript> () == null) {
+			StartCoroutine (PreGame ());
+		}
 	}
 	
 	// Update is called once per frame
-	void Update () {		
-		if (win) {
-			if (!once) {
-
-				stars += 1;
-				if (!isDamageTaken()) stars += 1;
-				if (savedCrates == crateAmount) stars += 1;
-				once = true;
-                winLevel();
-			}
-			resetCountdown -= Time.deltaTime;
-			if (resetCountdown <= 0f) Application.LoadLevel ("MainMenu");
+	void Update () {
+		Debug.Log (gameState);
+		if (gameState.Equals (GameState.Running)) {
+			levelTimer += Time.deltaTime;
 		}
+        //if (win) {
+        //    if (!once) {
+
+        //        stars += 1;
+        //        if (!isDamageTaken()) stars += 1;
+        //        if (savedCrates == crateAmount) stars += 1;
+        //        once = true;
+        //        winLevel();
+        //    }
+        //    resetCountdown -= Time.deltaTime;
+        //    if (resetCountdown <= 0f) Application.LoadLevel ("MainMenu");
+        //}
         //if (lose) {
         //    resetCountdown -= Time.deltaTime;
         //    //if (GameObject.Find("Copter") != null) GameObject.Find("Copter").GetComponent<CopterManagerTouch>().isKill = true;
@@ -111,27 +118,104 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 
+	private IEnumerator PreGame() {
+		float deltaTime = Time.time;
+		float timer = pregameTimer;
+		while (timer > 0) {
+			timer -= (Time.time - deltaTime);
+			deltaTime = Time.time;
+			yield return null;
+		}
+		StartGame ();
+	}
+	private IEnumerator PostGame(bool passed) {
+        gameState = GameState.PostGame;
+        int endReason = EndReason.lose;
+
+        //Determine why the level ended        
+        if (passed == true && objectives.AllObjectiveCompleted())
+            endReason = EndReason.winner;
+        else if (passed == true && objectives.AnyObjectiveCompleted())
+            endReason = EndReason.passed;
+        else if (exploded == true)
+            endReason = EndReason.explode;
+        else if (splash == true)
+            endReason = EndReason.drowned;
+
+        LevelEndInfo end = new LevelEndInfo(passed, endReason);
+
+        end.level = LevelHandler.CurrentLevel;
+        end.itemsSaved = getSavedCrates();
+        end.Reward = reward;
+        end.levelTime = levelTimer;
+
+        LevelHandler.CompleteLevel(end.level);
+        
+        RubyScript ruby = GameObject.FindObjectOfType<RubyScript>();
+
+        if (ruby == null) Debug.LogError("Ruby not found");
+        else { end.rubyFound = ruby.found; }
+
+        if (objectives == null) Debug.LogError("Objectives not found");
+        else
+        {
+            end.obj1Passed = objectives.LevelObjective1();
+            end.obj2Passed = objectives.LevelObjective2();
+            end.obj3Passed = objectives.LevelObjective3();
+        }
+
+        float timer = resetCountdown;
+        float deltaTime = Time.time;
+        while (timer > 0) {
+            timer -= (Time.time - deltaTime);
+            deltaTime = Time.time;
+            yield return null;
+        }
+
+        gameManager.loadMainMenu(true, end, 2);
+	}
+
+	public void StartGame() {
+		gameState = GameState.Running;
+	}
+
+    private void CopterCrashed() {
+        lose = true;
+        StartCoroutine(PostGame(false));
+    }
     private void CopterExploded() { 
         lose = true;
 		exploded = true;
-        Invoke("loseLevel", resetCountdown);
+        StartCoroutine(PostGame(false));
     }
     private void CopterSplashed() { 
 		lose = true;
         splash = true;
-        Invoke("loseLevel", resetCountdown);
-    }    
+        StartCoroutine(PostGame(false));
+    }
 
-	public void levelFailed (int type) {
-		if (type == 1)
-			lose = true;
-		else if (type == 2)
-			splash = true;
-	}
+    public void winLevel()
+    {
+        StartCoroutine(PostGame(true));
+    }
 
-	public void levelPassed () {
-		win = true;
-	}
+    private void loseLevel()
+    {
+        //int loseCondition = 0;
+        //if (lose == true) loseCondition = EndReason.lose;
+        //if (splash == true) loseCondition = EndReason.drowned;
+        //if (exploded == true) loseCondition = EndReason.explode;
+
+
+        //LevelEndInfo end = new LevelEndInfo(false, loseCondition);
+        //end.level = LevelHandler.CurrentLevel;
+        //end.passedLevel = false;
+
+        //RubyScript ruby = GameObject.FindObjectOfType<RubyScript>();
+        //end.rubyFound = ruby.found;
+
+        //gameManager.loadMainMenu(true, end, 2);
+    }	
 
 	public bool allCratesCollected() {
 		return (savedCrates >= crateAmount);
@@ -141,12 +225,20 @@ public class LevelManager : MonoBehaviour {
 		if (!gamePaused) {
 			gamePaused = true;
 
+			if(gameState.Equals(GameState.Running)) {
+				gameState = GameState.Paused;
+			}
+
 			HUD.SetActive(false);
 			pauseScreen.SetActive(true);
 
 			Time.timeScale = 0f;
 		} else {
 			gamePaused = false;
+
+			if(gameState.Equals(GameState.Paused)) {
+				gameState = GameState.Running;
+			}
 
 			pauseScreen.SetActive(false);
 			HUD.SetActive(true);
@@ -171,57 +263,7 @@ public class LevelManager : MonoBehaviour {
 
 	public bool getPaused () {
 		return gamePaused;
-	}
-
-    private void levelFinished() {
-        winLevel();
-    }
-
-    public void pressFinishButton() {
-        winLevel();
-    }
-
-    private void winLevel() {
-
-        int condition = objectives.AllObjectiveCompleted() ? EndReason.winner : EndReason.passed;
-
-        LevelEndInfo end = new LevelEndInfo(true, condition);
-        end.level = LevelHandler.CurrentLevel;
-        end.itemsSaved = getSavedCrates();
-        end.Reward = reward;
-
-        LevelHandler.CompleteLevel(end.level);
-
-        RubyScript ruby = GameObject.FindObjectOfType<RubyScript>();
-
-        if (ruby == null) Debug.LogError("Ruby not found");
-        else { end.rubyFound = ruby.found; }
-        if (objectives == null) Debug.LogError("Objectives not found");
-        else {
-            end.obj1Passed = objectives.LevelObjective1();
-            end.obj2Passed = objectives.LevelObjective2();
-            end.obj3Passed = objectives.LevelObjective3();
-        }
-
-        gameManager.loadMainMenu(true, end, 2);
-    }
-
-    private void loseLevel() {
-        int loseCondition = 0;
-        if(lose == true) loseCondition = EndReason.lose;
-        if(splash == true) loseCondition = EndReason.drowned;
-		if (exploded == true) loseCondition = EndReason.explode;
-
-
-        LevelEndInfo end = new LevelEndInfo(false, loseCondition);
-		end.level = LevelHandler.CurrentLevel;
-		end.passedLevel = false;
-        
-		RubyScript ruby = GameObject.FindObjectOfType<RubyScript>();
-		end.rubyFound = ruby.found;
-
-		gameManager.loadMainMenu(true, end, 2);
-    }
+	}  
 
 	public void backToMainMenu () {
 		Time.timeScale = 1f;
@@ -285,4 +327,11 @@ public class LevelManager : MonoBehaviour {
 	public void useAction() {
 		actionsPerLevel--;
 	}
+}
+
+public enum GameState {
+	Running,
+	Paused,
+	PreGame,
+	PostGame
 }

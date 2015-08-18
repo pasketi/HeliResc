@@ -64,7 +64,9 @@ public class ObstacleManager : MonoBehaviour {
                     //other.gameObject.GetComponent<Copter>().health.TakeDamage(fixedDamageAmount);
                 }
             }
-            else GameObject.Find("LevelManagerO").GetComponent<LevelManager>().levelFailed(1);
+            else {
+                copter.Detonate();
+            }
 
             if (diesOnContact && deathAnimation != null)
                 Instantiate(deathAnimation, transform.position, Quaternion.identity);

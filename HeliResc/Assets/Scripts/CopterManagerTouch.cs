@@ -319,8 +319,8 @@ public class CopterManagerTouch : MonoBehaviour {
 			currentHealth += amount;
 			if (!manager.isDamageTaken ())
 				manager.damageTaken ();
-			if (currentHealth <= 0)
-				manager.levelFailed (1);
+            //if (currentHealth <= 0)
+            //    manager.levelFailed (1);
 			hitFlashTime = 0.25f;
 		} else if (amount > 0f) {
 			if (currentHealth < maxHealth)
@@ -408,9 +408,9 @@ public class CopterManagerTouch : MonoBehaviour {
 	}
 
 	public void useAction () {
-		if (manager.levelAction == 0)
-			manager.levelFailed (1);
-		else if (manager.levelAction == 1 && manager.getActionsLeft() >= 1) {
+        //if (manager.levelAction == 0)
+        //    manager.levelFailed (1);
+		if (manager.levelAction == 1 && manager.getActionsLeft() >= 1) {
 			manager.useAction();
 			tempActionObject = Instantiate (actionPrefab, hookAnchor.transform.position, Quaternion.identity) as GameObject;
 			tempActionObject.GetComponent<Rigidbody2D> ().AddForce (gameObject.GetComponent<Rigidbody2D> ().velocity);

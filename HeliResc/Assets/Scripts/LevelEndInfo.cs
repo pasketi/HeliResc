@@ -48,7 +48,7 @@ public class LevelEndInfo {
     public bool rubyFound;
 
 	public int endCondition;
-
+	public float levelTime;
     public bool passedLevel;
 
     private int reward;

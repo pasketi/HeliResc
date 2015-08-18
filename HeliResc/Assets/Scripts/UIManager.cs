@@ -11,6 +11,9 @@ public class UIManager : MonoBehaviour {
 
 	public bool refill = false;
 
+	private float levelTimeChallenge;
+
+	private Image clock;
 	private Image fuel, fuelBorder;
 	private Slider power;
 	private bool 	lowFuel = false;
@@ -31,11 +34,14 @@ public class UIManager : MonoBehaviour {
 
 		saved = transform.FindChild ("SavedBackground").FindChild ("Saved").GetComponent<Text> ();
 		cargo = transform.FindChild ("CargoBackground").FindChild ("Cargo").GetComponent<Text> ();
+		clock = transform.FindChild ("ImageClock").GetComponent<Image> ();
 		//action = transform.FindChild ("ActionBackground").FindChild ("Action").GetComponent<Text> ();
 		power = transform.FindChild ("PowerMeter").FindChild("Power").GetComponent<Slider> ();
 		fuel = transform.FindChild ("Fuel").GetComponent<Image> ();
 		fuelBorder = fuel.transform.FindChild ("FuelMeter").GetComponent<Image>();
 
+
+		levelTimeChallenge = LevelHandler.CurrentLevel.levelTimeChallenge;
         //if (manager.levelAction != 0) 
         //    transform.FindChild ("ActionBackground").FindChild ("IsKill").GetComponent<Button> ().onClick.AddListener(() => copter.UseAction ());
         //else
@@ -62,6 +68,7 @@ public class UIManager : MonoBehaviour {
         //    action.text = "";
 
         //}
+		clock.fillAmount = manager.LevelTimer / levelTimeChallenge;
 
 		if (manager.cargoCrates == manager.cargoSize)
 			cargo.color = red;
