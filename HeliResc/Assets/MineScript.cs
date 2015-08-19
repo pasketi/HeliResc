@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MineScript : MonoBehaviour {
+public class MineScript : MonoBehaviour, SoundObject {
     
-    public GameObject explosion;    
+    public GameObject explosion;
+
+    private AudioSource _audio;
+
+    void Start() {
+        _audio = GetComponent<AudioSource>();
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -30,10 +36,22 @@ public class MineScript : MonoBehaviour {
         foreach (Collider2D c in GetComponents<Collider2D>())
             c.enabled = false;
         ParticleSystem[] parts = GetComponentsInChildren<ParticleSystem>();
-        foreach (ParticleSystem p in parts)
-        {
+        foreach (ParticleSystem p in parts) {
             p.Play();
         }
+        PlaySound();
         explosion.SetActive(true);
+    }
+
+    public void Mute(bool mute)
+    {
+        if (_audio == null)
+            _audio = GetComponent<AudioSource>();
+        _audio.volume = mute ? 1 : 0;
+    }
+
+    public void PlaySound()
+    {
+        _audio.Play();
     }
 }

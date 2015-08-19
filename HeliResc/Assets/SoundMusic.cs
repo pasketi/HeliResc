@@ -3,42 +3,75 @@ using System.Collections;
 
 public class SoundMusic : MonoBehaviour {
 
-	public AudioSource music;
-	public AudioSource sounds;
-
-	public AudioClip copterSlam;
-	public AudioClip mineExplosion;
-	public AudioClip birdExplosion;
-	public AudioClip tucanScream;
-	public AudioClip waterSplash;
+    public static bool SoundMuted { get { return instance.soundMuted; } }
+    public static bool MusicMuted { get { return instance.musicMuted; } }
 
 	private static SoundMusic instance;
+    private bool soundMuted;
+    private bool musicMuted;
 
-	// Use this for initialization
-	void Start () {
-		instance = this;
-		DontDestroyOnLoad (gameObject);
-	}
-	
+    void OnLevelWasLoaded(int level) {        
+        MuteSoundObjects(soundMuted);
+        MuteMusicObjects(musicMuted);
+    }
+
+    void Awake() {
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        //Set music on or off
+        if (PlayerPrefs.HasKey(SaveStrings.sMusic))
+            musicMuted = PlayerPrefsExt.GetBool(SaveStrings.sMusic);
+        else
+        {
+            musicMuted = false;
+            PlayerPrefsExt.SetBool(SaveStrings.sMusic, musicMuted);
+        }
+
+        //Set sounds on or off
+        if (PlayerPrefs.HasKey(SaveStrings.sSounds))
+            soundMuted = PlayerPrefsExt.GetBool(SaveStrings.sSounds);
+        else
+        {
+            soundMuted = false;
+            PlayerPrefsExt.SetBool(SaveStrings.sSounds, soundMuted);
+        }
+    }
+
+    private void MuteMusicObjects(bool mute) {
+        MonoBehaviour[] objects = GameObject.FindObjectsOfType<MonoBehaviour>();
+        foreach (MonoBehaviour mono in objects) {
+            MusicObject mo = mono as MusicObject;
+            if (mo != null)
+                mo.Mute(mute);
+        }
+    }
+
+    private void MuteSoundObjects(bool mute) {
+        MonoBehaviour[] objects = GameObject.FindObjectsOfType<MonoBehaviour>();
+        foreach (MonoBehaviour mono in objects) {
+            SoundObject so = mono as SoundObject;
+            if (so != null)
+                so.Mute(mute);
+        }
+    }    
+
 	public static void MuteMusic(bool mute) {
+        instance.musicMuted = mute;
+        instance.MuteMusicObjects(mute);
+	}
+    public static void MuteSounds(bool mute) {
+        instance.soundMuted = mute;
+        instance.MuteSoundObjects(mute);
+    }	
+}
 
-	}
-	public static void MuteSounds(bool mute) {
+public interface MusicObject {
+    void Mute(bool mute);
+    void PlaySound(bool loop);
+}
 
-	}
-	public static void CopterSlam() {
-		instance.sounds.PlayOneShot (instance.copterSlam);
-	}
-	public static void MineExplosion() {
-		instance.sounds.PlayOneShot (instance.mineExplosion);
-	}
-	public static void BirdExplosion() {
-		instance.sounds.PlayOneShot (instance.birdExplosion);
-	}
-	public static void TucanScream() {
-		instance.sounds.PlayOneShot (instance.tucanScream);
-	}
-	public static void WaterSplash() {
-		instance.sounds.PlayOneShot (instance.waterSplash);
-	}
+public interface SoundObject {
+    void Mute(bool mute);
+    void PlaySound();
 }

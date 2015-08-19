@@ -67,6 +67,7 @@ public abstract class Copter : MonoBehaviour {
         gameManager = GameObject.FindObjectOfType<GameManager>();
 		unlocked = PlayerPrefsExt.GetBool (copterName + "Unlocked") || unlocked;
 
+
         UpdateMethod = NormalUpdate;
         
         copterSprite = GetComponent<SpriteRenderer>().sprite;

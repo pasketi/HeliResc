@@ -50,13 +50,15 @@ public class StartMenuScript : MonoBehaviour {
 
 		sounds = !sounds;
 		soundOff.SetActive (!sounds);
+        SoundMusic.MuteSounds(sounds);
 		PlayerPrefsExt.SetBool(SaveStrings.sSounds, sounds);
 	}
 	public void Music() {
 		//TODO when the sounds are implemented
 
 		music = !music;
-		musicOff.SetActive (!music);
+		musicOff.SetActive (!music);        //If music is on turn off the cross on the button
+        SoundMusic.MuteMusic(music);
 		PlayerPrefsExt.SetBool(SaveStrings.sMusic, music);
 	}
 }

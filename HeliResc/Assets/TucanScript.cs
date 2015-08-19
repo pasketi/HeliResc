@@ -2,11 +2,12 @@
 using System;
 using System.Collections;
 
-public class TucanScript : MonoBehaviour {
+public class TucanScript : MonoBehaviour, SoundObject {
 
     public float speed;
     public float patrolRange;
 
+    private AudioSource _audio;
     private Action Patrol = () => { };
 
     private Transform _transform;
@@ -19,8 +20,10 @@ public class TucanScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+        _audio = GetComponent<AudioSource>();
         _transform = transform;
         _rigidbody = GetComponent<Rigidbody2D>();
+
 
         rightTarget = _transform.position + new Vector3(patrolRange, 0);
         leftTarget = _transform.position - new Vector3(patrolRange, 0);        
@@ -38,6 +41,13 @@ public class TucanScript : MonoBehaviour {
         Patrol();
         //Rotation();
 	}
+
+    void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("Copter")) {
+            PlaySound();
+        }
+    }
+
     private void Rotation() {
         float angle = Vector3.Angle((target-_transform.position).normalized, Vector3.right * _transform.localScale.x);
         Debug.Log("Angle" + angle);
@@ -70,5 +80,15 @@ public class TucanScript : MonoBehaviour {
         if (_transform.position.x > rightTarget.x || Vector3.SqrMagnitude(direction) < 0.25f) {
             ChangeDirection(false);
         }
-    }    
+    }
+
+    public void Mute(bool mute) {
+        if (_audio == null)
+            _audio = GetComponent<AudioSource>();
+        _audio.volume = mute ? 1 : 0;
+    }
+
+    public void PlaySound() {
+        _audio.Play();
+    }
 }
