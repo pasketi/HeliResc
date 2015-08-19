@@ -55,7 +55,7 @@ public class LevelManager : MonoBehaviour {
 		if (pauseScreen == null) pauseScreen = GameObject.Find("PauseScreen");
 		if (HUD == null) HUD = GameObject.Find("HUD");
 
-        objectives = GameObject.Find("Objectives").GetComponent<MissionObjectives>();
+        objectives = GameObject.FindObjectOfType<MissionObjectives>();
 		        
 		//copter instantiate
         if (copterSpawnPoint == null) copterSpawnPoint = GameObject.Find ("CopterSpawn");
