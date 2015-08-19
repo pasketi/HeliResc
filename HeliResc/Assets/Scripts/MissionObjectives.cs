@@ -17,15 +17,18 @@ public class MissionObjectives : MonoBehaviour {
     public LevelObjective LevelObjective2;
     public LevelObjective LevelObjective3;
 
+    private LevelManager manager;
+
     //Dictionary for all the different objectives.
     private Dictionary<Objective, LevelObjective> objectiveMethods;
 
     void Start() {
+        manager = GameObject.FindObjectOfType<LevelManager>();
+
         objectiveMethods = new Dictionary<Objective, LevelObjective>();
         objectiveMethods.Add(Objective.GetItems, GetItems);
-        objectiveMethods.Add(Objective.NoDamage, NoDamage);
         objectiveMethods.Add(Objective.PassLevel, PassLevel);
-        objectiveMethods.Add(Objective.HitTrigger, HitTrigger);
+        objectiveMethods.Add(Objective.Time, TimeChallenge);
 
         LevelObjective1 = objectiveMethods[Objective1];
         LevelObjective2 = objectiveMethods[Objective2];
@@ -33,28 +36,17 @@ public class MissionObjectives : MonoBehaviour {
 
     }    
 
-    public bool GetItems()
-    {
-		LevelManager manager = GameObject.FindObjectOfType<LevelManager>();
+    public bool GetItems() {
 		return manager.allCratesCollected ();
-    }
-
-    public bool NoDamage()
-    {
-        //TODO        
-        return false;
     }
 
     public bool PassLevel() {
         return true;
     }
 
-    public bool HitTrigger() {
-        ObjectiveTrigger[] triggers = GameObject.FindObjectsOfType<ObjectiveTrigger>();
-        if (triggers.Length == 1)
-            return triggers[0].triggered;
-        return false;
-    }    
+    public bool TimeChallenge() {
+        return LevelHandler.CurrentLevel.levelTimeChallenge > manager.LevelTimer && GetItems();
+    }
 
     public LevelObjective GetMethod(Objective o) {
         return objectiveMethods[o];
@@ -70,8 +62,6 @@ public class MissionObjectives : MonoBehaviour {
 }
 public enum Objective {
     GetItems,
-    NoDamage,
     PassLevel,
-    HitTrigger,
-    Tutorial
+    Time
 }

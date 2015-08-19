@@ -43,7 +43,7 @@ public class LandingPadManager : MonoBehaviour {
 			EventManager.TriggerEvent(SaveStrings.eEnterPlatform);
 
 			if (canWin == true) { 
-                bool win = objectives.AllObjectiveCompleted();                
+                bool win = objectives.AnyObjectiveCompleted();
                 if (win == true)
                     manager.winLevel();
 			}            

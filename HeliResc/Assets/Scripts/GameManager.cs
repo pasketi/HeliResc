@@ -24,9 +24,11 @@ public class GameManager : MonoBehaviour {
 	private int playerStars;
 	private int playerCoins;
 
+    private static GameManager instance;
 
 
-	void Awake(){
+	void Awake() {
+        instance = this;
 		DontDestroyOnLoad(gameObject);
         wallet = SaveLoad.LoadWallet();
 	}
@@ -68,7 +70,7 @@ public class GameManager : MonoBehaviour {
 
         if (level == 1 && !PlayerPrefs.HasKey("FirstLogin")) {
             PlayerPrefsExt.SetBool("FirstLogin", true);
-            Application.LoadLevel("GameStory");
+            GameManager.LoadLevel("GameStory");
             return;
         }
         if (level == 1 && showLevelEnd) {
@@ -107,12 +109,20 @@ public class GameManager : MonoBehaviour {
 	
 	public void startGame (string levelName) {		
 		save ();
-		Application.LoadLevel(levelName);
+        GameManager.LoadLevel(levelName);
 	}
 
 	public static void LoadLevel(string level) {
-		Application.LoadLevel (level);
+        instance.StartLevel(level);
 	}
+    public void StartLevel(string level) {
+        StartCoroutine(LoadLevelAsync(level));
+    }
+    public IEnumerator LoadLevelAsync(string level) {
+        AsyncOperation async = Application.LoadLevelAsync(level);
+        yield return async;
+        Debug.Log("Loading level " + level + " done");
+    }
 
     public void GameOver() { }
 
@@ -125,7 +135,7 @@ public class GameManager : MonoBehaviour {
 
         }
 		currentMenu = menu;
-		Application.LoadLevel("MainMenu");
+		GameManager.LoadLevel("MainMenu");
 	}
 	public Dictionary<int, CopterInfo> GetCopterInfo() {
 		foreach (CopterInfo i in CopterInfos.Values) {

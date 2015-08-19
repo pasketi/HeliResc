@@ -47,8 +47,8 @@ public class IntroScreenScript : MonoBehaviour {
 		GameManager.LoadLevel (LevelHandler.CurrentLevel.name);
 	}
 
-	public void PressBack() {		
-    	Application.LoadLevel ("LevelMap");
+	public void PressBack() {
+        GameManager.LoadLevel("LevelMap");
 	}
 
     [System.Serializable]

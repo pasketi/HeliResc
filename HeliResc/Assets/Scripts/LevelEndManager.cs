@@ -7,6 +7,8 @@ public class LevelEndManager : MonoBehaviour {
 
 	private GameManager gameManager;
 
+    public Text debugTime;
+
 	public Image star1, star2, star3;
     public Image rubyImage;
 
@@ -101,7 +103,8 @@ public class LevelEndManager : MonoBehaviour {
         {
             rubyImage.enabled = false;
         }
-        
+
+        debugTime.text = "Time spent: " + levelEnd.levelTime;
 
         StartCoroutine(Animations(levelEnd.rubyFound));
 		Level.Save (level);
@@ -145,11 +148,11 @@ public class LevelEndManager : MonoBehaviour {
     }
 
     public void PressRestart() {
-        Application.LoadLevel(level.name);
+        GameManager.LoadLevel(level.name);
     }
 
     public void PressLevelMap() {
-        Application.LoadLevel("LevelMap");
+        GameManager.LoadLevel("LevelMap");
     }
 
 }

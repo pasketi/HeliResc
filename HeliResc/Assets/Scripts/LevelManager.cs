@@ -180,18 +180,24 @@ public class LevelManager : MonoBehaviour {
 	}
 
     private void CopterCrashed() {
-        lose = true;
-        StartCoroutine(PostGame(false));
+        if (gameState.Equals(GameState.Running)) {
+            lose = true;
+            StartCoroutine(PostGame(false));
+        }
     }
-    private void CopterExploded() { 
-        lose = true;
-		exploded = true;
-        StartCoroutine(PostGame(false));
+    private void CopterExploded() {
+        if (gameState.Equals(GameState.Running)) {
+            lose = true;
+            exploded = true;
+            StartCoroutine(PostGame(false));
+        }
     }
-    private void CopterSplashed() { 
-		lose = true;
-        splash = true;
-        StartCoroutine(PostGame(false));
+    private void CopterSplashed() {
+        if (gameState.Equals(GameState.Running)) {
+            lose = true;
+            splash = true;
+            StartCoroutine(PostGame(false));
+        }
     }
 
     public void winLevel()
@@ -248,7 +254,7 @@ public class LevelManager : MonoBehaviour {
 	}
     public void backButton() {
         if (gamePaused == true) {
-            Application.LoadLevel("LevelMap");
+            GameManager.LoadLevel("LevelMap");
         } else {
             pause();
         }
@@ -271,7 +277,7 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void Reset() {
-		Application.LoadLevel(Application.loadedLevelName);
+        GameManager.LoadLevel(Application.loadedLevelName);
 	}
 
 	private int countCrates (){

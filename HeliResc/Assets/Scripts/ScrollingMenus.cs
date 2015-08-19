@@ -141,7 +141,7 @@ public class ScrollingMenus : MonoBehaviour {
 
 				menuPanel.position = target;
                 if (current == (menus.Count - 1))
-                    Application.LoadLevel("LevelMap");
+                    GameManager.LoadLevel("LevelMap");
 			}
 		}
 	}
@@ -189,6 +189,6 @@ public class ScrollingMenus : MonoBehaviour {
         StartCoroutine(SetMoneyPanelPosition());
     }
     public void ShowLevelMap() {
-        Application.LoadLevel("LevelMap");
+        GameManager.LoadLevel("LevelMap");
     }
 }
