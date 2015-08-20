@@ -8,12 +8,7 @@ public class SoundMusic : MonoBehaviour {
 
 	private static SoundMusic instance;
     private bool soundMuted;
-    private bool musicMuted;
-
-    void OnLevelWasLoaded(int level) {        
-        MuteSoundObjects(soundMuted);
-        MuteMusicObjects(musicMuted);
-    }
+    private bool musicMuted;    
 
     void Awake() {
         instance = this;
@@ -38,40 +33,12 @@ public class SoundMusic : MonoBehaviour {
         }
     }
 
-    private void MuteMusicObjects(bool mute) {
-        MonoBehaviour[] objects = GameObject.FindObjectsOfType<MonoBehaviour>();
-        foreach (MonoBehaviour mono in objects) {
-            MusicObject mo = mono as MusicObject;
-            if (mo != null)
-                mo.Mute(mute);
-        }
-    }
-
-    private void MuteSoundObjects(bool mute) {
-        MonoBehaviour[] objects = GameObject.FindObjectsOfType<MonoBehaviour>();
-        foreach (MonoBehaviour mono in objects) {
-            SoundObject so = mono as SoundObject;
-            if (so != null)
-                so.Mute(mute);
-        }
-    }    
-
 	public static void MuteMusic(bool mute) {
         instance.musicMuted = mute;
-        instance.MuteMusicObjects(mute);
+        PlayerPrefsExt.SetBool(SaveStrings.sMusic, mute);
 	}
     public static void MuteSounds(bool mute) {
         instance.soundMuted = mute;
-        instance.MuteSoundObjects(mute);
+        PlayerPrefsExt.SetBool(SaveStrings.sSounds, mute);
     }	
-}
-
-public interface MusicObject {
-    void Mute(bool mute);
-    void PlaySound(bool loop);
-}
-
-public interface SoundObject {
-    void Mute(bool mute);
-    void PlaySound();
 }

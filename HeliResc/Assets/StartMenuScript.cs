@@ -7,58 +7,43 @@ public class StartMenuScript : MonoBehaviour {
 	public GameObject soundOff;
 	public GameObject musicOff;
 
-    private bool autoHoover;
-	private bool sounds;
-	private bool music;
+    private bool autoHooverOn;
+	private bool soundMuted;
+	private bool musicMuted;
 
     void Start() {
 		//Set autohoover on or off
-        if (PlayerPrefs.HasKey(SaveStrings.sAutoHoover)) autoHoover = PlayerPrefsExt.GetBool(SaveStrings.sAutoHoover);        
+        if (PlayerPrefs.HasKey(SaveStrings.sAutoHoover)) autoHooverOn = PlayerPrefsExt.GetBool(SaveStrings.sAutoHoover);        
         else { 
-            autoHoover = true;
-            PlayerPrefsExt.SetBool(SaveStrings.sAutoHoover, autoHoover);
+            autoHooverOn = true;
+            PlayerPrefsExt.SetBool(SaveStrings.sAutoHoover, autoHooverOn);
         }
 
-		//Set music on or off
-		if (PlayerPrefs.HasKey (SaveStrings.sMusic))
-			music = PlayerPrefsExt.GetBool (SaveStrings.sMusic);
-		else {
-			music = true;
-			PlayerPrefsExt.SetBool(SaveStrings.sMusic, music);
-		}
+        musicMuted = SoundMusic.MusicMuted;
+        soundMuted = SoundMusic.SoundMuted;
 
-		//Set sounds on or off
-		if (PlayerPrefs.HasKey (SaveStrings.sSounds))
-			sounds = PlayerPrefsExt.GetBool (SaveStrings.sSounds);
-		else {
-			sounds = true;
-			PlayerPrefsExt.SetBool(SaveStrings.sSounds, sounds);
-		}
-
-		autoHooverOff.SetActive (!autoHoover);
-		soundOff.SetActive (!sounds);
-		musicOff.SetActive (!music);
+		autoHooverOff.SetActive (!autoHooverOn);
+		soundOff.SetActive (soundMuted);
+		musicOff.SetActive (musicMuted);
     }
 
     public void AutoHoover() {
-        autoHoover = !autoHoover;
-		autoHooverOff.SetActive (!autoHoover);
-        PlayerPrefsExt.SetBool(SaveStrings.sAutoHoover, autoHoover);
+        autoHooverOn = !autoHooverOn;
+		autoHooverOff.SetActive (!autoHooverOn);
+        PlayerPrefsExt.SetBool(SaveStrings.sAutoHoover, autoHooverOn);
     }
 	public void Sounds() {
 		//TODO when the sounds are implemented
 
-		sounds = !sounds;
-		soundOff.SetActive (!sounds);
-        SoundMusic.MuteSounds(sounds);
-		PlayerPrefsExt.SetBool(SaveStrings.sSounds, sounds);
+        soundMuted = !soundMuted;
+        soundOff.SetActive(soundMuted);
+        SoundMusic.MuteSounds(soundMuted);
 	}
 	public void Music() {
 		//TODO when the sounds are implemented
 
-		music = !music;
-		musicOff.SetActive (!music);        //If music is on turn off the cross on the button
-        SoundMusic.MuteMusic(music);
-		PlayerPrefsExt.SetBool(SaveStrings.sMusic, music);
+		musicMuted = !musicMuted;
+		musicOff.SetActive (musicMuted);        //If music is on turn off the cross on the button
+        SoundMusic.MuteMusic(musicMuted);
 	}
 }
