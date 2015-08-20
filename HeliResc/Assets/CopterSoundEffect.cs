@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WaterSplash : MonoBehaviour, SoundObject {
+public class CopterSoundEffect : MonoBehaviour, SoundObject {
 
     private AudioSource _audio;
 
