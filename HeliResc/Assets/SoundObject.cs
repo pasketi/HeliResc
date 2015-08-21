@@ -19,7 +19,10 @@ public class SoundObject : MonoBehaviour {
 
         _audio.loop = loopable;
         if (loopable == true)
-            PlaySound();
+        {
+            _audio.clip = clips[0];
+            _audio.Play();
+        }
 	}
 
     void OnTriggerEnter2D(Collider2D other) {

@@ -26,6 +26,7 @@ public class LevelEndManager : MonoBehaviour {
 	public Sprite unlockedStar;
 	public Sprite lockedStar;
     public Sprite unlockedRuby;
+    public Sprite unlockedSapphire;
 
 	private LevelEndInfo levelEnd;
     private Level level;
@@ -97,7 +98,7 @@ public class LevelEndManager : MonoBehaviour {
 
         if (levelEnd.rubyFound == true)
         {
-            rubyImage.sprite = unlockedRuby;
+            rubyImage.sprite = levelEnd.sapphireFound ? unlockedSapphire : unlockedRuby;
         }
         else
         {

@@ -46,6 +46,7 @@ public class LevelEndInfo {
     public bool obj2Passed;
     public bool obj3Passed;
     public bool rubyFound;
+    public bool sapphireFound;
 
 	public int endCondition;
 	public float levelTime;

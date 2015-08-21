@@ -154,7 +154,10 @@ public class LevelManager : MonoBehaviour {
         RubyScript ruby = GameObject.FindObjectOfType<RubyScript>();
 
         if (ruby == null) Debug.LogError("Ruby not found");
-        else { end.rubyFound = ruby.found; }
+        else { 
+            end.rubyFound = ruby.found;
+            end.sapphireFound = ruby.found && ruby.IsSapphire;
+        }
 
         if (objectives == null) Debug.LogError("Objectives not found");
         else
