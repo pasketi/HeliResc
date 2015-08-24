@@ -14,6 +14,7 @@ public class SaveStrings {
 	public static string sPlayerRubies = 		"PlayerRubies";
 	public static string sCurrentLevelSet = 	"CurrentSet";
 	public static string sCurrentLevelIndex =	"CurrentLevel";
+    public static string sLevelSetUnlock =      "SetUnlockedAnim";
     
     //Event strings
     public static string eEscape = 			"Escape";

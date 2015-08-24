@@ -37,11 +37,11 @@ public class FireworksController : MonoBehaviour {
         return null;
     }
 
-    private void Launch() {
+    public void Launch() {
         StartCoroutine(Launcher());
     }
 
-    private IEnumerator Launcher() {
+    public IEnumerator Launcher() {
         Vector3 vec = Camera.main.ScreenToWorldPoint(0.5f * (new Vector3(Screen.width, Screen.height)));
         ParticleSystem ps = PopFromList();
         float rangeX = range * Screen.width / Screen.height;

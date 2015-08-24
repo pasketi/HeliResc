@@ -52,8 +52,10 @@ public class LevelHandler : MonoBehaviour {
         if (name.Equals(""))
             name = instance.currentSet;
         foreach (LevelSet s in instance.LevelSets) {
-            if (s.levelSetName.Equals(name))
+            if (s.levelSetName.Equals(name)) {
+                s.Load();
                 return s;
+            }
         }
         return null;
     }

@@ -12,9 +12,11 @@ public class LevelMapButtonSizeScript : MonoBehaviour {
 
 		float size = GameObject.FindObjectOfType<LevelMapScript> ().size;
 
-		v /= size;
+		//v /= size;
 
-		r.anchorMin -= v * (.5f);
-		r.anchorMax = r.anchorMin + v;
+        r.sizeDelta = new Vector2(Screen.width * v.x, Screen.height * v.y);
+
+		//r.anchorMin -= v * (.5f);
+		//r.anchorMax = r.anchorMin + v;
 	}
 }

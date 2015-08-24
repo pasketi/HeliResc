@@ -5,11 +5,13 @@ using System.Collections.Generic;
 
 public class LevelSetHandler : MonoBehaviour {
 
+    public GameObject fireworksPrefab;
     public GameObject lockedPanel;
     public GameObject buttonPrefab; //Prefab of a button to open levels    
     public Image setImage;          //The image UI-component in the middle of the button set
     public string setName;
-    
+
+    public LevelSet Set { get { return set; } }
     private LevelSet set;            //The kind of set the group has
 
     void Start() {
@@ -18,7 +20,7 @@ public class LevelSetHandler : MonoBehaviour {
 
         int playerStars = PlayerPrefs.GetInt(SaveStrings.sPlayerStars);
 
-        if (playerStars >= set.neededStars && set.unlocked) {
+        if (playerStars >= set.neededStars && set.unlocked && set.animated == true) {
             SetUnlocked();
         }
         else {
@@ -32,7 +34,6 @@ public class LevelSetHandler : MonoBehaviour {
 
         Text starText = lockedPanel.GetComponentInChildren<Text>();
         starText.text = playerStars + "/" + set.neededStars;
-        Debug.Log("Text: " + (starText == null));
     }
 
     private void SetUnlocked() {
@@ -68,18 +69,29 @@ public class LevelSetHandler : MonoBehaviour {
 		RectTransform rect = GetComponent<RectTransform>();
 
 		//Depending on the aspect ratio set the circle's radius from the rectangle's width or height
-		float h = ((rect.anchorMax.y - rect.anchorMin.y) * Screen.height);
-		float w = ((rect.anchorMax.x - rect.anchorMin.x) * Screen.width);
+        float h = rect.sizeDelta.y; //((rect.anchorMax.y - rect.anchorMin.y) * Screen.height);
+        float w = rect.sizeDelta.x; //((rect.anchorMax.x - rect.anchorMin.x) * Screen.width);
 		if (h <= w) {
-			height = (h * 0.5f * mapSize) * .99451f;
+			height = (h * 0.5f) * .99451f;
 		} else {
-			height = (w * 0.5f * mapSize) * .99451f;
+			height = (w * 0.5f) * .99451f;
 		}
 
 
 		vec *= (height);		 
 
         return transform.position + vec;
+    }
+
+    public void OpenSetFirstTime() {
+        set.animated = true;
+        set.Save();
+        StartCoroutine(UnlockFirstTime());
+    }
+    private IEnumerator UnlockFirstTime() {
+        yield return new WaitForSeconds(2);           
+        SetUnlocked();
+
     }
 }
 
@@ -92,6 +104,7 @@ public class LevelSet {
 	public int neededStars;			//How many stars is required to open the set
     public int setIndex;            //the index of the set in the list of level sets
     public bool unlocked;           //Is the set unlocked
+    public bool animated;           //Has the animation been played
 
     public string challenge1;
     public string challenge2;
@@ -100,8 +113,10 @@ public class LevelSet {
 
     public void Save() {
         PlayerPrefsExt.SetBool(levelSetName + "Set", unlocked);
+        PlayerPrefsExt.SetBool(levelSetName + "Animation", animated);
     }
     public void Load() {
         unlocked = PlayerPrefsExt.GetBool(levelSetName + "Set") || unlocked;
+        animated = PlayerPrefsExt.GetBool(levelSetName + "Animation") || animated;
     }
 }

@@ -52,6 +52,8 @@ public class SoundObject : MonoBehaviour {
     {
         if (clips == null || clips.Length <= 0)
             Debug.LogError("audio clips not set");
+        if (_audio == null)
+            _audio = GetComponent<AudioSource>();
 
         AudioClip c = clips[Random.Range(0, clips.Length)];
         _audio.PlayOneShot(c);
