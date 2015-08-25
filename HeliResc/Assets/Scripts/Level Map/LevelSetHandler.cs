@@ -14,7 +14,7 @@ public class LevelSetHandler : MonoBehaviour {
     public LevelSet Set { get { return set; } }
     private LevelSet set;            //The kind of set the group has
 
-    void Start() {
+    void Start() {        
 
         set = LevelHandler.GetLevelSet(setName);
 
@@ -54,34 +54,7 @@ public class LevelSetHandler : MonoBehaviour {
             setImage.enabled = false;
         else
             setImage.sprite = set.setImage;
-    }
-
-    private Vector3 CalculateButtonPosition(int index, float mapSize) {
-        Vector3 vec = new Vector2();
-        float angle = (360f / set.levelAmount) * index * Mathf.Deg2Rad;
-
-        float x = Mathf.Sin(angle);
-        float y = Mathf.Cos(angle);       
-
-        vec.x = x;
-        vec.y = y;
-		float height = 0;
-		RectTransform rect = GetComponent<RectTransform>();
-
-		//Depending on the aspect ratio set the circle's radius from the rectangle's width or height
-        float h = rect.sizeDelta.y; //((rect.anchorMax.y - rect.anchorMin.y) * Screen.height);
-        float w = rect.sizeDelta.x; //((rect.anchorMax.x - rect.anchorMin.x) * Screen.width);
-		if (h <= w) {
-			height = (h * 0.5f) * .99451f;
-		} else {
-			height = (w * 0.5f) * .99451f;
-		}
-
-
-		vec *= (height);		 
-
-        return transform.position + vec;
-    }
+    }    
 
     public void OpenSetFirstTime() {
         set.animated = true;
@@ -89,9 +62,55 @@ public class LevelSetHandler : MonoBehaviour {
         StartCoroutine(UnlockFirstTime());
     }
     private IEnumerator UnlockFirstTime() {
-        yield return new WaitForSeconds(2);           
-        SetUnlocked();
+        setImage.enabled = true;
+        lockedPanel.SetActive(false);
 
+        float mapSize = GameObject.FindObjectOfType<LevelMapScript>().size;
+        
+        for (int i = 0; i < set.levelAmount; i++)
+        {
+            GameObject go = Instantiate(buttonPrefab) as GameObject;
+            go.transform.SetParent(transform);
+            LevelButtonHandler handler = go.GetComponent<LevelButtonHandler>();
+            handler.Init(i, set);
+
+            StartCoroutine(handler.SetPositionAnimated(CalculateButtonPosition(i, mapSize)));
+        }
+        if (set.setImage == null)
+            setImage.enabled = false;
+        else
+            setImage.sprite = set.setImage;
+        yield return null;
+
+    }
+    private Vector3 CalculateButtonPosition(int index, float mapSize) {
+        Vector3 vec = new Vector2();
+        float angle = (360f / set.levelAmount) * index * Mathf.Deg2Rad;
+
+        float x = Mathf.Sin(angle);
+        float y = Mathf.Cos(angle);
+
+        vec.x = x;
+        vec.y = y;
+        float height = 0;
+        RectTransform rect = GetComponent<RectTransform>();
+
+        //Depending on the aspect ratio set the circle's radius from the rectangle's width or height
+        float h = rect.sizeDelta.y; //((rect.anchorMax.y - rect.anchorMin.y) * Screen.height);
+        float w = rect.sizeDelta.x; //((rect.anchorMax.x - rect.anchorMin.x) * Screen.width);
+        if (h <= w)
+        {
+            height = (h * 0.5f) * .99451f;
+        }
+        else
+        {
+            height = (w * 0.5f) * .99451f;
+        }
+
+
+        vec *= (height);
+        return vec;
+        //return transform.position + vec;
     }
 }
 

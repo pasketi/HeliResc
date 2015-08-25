@@ -42,8 +42,29 @@ public class LevelButtonHandler : MonoBehaviour {
     public void SetPosition(Vector3 position) {
         RectTransform rect = GetComponent<RectTransform>();
 
-        transform.position = position;
+
+        rect.anchoredPosition = position;
+        //transform.position = position;
 		rect.sizeDelta = new Vector2 (size.x * Screen.width, size.y * Screen.height);
+    }
+
+    public IEnumerator SetPositionAnimated(Vector3 end) {
+        RectTransform rect = GetComponent<RectTransform>();
+        rect.sizeDelta = new Vector2(size.x * Screen.width, size.y * Screen.height);
+        
+        Vector2 dir = end.normalized;               //Assign the direction the button will move to
+        rect.anchoredPosition = Vector2.zero;       //Make sure the button starts from the middle of the set
+        Vector2 start = rect.anchoredPosition;      //Note the start position so in the while loop it can be compared
+        float dist = Vector2.Distance(start, end);  //The distance from the middle of set to the buttons final position. The amount is in pixels
+
+
+        while(Vector2.Distance(rect.anchoredPosition, start) <= dist) {
+            rect.anchoredPosition += (dir * dist * Time.deltaTime);
+            yield return null;
+        }
+
+        rect.anchoredPosition = end;
+        
     }
 
 	public void LoadLevel() {

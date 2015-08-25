@@ -22,6 +22,33 @@ public class LevelMapScript : MonoBehaviour {
 		SetScrollRectPosition ();
 	}
 
+    public IEnumerator MoveToNextSet(RectTransform start, RectTransform end, float time) {
+        
+        RectTransform rect = GetComponent<RectTransform>();
+        Vector2 startingPoint = rect.anchoredPosition;
+        Vector2 dir = (end.anchoredPosition - start.anchoredPosition).normalized;
+        Vector2 range = new Vector2(Screen.width, Screen.height);
+        float dist = Vector2.Distance(start.anchoredPosition, end.anchoredPosition);
+        float travelled = 0;
+        float step = dist / time;        
+
+        while (travelled < dist) {
+            travelled += step * Time.deltaTime;
+
+            Vector2 newPos = rect.anchoredPosition - (dir * step * Time.deltaTime);
+            newPos.x = Mathf.Clamp(newPos.x, 0, range.x);
+		    newPos.y = Mathf.Clamp(newPos.y, 0, range.y);
+
+            rect.anchoredPosition = newPos;
+            yield return null;
+        }
+
+        Vector2 vec = startingPoint - (dir * dist);
+        vec.x = Mathf.Clamp(vec.x, 0, range.x);
+        vec.y = Mathf.Clamp(vec.y, 0, range.y);
+        rect.anchoredPosition = vec;
+    }
+
 	private void SetScrollRectPosition() {
 		RectTransform rect = GetComponent<RectTransform> ();
 		LevelSetHandler[] sets = GameObject.FindObjectsOfType<LevelSetHandler> ();
@@ -36,13 +63,13 @@ public class LevelMapScript : MonoBehaviour {
 			}
 		}
 
-		Vector3 range = new Vector3(Screen.width, Screen.height) * 0.5f;
+		Vector3 range = new Vector3(Screen.width, Screen.height);
 
-		Vector3 newPos = (-target.localPosition);
+		Vector3 newPos = (-target.localPosition) + (range * 0.5f);
 		//Debug.Log ("New pos: " + newPos);
 
-		newPos.x = Mathf.Clamp(newPos.x, -range.x, range.x);
-		newPos.y = Mathf.Clamp(newPos.y, -range.y, range.y);
+		newPos.x = Mathf.Clamp(newPos.x, 0, range.x);
+		newPos.y = Mathf.Clamp(newPos.y, 0, range.y);
 
 		//Debug.Log ("New pos: " + newPos);
 

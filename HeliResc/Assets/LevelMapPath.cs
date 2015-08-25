@@ -34,13 +34,9 @@ public class LevelMapPath : MonoBehaviour {
         if (endPoint.sizeDelta.y < endPointRadius) endPointRadius = endPoint.sizeDelta.y;
         endPointRadius *= .5f;
 
-        startPosition = new Vector3();
-        startPosition.x = (startPoint.anchorMin.x - .5f) * screen.x;
-        startPosition.y = (startPoint.anchorMin.y - .5f) * screen.y;
+        startPosition = startPoint.anchoredPosition;
 
-        endPosition = new Vector3();
-        endPosition.x = (endPoint.anchorMin.x - .5f) * screen.x;
-        endPosition.y = (endPoint.anchorMin.y - .5f) * screen.y;
+        endPosition = endPoint.anchoredPosition;
 
         direction = (endPosition - startPosition).normalized;
         startPosition += direction * (startPointRadius + pathInterval);
@@ -70,6 +66,12 @@ public class LevelMapPath : MonoBehaviour {
         }
     }
     private IEnumerator SetUnlockedAnimated(LevelSetHandler set) {
+
+        float speed = 6;
+        float time = (1 / speed) * amount;
+
+        StartCoroutine(GameObject.FindObjectOfType<LevelMapScript>().MoveToNextSet(startPoint, endPoint, time));
+
         for (int i = 0; i < amount; i++) {
             GameObject go = Instantiate(pathBallPrefab) as GameObject;
             RectTransform r = go.transform as RectTransform;
@@ -77,22 +79,20 @@ public class LevelMapPath : MonoBehaviour {
             r.localScale = Vector3.one;
 
             Vector3 pos = startPosition + direction * pathInterval * i;
-            r.localPosition = pos;
+            r.anchoredPosition = pos;
 
-            yield return StartCoroutine(AnimateAlpha(go.GetComponent<Image>()));
+            yield return StartCoroutine(AnimateAlpha(go.GetComponent<Image>(), speed));
 
         }
         set.OpenSetFirstTime();
     }
 
-    private IEnumerator AnimateAlpha(Image image) {
+    private IEnumerator AnimateAlpha(Image image, float speed) {
         Color c = image.color;
         c.a = 0;
         image.color = c;
 
-        image.GetComponent<SoundObject>().PlaySound();
-
-        float speed = 6;
+        image.GetComponent<SoundObject>().PlaySound();        
 
         while (image.color.a < 1) {
             c = image.color;
