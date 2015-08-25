@@ -16,8 +16,9 @@ public class CameraManager : MonoBehaviour {
 	
 	private float slowDamp = 2.1f, //camre moves slow if copter moves slow
 	fastDamp = 0.35f, //short dump time needed when copter takes fast action
-	fastVelosity = 4.5f, //velocity that is concidered to be fast
-	cameraFront = 3f; //how much camera is forvard from copter's x positon
+	slowVelosity = 1f, //velocity that is concidered to be slow (use slowDump in lower speed)
+	fastVelosity = 4.5f, //velocity that is concidered to be fast (use fastDump with higher speed)
+	cameraFront = 3.5f; //how much camera is forvard from copter's x positon
 	private bool cameraMovingRight = false, //true if the copter and the camera is moving the same direction, false if copter change its flying direction.
 	cameraMovingLeft = false;
 	private Rigidbody2D copterRb;		//Reference to the copters rigidbody to access its velocity
@@ -77,11 +78,17 @@ public class CameraManager : MonoBehaviour {
 				cameraMovingLeft = false; //Stop moving wrong way
 			}
 			//Should camera be moved fast?
-			if (Mathf.Abs(vel.x) > fastVelosity) {
+			if (Mathf.Abs(vel.x) > slowVelosity) {
+				if (Mathf.Abs(vel.x) > fastVelosity) {
 				//Move camera fast to get to the copter
 				dampTime = fastDamp;
+				}else{
+					//copter is moving within mid range velosity
+					//get suitable dampTime
+					dampTime = fastDamp+((slowDamp-fastDamp)*(1-((Mathf.Abs(vel.x)-slowVelosity)/(fastVelosity-slowVelosity))));
+				}
 			}else{
-				//Everyting is fine. Set normal speed.
+				//the copter nearly moves. No need to hurry with the camera
 				dampTime = slowDamp;
 			}
 		}
