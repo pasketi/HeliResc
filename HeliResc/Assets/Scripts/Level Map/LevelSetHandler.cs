@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public class LevelSetHandler : MonoBehaviour {
 
-    public GameObject fireworksPrefab;
     public GameObject lockedPanel;
     public GameObject buttonPrefab; //Prefab of a button to open levels    
     public Image setImage;          //The image UI-component in the middle of the button set
@@ -14,13 +13,16 @@ public class LevelSetHandler : MonoBehaviour {
     public LevelSet Set { get { return set; } }
     private LevelSet set;            //The kind of set the group has
 
-    void Start() {        
+    void Start() {
+
+        RectTransform rect = GetComponent<RectTransform>();
+        rect.anchoredPosition *= GameObject.FindObjectOfType<LevelMapScript>().size;
 
         set = LevelHandler.GetLevelSet(setName);
 
         int playerStars = PlayerPrefs.GetInt(SaveStrings.sPlayerStars);
 
-        if (playerStars >= set.neededStars && set.unlocked && set.animated == true) {
+        if (playerStars >= set.neededStars && set.unlocked == true && set.animated == true) {
             SetUnlocked();
         }
         else {

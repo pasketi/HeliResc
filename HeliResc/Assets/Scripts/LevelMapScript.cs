@@ -18,7 +18,7 @@ public class LevelMapScript : MonoBehaviour {
 	void Awake () {
 
 		RectTransform rect = GetComponent<RectTransform>();
-		rect.sizeDelta = new Vector2(Screen.width, Screen.height) * size;
+		rect.sizeDelta = rect.root.GetComponent<RectTransform>().sizeDelta * size;
 		SetScrollRectPosition ();
 	}
 
@@ -27,7 +27,7 @@ public class LevelMapScript : MonoBehaviour {
         RectTransform rect = GetComponent<RectTransform>();
         Vector2 startingPoint = rect.anchoredPosition;
         Vector2 dir = (end.anchoredPosition - start.anchoredPosition).normalized;
-        Vector2 range = new Vector2(Screen.width, Screen.height);
+        Vector2 range = rect.root.GetComponent<RectTransform>().sizeDelta;
         float dist = Vector2.Distance(start.anchoredPosition, end.anchoredPosition);
         float travelled = 0;
         float step = dist / time;        
@@ -63,9 +63,11 @@ public class LevelMapScript : MonoBehaviour {
 			}
 		}
 
-		Vector3 range = new Vector3(Screen.width, Screen.height);
+        Debug.Log("lms");
 
-		Vector3 newPos = (-target.localPosition) + (range * 0.5f);
+        Vector2 range = rect.root.GetComponent<RectTransform>().sizeDelta;
+
+		Vector2 newPos = (target.anchoredPosition) + (range * 0.5f * size);
 		//Debug.Log ("New pos: " + newPos);
 
 		newPos.x = Mathf.Clamp(newPos.x, 0, range.x);

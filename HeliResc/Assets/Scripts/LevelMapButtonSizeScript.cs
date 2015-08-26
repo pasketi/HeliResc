@@ -14,7 +14,9 @@ public class LevelMapButtonSizeScript : MonoBehaviour {
 
 		//v /= size;
 
-        r.sizeDelta = new Vector2(Screen.width * v.x, Screen.height * v.y);
+        Vector2 vec = r.root.GetComponent<RectTransform>().sizeDelta;
+
+        r.sizeDelta = new Vector2(vec.x * v.x, vec.y * v.y);
 
 		//r.anchorMin -= v * (.5f);
 		//r.anchorMax = r.anchorMin + v;
