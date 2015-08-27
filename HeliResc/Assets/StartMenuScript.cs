@@ -6,6 +6,11 @@ public class StartMenuScript : MonoBehaviour {
 	public GameObject autoHooverOff;
 	public GameObject soundOff;
 	public GameObject musicOff;
+    
+    public GameObject autoHooveDialog;
+
+    private Animator settingsAnimator;
+    private bool showSettings;
 
     private bool autoHooverOn;
 	private bool soundMuted;
@@ -19,18 +24,28 @@ public class StartMenuScript : MonoBehaviour {
             PlayerPrefsExt.SetBool(SaveStrings.sAutoHoover, autoHooverOn);
         }
 
-        musicMuted = SoundMusic.MusicMuted;
-        soundMuted = SoundMusic.SoundMuted;
+        settingsAnimator = GetComponent<Animator>();
+        showSettings = false;
 
-		autoHooverOff.SetActive (!autoHooverOn);
-		soundOff.SetActive (soundMuted);
-		musicOff.SetActive (musicMuted);
+        musicMuted = SoundMusic.MusicMuted;
+        soundMuted = SoundMusic.SoundMuted;		
     }
 
-    public void AutoHoover() {
-        autoHooverOn = !autoHooverOn;
+    public void InitButtons() {
+        autoHooverOff.SetActive(!autoHooverOn);
+        soundOff.SetActive(soundMuted);
+        musicOff.SetActive(musicMuted);
+    }
+
+    public void ShowAutoHooverBox() {
+        autoHooveDialog.SetActive(true);
+    }
+
+    public void AutoHoover(bool on) {
+        autoHooverOn = on;
 		autoHooverOff.SetActive (!autoHooverOn);
         PlayerPrefsExt.SetBool(SaveStrings.sAutoHoover, autoHooverOn);
+        autoHooveDialog.SetActive(false);
     }
 	public void Sounds() {
 		//TODO when the sounds are implemented
@@ -46,4 +61,10 @@ public class StartMenuScript : MonoBehaviour {
 		musicOff.SetActive (musicMuted);        //If music is on turn off the cross on the button
         SoundMusic.MuteMusic(musicMuted);
 	}
+    public void Settings() {
+        showSettings = !showSettings;
+
+        if (showSettings == true) settingsAnimator.Play("ShowSettingsAnimation");
+        else settingsAnimator.Play("HideSettingsAnimation");
+    }
 }

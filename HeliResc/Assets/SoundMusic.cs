@@ -7,12 +7,15 @@ public class SoundMusic : MonoBehaviour {
     public static bool MusicMuted { get { return instance.musicMuted; } }
 
 	private static SoundMusic instance;
+    private AudioSource audio;
     private bool soundMuted;
     private bool musicMuted;    
 
     void Awake() {
         instance = this;
         DontDestroyOnLoad(gameObject);
+
+        audio = GetComponent<AudioSource>();
 
         //Set music on or off
         if (PlayerPrefs.HasKey(SaveStrings.sMusic))
@@ -40,5 +43,10 @@ public class SoundMusic : MonoBehaviour {
     public static void MuteSounds(bool mute) {
         instance.soundMuted = mute;
         PlayerPrefsExt.SetBool(SaveStrings.sSounds, mute);
-    }	
+    }
+
+    public static void PlaySound(AudioClip clip) {
+        if(instance.soundMuted == false)
+            instance.audio.PlayOneShot(clip);
+    }
 }
