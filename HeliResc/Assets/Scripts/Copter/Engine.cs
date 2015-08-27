@@ -19,6 +19,7 @@ public class Engine : Upgradable {
     public float holdTime = 0.25f;  //Time to limit the return speed
     private float tempHoldTime = 0; //holder to calculate the time passed since player let go of the screen
     private float persistence = 1;  //Limits the return speed
+    private float overAngleTime;
 
     private bool hasFuel = true;
     private bool hasInput;
@@ -65,10 +66,10 @@ public class Engine : Upgradable {
     public void PlatformUpdate() {
 		copterAngle = copterTr.eulerAngles.z;
         Thrust();
+        SnapReturnRotation();
     }
     public void FuelUpdate() {
 		copterAngle = copterTr.eulerAngles.z;        
-
         //Flip the copter depending on its angle
         if (playerRb.velocity.x > 0.1f)
         {
@@ -80,6 +81,7 @@ public class Engine : Upgradable {
             playerCopter.Direction(false);
         }
         Thrust();                           //Move the copter
+        SnapReturnRotation();
     }
     public void NoFuelUpdate() {
 		copterAngle = copterTr.eulerAngles.z;
@@ -158,6 +160,22 @@ public class Engine : Upgradable {
         if (currentPower > maxPower) currentPower = maxPower;        
     }
 
+    private void SnapReturnRotation() {
+        if ((copterAngle > maxTiltValue + 5 && copterAngle <= 180) || (copterAngle > 180 && copterAngle < (355 - maxTiltValue)))
+        {
+            overAngleTime += Time.deltaTime;
+        }
+        else
+        {
+            overAngleTime = 0;
+        }
+        if (overAngleTime > 2)
+        {
+            overAngleTime = 0;
+            copterTr.eulerAngles = Vector3.zero;
+        }
+    }
+
     private void HandleRotation(MouseTouch touch) {                
 
 		if ((currentAngle < maxTiltValue
@@ -182,7 +200,6 @@ public class Engine : Upgradable {
 		Quaternion q = Quaternion.AngleAxis (currentAngle, Vector3.forward);
 
 		copterTr.rotation = Quaternion.RotateTowards (copterTr.rotation, q, Time.deltaTime * maxTiltSpeed);
-        
 //        if (copterAngle != currentAngle)
 //        { // Turn to currentAngle
 //            if (currentAngle < 180f)
@@ -252,7 +269,7 @@ public class Engine : Upgradable {
         {
             persistence = 1f;
             tempHoldTime = holdTime;
-        }
+        }        
     }
     protected override void GiveName() {
         name = "Engine";

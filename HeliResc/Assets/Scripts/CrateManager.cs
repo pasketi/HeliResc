@@ -128,7 +128,7 @@ public class CrateManager : MonoBehaviour {
 				}
 			}*/
 
-            if (copterScript == null || (!inCargo && copterScript != null && crate.layer == 11 && copterScript.rope.HasHook == false)) {
+            if (copterScript == null || (!inCargo && copterScript != null && crate.layer == 11)) {
 				Destroy (joint);
 				//copterScript.cargo.ChangeHookMass (-crateMass);
 				gameObject.GetComponent<Collider2D> ().enabled = true;
@@ -191,7 +191,7 @@ public class CrateManager : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision){
 		if (!inMenu && !dead) {
-			if (copterScript != null && collision.collider.gameObject.CompareTag ("Hook") && copterScript.rope.HasHook == true && tag != "ActionableObject" && tag != "SavedObject") {
+			if (copterScript != null && collision.collider.gameObject.CompareTag ("Hook") && tag != "ActionableObject" && tag != "SavedObject") {
 				gameObject.transform.parent.parent = collision.collider.gameObject.transform;
 				gameObject.AddComponent <DistanceJoint2D> ();
 

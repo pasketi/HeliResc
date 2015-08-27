@@ -18,21 +18,21 @@ public class Rope : Upgradable {
     
     private DistanceJoint2D hookJoint;  //DistanceJoint component of the copter
     private bool hookOut;               //Is the hook out or inside the copter
-    private bool hasHook;               //Determines if the copter has a hook or is it destroyed    
+    //private bool hasHook;               //Determines if the copter has a hook or is it destroyed    
 
     private HookScript hookScript;      //The reference to the hook script of the hook
     public HookScript HookScript { get { return hookScript; } }
 
-    public bool HasHook { get { return hasHook; } }
+    //public bool HasHook { get { return hasHook; } }
 
 
     public override void RegisterListeners() {
         EventManager.StartListening(SaveStrings.eCopterExplode, KillHook);
-        EventManager.StartListening(SaveStrings.eEnterPlatform, RestoreHook);
+        //EventManager.StartListening(SaveStrings.eEnterPlatform, RestoreHook);
     }
     public override void UnregisterListeners() {
         EventManager.StopListening(SaveStrings.eCopterExplode, KillHook);
-        EventManager.StopListening(SaveStrings.eEnterPlatform, RestoreHook);
+        //EventManager.StopListening(SaveStrings.eEnterPlatform, RestoreHook);
     }
 
     public override void Init(Copter copter) {
@@ -57,7 +57,7 @@ public class Rope : Upgradable {
         hookScript = hook.GetComponent<HookScript>();
         hookScript.HookMass = hookMass;
 
-        hasHook = true;
+        //hasHook = true;
         hookJoint = playerRb.GetComponent<DistanceJoint2D>();
         hookJoint.anchor = hookAnchor.transform.localPosition;
 
@@ -74,7 +74,7 @@ public class Rope : Upgradable {
     }
 
     public override void TouchStart(MouseTouch touch) {        
-        if (playerRb.GetComponent<Collider2D>() == Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(touch.position)) && hasHook) {
+        if (playerRb.GetComponent<Collider2D>() == Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(touch.position))) {
             hookOut = !hookOut;
 
             if (hookOut == true) {              //Actions to take when hook is thrown                
@@ -85,17 +85,14 @@ public class Rope : Upgradable {
         }
     }
 
-    public void ReelInUpdate() {        
-        if (hasHook == true) {
-            
-            hookJoint.distance -= reelSpeed * Time.deltaTime;
-            if (hookJoint.distance <= reelSpeed * Time.deltaTime) {                                
-                PushHookToCargo();
-            }
-        }        
+    public void ReelInUpdate() {            
+        hookJoint.distance -= reelSpeed * Time.deltaTime;
+        if (hookJoint.distance <= reelSpeed * Time.deltaTime) {                                
+            PushHookToCargo();
+        }
     }
     public void HookOutUpdate() {                       
-        if (hasHook && hookOut && Vector2.Distance(hook.transform.position, hookAnchor.transform.position) > snapDistance) {
+        if (hookOut && Vector2.Distance(hook.transform.position, hookAnchor.transform.position) > snapDistance) {
             KillHook();
         }
     }
@@ -147,7 +144,7 @@ public class Rope : Upgradable {
     }
 
     private void ThrowHook() {
-        
+        hook.tag = "Hook";
         hook.SetActive(true);
         hook.GetComponent<LineRenderer>().enabled = true;
         hookJoint.enabled = true;
@@ -160,16 +157,17 @@ public class Rope : Upgradable {
         hook.GetComponent<LineRenderer>().enabled = false;
 		hookScript.tag = "Untagged";
         EventManager.TriggerEvent(SaveStrings.eHookDied);
-        hasHook = false;
+        //hasHook = false;
+        
 		hookOut = false;
         hookJoint.enabled = false;              
     }
-    protected virtual void RestoreHook() {
-        if (hasHook == true) return;
-        hasHook = true;
-		if(hookOut == false)
-        	PushHookToCargo(true);
-    }
+    //protected virtual void RestoreHook() {
+        //if (hasHook == true) return;
+        //hasHook = true;
+        //if(hookOut == false)
+        //    PushHookToCargo(true);
+    //}
     protected override void GiveName() {
         name = "Rope";
     }

@@ -15,11 +15,15 @@ public class CopterSpecsMenu : MonoBehaviour {
 	void Start() {
 		GridLayoutGroup[] grids = GetComponentsInChildren<GridLayoutGroup> ();
 
-		float x = Screen.width * (28f / 1920f);
+        float cellWidth = Screen.width * .195f / 8;
+        float cellSpacing = cellWidth / 4;
+
+        float x = cellWidth - cellSpacing;
 		float y = Screen.height * (89f / 1080f);
 
 		foreach (GridLayoutGroup g in grids) {
 			g.cellSize = new Vector2(x, y);
+            g.spacing = new Vector2(cellSpacing, 0);
 		}
 
 	}
@@ -49,9 +53,11 @@ public class CopterSpecsMenu : MonoBehaviour {
 			copterName.text = info.copterName;
 			copterDescription.text = info.description;
 
-			int fuel = (int)(info.fuelAmount / 20);
+			int fuel = (int)(info.fuelAmount / 50);
+            fuel = Mathf.Clamp(fuel, 0, 8);
 			int cargo = info.cargoSpace;
 			int engine = (int)(info.enginePower / 20);
+            engine = Mathf.Clamp(engine, 0, 8);
 
 			CreateBallots (ballotPanelFuel, fuel);
 			CreateBallots (ballotPanelEngine, engine);
