@@ -58,7 +58,8 @@ public class SoundObject : MonoBehaviour {
         AudioClip c = clips[Random.Range(0, clips.Length)];
         _audio.PlayOneShot(c);
     }
-    public void PlayUsingHandler(AudioClip clip) {
-        SoundMusic.PlaySound(clip);
+    public void PlayUsingHandler() {
+        AudioClip c = clips[Random.Range(0, clips.Length)];
+        SoundMusic.PlaySound(c);
     }
 }

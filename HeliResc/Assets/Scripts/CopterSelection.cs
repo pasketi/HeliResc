@@ -103,6 +103,7 @@ public class CopterSelection : MonoBehaviour {
 		if (gameManager.wallet.Purchase(info.copterPrice) == true) {
 			info.unlocked = true;
 			info.Save();
+            GetComponent<SoundObject>().PlayUsingHandler();
 			copterEntries[selectedCopter].UpdateInfo(info);
 			copterEntries[selectedCopter].SelectCopter();
 		}

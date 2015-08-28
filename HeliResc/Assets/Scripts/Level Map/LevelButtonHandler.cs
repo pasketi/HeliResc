@@ -44,8 +44,11 @@ public class LevelButtonHandler : MonoBehaviour {
 
 
         rect.anchoredPosition = position;
-        //transform.position = position;
-		rect.sizeDelta = new Vector2 (size.x * Screen.width, size.y * Screen.height);
+        
+
+        Vector2 vec = rect.root.GetComponent<RectTransform>().sizeDelta;
+
+        rect.sizeDelta = new Vector2(vec.x * size.x, vec.y * size.y);
     }
 
     public IEnumerator SetPositionAnimated(Vector3 end) {
