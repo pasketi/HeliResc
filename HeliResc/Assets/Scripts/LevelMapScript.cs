@@ -7,6 +7,13 @@ public class LevelMapScript : MonoBehaviour {
 	public float size = 2f;
 	public string set;
 
+    public ScrollRect scrollRect;
+
+    private Vector2 minLimit;
+    private Vector2 maxLimit;
+    private Vector3 range;
+    private RectTransform rect;
+
     void OnEnable() {
         EventManager.StartListening(SaveStrings.eEscape, BackButton);
     }
@@ -17,17 +24,27 @@ public class LevelMapScript : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 
-		RectTransform rect = GetComponent<RectTransform>();
-		rect.sizeDelta = rect.root.GetComponent<RectTransform>().sizeDelta * size;
+		rect = GetComponent<RectTransform>();
+        range = rect.root.GetComponent<RectTransform>().sizeDelta;
+
+        minLimit = -(new Vector2(range.x * ((size * 0.5f) - 1), range.y * ((size * 0.5f) - 1)));
+        maxLimit = new Vector2(range.x * (size * 0.5f), range.y * (size * 0.5f));
+
+        rect.sizeDelta = range * size;
+
 		SetScrollRectPosition ();
 	}
 
     public IEnumerator MoveToNextSet(RectTransform start, RectTransform end, float time) {
-        
-        RectTransform rect = GetComponent<RectTransform>();
-        Vector2 startingPoint = rect.anchoredPosition;
+
+        scrollRect.enabled = false;
+
         Vector2 dir = (end.anchoredPosition - start.anchoredPosition).normalized;
-        Vector2 range = rect.root.GetComponent<RectTransform>().sizeDelta;
+        Vector2 startingPoint = (-start.localPosition) + (range * 0.5f);
+
+        rect.anchoredPosition = startingPoint;
+        LimitScrollRectPosition();
+
         float dist = Vector2.Distance(start.anchoredPosition, end.anchoredPosition);
         float travelled = 0;
         float step = dist / time;        
@@ -36,21 +53,20 @@ public class LevelMapScript : MonoBehaviour {
             travelled += step * Time.deltaTime;
 
             Vector2 newPos = rect.anchoredPosition - (dir * step * Time.deltaTime);
-            newPos.x = Mathf.Clamp(newPos.x, 0, range.x);
-		    newPos.y = Mathf.Clamp(newPos.y, 0, range.y);
-
             rect.anchoredPosition = newPos;
+
+            LimitScrollRectPosition();
+            
             yield return null;
         }
 
-        Vector2 vec = startingPoint - (dir * dist);
-        vec.x = Mathf.Clamp(vec.x, 0, range.x);
-        vec.y = Mathf.Clamp(vec.y, 0, range.y);
+        Vector2 vec = startingPoint - (dir * dist);        
         rect.anchoredPosition = vec;
+        LimitScrollRectPosition();
+        scrollRect.enabled = true;
     }
 
 	private void SetScrollRectPosition() {
-		RectTransform rect = GetComponent<RectTransform> ();
 		LevelSetHandler[] sets = GameObject.FindObjectsOfType<LevelSetHandler> ();
 
 		RectTransform target = null;
@@ -63,20 +79,18 @@ public class LevelMapScript : MonoBehaviour {
 			}
 		}
 
-        Debug.Log("lms");
+        Vector3 newPos = (-target.localPosition) + (range * 0.5f);
+        rect.anchoredPosition = newPos;
 
-        Vector2 range = rect.root.GetComponent<RectTransform>().sizeDelta;
-
-		Vector2 newPos = (target.anchoredPosition) + (range * 0.5f * size);
-		//Debug.Log ("New pos: " + newPos);
-
-		newPos.x = Mathf.Clamp(newPos.x, 0, range.x);
-		newPos.y = Mathf.Clamp(newPos.y, 0, range.y);
-
-		//Debug.Log ("New pos: " + newPos);
-
-		rect.anchoredPosition = newPos;
+        LimitScrollRectPosition();
 	}
+
+    private void LimitScrollRectPosition() { 
+        Vector3 vec = rect.anchoredPosition;
+        vec.x = Mathf.Clamp(vec.x, minLimit.x, maxLimit.x);
+        vec.y = Mathf.Clamp(vec.y, minLimit.y, maxLimit.y);
+        rect.anchoredPosition = vec;
+    }
 
     private void BackButton() {
         GameObject.Find("GameManager").GetComponent<GameManager>().loadMainMenu(false, null, 0);

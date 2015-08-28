@@ -7,7 +7,7 @@ public class LevelMapButtonSizeScript : MonoBehaviour {
 	public Vector2 v;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		RectTransform r = GetComponent<RectTransform>();
 
 		float size = GameObject.FindObjectOfType<LevelMapScript> ().size;

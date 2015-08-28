@@ -13,7 +13,7 @@ public class LevelSetHandler : MonoBehaviour {
     public LevelSet Set { get { return set; } }
     private LevelSet set;            //The kind of set the group has
 
-    void Start() {
+    void Awake() {
 
         RectTransform rect = GetComponent<RectTransform>();
         rect.anchoredPosition *= GameObject.FindObjectOfType<LevelMapScript>().size;

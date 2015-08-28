@@ -18,7 +18,7 @@ public class LevelMapPath : MonoBehaviour {
     private Vector3 endPosition;
     private Vector3 direction;
 
-    void Start() {
+    void Awake() {
 
         pathInterval = 50;  //Need to be replaced to adjust for different screen sizes
 

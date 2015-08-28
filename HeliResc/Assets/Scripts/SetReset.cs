@@ -25,6 +25,7 @@ public class SetReset : MonoBehaviour {
         }
         foreach (LevelSet set in LevelHandler.levelSets) {
             set.unlocked = true;
+            set.animated = true;
             set.Save();
         }
         PlayerPrefs.SetInt(SaveStrings.sPlayerRubies, LevelHandler.LevelCount);
