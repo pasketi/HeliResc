@@ -16,9 +16,12 @@ public class CameraManager : MonoBehaviour {
 	mapBoundsRight = 0f;
 	
 	private float slowDamp = 2.1f, //camre moves slow if copter moves slow
-	fastDamp = 0.35f, //short dump time needed when copter takes fast action
-	slowVelosity = 1f, //velocity that is concidered to be slow (use slowDump in lower speed)
-	fastVelosity = 4.5f, //velocity that is concidered to be fast (use fastDump with higher speed)
+	fastDamp = 0.35f, //short dump time needed when copter takes fast action (old fastDamp = 0.35f)
+	dampX = 2.1f, //demand for dump time time from x
+	dampY = 2.1f, //demand for dump time time from y
+	slowVelocity = 1f, //velocity that is concidered to be slow (use slowDump in lower speed)
+	fastVelocity = 4.5f, //velocity that is concidered to be fast (use fastDump with higher speed)
+	risingVelocity = 1f, //expected speed to rise the copter. If the copter is rising slowler that is propably meant to be hoovering
 	cameraFront = 3.5f, //how much camera is forvard from copter's x positon
 	cameraDownLook = 2.5f; //if the copter is moving down the camera looks further to see the sea or the ground earlier. 
 	private bool cameraMovingRight = false, //true if the copter and the camera is moving the same direction, false if copter change its flying direction.
@@ -48,8 +51,11 @@ public class CameraManager : MonoBehaviour {
 			if (vel.y < 0) {
 				//copter is moving down, so look down
 				targetY = copter.transform.position.y - cameraDownLook;
-			} else {
+			} else if (vel.y < risingVelocity){
 				//copter is not moving down
+				targetY = copter.transform.position.y - (cameraDownLook*(1-(vel.y/risingVelocity)));
+			}else{
+				//center copter to the screen by y-position
 				targetY = copter.transform.position.y;
 			}
 			if (targetY > maxY)
@@ -100,21 +106,39 @@ public class CameraManager : MonoBehaviour {
 				if (vel.x > 0 && cameraMovingLeft == true) {
 					cameraMovingLeft = false; //Stop moving wrong way
 				}
-				//Should camera be moved fast?
-				if (Mathf.Abs (vel.x) > slowVelosity) {
-					if (Mathf.Abs (vel.x) > fastVelosity) {
-						//Move camera fast to get to the copter
-						dampTime = fastDamp;
-					} else {
-						//copter is moving within mid range velosity
-						//get suitable dampTime
-						dampTime = fastDamp + ((slowDamp - fastDamp) * (1 - ((Mathf.Abs (vel.x) - slowVelosity) / (fastVelosity - slowVelosity))));
-					}
-				} else {
-					//the copter nearly moves. No need to hurry with the camera
-					dampTime = slowDamp;
-				}
 			}
+				//Should the camera be moved fast?
+			if (Mathf.Abs (vel.x) > slowVelocity) {
+				if (Mathf.Abs (vel.x) > fastVelocity) {
+					//Move camera fast to get to the copter
+					dampX = fastDamp;
+				} else {
+					//copter is moving within mid range velocity
+					//get suitable dampTime
+					dampX = fastDamp + ((slowDamp - fastDamp) * (1f - ((Mathf.Abs (vel.x) - slowVelocity) / (fastVelocity - slowVelocity))));
+				}
+			} else {
+				//the copter nearly moves. No need to hurry with the camera
+				dampX = slowDamp;
+			}
+			//fit dampTime to y-velocity
+			if (Mathf.Abs (vel.y) > fastVelocity*0.7f) {
+				//Move camera fast to get to the copter
+				dampY = fastDamp;
+
+			} else {
+				//copter is moving within mid range velocity
+				//get suitable dampTime
+				dampY = fastDamp + ((slowDamp - fastDamp) * (1f - (Mathf.Abs (vel.y) / fastVelocity*0.7f)));
+			}
+
+			if (dampX < dampY) {
+				dampTime = dampX;
+			}else{
+				dampTime = dampY;
+				//Debug.Log(dampTime+"the copter moves fast vertically");
+			}
+			
 		}
 		if (Camera.main.transform.position.x != target.x || Camera.main.transform.position.y != target.y) gameObject.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, target, ref zero, dampTime, maxSpeed);
 		//gameObject.transform.position = Vector3.Lerp (gameObject.transform.position, target, 3.5f * Time.deltaTime);
