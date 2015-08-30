@@ -46,10 +46,10 @@ public class LevelMapPath : MonoBehaviour {
         amount = distance / pathInterval;
 
         LevelSetHandler set = endPoint.GetComponent<LevelSetHandler>();
-        if (set.Set.unlocked && set.Set.animated) {
+        if (set.Unlocked && set.Set.animated) {
             SetUnlocked();
         }
-        else if (set.Set.unlocked) {
+        else if (set.Unlocked) {
             StartCoroutine(SetUnlockedAnimated(set));
         }
     }

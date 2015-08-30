@@ -17,6 +17,7 @@ public class Wallet {
 
     public void AddMoney(int amount) {
         coins += amount;
+        SaveWallet();
     }
 
     /// <summary>

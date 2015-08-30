@@ -10,13 +10,20 @@ public class LevelSetHandler : MonoBehaviour {
     public Image setImage;          //The image UI-component in the middle of the button set
     public string setName;
 
+    public bool Unlocked { 
+        get {
+            int playerStars = PlayerPrefs.GetInt(SaveStrings.sPlayerStars);
+            return set.unlocked && (playerStars >= set.neededStars);
+        } 
+    }
+
     public LevelSet Set { get { return set; } }
     private LevelSet set;            //The kind of set the group has
 
     void Awake() {
 
         RectTransform rect = GetComponent<RectTransform>();
-        rect.anchoredPosition *= GameObject.FindObjectOfType<LevelMapScript>().size;
+        //rect.anchoredPosition *= GameObject.FindObjectOfType<LevelMapScript>().size;
 
         set = LevelHandler.GetLevelSet(setName);
 

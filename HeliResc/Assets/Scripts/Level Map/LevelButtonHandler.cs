@@ -20,6 +20,8 @@ public class LevelButtonHandler : MonoBehaviour {
         levelId = set.levelSetName + id;			//Set the identifier from the set name and the integer id
         level = Level.Load(set.levelSetName, id);
 
+        transform.localScale = Vector3.one;
+
         //Debug.Log(level.ToString());
 
         if(level.unlocked == true) {
@@ -48,12 +50,12 @@ public class LevelButtonHandler : MonoBehaviour {
 
         Vector2 vec = rect.root.GetComponent<RectTransform>().sizeDelta;
 
-        rect.sizeDelta = new Vector2(vec.x * size.x, vec.y * size.y);
+        //rect.sizeDelta = new Vector2(Screen.width * size.x, Screen.height * size.y);
     }
 
     public IEnumerator SetPositionAnimated(Vector3 end) {
         RectTransform rect = GetComponent<RectTransform>();
-        rect.sizeDelta = new Vector2(size.x * Screen.width, size.y * Screen.height);
+        //rect.sizeDelta = new Vector2(Screen.width * size.x, Screen.height * size.y);
         
         Vector2 dir = end.normalized;               //Assign the direction the button will move to
         rect.anchoredPosition = Vector2.zero;       //Make sure the button starts from the middle of the set
