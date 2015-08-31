@@ -28,7 +28,8 @@ public class StartMenuScript : MonoBehaviour {
         showSettings = false;
 
         musicMuted = SoundMusic.MusicMuted;
-        soundMuted = SoundMusic.SoundMuted;		
+        soundMuted = SoundMusic.SoundMuted;
+        InitButtons();
     }
 
     public void InitButtons() {
