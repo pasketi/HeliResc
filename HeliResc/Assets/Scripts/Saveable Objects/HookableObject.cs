@@ -50,7 +50,7 @@ public class HookableObject : MonoBehaviour, IHookable {
 
     protected virtual void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag.Equals("LandingPad")) {
-            
+            SaveItem();
         }
     }
 
@@ -68,8 +68,10 @@ public class HookableObject : MonoBehaviour, IHookable {
         gameObject.SetActive(false);
     }
     public virtual void SaveItem() {
+        
         LevelManager manager = GameObject.FindObjectOfType<LevelManager>();
-        manager.saveCrates(1);
+        if (saveable == true)
+            manager.saveCrates(1);
 		hookScript.DetachHook (this);
         gameObject.SetActive(false);
     }

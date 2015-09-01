@@ -18,7 +18,10 @@ public class MusicObject : MonoBehaviour
         _audio.loop = loop;
 
         if (clips == null)
+        {
             Debug.LogError("audio clip not set");
+            return;
+        }
 
         AudioClip c = clips;
         _audio.clip = c;
@@ -33,7 +36,7 @@ public class MusicObject : MonoBehaviour
     }
 
     public void PlayMusic()
-    {        
-        _audio.Play();
+    {
+        SoundMusic.PlayMusic(clips);
     }
 }

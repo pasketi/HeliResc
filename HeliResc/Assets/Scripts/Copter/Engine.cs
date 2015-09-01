@@ -253,23 +253,23 @@ public class Engine : Upgradable {
         { // Return to 0°
             if (copterAngle > 180f)
             {
-				copterTr.Rotate(new Vector3(0f, 0f, returnSpeed * Time.deltaTime * (360f - copterAngle) * persistence));
+				copterTr.Rotate(new Vector3(0f, 0f, returnSpeed * Time.deltaTime * (360f - copterAngle)));
             }
             else if (copterAngle < 180f)
             {
-				copterTr.Rotate(new Vector3(0f, 0f, -(returnSpeed * Time.deltaTime) * copterAngle * persistence));
+				copterTr.Rotate(new Vector3(0f, 0f, -(returnSpeed * Time.deltaTime) * copterAngle));
             }
         }
-        if (tempHoldTime != holdTime)
-        {
-            tempHoldTime += Time.deltaTime;
-            persistence = tempHoldTime / holdTime;
-        }
-        if (tempHoldTime > holdTime)
-        {
-            persistence = 1f;
-            tempHoldTime = holdTime;
-        }        
+        //if (tempHoldTime != holdTime)
+        //{
+        //    tempHoldTime += Time.deltaTime;
+        //    persistence = tempHoldTime / holdTime;
+        //}
+        //if (tempHoldTime > holdTime)
+        //{
+        //    persistence = 1f;
+        //    tempHoldTime = holdTime;
+        //}        
     }
     protected override void GiveName() {
         name = "Engine";

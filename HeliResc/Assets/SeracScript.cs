@@ -13,7 +13,7 @@ public class SeracScript : ActionableObject {
 	}
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("CrushBall")) {
+        if (other.CompareTag("Hook") || other.CompareTag("CrushBall")) {
             if(other.GetComponent<Rigidbody2D>().velocity.magnitude >= requiredForce)
                 UseAction();
         }

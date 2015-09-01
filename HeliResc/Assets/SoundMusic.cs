@@ -37,11 +37,24 @@ public class SoundMusic : MonoBehaviour {
     }
 
 	public static void MuteMusic(bool mute) {
-        instance.musicMuted = mute;
+        instance.musicMuted = mute;        
+        MusicObject[] mo = GameObject.FindObjectsOfType<MusicObject>();
+        foreach (MusicObject m in mo)
+        {
+            m.Mute(mute);
+            if (instance.musicSource.isPlaying == false && mute == false)
+            {
+                AudioClip c = m.clips;
+                if (c != null) PlayMusic(c);
+            }
+        }
         PlayerPrefsExt.SetBool(SaveStrings.sMusic, mute);
 	}
     public static void MuteSounds(bool mute) {
         instance.soundMuted = mute;
+        SoundObject[] so = GameObject.FindObjectsOfType<SoundObject>();
+        foreach (SoundObject s in so)
+            s.Mute(mute);
         PlayerPrefsExt.SetBool(SaveStrings.sSounds, mute);
     }
 
@@ -51,6 +64,7 @@ public class SoundMusic : MonoBehaviour {
     }
     public static void PlayMusic(AudioClip clip) {
         if (instance.musicMuted == false) {
+            if (clip.Equals(instance.musicSource.clip)) return;
             instance.musicSource.clip = clip;
             instance.musicSource.Play();
         }
