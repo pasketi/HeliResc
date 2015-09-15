@@ -148,8 +148,8 @@ public class LevelManager : MonoBehaviour {
         end.itemsSaved = getSavedCrates();
         end.Reward = reward;
         end.levelTime = levelTimer;
-
-        LevelHandler.CompleteLevel(end.level);
+        if(passed == true)
+            LevelHandler.CompleteLevel(end.level);
         
         RubyScript ruby = GameObject.FindObjectOfType<RubyScript>();
 

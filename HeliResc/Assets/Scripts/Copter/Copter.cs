@@ -50,6 +50,8 @@ public abstract class Copter : MonoBehaviour {
         EventManager.StartListening(SaveStrings.eCopterSplash, TurnCopterOff);
         EventManager.StartListening(SaveStrings.eEnterPlatform, EnterPlatform);
         EventManager.StartListening(SaveStrings.eExitPlatform, ExitPlatform);
+
+        fuelTank.TankDepleted += input.DisableInput;
     }
     protected virtual void OnDisable() {
         foreach (Upgradable entry in copterUpgrades.Values) {
@@ -58,6 +60,8 @@ public abstract class Copter : MonoBehaviour {
         EventManager.StopListening(SaveStrings.eCopterSplash, TurnCopterOff);
         EventManager.StopListening(SaveStrings.eEnterPlatform, EnterPlatform);
         EventManager.StopListening(SaveStrings.eExitPlatform, ExitPlatform);
+
+        fuelTank.TankDepleted -= input.DisableInput;
     }
 
 	// Use this for initialization

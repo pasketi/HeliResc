@@ -16,6 +16,7 @@ public class CopterInput {
     public Action<MouseTouch> TouchStart = (MouseTouch) => { };     //Event when the mouseclick happens
     public Action<MouseTouch> TouchEnd = (MouseTouch) => { };       //Event to trigger when mouse button goes up
     public Action IdleUpdate = () => { };                           //Event when there is no input
+    
 
 #if UNITY_EDITOR
     public void UpdateMethod() {
