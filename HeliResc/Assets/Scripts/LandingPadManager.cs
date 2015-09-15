@@ -24,10 +24,7 @@ public class LandingPadManager : MonoBehaviour {
         objectives = GameObject.FindObjectOfType<MissionObjectives>();
         manager = GameObject.FindObjectOfType<LevelManager>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	}
+		
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.transform.tag == "Crate") {
@@ -38,9 +35,9 @@ public class LandingPadManager : MonoBehaviour {
 		}
 
 		if (other.gameObject.transform.tag == "Copter") {
-
-			if (enterPlatform != null) enterPlatform(gameObject);
+			
 			EventManager.TriggerEvent(SaveStrings.eEnterPlatform);
+            if (enterPlatform != null) enterPlatform(gameObject);
 
 			if (canWin == true) { 
                 bool win = objectives.AnyObjectiveCompleted();
@@ -78,10 +75,10 @@ public class LandingPadManager : MonoBehaviour {
 	void OnTriggerExit2D(Collider2D other) {
 		if (other.gameObject.transform.tag == "Copter") {
             
-            //Trigger the landing events
-            exitPlatform(gameObject);
+            //Trigger the landing events            
             EventManager.TriggerEvent(SaveStrings.eExitPlatform);
-            
+            exitPlatform(gameObject);
+
 			GameObject.Find ("HUD").GetComponent<UIManager> ().refill = false;
 		}
 	}

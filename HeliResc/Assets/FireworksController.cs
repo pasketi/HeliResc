@@ -9,6 +9,7 @@ public class FireworksController : MonoBehaviour {
     public float timeToWait = 1;
 
     private List<ParticleSystem> particles;
+    private bool launched;
 
     void Start() {
         particles = new List<ParticleSystem>();
@@ -38,7 +39,11 @@ public class FireworksController : MonoBehaviour {
     }
 
     public void Launch() {
-        StartCoroutine(Launcher());
+        if (launched == false)
+        {
+            launched = true;
+            StartCoroutine(Launcher());
+        }
     }
 
     public IEnumerator Launcher() {

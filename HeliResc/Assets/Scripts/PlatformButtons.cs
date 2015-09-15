@@ -16,22 +16,27 @@ public class PlatformButtons: MonoBehaviour {
 	private Transform target;
 
     void OnEnable() {
-        EventManager.StartListening(SaveStrings.eEnterPlatform, ShowFuel);
-        EventManager.StartListening(SaveStrings.eExitPlatform, HideFuel);
+        landing = transform.parent.parent.GetComponent<LandingPadManager>();
+        if (landing.Equals(null))
+            Debug.LogError("The landingpad manager was not found in platform buttons");
+
+        landing.enterPlatform += ShowFuel;
+        landing.exitPlatform += HideFuel;
+        //EventManager.StartListening(SaveStrings.eEnterPlatform, ShowFuel);
+        //EventManager.StartListening(SaveStrings.eExitPlatform, HideFuel);
     }
     void OnDisable() {
-        EventManager.StopListening(SaveStrings.eEnterPlatform, ShowFuel);
-        EventManager.StopListening(SaveStrings.eExitPlatform, HideFuel);
+
+        landing.enterPlatform -= ShowFuel;
+        landing.exitPlatform -= HideFuel;
+        //EventManager.StopListening(SaveStrings.eEnterPlatform, ShowFuel);
+        //EventManager.StopListening(SaveStrings.eExitPlatform, HideFuel);
     }
 
 	// Use this for initialization
 	void Awake () {
-
-        fuelAnimator = GetComponentInChildren<Animator>();
-
-		landing = transform.parent.parent.GetComponent<LandingPadManager>();
-		if (landing.Equals(null))
-			Debug.LogError("The landingpad manager was not found in platform buttons");
+        landing = transform.parent.parent.GetComponent<LandingPadManager>();
+        fuelAnimator = GetComponentInChildren<Animator>();		
 
 		Vector3 landingScale = landing.transform.localScale;
 		Vector3 scale = transform.localScale;
@@ -76,12 +81,27 @@ public class PlatformButtons: MonoBehaviour {
     {
         landing.StartRefill();
     }
+    public void ShowFuel(GameObject go) {
+        if (levelManager.gameState.Equals(GameState.Running))
+        {
+            Debug.Log("Fuel animation");
+            fuelAnimator.Play("ShowFuel");
+        }
+    }
     public void ShowFuel()
     {
-		Debug.Log ("Fuel animation");
-        fuelAnimator.Play("ShowFuel");
+        if (levelManager.gameState.Equals(GameState.Running))
+        {
+            Debug.Log("Fuel animation");
+            fuelAnimator.Play("ShowFuel");
+        }
     }
-    
+    public void HideFuel(GameObject go)
+    {
+        if (fuelAnimator == null)
+            fuelAnimator = GetComponentInChildren<Animator>();
+        fuelAnimator.Play("HideFuel");
+    }
     public void HideFuel()
     {
         if (fuelAnimator == null)
