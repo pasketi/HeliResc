@@ -50,7 +50,7 @@ public class FireworksController : MonoBehaviour {
                         
             float x = Random.Range(vec.x - rangeX, vec.x + rangeX);
             
-            float y = Random.Range(vec.y - rangeY, vec.y + rangeY);
+            float y = Random.Range(vec.y - rangeY, vec.y + rangeY) + 3;
             ps.transform.position = new Vector3(x, y);
             
             ps.Play();

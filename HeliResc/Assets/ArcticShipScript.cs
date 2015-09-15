@@ -78,6 +78,8 @@ public class ArcticShipScript : MonoBehaviour {
 		move = false;
 	}
     private IEnumerator Sink() {
+        LevelManager lm = GameObject.FindObjectOfType<LevelManager>();
+        lm.LoseLevel();
         GetComponent<FloatingObject>().enabled = false;
 		if (moveRight == true) {
 			while (_transform.eulerAngles.z > (360-45) || _transform.eulerAngles.z == 0) {

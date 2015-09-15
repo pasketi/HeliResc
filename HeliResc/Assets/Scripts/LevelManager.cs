@@ -148,8 +148,14 @@ public class LevelManager : MonoBehaviour {
         end.itemsSaved = getSavedCrates();
         end.Reward = reward;
         end.levelTime = levelTimer;
-        if(passed == true)
+        if (passed == true) {
             LevelHandler.CompleteLevel(end.level);
+            FireworksController fw = GameObject.FindObjectOfType<FireworksController>();
+            if (fw != null) {
+                //fw.transform.position = GameObject.FindObjectOfType<Copter>().transform.position + Vector3.up * 3;
+                fw.Launch();
+            }
+        }
         
         RubyScript ruby = GameObject.FindObjectOfType<RubyScript>();
 
@@ -180,7 +186,7 @@ public class LevelManager : MonoBehaviour {
 
 	public void StartGame() {
 		gameState = GameState.Running;
-	}
+	}    
 
     private void CopterCrashed() {
         if (gameState.Equals(GameState.Running)) {
@@ -199,6 +205,13 @@ public class LevelManager : MonoBehaviour {
         if (gameState.Equals(GameState.Running)) {
             lose = true;
             splash = true;
+            StartCoroutine(PostGame(false));
+        }
+    }
+
+    public void LoseLevel() {
+        if (gameState.Equals(GameState.Running)) {
+            lose = true;
             StartCoroutine(PostGame(false));
         }
     }
