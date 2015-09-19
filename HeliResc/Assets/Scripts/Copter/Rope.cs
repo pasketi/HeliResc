@@ -144,6 +144,7 @@ public class Rope : Upgradable {
     }
 
     private void ThrowHook() {
+        Debug.Log("anchor: " + hookAnchor.transform.position);
         hook.tag = "Hook";
         hook.SetActive(true);
         hook.GetComponent<LineRenderer>().enabled = true;
@@ -153,7 +154,8 @@ public class Rope : Upgradable {
         hook.transform.position = hookAnchor.transform.position;
         UpdateDelegate = HookOutUpdate;
     }
-    public void KillHook() {                
+    public void KillHook() {
+        Debug.Log("Kill hook");
         hook.GetComponent<LineRenderer>().enabled = false;
 		hookScript.tag = "Untagged";
         EventManager.TriggerEvent(SaveStrings.eHookDied);

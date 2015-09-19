@@ -87,18 +87,19 @@ public class HookableObject : MonoBehaviour, IHookable {
         joint.connectedBody = hookRb;
         joint.connectedAnchor = connectedAnchor;
         joint.anchor = anchorWhenHooked;
-
-        floating.enabled = false;
+        if(floating != null)
+            floating.enabled = false;
     }
     public virtual void DetachHook() {
 		if (hooked == false)
 			return;
         hooked = false;
         joint.enabled = false;
-        gameObject.layer = LayerMask.NameToLayer("Crate");
-        floating.enabled = true;
+        gameObject.layer = LayerMask.NameToLayer("Crate");        
         hookScript.DetachHook(this);
-                
+
+        if(floating != null)
+            floating.enabled = true;
     }
 }
 

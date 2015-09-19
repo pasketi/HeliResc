@@ -25,12 +25,12 @@ public class HookScript : MonoBehaviour {
     }
 
     //Start listening to events
-    void OnEnable() {
+    protected virtual void OnEnable() {
         EventManager.StartListening(SaveStrings.eCopterExplode, DisableLine);
 		EventManager.StartListening (SaveStrings.eHookDied, HookDied);
         //EventManager.StartListening("EnterPlatform", DisableLine);
     }
-    void OnDisable() {
+    protected virtual void OnDisable() {
         EventManager.StopListening(SaveStrings.eCopterExplode, DisableLine);
 		EventManager.StopListening (SaveStrings.eHookDied, HookDied);
 		//EventManager.StopListening("EnterPlatform", DisableLine);
@@ -49,16 +49,18 @@ public class HookScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected virtual void Update () {
         UpdateLine();	
         UpdateRotation();                
 	}
 
-    private void UpdateLine() {
+    protected virtual void UpdateLine()
+    {
         line.SetPosition(0, _t.position);
         line.SetPosition(1, anchor.position);
     }
-    private void UpdateRotation() {
+    protected virtual void UpdateRotation()
+    {
         float angle = Vector3.Angle(Vector3.up, (anchor.position - _t.position));
 
         if (_t.position.x >= anchor.position.x)
@@ -87,7 +89,7 @@ public class HookScript : MonoBehaviour {
         hookedItems = newList;
     }
             
-	private void HookDied() {
+	protected virtual void HookDied() {
 		int count = hookedItems.Count;
 		for(int i = 0; i < count; i++) {
 			hookedItems[0].DetachHook();
@@ -106,10 +108,10 @@ public class HookScript : MonoBehaviour {
             hookedItems.Remove(obj);
         }
     }
-    public void DisableLine() {
+    public virtual void DisableLine() {
         line.enabled = false;
     }
-    public void EnableLine() {
+    public virtual void EnableLine() {
         line.enabled = true;
     }
 }

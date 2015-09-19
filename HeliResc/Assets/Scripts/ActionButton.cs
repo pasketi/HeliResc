@@ -10,22 +10,40 @@ public class ActionButton : MonoBehaviour {
     public int maxActions = 10;         //How many actions are available at start
     private int actionsLeft;            //How many actions left
 
+    private System.Action actionMethod; //The method to run depending on the level type
     private Transform copterAnchor;     //The position to instantiate the item
     private Rigidbody2D copterRb;       //The rigidbody of the copter
+    private BucketScript bucket;
 
 	void Start () {
-		manager = GameObject.FindObjectOfType<LevelManager> ();
-        if (!(manager.levelAction > 0))
-            transform.parent.gameObject.SetActive(false);
+		
         copterAnchor = GameObject.Find("Copter").transform;
         copterRb = GameObject.Find("Copter").GetComponent<Rigidbody2D>();
-        actionsLeft = maxActions;
+        actionMethod = () => { };
 
-        actionText.text = actionsLeft.ToString() + "/" + maxActions.ToString();
+        manager = GameObject.FindObjectOfType<LevelManager> ();
+        int type = manager.levelAction;
+        if (type == 0){
+            transform.parent.gameObject.SetActive(false);
+        }
+        else if (type == 1)
+        {
+            actionsLeft = maxActions;
+            actionText.text = actionsLeft.ToString() + "/" + maxActions.ToString();
+            actionMethod = ThrowLifeRing;
+        }
+        else if (type == 2) {
+            actionText.enabled = false;
+            actionMethod = ThrowWater;            
+        }
 	}
 	
     public void UseAction() {
-        if (actionsLeft >= 1) {
+        actionMethod();
+    }
+    private void ThrowLifeRing() {
+        if (actionsLeft >= 1)
+        {
             actionsLeft--;
             GameObject tempActionObject = null;
             tempActionObject = Instantiate(actionItem, copterAnchor.transform.position, Quaternion.identity) as GameObject;
@@ -34,5 +52,14 @@ public class ActionButton : MonoBehaviour {
             rb.AddTorque(2f * (Random.value - 0.5f));
             actionText.text = actionsLeft.ToString() + "/" + maxActions.ToString();
         }
+    }
+
+    private void ThrowWater() {
+        if(bucket == null)
+            bucket = GameObject.FindObjectOfType<BucketScript>();
+        if (bucket == null)
+            Debug.LogError("Bucket not found");
+        else
+            bucket.Throw();
     }
 }

@@ -74,7 +74,6 @@ public class LevelManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (gameState);
 		if (gameState.Equals (GameState.Running)) {
 			levelTimer += Time.deltaTime;
 		}

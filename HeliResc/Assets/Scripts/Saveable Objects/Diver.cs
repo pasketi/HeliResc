@@ -12,7 +12,7 @@ public class Diver : HookableObject {
 
     public override void GrabHook(Rigidbody2D hookRb) {
         base.GrabHook(hookRb);
-
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         animator.Play("Hooked");
     }
 

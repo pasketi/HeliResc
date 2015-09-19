@@ -73,7 +73,6 @@ public class Engine : Upgradable {
         //Flip the copter depending on its angle
         if (playerRb.velocity.x > 0.1f)
         {
-			Debug.Log ("Right");
             playerCopter.Direction(true);   //True means to turn right
         }
         else if (playerRb.velocity.x < -0.1f)
