@@ -9,10 +9,10 @@ public class BucketScript : HookScript {
     private Animator animator;          //Reference to animator component
     private SpriteRenderer sprite;      //Reference to sprite renderer component
 
-    private int animEmpty;              //The hash of empty animation
-    private int animFull;               //Hash of full animation    
     private bool full;                  //Is the bucket full or empty
     private bool canThrowWater;         //Player should not be able to throw continuously to avoid glitches with animator
+
+    private GameObject waterDrop;
 
     protected override void Start() {
         base.Start();
@@ -20,8 +20,8 @@ public class BucketScript : HookScript {
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
 
-        animEmpty = Animator.StringToHash("OpenEmpty");
-        animFull = Animator.StringToHash("OpenFull");
+        waterDrop = Instantiate(waterPrefab) as GameObject;
+        waterDrop.SetActive(false);
         canThrowWater = true;
     }
     
@@ -38,8 +38,9 @@ public class BucketScript : HookScript {
     }
 
     public void Throw() {
-        Debug.Log("Throw water: " + canThrowWater);
+        Debug.Log("Throw water: " + canThrowWater);        
         OpenBucket();
+        DropWater();
     }
 
     public void OpenBucket() {
@@ -52,6 +53,11 @@ public class BucketScript : HookScript {
             animator.Play("OpenEmpty");
         full = false;
         StartCoroutine(BucketCooldown());
+    }
+
+    private void DropWater() {
+        waterDrop.SetActive(true);
+        waterDrop.transform.position = transform.position - (Vector3.up * 0.75f);
     }
 
     private IEnumerator BucketCooldown() {
