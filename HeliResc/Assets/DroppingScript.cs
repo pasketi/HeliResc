@@ -14,8 +14,8 @@ public class DroppingScript : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		if (_box.enabled == false)
-			_transform.up = Vector3.Lerp (_transform.up, -_rb.velocity.normalized, 0.1f); 	// = -_rb.velocity.normalized;
+		//if (_box.enabled == false)
+			//_transform.up = Vector3.Lerp (_transform.up, -_rb.velocity.normalized, 0.1f); 	// = -_rb.velocity.normalized;
 	}
 	void OnTriggerExit2D(Collider2D other) {
 		DisableCollider ();

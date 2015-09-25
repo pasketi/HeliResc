@@ -88,8 +88,9 @@ public class LevelEndManager : MonoBehaviour {
         level.star3 = levelEnd.obj3Passed || level.star3;
 
         if (levelEnd.passedLevel == true)
-        {
+        {            
             PassedLevel();
+            Level.Save(level);
         }
         else
         {
@@ -107,8 +108,7 @@ public class LevelEndManager : MonoBehaviour {
 
         debugTime.text = "Time spent: " + levelEnd.levelTime;
 
-        StartCoroutine(Animations(levelEnd.rubyFound));
-		Level.Save (level);
+        StartCoroutine(Animations(levelEnd.rubyFound));		
 
     }
 

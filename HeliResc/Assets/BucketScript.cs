@@ -4,17 +4,17 @@ using System.Collections;
 public class BucketScript : HookScript {
 
     public Sprite fullSprite;
-    public GameObject waterPrefab;      //Prefab of the water that can be thrown
+    public GameObject waterPrefab;          //Prefab of the water that can be thrown
 
-    private Animator _animator;          //Reference to animator component
-    private SpriteRenderer _sprite;      //Reference to sprite renderer component
+    private Animator _animator;             //Reference to animator component
+    private SpriteRenderer _sprite;         //Reference to sprite renderer component
 
-    private bool full;                  //Is the bucket full or empty
-    private bool canThrowWater;         //Player should not be able to throw continuously to avoid glitches with animator
+    private bool full;                      //Is the bucket full or empty
+    private bool canThrowWater;             //Player should not be able to throw continuously to avoid glitches with animator
 
     private GameObject waterDrop;
 	private Rigidbody2D waterRb;
-	private Rigidbody2D _rigidbody;
+    private Rigidbody2D _rigidbody;
 
     protected override void Start() {
         base.Start();
@@ -44,7 +44,6 @@ public class BucketScript : HookScript {
     public void Throw() {
         Debug.Log("Throw water: " + canThrowWater);        
         OpenBucket();
-        //DropWater();
     }
 
     public void OpenBucket() {
@@ -62,10 +61,11 @@ public class BucketScript : HookScript {
     }
 
     private void DropWater() {
-        waterDrop.SetActive(true);
+        waterDrop.SetActive(true);        
 		waterRb.velocity = _rigidbody.velocity;
 		waterDrop.GetComponent<BoxCollider2D> ().enabled = true;
 		waterDrop.transform.position = transform.position;
+        waterDrop.transform.eulerAngles = transform.eulerAngles;
     }
 
     private IEnumerator BucketCooldown() {

@@ -22,6 +22,8 @@ public class JumboJetScript : MonoBehaviour {
         _collider.enabled = false;
         _sprite.enabled = false;
         _rigidbody.gravityScale = 0;
+
+        maxHeight = transform.position.y - 3.025f;
     }
 
 	// Use this for initialization

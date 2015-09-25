@@ -8,7 +8,7 @@ public class MineScript : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         
-        if (other.CompareTag("CrushBall") || other.name.Equals("Copter") || other.CompareTag("Hook"))
+        if (other.name.Equals("Copter") || other.CompareTag("Hook"))
         {   
 			StartCoroutine(DetonateCopter());
             Explode();
