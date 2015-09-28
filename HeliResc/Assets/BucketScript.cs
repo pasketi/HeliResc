@@ -13,6 +13,7 @@ public class BucketScript : HookScript {
     private bool canThrowWater;             //Player should not be able to throw continuously to avoid glitches with animator
 
     private GameObject waterDrop;
+    private ParticleSystem waterParticles;
 	private Rigidbody2D waterRb;
     private Rigidbody2D _rigidbody;
 
@@ -25,6 +26,8 @@ public class BucketScript : HookScript {
 
         waterDrop = Instantiate(waterPrefab) as GameObject;
 		waterRb = waterDrop.GetComponent<Rigidbody2D> ();
+        waterParticles = waterDrop.GetComponent<ParticleSystem>();
+
         waterDrop.SetActive(false);
         canThrowWater = true;
     }
@@ -52,7 +55,7 @@ public class BucketScript : HookScript {
         canThrowWater = false;
         if (full == true) {
 			_animator.Play ("OpenFull");
-			DropWater ();
+			//DropWater ();
 		}
         else
             _animator.Play("OpenEmpty");
@@ -61,10 +64,10 @@ public class BucketScript : HookScript {
     }
 
     private void DropWater() {
-        waterDrop.SetActive(true);        
+        waterDrop.SetActive(true);
+        waterParticles.Play();
 		waterRb.velocity = _rigidbody.velocity;
-		waterDrop.GetComponent<BoxCollider2D> ().enabled = true;
-		waterDrop.transform.position = transform.position;
+		waterDrop.transform.position = transform.position - (transform.up * .5f);
         waterDrop.transform.eulerAngles = transform.eulerAngles;
     }
 
