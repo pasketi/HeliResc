@@ -12,13 +12,13 @@ public class BurningObject : ActionableObject {
 	public Sprite[] burnSprites;			    //The sprites of different states of the burning object. Assign the most healthy to the first slot
 	public List<GameObject> fires;			    //List of bigger fire gameobjects on the object
 	public List<GameObject> smallFires;		    //list of the small fire gameobject on the object
-    public float smallFireScale;                //How much to increase the size of the smallFires in 3rd state
 
 	private System.Action UpdateMethod;
 
 
 	private SpriteRenderer _sprite;			    //Reference to sprite renderer component
     private List<BurningObject> nearbyObjects;  //List of objects that are close enough to be ignited
+    private LevelManager manager;
 
     private bool saved;
 	private bool ignite;					    //Should the object ignite nearby objects
@@ -34,6 +34,8 @@ public class BurningObject : ActionableObject {
 		burnState = 1;
 		maxState = burnSprites.Length;
 
+        manager = GameObject.FindObjectOfType<LevelManager>();
+
         UpdateMethod = () => { };        
         if (burning == true)
         {
@@ -48,7 +50,13 @@ public class BurningObject : ActionableObject {
 	// Update is called once per frame
 	void Update () {
         UpdateMethod ();
-	}	
+	}
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Water")) {
+            UseAction();
+        }
+    }
 
 	public void StartBurning() {
         if (dead == false && saved == false)
@@ -66,8 +74,9 @@ public class BurningObject : ActionableObject {
     public override void UseAction()
     {
         if (saved == true) return;
+        StopBurning();
         saved = true;
-        GameObject.FindObjectOfType<LevelManager>().saveCrates(1);
+        manager.saveCrates(1);
     }
 	private void Burn() {
 		damage += Time.deltaTime;        
@@ -94,10 +103,10 @@ public class BurningObject : ActionableObject {
                 SetBigFire(false);
                 break;
             case 2:
-                SetSmallFire();
+                SetSmallFire(true);
                 break;
             case 3:
-                SetBigFire();
+                SetBigFire(true);
                 break;
             case 4:
                 Die();
@@ -106,17 +115,39 @@ public class BurningObject : ActionableObject {
     }
     private void SetSmallFire(bool active = true) {
         foreach (GameObject go in smallFires)
+        {
             go.SetActive(active);
+            if(active == true)
+                StartCoroutine(Tutorial.FadeIn(go.GetComponent<SpriteRenderer>(), 1));
+            /*
+            if(animate == true)
+                StartCoroutine(SetScale(go.transform, 1, !active));
+            else
+                go.SetActive(active);*/
+        }
     }
     private void SetBigFire(bool active = true) {
         foreach (GameObject go in fires)
+        {
+
             go.SetActive(active);
-        foreach (GameObject go in smallFires)
-            go.transform.localScale *= smallFireScale;
+            if(active == true)
+                StartCoroutine(Tutorial.FadeIn(go.GetComponent<SpriteRenderer>(), 1));
+            /*
+            if(animate == true)
+                StartCoroutine(SetScale(go.transform, 1, !active));
+            else
+                go.SetActive(active);*/
+        }        
     }
 	private void Die() {
         burning = false;
         dead = true;
+        Collider2D[] cols = GetComponents<Collider2D>();
+        foreach (Collider2D c in cols) {
+            if (c.isTrigger == false)
+                c.enabled = false;
+        }
         //_sprite.sprite = burnSprites[maxState - 1];
         StopBurning();
 	}
@@ -140,5 +171,42 @@ public class BurningObject : ActionableObject {
                 break;
             }
         }
+    }
+
+    private IEnumerator SetScale(Transform tr, float time, bool shrink) {
+        float t = 1 / time;
+        Vector3 vec = tr.localScale;        
+
+        if (shrink == true) {
+            while (vec.x > 0)
+            {
+                float f = Time.deltaTime * t;
+                vec.x -= f;
+                vec.y -= f;
+                tr.localScale = vec;
+                yield return null;
+            }
+
+            vec.x = vec.y = 0;
+            tr.localScale = vec;
+            tr.gameObject.SetActive(false);
+        }
+        else
+        {
+            tr.gameObject.SetActive(true);
+            tr.localScale = Vector3.zero;
+            while (vec.x < 1)
+            {
+                float f = Time.deltaTime * t;
+                vec.x += f;
+                vec.y += f;
+                tr.localScale = vec;
+                yield return null;
+            }
+
+            vec.x = vec.y = 1;
+            tr.localScale = vec;
+        }
+
     }
 }

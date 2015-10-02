@@ -30,10 +30,25 @@ public class TutorialScript : MonoBehaviour {
 public class Tutorial {
 	public static IEnumerator FadeOut(SpriteRenderer sprite, float time) {
 		Color c = sprite.color;
+        float t = 1 / time;
 		while (sprite.color.a > 0) {
-			c.a -= (time * Time.deltaTime);
+			c.a -= (t * Time.deltaTime);
 			sprite.color = c;
 			yield return null;
 		}
 	}
+    public static IEnumerator FadeIn(SpriteRenderer sprite, float time)
+    {
+        Color c = sprite.color;
+        c.a = 0;
+        sprite.color = c;
+
+        float t = 1 / time;
+        while (sprite.color.a < 1)
+        {
+            c.a += (t * Time.deltaTime);
+            sprite.color = c;
+            yield return null;
+        }
+    }
 }
