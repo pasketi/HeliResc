@@ -25,7 +25,8 @@ public class MineScript : MonoBehaviour {
     }
 
     private void Explode()
-    {        
+    {
+        if (explosion == null) return;
         GetComponent<SpriteRenderer>().enabled = false;
         foreach (Collider2D c in GetComponents<Collider2D>())
             c.enabled = false;

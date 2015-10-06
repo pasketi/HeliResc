@@ -83,7 +83,7 @@ public class ScrollingMenus : MonoBehaviour {
                 
 	}
 	
-	void Update() {
+	void LateUpdate() {
         
         
 		if(Input.GetMouseButtonDown(0)){
