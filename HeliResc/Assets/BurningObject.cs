@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BurningObject : ActionableObject {
+public class BurningObject : MonoBehaviour {
 
     [HideInInspector]
     public bool dead;                           //Is the object still saveable
@@ -10,15 +10,17 @@ public class BurningObject : ActionableObject {
     public int startState = 1;                  //Which state the objects starts burning.
 	public float burnStateTime;				    //The time it will take from the object to advance to next level of burning
 	public Sprite[] burnSprites;			    //The sprites of different states of the burning object. Assign the most healthy to the first slot
-	public List<GameObject> fires;			    //List of bigger fire gameobjects on the object
-	public List<GameObject> smallFires;		    //list of the small fire gameobject on the object
+	
+    public List<GameObject> firstStageFire;     //list of all fires on the first stage of burning
+	public List<GameObject> secondStageFire;    //list of the fires on the second stage
+    public List<GameObject> thirdStageFire;		//List of the fires on the third stage
 
 	private System.Action UpdateMethod;
 
 
 	private SpriteRenderer _sprite;			    //Reference to sprite renderer component
     private List<BurningObject> nearbyObjects;  //List of objects that are close enough to be ignited
-    private LevelManager manager;
+    private BurningGroup group;                 //The group script of the parent of this gameobject
 
     private bool saved;
 	private bool ignite;					    //Should the object ignite nearby objects
@@ -31,18 +33,17 @@ public class BurningObject : ActionableObject {
 	void Awake () {
 		_sprite = GetComponent<SpriteRenderer> ();
 		_sprite.sprite = burnSprites [0];
-		burnState = 1;
+		burnState = 0;
 		maxState = burnSprites.Length;
 
-        manager = GameObject.FindObjectOfType<LevelManager>();
+        group = transform.parent.GetComponent<BurningGroup>();
 
         UpdateMethod = () => { };        
         if (burning == true)
         {
+            burnState = 1;
             StartBurning();
         }
-        else
-            StopBurning();
         UpdateState();
         FindNearbyObjects();
 	}    
@@ -54,7 +55,7 @@ public class BurningObject : ActionableObject {
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Water")) {
-            UseAction();
+            SaveObject();
         }
     }
 
@@ -67,16 +68,17 @@ public class BurningObject : ActionableObject {
 	}
 	public void StopBurning() {
 		UpdateMethod = () => { };
-        SetBigFire(false);
-        SetSmallFire(false);
+        ThirdStage(false);
+        SecondStage(false);
 		burning = false;
 	}
-    public override void UseAction()
+    public void SaveObject()
     {
         if (saved == true) return;
         StopBurning();
         saved = true;
-        manager.saveCrates(1);
+        group.UseAction();
+        
     }
 	private void Burn() {
 		damage += Time.deltaTime;        
@@ -98,46 +100,52 @@ public class BurningObject : ActionableObject {
     private void UpdateState() {
         switch (burnState)
         {
+            case 0:
+                FirstStage(false);
+                SecondStage(false);
+                ThirdStage(false);
+                break;
             case 1:
-                SetSmallFire(false);
-                SetBigFire(false);
+                FirstStage(true);
+                SecondStage(false);
+                ThirdStage(false);
                 break;
             case 2:
-                SetSmallFire(true);
+                SecondStage(true);
                 break;
             case 3:
-                SetBigFire(true);
+                ThirdStage(true);
                 break;
             case 4:
                 Die();
                 break;
         }
     }
-    private void SetSmallFire(bool active = true) {
-        foreach (GameObject go in smallFires)
+
+    private void FirstStage(bool active = true)
+    {
+        foreach (GameObject go in firstStageFire)
+        {
+            go.SetActive(active);
+            if (active == true)
+                StartCoroutine(Tutorial.FadeIn(go.GetComponent<SpriteRenderer>(), 1));            
+        }
+    }
+    private void SecondStage(bool active = true) {
+        foreach (GameObject go in secondStageFire)
         {
             go.SetActive(active);
             if(active == true)
-                StartCoroutine(Tutorial.FadeIn(go.GetComponent<SpriteRenderer>(), 1));
-            /*
-            if(animate == true)
-                StartCoroutine(SetScale(go.transform, 1, !active));
-            else
-                go.SetActive(active);*/
+                StartCoroutine(Tutorial.FadeIn(go.GetComponent<SpriteRenderer>(), 1));            
         }
     }
-    private void SetBigFire(bool active = true) {
-        foreach (GameObject go in fires)
+    private void ThirdStage(bool active = true) {
+        foreach (GameObject go in thirdStageFire)
         {
 
             go.SetActive(active);
             if(active == true)
-                StartCoroutine(Tutorial.FadeIn(go.GetComponent<SpriteRenderer>(), 1));
-            /*
-            if(animate == true)
-                StartCoroutine(SetScale(go.transform, 1, !active));
-            else
-                go.SetActive(active);*/
+                StartCoroutine(Tutorial.FadeIn(go.GetComponent<SpriteRenderer>(), 1));           
         }        
     }
 	private void Die() {
