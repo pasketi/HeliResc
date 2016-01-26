@@ -30,7 +30,7 @@ public class LevelMapScript : MonoBehaviour {
         minLimit = -(new Vector2(range.x * ((size * 0.5f) - 1), range.y * ((size * 0.5f) - 1)));
         maxLimit = new Vector2(range.x * (size * 0.5f), range.y * (size * 0.5f));
 
-        rect.sizeDelta = range * size;
+        //rect.sizeDelta = range * size;
 
 		SetScrollRectPosition ();
 	}
