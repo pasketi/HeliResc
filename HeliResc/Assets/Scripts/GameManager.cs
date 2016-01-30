@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
+	public float pixelDragThresholdMultiplier = 20f;
 	private bool showLevelEnd = false;
 	public bool ShowLevelEnd { get { return showLevelEnd; } }
 
@@ -62,6 +65,8 @@ public class GameManager : MonoBehaviour {
 
     void OnLevelWasLoaded(int level) {
         
+		if ( GameObject.Find("EventSystem") != null ) GameObject.Find("EventSystem").GetComponent<EventSystem>().pixelDragThreshold = (int)(pixelDragThresholdMultiplier * ((float)Screen.width / (float)Screen.height));
+
         //Quit the game when player press back button
         if(level == 1) EventManager.StartListening(SaveStrings.eEscape, Application.Quit);
         else EventManager.StopListening(SaveStrings.eEscape, Application.Quit);
@@ -115,6 +120,11 @@ public class GameManager : MonoBehaviour {
 	public static void LoadLevel(string level) {
         instance.StartLevel(level);
 	}
+
+	public string LevelName () {
+		return SceneManager.GetActiveScene().name;
+	}
+
     public void StartLevel(string level) {
         StartCoroutine(LoadLevelAsync(level));
     }
