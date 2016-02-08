@@ -19,7 +19,7 @@ public class LevelEndManager : MonoBehaviour {
     public Sprite winnerAl;
     public Sprite passedAl;
     public Sprite timeoutAl;
-	public Sprite loserAl;
+	public Sprite loserAl; 
 
     private Dictionary<int, Sprite> endFaces;
 
@@ -27,6 +27,8 @@ public class LevelEndManager : MonoBehaviour {
 	public Sprite lockedStar;
     public Sprite unlockedRuby;
     public Sprite unlockedSapphire;
+
+	public GameObject coinPrefab;
 
 	private LevelEndInfo levelEnd;
     private Level level;
@@ -64,14 +66,17 @@ public class LevelEndManager : MonoBehaviour {
 
 		if (level.star1 == false && levelEnd.obj1Passed == true) {
 			gameManager.wallet.AddMoney(10 + 10 * level.id);
+			StartCoroutine(CoinFlow(10+10*level.id, GameObject.Find("Star1")));
 			playerStars++;
 		}
 		if (level.star2 == false && levelEnd.obj2Passed == true) {
 			gameManager.wallet.AddMoney(10 + 10 * level.id);
+			StartCoroutine(CoinFlow(10+10*level.id, GameObject.Find("Star2")));
 			playerStars++;
 		}
 		if (level.star3 == false && levelEnd.obj3Passed == true) {
 			gameManager.wallet.AddMoney(10 + 10 * level.id);
+			StartCoroutine(CoinFlow(10+10*level.id, GameObject.Find("Star3")));
 			playerStars++;
 		}
 
@@ -87,6 +92,7 @@ public class LevelEndManager : MonoBehaviour {
         level.star2 = levelEnd.obj2Passed || level.star2;
         level.star3 = levelEnd.obj3Passed || level.star3;
 
+		// Grafiikoiden määritys
         if (levelEnd.passedLevel == true)
         {            
             PassedLevel();
@@ -113,10 +119,26 @@ public class LevelEndManager : MonoBehaviour {
     }
 
     private IEnumerator Animations(bool showRuby) {
+				Debug.Log("Animations");
         yield return null;
     }
-    private IEnumerator CoinFlow(int amount) {
-        yield return null;
+		private IEnumerator CoinFlow(int amount, GameObject spawnPosition) {
+				yield return new WaitForSeconds(5f);
+				float maxCoinForce = 1000f;
+				GameObject[] coins = new GameObject[amount];
+				Vector2 coinDestination = (Vector2)Camera.main.ScreenToWorldPoint(GameObject.Find("ImageCoin").GetComponent<RectTransform>().position);
+				Debug.Log(coinDestination);
+				for (int i = 0; i < amount; i++) coins[i] = Instantiate(coinPrefab, spawnPosition.transform.position, Quaternion.identity) as GameObject;
+				foreach (GameObject coin in coins) {
+						coin.transform.SetParent(spawnPosition.transform);
+						coin.transform.localScale = new Vector3(20f,20f,0f);
+						Vector2 force, coinPosition = (Vector2)Camera.main.ScreenToWorldPoint(coin.GetComponent<RectTransform>().position);
+						force = coinPosition - coinDestination;
+						Debug.Log ("Coin Force before normalization " + coinPosition + " - " + coinDestination + " = " + force);
+						force.Normalize();
+						coin.GetComponent<Rigidbody2D>().AddForce(force * maxCoinForce, ForceMode2D.Force);
+				}
+				yield return null;
     }
     private IEnumerator StarsAnimation() {
         yield return null;
