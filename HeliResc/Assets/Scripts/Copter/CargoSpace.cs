@@ -105,7 +105,7 @@ public class CargoSpace : Upgradable {
         cargoItems = new List<HookableObject>();
 
         cargoMass = 0;
-        //playerRb.mass = cargoMass + hookMass + copterMass;
+        playerRb.mass = cargoMass + copterMass;
         manager.setCargoCrates(currentCargo);
     }    
 

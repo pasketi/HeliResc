@@ -114,30 +114,34 @@ public class LevelEndManager : MonoBehaviour {
 
         debugTime.text = "Time spent: " + levelEnd.levelTime;
 
-        StartCoroutine(Animations(levelEnd.rubyFound));		
+        //StartCoroutine(Animations(levelEnd.rubyFound));		
 
     }
 
     private IEnumerator Animations(bool showRuby) {
-				Debug.Log("Animations");
         yield return null;
     }
 		private IEnumerator CoinFlow(int amount, GameObject spawnPosition) {
-				yield return new WaitForSeconds(5f);
-				float maxCoinForce = 1000f;
+
+				// Coin initialization
+				yield return new WaitForSeconds(1f);
 				GameObject[] coins = new GameObject[amount];
-				Vector2 coinDestination = (Vector2)Camera.main.ScreenToWorldPoint(GameObject.Find("ImageCoin").GetComponent<RectTransform>().position);
-				Debug.Log(coinDestination);
-				for (int i = 0; i < amount; i++) coins[i] = Instantiate(coinPrefab, spawnPosition.transform.position, Quaternion.identity) as GameObject;
-				foreach (GameObject coin in coins) {
-						coin.transform.SetParent(spawnPosition.transform);
-						coin.transform.localScale = new Vector3(20f,20f,0f);
-						Vector2 force, coinPosition = (Vector2)Camera.main.ScreenToWorldPoint(coin.GetComponent<RectTransform>().position);
-						force = coinPosition - coinDestination;
-						Debug.Log ("Coin Force before normalization " + coinPosition + " - " + coinDestination + " = " + force);
+				//Debug.Log(coinDestination);
+				for (int i = 0; i < amount; i++) {
+						coins[i] = Instantiate(coinPrefab, spawnPosition.transform.position, Quaternion.identity) as GameObject;
+						coins[i].transform.SetParent(spawnPosition.transform);
+						Vector2 force = new Vector2 (Random.value-0.5f,Random.value-0.5f);
 						force.Normalize();
-						coin.GetComponent<Rigidbody2D>().AddForce(force * maxCoinForce, ForceMode2D.Force);
+						coins[i].GetComponent<Rigidbody2D>().AddForce(force * (Random.value * 7500f + 2500f), ForceMode2D.Force);
 				}
+
+				/*foreach (GameObject coin in coins) {
+						//coin.transform.localScale = new Vector3(1f,1f,1f);
+						//coin.GetComponent<RectTransform>().anchorMin = new Vector2 (0f,0f);
+						//coin.GetComponent<RectTransform>().anchorMax = new Vector2 (0.1f,0.1f);
+				}*/
+
+				// End
 				yield return null;
     }
     private IEnumerator StarsAnimation() {

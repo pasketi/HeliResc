@@ -157,4 +157,9 @@ public class GameManager : MonoBehaviour {
     private void CheckEarnedStars() {
 
     }
+
+	/*private IEnumerator Loader () {
+				for (int curLvl = 0; curLvl < SceneManager.sceneCount; curLvl++) SceneManager.LoadSceneAsync(curLvl);
+				yield return null;
+	}*/
 }
