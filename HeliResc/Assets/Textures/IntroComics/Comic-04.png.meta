@@ -1,0 +1,137 @@
+fileFormatVersion: 2
+guid: a09bba7af87ca4d6489cfceb27e27b40
+timeCreated: 1455545167
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Comic-04_0
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 2
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Comic-04_0
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 369
+        width: 1554
+        height: 627
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 173.46667, y: -30.199997}
+        - {x: 173.46667, y: -23.199997}
+        - {x: 245.46667, y: -24.199997}
+        - {x: 402.46667, y: -24.199997}
+        - {x: 404.46667, y: -23.199997}
+        - {x: 411.46667, y: 63.800003}
+        - {x: 411.46667, y: 79.8}
+        - {x: 415.46667, y: 143.8}
+        - {x: 415.46667, y: 168.8}
+        - {x: 373.46667, y: 168.8}
+        - {x: 327.46667, y: 164.8}
+        - {x: 247.46667, y: 159.8}
+        - {x: 214.46667, y: 158.8}
+        - {x: 189.46667, y: 156.8}
+        - {x: 141.46667, y: 152.8}
+        - {x: 131.46667, y: 153.8}
+        - {x: 128.46667, y: 140.8}
+        - {x: 135.46667, y: 75.8}
+        - {x: 137.46667, y: 45.800003}
+        - {x: 138.46667, y: 27.800003}
+        - {x: 92.466675, y: 26.800003}
+        - {x: 38.466675, y: 24.800003}
+        - {x: -16.533325, y: 22.800003}
+        - {x: -30.533325, y: 21.800003}
+        - {x: -58.533325, y: 20.800003}
+        - {x: -111.533325, y: 19.800003}
+        - {x: -110.533325, y: 26.800003}
+        - {x: -104.533325, y: 102.8}
+        - {x: -101.533325, y: 134.8}
+        - {x: -99.533325, y: 154.8}
+        - {x: -107.533325, y: 158.8}
+        - {x: -162.53333, y: 166.8}
+        - {x: -185.53333, y: 168.8}
+        - {x: -269.53333, y: 168.8}
+        - {x: -294.53333, y: 166.8}
+        - {x: -333.53333, y: 158.8}
+        - {x: -357.53333, y: 149.8}
+        - {x: -375.53333, y: 141.8}
+        - {x: -391.53333, y: 133.8}
+        - {x: -404.53333, y: 125.8}
+        - {x: -414.53333, y: 117.8}
+        - {x: -414.53333, y: 97.8}
+        - {x: -411.53333, y: 86.8}
+        - {x: -405.53333, y: 35.800003}
+        - {x: -396.53333, y: -19.199997}
+        - {x: -395.53333, y: -29.199997}
+        - {x: -392.53333, y: -35.199997}
+        - {x: -358.53333, y: -37.199997}
+        - {x: -301.53333, y: -39.199997}
+        - {x: -255.53333, y: -41.199997}
+        - {x: -165.53333, y: -45.199997}
+        - {x: -153.53333, y: -46.199997}
+        - {x: -118.533325, y: -47.199997}
+        - {x: -115.533325, y: -57.199997}
+        - {x: -114.533325, y: -91.2}
+        - {x: -112.533325, y: -157.2}
+        - {x: -111.533325, y: -166.2}
+        - {x: -110.533325, y: -167.2}
+        - {x: 156.46667, y: -167.2}
+        - {x: 158.46667, y: -165.2}
+        - {x: 161.46667, y: -141.2}
+        - {x: 169.46667, y: -68.2}
+      - - {x: -310.53333, y: -94.2}
+        - {x: -309.53333, y: -97.2}
+        - {x: -306.53333, y: -97.2}
+        - {x: -304.53333, y: -95.2}
+        - {x: -305.53333, y: -92.2}
+        - {x: -308.53333, y: -92.2}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

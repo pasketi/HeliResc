@@ -1,0 +1,137 @@
+fileFormatVersion: 2
+guid: 50f2cae1ec4ed46f09cb674d9d092219
+timeCreated: 1455545251
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Comic-16_0
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 2
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Comic-16_0
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 334
+        width: 1110
+        height: 649
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32.033325, y: -56.366653}
+        - {x: -33.033325, y: -36.366653}
+        - {x: -35.033325, y: 38.633347}
+        - {x: -37.033325, y: 114.63335}
+        - {x: -38.033325, y: 140.63335}
+        - {x: -39.033325, y: 143.63335}
+        - {x: -53.033325, y: 146.63335}
+        - {x: -93.033325, y: 150.63335}
+        - {x: -120.033325, y: 155.63335}
+        - {x: -179.03333, y: 162.63335}
+        - {x: -238.03333, y: 171.63335}
+        - {x: -258.03333, y: 173.63335}
+        - {x: -276.03333, y: 173.63335}
+        - {x: -277.03333, y: 171.63335}
+        - {x: -278.03333, y: 163.63335}
+        - {x: -283.03333, y: 78.63335}
+        - {x: -286.03333, y: 44.633347}
+        - {x: -288.03333, y: 18.633347}
+        - {x: -291.03333, y: -49.366653}
+        - {x: -296.03333, y: -108.36665}
+        - {x: -296.03333, y: -149.36665}
+        - {x: -291.03333, y: -151.36665}
+        - {x: -262.03333, y: -153.36665}
+        - {x: -188.03333, y: -160.36665}
+        - {x: -103.033325, y: -168.36665}
+        - {x: -47.033325, y: -173.36665}
+        - {x: -29.033325, y: -173.36665}
+        - {x: -29.033325, y: -169.36665}
+        - {x: -30.033325, y: -167.36665}
+        - {x: -30.033325, y: -131.36665}
+        - {x: -31.033325, y: -93.36665}
+      - - {x: 241.96667, y: -101.36665}
+        - {x: 256.96667, y: -47.366653}
+        - {x: 260.96667, y: -30.366653}
+        - {x: 267.96667, y: 0.63334656}
+        - {x: 275.96667, y: 33.633347}
+        - {x: 280.96667, y: 48.633347}
+        - {x: 284.96667, y: 69.63335}
+        - {x: 293.96667, y: 126.63335}
+        - {x: 296.96667, y: 141.63335}
+        - {x: 296.96667, y: 153.63335}
+        - {x: 295.96667, y: 154.63335}
+        - {x: 291.96667, y: 155.63335}
+        - {x: 199.96667, y: 161.63335}
+        - {x: 166.96667, y: 163.63335}
+        - {x: 74.966675, y: 169.63335}
+        - {x: 7.966675, y: 173.63335}
+        - {x: -20.033325, y: 173.63335}
+        - {x: -20.033325, y: 168.63335}
+        - {x: -19.033325, y: 168.63335}
+        - {x: -19.033325, y: 91.63335}
+        - {x: -18.033325, y: 90.63335}
+        - {x: -18.033325, y: 13.633347}
+        - {x: -17.033325, y: 12.633347}
+        - {x: -16.033325, y: -149.36665}
+        - {x: -9.033325, y: -152.36665}
+        - {x: 22.966675, y: -153.36665}
+        - {x: 63.966675, y: -155.36665}
+        - {x: 84.966675, y: -156.36665}
+        - {x: 125.966675, y: -158.36665}
+        - {x: 157.96667, y: -160.36665}
+        - {x: 198.96667, y: -162.36665}
+        - {x: 238.96667, y: -164.36665}
+        - {x: 260.96667, y: -165.36665}
+        - {x: 275.96667, y: -165.36665}
+        - {x: 277.96667, y: -163.36665}
+        - {x: 274.96667, y: -155.36665}
+        - {x: 258.96667, y: -130.36665}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

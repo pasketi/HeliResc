@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class LevelEndManager : MonoBehaviour {
 
 	private GameManager gameManager;
+	private MoneyUIUpdate moneyText;
 
     public Text debugTime;
 
@@ -40,6 +41,7 @@ public class LevelEndManager : MonoBehaviour {
 
     public void UpdateLevelEnd(GameManager gm) {
         gameManager = gm;
+		moneyText = GameObject.Find("TextMoney").GetComponent<MoneyUIUpdate>();
 
         CreateFaceDictionary();
 
@@ -63,6 +65,8 @@ public class LevelEndManager : MonoBehaviour {
 
 		//Save the amount of stars and rubies the player has earned from all levels
 		int playerStars = PlayerPrefs.GetInt(SaveStrings.sPlayerStars, 0);
+		moneyText.setOldMoney(gameManager.wallet.Coins);
+		moneyText.setLevelEnd(true);
 
 		if (level.star1 == false && levelEnd.obj1Passed == true) {
 			gameManager.wallet.AddMoney(10 + 10 * level.id);

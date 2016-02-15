@@ -10,6 +10,10 @@ public class IntroScreenScript : MonoBehaviour {
 	public Text introText;
     public Image introComic;
 
+	private int spriteIndex = 0;
+	
+	public GameObject loadImage;
+
     void OnEnable() {
         EventManager.StartListening(SaveStrings.eEscape, PressBack);
     }
@@ -21,6 +25,7 @@ public class IntroScreenScript : MonoBehaviour {
 	void Start () {
         LevelSet set = LevelHandler.GetLevelSet();
         Intro i = intro[set.setIndex];
+		spriteIndex = 0;
 
         if (i.showText == true) {
             introText.enabled = true;
@@ -31,7 +36,7 @@ public class IntroScreenScript : MonoBehaviour {
         else {
             introText.enabled = false;
             introComic.enabled = true;
-            introComic.sprite = i.sprite;
+			introComic.sprite = i.sprite[spriteIndex];
         }
 
         if (challenges.Length != 3) Debug.LogError("Missing references to challege texts");
@@ -44,7 +49,16 @@ public class IntroScreenScript : MonoBehaviour {
 
     public void PressPlay()
     {
-		GameManager.LoadLevel (LevelHandler.CurrentLevel.name);
+		LevelSet set = LevelHandler.GetLevelSet();
+		Intro i = intro[set.setIndex];
+		
+		if (spriteIndex >= i.sprite.Length-1) {
+			loadImage.SetActive(true);
+			GameManager.LoadLevel (LevelHandler.CurrentLevel.name);
+		} else {
+			spriteIndex++;
+			introComic.sprite = i.sprite[spriteIndex];
+		}
 	}
 
 	public void PressBack() {
@@ -54,7 +68,7 @@ public class IntroScreenScript : MonoBehaviour {
     [System.Serializable]
     public class Intro {
         public bool showText;
-        public Sprite sprite;
+        public Sprite[] sprite;
         public string text;
     }
 }

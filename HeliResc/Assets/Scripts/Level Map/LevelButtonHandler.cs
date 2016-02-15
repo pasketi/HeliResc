@@ -11,6 +11,8 @@ public class LevelButtonHandler : MonoBehaviour {
     public Image lockedImage;       //The image component of the locked sprite. enable if level is locked
     public Image[] unlockedStars;   //The image components of the stars.
     public Image unlockedRuby;      //The image component of the ruby image
+	
+	public GameObject loadImage;
 
 	public Vector2 size;			//Size in percentage of the screen
     private string levelId;			//The name the level information is going to be saved
@@ -19,10 +21,10 @@ public class LevelButtonHandler : MonoBehaviour {
     public void Init(int id, LevelSet set) {
         levelId = set.levelSetName + id;			//Set the identifier from the set name and the integer id
         level = Level.Load(set.levelSetName, id);
+		loadImage = GameObject.Find("LoadImage");
 
         transform.localScale = Vector3.one;
-
-        //Debug.Log(level.ToString());
+				Debug.Log(loadImage + " " + GameObject.Find("LoadImage"));
 
         if(level.unlocked == true) {
             if (unlockedStars.Length != 3) Debug.LogError("The stars array is not the correct size");
@@ -75,10 +77,14 @@ public class LevelButtonHandler : MonoBehaviour {
 	public void LoadLevel() {
         if (level.unlocked == true) {
             LevelHandler.CurrentLevel = level;
-            if (level.id > 0)
+			if (level.id > 0){
+				loadImage.SetActive(true);
                 GameManager.LoadLevel(levelId);
-            else
+			}
+			else{
+				loadImage.SetActive(true);
                 GameManager.LoadLevel("IntroScreen");
+			}
         }
 	}
 }

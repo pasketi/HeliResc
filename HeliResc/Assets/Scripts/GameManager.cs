@@ -64,8 +64,8 @@ public class GameManager : MonoBehaviour {
 	}
 
     void OnLevelWasLoaded(int level) {
-        
-		if ( GameObject.Find("EventSystem") != null ) GameObject.Find("EventSystem").GetComponent<EventSystem>().pixelDragThreshold = (int)(pixelDragThresholdMultiplier * ((float)Screen.width / (float)Screen.height));
+		if (GameObject.Find("LoadImage") != null) GameObject.Find("LoadImage").SetActive(false);
+		if (GameObject.Find("EventSystem") != null ) GameObject.Find("EventSystem").GetComponent<EventSystem>().pixelDragThreshold = (int)(pixelDragThresholdMultiplier * ((float)Screen.width / (float)Screen.height));
 
         //Quit the game when player press back button
         if(level == 1) EventManager.StartListening(SaveStrings.eEscape, Application.Quit);

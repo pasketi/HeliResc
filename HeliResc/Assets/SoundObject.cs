@@ -27,17 +27,14 @@ public class SoundObject : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         if (playSoundOnTrigger == true) {
-            if (other.CompareTag("Copter") || other.CompareTag("Hook")) {
-                PlaySound();
-            }
+            if (other.CompareTag("Copter") || other.CompareTag("Hook")) PlaySound();
+			if (other.CompareTag("Coin") && gameObject.CompareTag("Bank")) PlaySound();
         }
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (playSoundOnCollision == true) {
-            if (collision.gameObject.CompareTag("Copter") || collision.gameObject.CompareTag("Hook")) {
-                PlaySound();
-            }
+            if (collision.gameObject.CompareTag("Copter") || collision.gameObject.CompareTag("Hook")) PlaySound();
         }
     }
 
