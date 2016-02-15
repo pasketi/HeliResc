@@ -78,11 +78,11 @@ public class LevelButtonHandler : MonoBehaviour {
         if (level.unlocked == true) {
             LevelHandler.CurrentLevel = level;
 			if (level.id > 0){
-				loadImage.SetActive(true);
+				loadImage.transform.localScale = new Vector3 (1f, 1f, 1f);
                 GameManager.LoadLevel(levelId);
 			}
 			else{
-				loadImage.SetActive(true);
+				loadImage.transform.localScale = new Vector3 (1f, 1f, 1f);
                 GameManager.LoadLevel("IntroScreen");
 			}
         }

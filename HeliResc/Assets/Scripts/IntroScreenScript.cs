@@ -53,7 +53,7 @@ public class IntroScreenScript : MonoBehaviour {
 		Intro i = intro[set.setIndex];
 		
 		if (spriteIndex >= i.sprite.Length-1) {
-			loadImage.SetActive(true);
+			loadImage.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
 			GameManager.LoadLevel (LevelHandler.CurrentLevel.name);
 		} else {
 			spriteIndex++;
