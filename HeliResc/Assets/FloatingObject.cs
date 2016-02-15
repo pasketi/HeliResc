@@ -10,6 +10,7 @@ public class FloatingObject : MonoBehaviour {
     private float floatyValue;
     private bool inWater;
     private Rigidbody2D _rigidbody;
+	private LevelManager lManager;
 
     private Action UpdateMethod = () => { };            //Assign a static or non static method to update the object
 
@@ -19,6 +20,7 @@ public class FloatingObject : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		lManager = GameObject.Find("LevelManagerO").GetComponent<LevelManager>();
         _transform = transform;
         _rigidbody = GetComponent<Rigidbody2D>();
         water = GameObject.FindGameObjectWithTag("waterLayer1").transform;
@@ -37,7 +39,7 @@ public class FloatingObject : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        UpdateMethod();
+				if (!lManager.gameState.Equals(GameState.Paused)) UpdateMethod();
 	}
 
     private void StaticUpdate() {
@@ -51,7 +53,7 @@ public class FloatingObject : MonoBehaviour {
         //}
         if (_transform.position.y < water.position.y + scale) {
             inWater = true;
-            _rigidbody.AddForce(Vector3.up * floatyValue);
+			_rigidbody.AddForce(Vector3.up * floatyValue);
         }
         else if (_transform.position.y > water.position.y + scale * 2) { 
         
