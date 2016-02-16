@@ -6,6 +6,7 @@ public class CopterEntryScript : MonoBehaviour {
 
     public int index;						//The index of the copter in the gamemanagers copter list
 	public Image copterImage;				//The image of the copter to show in the selection list. Get the sprite from gamemanager
+	public Image selectedImage;
 
 	private CopterSelection copterSelect;	//Reference to the copterselect script
 
@@ -29,6 +30,7 @@ public class CopterEntryScript : MonoBehaviour {
 		gameManager = GameObject.FindObjectOfType<GameManager> ();
 
 		backgroundImage.enabled = false;
+		selectedImage.enabled = false;
 		copterImage.sprite = copter.copterSprite;
 		copterImage.color = copter.copterColor;
 
@@ -41,19 +43,20 @@ public class CopterEntryScript : MonoBehaviour {
 	}
 
 	public void SelectCopter() {
-		copterSelect.UpdateSelected (index);
 
 //		Debug.Log ("Copter: " + copter.copterName + " uncloked: " + copter.unlocked);
-		ShowBackground (true);
 		if (copter.unlocked == true) {
 
+			ShowSelected (true);
 			gameManager.CurrentCopterIndex = index;
 			PlayerPrefs.SetInt(SaveStrings.sSelectedCopter, index);
+			copterSelect.UpdateSelected (index);
 			copterSelect.CopterUnlocked();
 			
 		} else if (copter.buyable == true) {
 
 			string buyText = copter.copterPrice.ToString();
+			copterSelect.UpdateSelected (index);
 			copterSelect.CopterBuyable(buyText);
 			
 		} else {
@@ -66,11 +69,16 @@ public class CopterEntryScript : MonoBehaviour {
 			else if(copter.requiredRubies > 0){
 				starText = PlayerPrefs.GetInt(SaveStrings.sPlayerRubies) + "/" + copter.requiredRubies.ToString();
 			}
+			copterSelect.UpdateSelected (index);
 			copterSelect.CopterLocked(starText, showStar);
 			
 		}
+		ShowBackground (true);
 	}
 	public void ShowBackground(bool show) {
 		backgroundImage.enabled = show;
+	}
+	public void ShowSelected(bool show) {
+		selectedImage.enabled = show;
 	}
 }

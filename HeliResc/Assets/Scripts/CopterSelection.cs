@@ -12,6 +12,7 @@ public class CopterSelection : MonoBehaviour {
 
 	//All these 3 panels are below the copter image in the copter info panel 
 	public GameObject buyPanel;									//The panel that is available when the player hasn't bought the copter
+	public GameObject costPanel;
 	public GameObject lockedPanel;								//The panel that is on when player has not enough stars to buy the copter
 	public GameObject unlockedPanel;							//The panel to show when the copter is available
 
@@ -52,6 +53,7 @@ public class CopterSelection : MonoBehaviour {
 
 	public void CopterUnlocked() {
 		buyPanel.SetActive (false);
+		costPanel.SetActive (false);
 		lockedPanel.SetActive (false);
 
 		unlockedPanel.SetActive (true);
@@ -59,6 +61,7 @@ public class CopterSelection : MonoBehaviour {
 
 	public void CopterLocked(string text, bool showStar) {
 		buyPanel.SetActive (false);
+		costPanel.SetActive (false);
 		unlockedPanel.SetActive (false);
 
 		lockedPanel.SetActive (true);
@@ -72,10 +75,20 @@ public class CopterSelection : MonoBehaviour {
 	public void CopterBuyable(string buyText) {
 		unlockedPanel.SetActive (false);
 		lockedPanel.SetActive (false);
+		costPanel.SetActive (false);
+		buyPanel.SetActive (false);
+		Text moneyText;
+		CopterInfo info = allCopters[selectedCopter];
 
-		buyPanel.SetActive (true);
+		if (gameManager.wallet.Coins >= info.copterPrice) {
+			buyPanel.SetActive (true);
+			moneyText = buyPanel.GetComponentInChildren<Text> ();
+		}
+		else {
+			costPanel.SetActive (true);
+			moneyText = costPanel.GetComponentInChildren<Text> ();
+		}
 
-		Text moneyText = buyPanel.GetComponentInChildren<Text> ();
 		moneyText.text = buyText;
 	}
 
@@ -84,6 +97,9 @@ public class CopterSelection : MonoBehaviour {
 
 		foreach (CopterEntryScript entry in copterEntries.Values) {
 			entry.ShowBackground(false);
+			if (entry.index != gameManager.CurrentCopterIndex) entry.ShowSelected(false);
+			//if (selectedCopter != gameManager.CurrentCopterIndex) entry.ShowSelected(false);
+			//else entry.ShowSelected(true);
 		}
 
 		UpdateCopterScreen ();
@@ -106,7 +122,7 @@ public class CopterSelection : MonoBehaviour {
             info.unlocked = true;
 			info.Save();            
 			copterEntries[selectedCopter].UpdateInfo(info);
-			copterEntries[selectedCopter].SelectCopter();                        
+			copterEntries[selectedCopter].SelectCopter();                       
 		}
 	}
 }
