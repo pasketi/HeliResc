@@ -187,7 +187,7 @@ public class LevelManager : MonoBehaviour {
             end.obj3Passed = objectives.LevelObjective3();
         }
 
-		setResetButton(true);
+		if (!passed) setResetButton(true);
         float timer = resetCountdown;
         float deltaTime = Time.time;
         while (timer > 0) {
