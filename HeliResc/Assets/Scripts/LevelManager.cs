@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class LevelManager : MonoBehaviour {
@@ -13,16 +14,16 @@ public class LevelManager : MonoBehaviour {
 	public float LevelTimer { get { return levelTimer; } }	//Getter for the level timer
 	private float levelTimer;								//The time when gamestate is changed to running
 
-
-
     private MissionObjectives objectives;
 
     private Copter copterScript;
 
 	private int reward = 1, actionsPerLevel = 0;
-	private float graceTime = 10f;
+	private float graceTime = 5f, maxGraceTime = 5f;
 	public int levelCoinRewardPerStar = 200, neededCrates = 0;
 	public GameObject pauseScreen, HUD, copterSpawnPoint, kamikazePelican;
+	public SoundObject endCheer;
+	private bool cheerOnce = false;
 	public GameObject levelSplash;
 	private bool win = false, lose = false, splash = false, gamePaused = false, takenDamage = false, once = false, releaseThePelican = false;
 	private bool exploded;
@@ -62,7 +63,7 @@ public class LevelManager : MonoBehaviour {
 		if (gameManager != null) copter = Instantiate (gameManager.CurrentCopter, copterSpawnPoint.transform.position, Quaternion.identity) as GameObject;
 
 		copter.name = "Copter";
-        copterScript = copter.GetComponent<Copter>();
+		copterScript = copter.GetComponent<Copter>();
         cargoSize = copterScript.cargo.maxCapacity;
         
 
@@ -91,29 +92,34 @@ public class LevelManager : MonoBehaviour {
         //}
         //if (lose) {
         //    resetCountdown -= Time.deltaTime;
-        //    //if (GameObject.Find("Copter") != null) GameObject.Find("Copter").GetComponent<CopterManagerTouch>().isKill = true;
+        //    //if (copter != null) copter.GetComponent<CopterManagerTouch>().isKill = true;
         //    if (resetCountdown <= 0f) loseLevel (EndReason.explode);
         //} else if (splash) {
         //    resetCountdown -= Time.deltaTime;
-        //    //if (GameObject.Find("Copter") != null) GameObject.Find("Copter").GetComponent<CopterManagerTouch>().isSplash = true;
+        //    //if (copter != null) copter.GetComponent<CopterManagerTouch>().isSplash = true;
         //    if (resetCountdown <= 0f) loseLevel(EndReason.drowned);
         //}
 
-		if (GameObject.Find("Copter") != null && !releaseThePelican && (GameObject.Find("Copter").transform.position.x <= mapBoundsLeft || GameObject.Find("Copter").transform.position.x >= mapBoundsRight)){
+		if (copter != null && !releaseThePelican && (copter.transform.position.x <= mapBoundsLeft || copter.transform.position.x >= mapBoundsRight)){
 			releaseThePelican = true;
-			if (GameObject.Find("Copter").transform.position.x <= mapBoundsLeft) Instantiate (kamikazePelican, new Vector3(mapBoundsLeft - 25f, Random.value * 15f, 0f), Quaternion.identity);
-			else if (GameObject.Find("Copter").transform.position.x >= mapBoundsRight) Instantiate (kamikazePelican, new Vector3(mapBoundsRight + 25f, Random.value * 15f, 0f), Quaternion.identity);
+			if (copter.transform.position.x <= mapBoundsLeft) Instantiate (kamikazePelican, new Vector3(mapBoundsLeft - 25f, Random.value * 15f, 0f), Quaternion.identity);
+			else if (copter.transform.position.x >= mapBoundsRight) Instantiate (kamikazePelican, new Vector3(mapBoundsRight + 25f, Random.value * 15f, 0f), Quaternion.identity);
 		}
 
-		if (GameObject.Find("Copter") != null && !releaseThePelican && GameObject.Find("Copter").GetComponent<Copter>().fuelTank.CurrentFuel <= 0f) {
-			if (graceTime > 0f) graceTime -= Time.deltaTime;
-			else {
+		if (copter != null && !releaseThePelican && copterScript.fuelTank.CurrentFuel <= 0f) {
+			if (graceTime > 0f) {
+				if (Mathf.Abs(copter.GetComponent<Rigidbody2D>().velocity.magnitude) <= 1f) graceTime -= Time.deltaTime;
+			}
+			else if (graceTime <= 0f) {
 				releaseThePelican = true;
 				int dir = Random.Range(0,2);
 				if (dir == 0) dir--;
 				else dir = 1;
-				Instantiate (kamikazePelican, new Vector3(GameObject.Find("Copter").transform.position.x + ((float) dir * 15f), Random.value * 15f, 0f), Quaternion.identity);
+				Instantiate (kamikazePelican, new Vector3(copter.transform.position.x + ((float) dir * 15f), Random.value * 15f, 0f), Quaternion.identity);
 			}
+		}
+		else if (copterScript.fuelTank.currentFuel > 0f) {
+			graceTime = maxGraceTime;
 		}
 	}
 
@@ -150,6 +156,10 @@ public class LevelManager : MonoBehaviour {
         if (passed == true) {
             LevelHandler.CompleteLevel(end.level);
             FireworksController fw = GameObject.FindObjectOfType<FireworksController>();
+			if (!cheerOnce) {
+				endCheer.PlaySound();
+				cheerOnce = true;
+			}
             if (fw != null) {
                 //fw.transform.position = GameObject.FindObjectOfType<Copter>().transform.position + Vector3.up * 3;
                 fw.Launch();
@@ -165,7 +175,7 @@ public class LevelManager : MonoBehaviour {
         }
 
         if (objectives == null) Debug.LogError("Objectives not found");
-        else
+		else if (passed == true)
         {
             end.obj1Passed = objectives.LevelObjective1();
             end.obj2Passed = objectives.LevelObjective2();
@@ -180,7 +190,8 @@ public class LevelManager : MonoBehaviour {
             yield return null;
         }
 
-        gameManager.loadMainMenu(true, end, 2);
+		if (SceneManager.GetActiveScene().name == "Tutorial00" && !passed) GameManager.LoadLevel("IntroScreen");
+		else gameManager.loadMainMenu(true, end, 2);
 	}
 
 	public void StartGame() {

@@ -175,7 +175,7 @@ public class LevelEndManager : MonoBehaviour {
         endFaces.Add(EndReason.passed, passedAl);
         endFaces.Add(EndReason.timeout, timeoutAl);
         endFaces.Add(EndReason.winner, winnerAl);
-		endFaces.Add (EndReason.lose, loserAl);
+		endFaces.Add(EndReason.lose, loserAl);
     }
 
     public void PressRestart() {

@@ -38,6 +38,7 @@ public class FuelTank : Upgradable {
         UpdateDelegate = FillFuel;
         fill = true;
         useFuel = false;
+		playerCopter.SetInputActive(true);
     }
 
     /// <summary>
@@ -45,7 +46,7 @@ public class FuelTank : Upgradable {
     /// </summary>
     private void UseFuel() {
         currentFuel -= spendingRate * playerCopter.engine.CurrentPower * Time.deltaTime;
-        if (currentFuel <= 0) {
+        if (currentFuel <= 0f) {
             useFuel = false;                            //Disable use of fuel when the tank is empty
             TankDepleted();                             //Trigger an event to notify the tank is empty
         }
