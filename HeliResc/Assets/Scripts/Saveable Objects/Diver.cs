@@ -21,4 +21,10 @@ public class Diver : HookableObject {
 
         animator.Play("Diver");
     }
+
+	public override void CargoItem () {
+		base.CargoItem();
+
+		manager.isDiverInCargo = true;
+	}
 }

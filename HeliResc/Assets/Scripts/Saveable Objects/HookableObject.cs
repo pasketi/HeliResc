@@ -6,6 +6,8 @@ public class HookableObject : MonoBehaviour, IHookable {
 
     protected Action UpdateMethod = () => { };      //Event to update all necessary methods depending on the type of the object
 
+	protected LevelManager manager;
+
     public bool saveable = true;                    //Can the object be hooked
     public bool useTimer;
     public float timeToLive = 60;
@@ -32,7 +34,7 @@ public class HookableObject : MonoBehaviour, IHookable {
 //    }
 
     protected virtual void Start() {
-        
+		manager = GameObject.Find("LevelManagerO").GetComponent<LevelManager>();
         copter = GameObject.Find("Copter").GetComponent<Copter>();
         hookScript = copter.HookScript;
         joint = GetComponent<HingeJoint2D>();

@@ -8,6 +8,7 @@ public class ArcticShipScript : MonoBehaviour {
     public Sprite damagedShip;
 	public bool moveRight = true;
 
+	private LevelManager manager;
     private SpriteRenderer _sprite;
     private Vector3 speedVector;
 	private Vector3 targetPoint;
@@ -18,6 +19,7 @@ public class ArcticShipScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		manager = GameObject.Find("LevelManagerO").GetComponent<LevelManager>();
         _transform = transform;
         _sprite = GetComponent<SpriteRenderer>();
 
@@ -97,6 +99,7 @@ public class ArcticShipScript : MonoBehaviour {
     private void HitSerac() {
         _sprite.sprite = damagedShip;
         gotHit = true;
+		manager.shipNotHit = false;
     }
     private void MoveToTarget() {
         _transform.Translate(speedVector);
@@ -111,5 +114,5 @@ public class ArcticShipScript : MonoBehaviour {
 				StartCoroutine(Stop ());
 			}
 		}
-    }        
+    }
 }

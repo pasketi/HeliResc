@@ -31,6 +31,26 @@ public class LevelManager : MonoBehaviour {
 	public int cargoSize = 2, cargoCrates = 0, levelAction = 0, maxActionsPerLevel = 0;
 	private GameObject resetButton;
 
+	//Star mission variables
+	private bool 	whaleSeen = false,
+					refueled = false,
+					diverInCargo = false,
+					dryCat = true,
+					twoCratesHooked = false,
+					noMissedThrows = true,
+					fishermenChained = false,
+					shipIntact = true;
+
+	public bool isWhaleSeen { get { return whaleSeen; } set { whaleSeen = value; } }
+	public bool isCopterRefueled { get { return refueled; } set { refueled = value; } }
+	public bool isDiverInCargo { get { return diverInCargo; } set { diverInCargo = value; } }
+	public bool isCatDry { get { return dryCat; } set { dryCat = value; } }
+	public bool multipleCratesHooked { get { return twoCratesHooked; } set { twoCratesHooked = value; } }
+	public bool totalAccuracy { get { return noMissedThrows; } set { noMissedThrows = value; } }
+	public bool chainFormed { get { return fishermenChained; } set { fishermenChained = value; } }
+	public bool shipNotHit { get { return shipIntact; } set { shipIntact = value; } }
+
+
     void OnEnable() {
         EventManager.StartListening(SaveStrings.eCopterExplode, CopterExploded);
         EventManager.StartListening(SaveStrings.eCopterSplash, CopterSplashed);
@@ -61,8 +81,12 @@ public class LevelManager : MonoBehaviour {
 			resetButton.SetActive(false);
 		}
 
-        objectives = GameObject.FindObjectOfType<MissionObjectives>();
-		        
+		objectives = GameObject.FindObjectOfType<MissionObjectives>();
+		objectives.Objective1 = LevelHandler.GetLevelSet(LevelHandler.CurrentLevel.setName).objective1;
+		objectives.Objective2 = LevelHandler.GetLevelSet(LevelHandler.CurrentLevel.setName).objective2;
+		objectives.Objective3 = LevelHandler.GetLevelSet(LevelHandler.CurrentLevel.setName).objective3;
+
+		//objectives.refreshLevelObjectives();
 		//copter instantiate
         if (copterSpawnPoint == null) copterSpawnPoint = GameObject.Find ("CopterSpawn");
 		if (gameManager != null) copter = Instantiate (gameManager.CurrentCopter, copterSpawnPoint.transform.position, Quaternion.identity) as GameObject;
@@ -295,6 +319,7 @@ public class LevelManager : MonoBehaviour {
 	public bool isDamageTaken () {
 		return takenDamage;
 	}
+
 	public void damageTaken () {
 		takenDamage = true;
 	}

@@ -48,6 +48,7 @@ public class LevelHandler : MonoBehaviour {
 		currentSet = PlayerPrefs.GetString (SaveStrings.sCurrentLevelSet, "Tutorial0");
 		currentLevel = Levels[currentSet][PlayerPrefs.GetInt(SaveStrings.sCurrentLevelIndex, 0)];
 	}
+
     public static LevelSet GetLevelSet(string name = "") {
         if (name.Equals(""))
             name = instance.currentSet;

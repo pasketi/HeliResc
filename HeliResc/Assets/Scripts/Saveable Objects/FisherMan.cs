@@ -125,6 +125,7 @@ public class FisherMan : HookableObject, IChainable {
             grabLegs = true;
             joint.connectedAnchor = chainConnectedAnchor;
             joint.anchor = chainAnchor;
+			manager.chainFormed = true;
         }
         else {
             joint.connectedAnchor = connectedAnchor;

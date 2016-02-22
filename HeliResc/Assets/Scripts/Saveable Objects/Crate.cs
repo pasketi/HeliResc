@@ -11,6 +11,8 @@ public class Crate : HookableObject {
     public override void GrabHook(Rigidbody2D hookRb) {
         base.GrabHook(hookRb);
 
+		if (crate.transform.parent.childCount >= 2) manager.multipleCratesHooked = true;
+
 		crate.gameObject.layer = LayerMask.NameToLayer("liftedCrateCollider");
 
         crate.sprite = hookedSprites[0];

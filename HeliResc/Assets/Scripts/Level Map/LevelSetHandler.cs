@@ -134,6 +134,9 @@ public class LevelSet {
     public bool unlocked;           //Is the set unlocked
     public bool animated;           //Has the animation been played
 
+	public Objective objective1;
+	public Objective objective2;
+	public Objective objective3;
     public string challenge1;
     public string challenge2;
     public string challenge3;               //Description of the level challenges 1, 2 and 3
