@@ -9,7 +9,9 @@ public class Cat : HookableObject {
 	protected override void Update () {
 		base.Update();
 
-		if (manager.isCatDry != false) manager.isCatDry = !floating.IsInWater;
+		if (manager.isCatDry != false && !hooked) {
+			manager.isCatDry = !floating.IsInWater;
+		}
 	}
 
     public override void GrabHook(Rigidbody2D hookRb) {
@@ -29,4 +31,10 @@ public class Cat : HookableObject {
     public override void CargoItem() {
         base.CargoItem();
     }
+
+	protected virtual void OnCollisionEnter2D(Collision2D collision) {
+		base.OnCollisionEnter2D(collision);
+
+		if (collision.gameObject.CompareTag("CatIsland")) manager.isCatDry = false;
+	}
 }

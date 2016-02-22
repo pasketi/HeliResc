@@ -162,9 +162,9 @@ public class LevelEndManager : MonoBehaviour {
 
     }
     private void PassedLevel() {
-        star1.sprite = starsEarned > 0 ? unlockedStar : lockedStar;
-        star2.sprite = starsEarned > 1 ? unlockedStar : lockedStar;
-        star3.sprite = starsEarned > 2 ? unlockedStar : lockedStar;
+		star1.sprite = level.star1 ? unlockedStar : lockedStar;
+		star2.sprite = level.star2 ? unlockedStar : lockedStar;
+		star3.sprite = level.star3 ? unlockedStar : lockedStar;
         
     }
 
