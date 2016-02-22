@@ -11,12 +11,16 @@ public class Crate : HookableObject {
     public override void GrabHook(Rigidbody2D hookRb) {
         base.GrabHook(hookRb);
 
+		crate.gameObject.layer = LayerMask.NameToLayer("liftedCrateCollider");
+
         crate.sprite = hookedSprites[0];
         background.sprite = hookedSprites[1];
     }
 
     public override void DetachHook() {
         base.DetachHook();
+
+		crate.gameObject.layer = LayerMask.NameToLayer("CrateCollider");
 
         crate.sprite = nonHookedSprites[0];
         background.sprite = nonHookedSprites[1];
