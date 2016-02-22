@@ -9,4 +9,4 @@ HeliResc/obj/*
 *.csproj
 *.pidb
 *.unityproj
-.DS_Store
+*.DS_Store
