@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System;
 
 [System.Serializable]
 public class FuelTank : Upgradable {
 
+	private LevelManager manager;
     public float maxCapacity = 100;                 //Maximum amount of fuel the player can have
     public float spendingRate = 1;                  //How much fuel is used
     public float fillRate = 40;                     //how much the tank is filled per second
@@ -23,6 +25,7 @@ public class FuelTank : Upgradable {
         
         UpdateDelegate = UseFuel;    //Set the update method
         currentFuel = maxCapacity;
+		manager = GameObject.FindObjectOfType<LevelManager>();
     }
 
     public override void Upgrade() {
@@ -39,7 +42,7 @@ public class FuelTank : Upgradable {
         fill = true;
         useFuel = false;
 		playerCopter.SetInputActive(true);
-		GameObject.Find("LevelManagerO").GetComponent<LevelManager>().setResetButton(false);
+		manager.setResetButton(false);
     }
 
     /// <summary>
@@ -50,7 +53,7 @@ public class FuelTank : Upgradable {
         if (currentFuel <= 0f) {
             useFuel = false;                            //Disable use of fuel when the tank is empty
             TankDepleted();                             //Trigger an event to notify the tank is empty
-			GameObject.Find("LevelManagerO").GetComponent<LevelManager>().setResetButton(true);
+			manager.setResetButton(true);
         }
     }
     private void FillFuel() {
@@ -62,6 +65,7 @@ public class FuelTank : Upgradable {
             useFuel = true;                             //Start to use fuel again
             UpdateDelegate = UseFuel;
         }
+		if (SceneManager.GetActiveScene().name.Equals("Tutorial10")) manager.isCopterRefueled = true;
     }
     protected override void GiveName() {
         name = "FuelTank";

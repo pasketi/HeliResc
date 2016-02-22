@@ -33,23 +33,12 @@ public class WhaleScript : MonoBehaviour {
             pool.Add(g);
         }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.A))
-            Launch();
-	}
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.name.Equals("Copter")) {
-            Launch();
+			StartCoroutine(Launcher());
         }
     }
-
-    void Launch() {
-        StartCoroutine(Launcher());
-    }
-    
 
     IEnumerator Launcher() {
         if (isShooting == false) {

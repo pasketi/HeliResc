@@ -30,7 +30,7 @@ public class MissionObjectives : MonoBehaviour {
         objectiveMethods.Add(Objective.PassLevel, PassLevel);
         objectiveMethods.Add(Objective.Time, TimeChallenge);
 		objectiveMethods.Add(Objective.ObjectiveNotImplemented, objectiveNotImplemented);
-		objectiveMethods.Add(Objective.WhaleSeen, isWhaleSeen);
+		objectiveMethods.Add(Objective.WhaleSeen, PassLevel);
 		objectiveMethods.Add(Objective.Refueled, isCopterRefueled);
 		objectiveMethods.Add(Objective.DiverInCargo, isDiverInCargo);
 		objectiveMethods.Add(Objective.DryCat, isCatDry);
@@ -66,10 +66,6 @@ public class MissionObjectives : MonoBehaviour {
     public bool TimeChallenge() {
         return LevelHandler.CurrentLevel.levelTimeChallenge > manager.LevelTimer && GetItems();
     }
-
-	public bool isWhaleSeen() {
-		return manager.isWhaleSeen;
-	}
 
 	public bool isCopterRefueled() {
 		return manager.isCopterRefueled;

@@ -32,8 +32,7 @@ public class LevelManager : MonoBehaviour {
 	private GameObject resetButton;
 
 	//Star mission variables
-	private bool 	whaleSeen = false,
-					refueled = false,
+	private bool 	refueled = false,
 					diverInCargo = false,
 					dryCat = true,
 					twoCratesHooked = false,
@@ -41,7 +40,6 @@ public class LevelManager : MonoBehaviour {
 					fishermenChained = false,
 					shipIntact = true;
 
-	public bool isWhaleSeen { get { return whaleSeen; } set { whaleSeen = value; } }
 	public bool isCopterRefueled { get { return refueled; } set { refueled = value; } }
 	public bool isDiverInCargo { get { return diverInCargo; } set { diverInCargo = value; } }
 	public bool isCatDry { get { return dryCat; } set { dryCat = value; } }
