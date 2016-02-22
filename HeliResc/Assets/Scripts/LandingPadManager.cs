@@ -40,7 +40,7 @@ public class LandingPadManager : MonoBehaviour {
             if (enterPlatform != null) enterPlatform(gameObject);
 
 			if (canWin == true) { 
-                bool win = objectives.AnyObjectiveCompleted();
+				bool win = objectives.ObjectiveOneCompleted();
                 if (win == true)
                     manager.winLevel();
 			}            

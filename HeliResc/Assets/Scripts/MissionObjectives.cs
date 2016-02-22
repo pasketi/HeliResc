@@ -103,6 +103,10 @@ public class MissionObjectives : MonoBehaviour {
         return objectiveMethods[o];
     }
 
+	public bool ObjectiveOneCompleted() {
+		return LevelObjective1();
+	}
+
     public bool AnyObjectiveCompleted() {
         return (LevelObjective1() || LevelObjective2() || LevelObjective3());
     }

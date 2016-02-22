@@ -127,26 +127,26 @@ public class LevelEndManager : MonoBehaviour {
     }
 		private IEnumerator CoinFlow(int amount, GameObject spawnPosition) {
 
-				// Coin initialization
-				yield return new WaitForSeconds(1f);
-				GameObject[] coins = new GameObject[amount];
-				//Debug.Log(coinDestination);
-				for (int i = 0; i < amount; i++) {
-						coins[i] = Instantiate(coinPrefab, spawnPosition.transform.position, Quaternion.identity) as GameObject;
-						coins[i].transform.SetParent(spawnPosition.transform);
-						Vector2 force = new Vector2 (Random.value-0.5f,Random.value-0.5f);
-						force.Normalize();
-						coins[i].GetComponent<Rigidbody2D>().AddForce(force * (Random.value * 7500f + 2500f), ForceMode2D.Force);
-				}
+		// Coin initialization
+		yield return new WaitForSeconds(1f);
+		GameObject[] coins = new GameObject[amount];
+		//Debug.Log(coinDestination);
+		for (int i = 0; i < amount; i++) {
+			coins[i] = Instantiate(coinPrefab, spawnPosition.transform.position, Quaternion.identity) as GameObject;
+			coins[i].transform.SetParent(spawnPosition.transform.parent.transform);
+			Vector2 force = new Vector2 (Random.value-0.5f,Random.value-0.5f);
+			force.Normalize();
+			coins[i].GetComponent<Rigidbody2D>().AddForce(force * (Random.value * 7500f + 2500f), ForceMode2D.Force);
+		}
 
-				/*foreach (GameObject coin in coins) {
+		/*foreach (GameObject coin in coins) {
 						//coin.transform.localScale = new Vector3(1f,1f,1f);
 						//coin.GetComponent<RectTransform>().anchorMin = new Vector2 (0f,0f);
 						//coin.GetComponent<RectTransform>().anchorMax = new Vector2 (0.1f,0.1f);
 				}*/
 
-				// End
-				yield return null;
+		// End
+		yield return null;
     }
     private IEnumerator StarsAnimation() {
         yield return null;
