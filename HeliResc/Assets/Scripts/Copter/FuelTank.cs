@@ -39,6 +39,7 @@ public class FuelTank : Upgradable {
         fill = true;
         useFuel = false;
 		playerCopter.SetInputActive(true);
+		GameObject.Find("LevelManagerO").GetComponent<LevelManager>().setResetButton(false);
     }
 
     /// <summary>
@@ -49,6 +50,7 @@ public class FuelTank : Upgradable {
         if (currentFuel <= 0f) {
             useFuel = false;                            //Disable use of fuel when the tank is empty
             TankDepleted();                             //Trigger an event to notify the tank is empty
+			GameObject.Find("LevelManagerO").GetComponent<LevelManager>().setResetButton(true);
         }
     }
     private void FillFuel() {

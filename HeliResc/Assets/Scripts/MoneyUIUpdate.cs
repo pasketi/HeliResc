@@ -19,7 +19,7 @@ public class MoneyUIUpdate : MonoBehaviour {
 	void Update () {
 		currentMoney = manager.wallet.Coins;
         if (Input.GetKeyDown(KeyCode.I))
-            manager.wallet.AddMoney(1);
+            manager.wallet.AddMoney(50);
 		if (!levelEnd || oldMoney == currentMoney) moneyText.text = manager.wallet.Coins.ToString();
 		else moneyText.text = oldMoney.ToString();
 		

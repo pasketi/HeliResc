@@ -35,10 +35,11 @@ public class Turbine : Upgradable {
 
 		GameObject button = copter.CreateGameObject (turboButtonPrefab, turboButtonPrefab.transform.position, Quaternion.identity);
 		button.transform.SetParent (hud.transform);
+		button.transform.SetSiblingIndex(0);
 		RectTransform rect = button.transform as RectTransform;
 
-		rect.anchoredPosition = new Vector2 (Screen.width * 0.91f, Screen.height * 0.178f);
-		rect.sizeDelta = new Vector2 (Screen.width * 0.095f, Screen.height * 0.178f);
+		rect.anchoredPosition = new Vector2 (Screen.width * 0.91f, Screen.height * (0.19f/2f));
+		rect.sizeDelta = new Vector2 (Screen.width * 0.15f, Screen.height * 0.18f);
 		rect.localScale = Vector3.one;
 
 		buttonRectangle = new Rect ();
@@ -67,7 +68,7 @@ public class Turbine : Upgradable {
 			Debug.Log(force);
 			playerRb.AddForce(force);
 		}
-		pressingButton = false;
+		//pressingButton = false;
 	}
 
 	protected void SwitchDirection() {

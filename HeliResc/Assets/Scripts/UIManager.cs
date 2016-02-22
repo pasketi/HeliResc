@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour {
 	private Color	red = new Color(1f, 0f, 0f),
 					black = new Color(0f, 0f, 0f),
 					white = new Color(1f, 1f, 1f);
+	private GameObject resetButton, pauseButton;
 
 	// Use this for initialization
 	void Start () {
@@ -40,6 +41,14 @@ public class UIManager : MonoBehaviour {
 		fuel = transform.FindChild ("Fuel").GetComponent<Image> ();
 		fuelBorder = fuel.transform.FindChild ("FuelMeter").GetComponent<Image>();
 
+		if (resetButton == null) {
+			resetButton = gameObject.transform.FindChild("ResetButton").gameObject;
+			resetButton.GetComponent<Button>().onClick.AddListener(() => manager.Reset());
+		}
+		if (pauseButton == null) {
+			pauseButton = gameObject.transform.FindChild("PauseButton").gameObject;
+			pauseButton.GetComponent<Button>().onClick.AddListener(() => manager.pause());
+		}
 
 		levelTimeChallenge = LevelHandler.CurrentLevel.levelTimeChallenge;
         //if (manager.levelAction != 0) 

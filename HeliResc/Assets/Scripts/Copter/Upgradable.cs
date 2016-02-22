@@ -3,7 +3,7 @@ using System.Collections;
 
 [System.Serializable]
 public abstract class Upgradable {
-
+	
     public bool allowUpgrade;                           //Should this item be able to be upgraded
     protected string name;                              //Identifying name of the object
     protected Rigidbody2D playerRb;                     //Reference to player rigidbody

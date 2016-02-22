@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour {
 	private bool exploded;
 	public float waterLevel = 0f, uiLiftPowerWidth = 0.1f, uiLiftPowerDeadZone = 0.05f, resetCountdown = 3f, crateSize, mapBoundsLeft = -50f, mapBoundsRight = 50f;
 	public int cargoSize = 2, cargoCrates = 0, levelAction = 0, maxActionsPerLevel = 0;
+	private GameObject resetButton;
 
     void OnEnable() {
         EventManager.StartListening(SaveStrings.eCopterExplode, CopterExploded);
@@ -55,6 +56,10 @@ public class LevelManager : MonoBehaviour {
 		actionsPerLevel = maxActionsPerLevel;
 		if (pauseScreen == null) pauseScreen = GameObject.Find("PauseScreen");
 		if (HUD == null) HUD = GameObject.Find("HUD");
+		if (resetButton == null) {
+			resetButton = HUD.transform.FindChild("ResetButton").gameObject;
+			resetButton.SetActive(false);
+		}
 
         objectives = GameObject.FindObjectOfType<MissionObjectives>();
 		        
@@ -182,6 +187,7 @@ public class LevelManager : MonoBehaviour {
             end.obj3Passed = objectives.LevelObjective3();
         }
 
+		setResetButton(true);
         float timer = resetCountdown;
         float deltaTime = Time.time;
         while (timer > 0) {
@@ -358,6 +364,14 @@ public class LevelManager : MonoBehaviour {
 
 	public void useAction() {
 		actionsPerLevel--;
+	}
+
+	public void setResetButton(bool a) {
+		resetButton.SetActive(a);
+	}
+
+	public bool getResetButton() {
+		return resetButton.activeSelf;
 	}
 }
 

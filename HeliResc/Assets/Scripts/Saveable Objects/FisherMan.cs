@@ -103,6 +103,7 @@ public class FisherMan : HookableObject, IChainable {
         UpdateMethod = () => { };
         UpdateMethod += UpdateSkull;
         skullTransform.gameObject.SetActive(true);
+		if (!manager.getResetButton()) manager.setResetButton(true);
     }
 
     public override void GrabHook(Rigidbody2D hookRb) {
