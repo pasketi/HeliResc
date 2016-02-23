@@ -106,7 +106,7 @@ public class LevelEndManager : MonoBehaviour {
 		star2Text.text = levelEnd.obj2Passed || level.star2 ? "Bonus" : "Bonus" ;
 
 		float timeDifference = level.bestTime < level.levelTimeChallenge ? (levelEnd.levelTime - level.bestTime) : (levelEnd.levelTime - level.levelTimeChallenge) ;
-		star3Text.text = (timeDifference.CompareTo(0f) >= 0 ? "+ " : "- ") + Mathf.Abs(timeDifference / 60f).ToString("#0") + ":" + Mathf.Abs(timeDifference % 60f).ToString("00.##);
+		star3Text.text = (timeDifference.CompareTo(0f) >= 0 ? "+ " : "- ") + Mathf.Abs(timeDifference / 60f).ToString("#0") + ":" + Mathf.Abs(timeDifference % 60f).ToString("00.##");
 
 		playerTime.text = "Time: " + (levelEnd.levelTime / 60f).ToString("#0") + ":" + (levelEnd.levelTime % 60f).ToString("00.##");
 
