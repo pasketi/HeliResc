@@ -11,6 +11,9 @@ public class LevelEndManager : MonoBehaviour {
     public Text debugTime;
 
 	public Image star1, star2, star3;
+	private Text star1Text, star2Text, star3Text;
+	private Text targetTime, playerTime;
+	private Image personalBest;
     public Image rubyImage;
 
     public Image alsFace;
@@ -43,7 +46,15 @@ public class LevelEndManager : MonoBehaviour {
         gameManager = gm;
 		moneyText = GameObject.Find("TextMoney").GetComponent<MoneyUIUpdate>();
 
-        CreateFaceDictionary();
+		CreateFaceDictionary();
+
+		star1Text = star1.GetComponentInChildren<Text>();
+		star2Text = star2.GetComponentInChildren<Text>();
+		star3Text = star3.GetComponentInChildren<Text>();
+		targetTime = GameObject.Find("TargetTime").GetComponent<Text>();
+		playerTime = GameObject.Find("YourTime").GetComponent<Text>();
+		personalBest = GameObject.Find("PersonalBest").GetComponent<Image>();
+		personalBest.gameObject.SetActive(false);
 
         levelEnd = gameManager.levelEnd;
 		if (levelEnd == null) {
@@ -89,6 +100,30 @@ public class LevelEndManager : MonoBehaviour {
 		if (level.rubyFound == false && levelEnd.rubyFound == true) {
 			int rubies = PlayerPrefs.GetInt(SaveStrings.sPlayerRubies) + 1;
 			PlayerPrefs.SetInt(SaveStrings.sPlayerRubies, rubies);
+		}
+
+		star1Text.text = levelEnd.itemsSaved.ToString() + "/" + levelEnd.maxItems.ToString();
+		star2Text.text = levelEnd.obj2Passed || level.star2 ? "Bonus" : "Bonus" ;
+
+		float timeDifference = level.bestTime < level.levelTimeChallenge ? (levelEnd.levelTime - level.bestTime) : (levelEnd.levelTime - level.levelTimeChallenge) ;
+		star3Text.text = (timeDifference.CompareTo(0f) >= 0 ? "+ " : "- ") + Mathf.Abs(timeDifference / 60f).ToString("#0") + ":" + Mathf.Abs(timeDifference % 60f).ToString("00.##);
+
+		playerTime.text = "Time: " + (levelEnd.levelTime / 60f).ToString("#0") + ":" + (levelEnd.levelTime % 60f).ToString("00.##");
+
+		if (level.bestTime > level.levelTimeChallenge) {
+			targetTime.text = "Target: " + (level.levelTimeChallenge / 60f).ToString("#0") + ":" + (level.levelTimeChallenge % 60f).ToString("00.##");
+			if (levelEnd.levelTime < level.levelTimeChallenge) {
+				level.bestTime = levelEnd.levelTime;
+				personalBest.gameObject.SetActive(true);
+				PlayerPrefs.SetFloat(level.name + "BestTime", level.bestTime);
+			}
+		} else {
+			targetTime.text = "Best: " + (level.bestTime / 60f).ToString("#0") + ":" + (level.bestTime % 60f).ToString("00.##");
+			if (levelEnd.levelTime < level.bestTime) {
+				level.bestTime = levelEnd.levelTime;
+				personalBest.gameObject.SetActive(true);
+				PlayerPrefs.SetFloat(level.name + "BestTime", level.bestTime);
+			}
 		}
 
 		level.rubyFound = levelEnd.rubyFound || level.rubyFound;

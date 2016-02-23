@@ -57,6 +57,7 @@ public class LevelEndInfo {
 
 	public int collectedCoins;
 	public int itemsSaved;
+	public int maxItems;
 
 	public LevelEndInfo(bool passed, int condition) {
         passedLevel = passed;

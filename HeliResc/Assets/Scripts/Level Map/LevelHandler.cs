@@ -108,6 +108,7 @@ public class Level {
     public bool rubyFound;
     public bool unlocked;
 	public float levelTimeChallenge;
+	public float bestTime;
 
     public Level(string setName, int id) {
         this.setName = setName;
@@ -132,6 +133,7 @@ public class Level {
         PlayerPrefsExt.SetBool(level.name + "Star3", level.star3);
         PlayerPrefsExt.SetBool(level.name + "Ruby", level.rubyFound);
         PlayerPrefsExt.SetBool(level.name + "Unlocked", level.unlocked);
+		PlayerPrefs.SetFloat(level.name + "BestTime", level.bestTime);
     }
 
     public void LoadInfo() {
@@ -149,6 +151,9 @@ public class Level {
 
         if (PlayerPrefs.HasKey(name + "Unlocked")) { unlocked = PlayerPrefsExt.GetBool(name + "Unlocked"); }
         else { PlayerPrefsExt.SetBool(name + "Unlocked", false); }
+
+		if (PlayerPrefs.HasKey(name + "BestTime")) { bestTime = PlayerPrefs.GetFloat(name + "BestTime"); }
+		else { PlayerPrefs.SetFloat(name + "BestTime", 999f); }
     }
 
     public override string ToString()

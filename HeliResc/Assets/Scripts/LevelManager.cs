@@ -178,6 +178,7 @@ public class LevelManager : MonoBehaviour {
 
         end.level = LevelHandler.CurrentLevel;
         end.itemsSaved = getSavedCrates();
+		end.maxItems = getCrateAmount();
         end.Reward = reward;
         end.levelTime = levelTimer;
         if (passed == true) {
