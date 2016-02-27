@@ -8,7 +8,7 @@ public class LandingPadManager : MonoBehaviour {
     public event LandingEvent enterPlatform = (GameObject platform) => { };
     public event LandingEvent exitPlatform = (GameObject platform) => { };
 
-    public bool canWin = false;
+    public bool canWin = false, once = false;
     private MissionObjectives objectives;
     private LevelManager manager;
 
@@ -41,8 +41,10 @@ public class LandingPadManager : MonoBehaviour {
 
 			if (canWin == true) { 
 				bool win = objectives.ObjectiveOneCompleted();
-                if (win == true)
+				if (win == true && !once) {
                     manager.winLevel();
+					once = true;
+				}
 			}            
                         
 

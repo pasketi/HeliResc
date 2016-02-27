@@ -12,7 +12,7 @@ public class LevelEndManager : MonoBehaviour {
 
 	public Image star1, star2, star3;
 	private Text star1Text, star2Text, star3Text;
-	private Text targetTime, playerTime;
+	private Text targetTime, playerTime, bonusObjective;
 	private Image personalBest;
     public Image rubyImage;
 
@@ -46,15 +46,16 @@ public class LevelEndManager : MonoBehaviour {
         gameManager = gm;
 		moneyText = GameObject.Find("TextMoney").GetComponent<MoneyUIUpdate>();
 
-		CreateFaceDictionary();
-
 		star1Text = star1.GetComponentInChildren<Text>();
 		star2Text = star2.GetComponentInChildren<Text>();
 		star3Text = star3.GetComponentInChildren<Text>();
 		targetTime = GameObject.Find("TargetTime").GetComponent<Text>();
 		playerTime = GameObject.Find("YourTime").GetComponent<Text>();
+		bonusObjective = GameObject.Find("BonusObjective").GetComponent<Text>();
 		personalBest = GameObject.Find("PersonalBest").GetComponent<Image>();
 		personalBest.gameObject.SetActive(false);
+
+		CreateFaceDictionary();
 
         levelEnd = gameManager.levelEnd;
 		if (levelEnd == null) {
@@ -104,24 +105,25 @@ public class LevelEndManager : MonoBehaviour {
 
 		star1Text.text = levelEnd.itemsSaved.ToString() + "/" + levelEnd.maxItems.ToString();
 		star2Text.text = levelEnd.obj2Passed || level.star2 ? "Bonus" : "Bonus" ;
+		bonusObjective.text = "Bonus: " + LevelHandler.GetLevelSet(level.setName).challenge2;
 
-		float timeDifference = level.bestTime < level.levelTimeChallenge ? (levelEnd.levelTime - level.bestTime) : (levelEnd.levelTime - level.levelTimeChallenge) ;
+		float timeDifference = (level.bestTime < level.levelTimeChallenge && level.star3) ? (levelEnd.levelTime - level.bestTime) : (levelEnd.levelTime - level.levelTimeChallenge) ;
 		star3Text.text = (timeDifference.CompareTo(0f) >= 0 ? "+ " : "- ") + (Mathf.Abs(timeDifference / 60f) >= 1f ? Mathf.Abs(timeDifference / 60f).ToString("##:") : "" ) + Mathf.Abs(timeDifference % 60f).ToString("00.00");
 
-		playerTime.text = "Time: " + (levelEnd.levelTime / 60f >= 1f ? (levelEnd.levelTime / 60f).ToString("##:") : "") + (levelEnd.levelTime % 60f).ToString("00.00");
+		playerTime.text = levelEnd.passedLevel ? ("Time: " + (levelEnd.levelTime / 60f >= 1f ? (levelEnd.levelTime / 60f).ToString("##:") : "") + (levelEnd.levelTime % 60f).ToString("00.00")) : "Time: 0.00";
 
-		if (level.bestTime > level.levelTimeChallenge || !level.star3) {
+		if (!level.star3) {
 			targetTime.text = "Target: " + (level.levelTimeChallenge / 60f >= 1f ? (level.levelTimeChallenge / 60f).ToString("##:"): "") + (level.levelTimeChallenge % 60f).ToString("00.00");
-			if (levelEnd.levelTime < level.levelTimeChallenge) {
+			if (levelEnd.levelTime < level.levelTimeChallenge && levelEnd.passedLevel) {
 				level.bestTime = levelEnd.levelTime;
-				personalBest.gameObject.SetActive(true);
+				//personalBest.gameObject.SetActive(true);
 				PlayerPrefs.SetFloat(level.name + "BestTime", level.bestTime);
 			}
 		} else {
 			targetTime.text = "Best: " + (level.bestTime / 60f >= 1f ? (level.bestTime / 60f).ToString("##:") : "" ) + (level.bestTime % 60f).ToString("00.00");
-			if (levelEnd.levelTime < level.bestTime) {
+			if (levelEnd.levelTime < level.bestTime && levelEnd.passedLevel) {
 				level.bestTime = levelEnd.levelTime;
-				personalBest.gameObject.SetActive(true);
+				//personalBest.gameObject.SetActive(true);
 				PlayerPrefs.SetFloat(level.name + "BestTime", level.bestTime);
 			}
 		}
@@ -151,7 +153,7 @@ public class LevelEndManager : MonoBehaviour {
             rubyImage.enabled = false;
         }
 
-        debugTime.text = "Time spent: " + levelEnd.levelTime;
+        //debugTime.text = "Time spent: " + levelEnd.levelTime;
 
         //StartCoroutine(Animations(levelEnd.rubyFound));		
 

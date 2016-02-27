@@ -6,9 +6,12 @@ public class StartMenuScript : MonoBehaviour {
 	public GameObject autoHooverOff;
 	public GameObject soundOff;
 	public GameObject musicOff;
+	//public GameObject resetGame;
     
     public GameObject autoHooveDialog;
+	public GameObject resetDialog;
 
+	private GameManager manager;
     private Animator settingsAnimator;
     private bool showSettings;
 
@@ -24,6 +27,7 @@ public class StartMenuScript : MonoBehaviour {
             PlayerPrefsExt.SetBool(SaveStrings.sAutoHoover, autoHooverOn);
         }
 
+		manager = GameObject.FindObjectOfType<GameManager>();
         settingsAnimator = GetComponent<Animator>();
         showSettings = false;
 
@@ -41,7 +45,9 @@ public class StartMenuScript : MonoBehaviour {
     public void ShowAutoHooverBox() {
         autoHooveDialog.SetActive(true);
     }
-
+	public void ShowResetBox() {
+		resetDialog.SetActive(true);
+	}
     public void AutoHoover(bool on) {
         autoHooverOn = on;
 		autoHooverOff.SetActive (!autoHooverOn);
@@ -62,6 +68,12 @@ public class StartMenuScript : MonoBehaviour {
 		musicOff.SetActive (musicMuted);        //If music is on turn off the cross on the button
         SoundMusic.MuteMusic(musicMuted);
 	}
+
+	public void reset(bool yes) {
+		resetDialog.SetActive(false);
+		if (yes) manager.resetData();
+	}
+
     public void Settings() {
         showSettings = !showSettings;
 
