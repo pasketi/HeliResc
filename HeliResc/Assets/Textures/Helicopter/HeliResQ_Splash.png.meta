@@ -29,7 +29,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -38,7 +38,7 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
     filterMode: 2
@@ -48,12 +48,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
-  compressionQuality: 50
+  compressionQuality: -1
+  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 35
   alphaIsTransparency: 1
@@ -69,8 +70,18 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 42, y: 16}
+        - {x: 33, y: 18}
+        - {x: -39, y: 18}
+        - {x: -39, y: -26}
+        - {x: -29, y: -33}
+        - {x: 24, y: -33}
+        - {x: 28, y: -31}
+        - {x: 35, y: -27}
+        - {x: 42, y: -13}
     - name: HeliResQ_Splash_1
       rect:
         serializedVersion: 2
@@ -79,8 +90,16 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -41, y: 24}
+        - {x: -45, y: 14}
+        - {x: -45, y: -21}
+        - {x: -32, y: -33}
+        - {x: 31, y: -33}
+        - {x: 45, y: -30}
+        - {x: 45, y: 24}
     - name: HeliResQ_Splash_2
       rect:
         serializedVersion: 2
@@ -89,8 +108,18 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 3, y: 30}
+        - {x: -31, y: 30}
+        - {x: -49, y: 22}
+        - {x: -49, y: -19}
+        - {x: -24, y: -34}
+        - {x: 33, y: -34}
+        - {x: 49, y: -27}
+        - {x: 49, y: 1}
+        - {x: 43, y: 28}
     - name: HeliResQ_Splash_3
       rect:
         serializedVersion: 2
@@ -99,8 +128,35 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: 24}
+        - {x: -16, y: 42}
+        - {x: -41, y: 42}
+        - {x: -56, y: 22}
+        - {x: -56, y: 1}
+        - {x: -31, y: -33}
+        - {x: 33, y: -33}
+        - {x: 56, y: -5}
+        - {x: 56, y: 31}
+        - {x: 29, y: 33}
+      - - {x: 55, y: -6}
+        - {x: 50, y: -6}
+        - {x: 46, y: -7}
+        - {x: 46, y: -14}
+        - {x: 51, y: -21}
+        - {x: 56, y: -21}
+        - {x: 60, y: -18}
+        - {x: 60, y: -10}
+      - - {x: -53, y: -3}
+        - {x: -56, y: -6}
+        - {x: -56, y: -11}
+        - {x: -54, y: -14}
+        - {x: -42, y: -14}
+        - {x: -41, y: -13}
+        - {x: -41, y: -8}
+        - {x: -44, y: -3}
     - name: HeliResQ_Splash_4
       rect:
         serializedVersion: 2
@@ -109,8 +165,48 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -57, y: 35}
+        - {x: -57, y: -7}
+        - {x: -40, y: -33}
+        - {x: 40, y: -33}
+        - {x: 54, y: -16}
+        - {x: 54, y: 24}
+        - {x: 24, y: 35}
+      - - {x: 51, y: -15}
+        - {x: 50, y: -17}
+        - {x: 50, y: -26}
+        - {x: 51, y: -28}
+        - {x: 53, y: -29}
+        - {x: 62, y: -29}
+        - {x: 63, y: -26}
+        - {x: 63, y: -17}
+        - {x: 59, y: -15}
+      - - {x: -54, y: -8}
+        - {x: -60, y: -13}
+        - {x: -60, y: -18}
+        - {x: -56, y: -21}
+        - {x: -49, y: -21}
+        - {x: -46, y: -17}
+        - {x: -46, y: -10}
+        - {x: -47, y: -8}
+      - - {x: 46, y: 20}
+        - {x: 46, y: 12}
+        - {x: 48, y: 7}
+        - {x: 59, y: 7}
+        - {x: 61, y: 9}
+        - {x: 61, y: 15}
+        - {x: 59, y: 20}
+      - - {x: 38, y: 23}
+        - {x: 38, y: 21}
+        - {x: 41, y: 17}
+        - {x: 45, y: 17}
+        - {x: 48, y: 18}
+        - {x: 48, y: 22}
+        - {x: 45, y: 25}
+        - {x: 40, y: 25}
     - name: HeliResQ_Splash_5
       rect:
         serializedVersion: 2
@@ -119,8 +215,40 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 58, y: 12}
+        - {x: -1, y: 20}
+        - {x: -58, y: 20}
+        - {x: -63, y: 14}
+        - {x: -63, y: -1}
+        - {x: -48, y: -33}
+        - {x: 47, y: -33}
+        - {x: 56, y: -25}
+        - {x: 64, y: -14}
+        - {x: 64, y: 9}
+      - - {x: 52, y: -24}
+        - {x: 52, y: -31}
+        - {x: 54, y: -33}
+        - {x: 64, y: -33}
+        - {x: 64, y: -24}
+      - - {x: -55, y: -17}
+        - {x: -60, y: -23}
+        - {x: -60, y: -28}
+        - {x: -57, y: -32}
+        - {x: -53, y: -32}
+        - {x: -51, y: -31}
+        - {x: -49, y: -29}
+        - {x: -49, y: -19}
+        - {x: -51, y: -17}
+      - - {x: 56, y: 16}
+        - {x: 56, y: 8}
+        - {x: 57, y: 7}
+        - {x: 62, y: 7}
+        - {x: 64, y: 8}
+        - {x: 64, y: 13}
+        - {x: 61, y: 16}
     - name: HeliResQ_Splash_6
       rect:
         serializedVersion: 2
@@ -129,8 +257,17 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 28, y: -10}
+        - {x: -41, y: -10}
+        - {x: -63, y: -24}
+        - {x: -63, y: -30}
+        - {x: -56, y: -33}
+        - {x: 64, y: -33}
+        - {x: 64, y: -28}
+        - {x: 61, y: -20}
     - name: HeliResQ_Splash_7
       rect:
         serializedVersion: 2
@@ -139,8 +276,25 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 47, y: -33}
+        - {x: 48, y: -34}
+        - {x: 60, y: -34}
+        - {x: 64, y: -32}
+        - {x: 64, y: -26}
+        - {x: 63, y: -25}
+        - {x: 47, y: -25}
+      - - {x: 41, y: -23}
+        - {x: 17, y: 4}
+        - {x: -19, y: 4}
+        - {x: -64, y: -16}
+        - {x: -64, y: -32}
+        - {x: -62, y: -33}
+        - {x: 46, y: -33}
+        - {x: 47, y: -30}
+        - {x: 47, y: -26}
     - name: HeliResQ_Splash_8
       rect:
         serializedVersion: 2
@@ -149,8 +303,36 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 47, y: -33}
+        - {x: 48, y: -34}
+        - {x: 60, y: -34}
+        - {x: 64, y: -32}
+        - {x: 64, y: -26}
+        - {x: 63, y: -25}
+        - {x: 47, y: -25}
+      - - {x: -60, y: -25}
+        - {x: -64, y: -26}
+        - {x: -64, y: -32}
+        - {x: -63, y: -33}
+        - {x: -43, y: -33}
+        - {x: -38, y: -32}
+        - {x: -37, y: -29}
+        - {x: -37, y: -28}
+        - {x: -40, y: -25}
+      - - {x: 19, y: -19}
+        - {x: 3, y: -7}
+        - {x: 0, y: -7}
+        - {x: -2, y: -9}
+        - {x: -37, y: -26}
+        - {x: -37, y: -32}
+        - {x: -28, y: -33}
+        - {x: 18, y: -33}
+        - {x: 27, y: -32}
+        - {x: 28, y: -31}
+        - {x: 28, y: -27}
     - name: HeliResQ_Splash_9
       rect:
         serializedVersion: 2
@@ -159,8 +341,26 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 26, y: -21}
+        - {x: -10, y: -21}
+        - {x: -64, y: -26}
+        - {x: -64, y: -31}
+        - {x: -63, y: -33}
+        - {x: -53, y: -34}
+        - {x: 42, y: -34}
+        - {x: 43, y: -33}
+        - {x: 43, y: -29}
+        - {x: 40, y: -24}
+      - - {x: 51, y: -26}
+        - {x: 47, y: -29}
+        - {x: 48, y: -32}
+        - {x: 53, y: -33}
+        - {x: 61, y: -33}
+        - {x: 64, y: -30}
+        - {x: 63, y: -26}
     - name: HeliResQ_Splash_10
       rect:
         serializedVersion: 2
@@ -169,8 +369,24 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -14, y: -20}
+        - {x: -62, y: -25}
+        - {x: -63, y: -28}
+        - {x: -63, y: -34}
+        - {x: 43, y: -34}
+        - {x: 43, y: -26}
+        - {x: 32, y: -23}
+        - {x: 9, y: -20}
+      - - {x: 51, y: -26}
+        - {x: 49, y: -29}
+        - {x: 49, y: -30}
+        - {x: 51, y: -33}
+        - {x: 62, y: -33}
+        - {x: 62, y: -27}
+        - {x: 58, y: -26}
     - name: HeliResQ_Splash_11
       rect:
         serializedVersion: 2
@@ -179,8 +395,38 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 19, y: -22}
+        - {x: -7, y: -22}
+        - {x: -26, y: -23}
+        - {x: -28, y: -25}
+        - {x: -28, y: -29}
+        - {x: -25, y: -34}
+        - {x: 36, y: -34}
+        - {x: 36, y: -25}
+        - {x: 28, y: -24}
+      - - {x: 54, y: -26}
+        - {x: 53, y: -29}
+        - {x: 53, y: -31}
+        - {x: 55, y: -33}
+        - {x: 61, y: -33}
+        - {x: 63, y: -32}
+        - {x: 63, y: -27}
+        - {x: 61, y: -26}
+      - - {x: -62, y: -26}
+        - {x: -64, y: -28}
+        - {x: -64, y: -32}
+        - {x: -52, y: -32}
+        - {x: -52, y: -29}
+        - {x: -56, y: -26}
+      - - {x: -52, y: -28}
+        - {x: -51, y: -31}
+        - {x: -45, y: -31}
+        - {x: -43, y: -29}
+        - {x: -44, y: -26}
+        - {x: -50, y: -26}
     - name: HeliResQ_Splash
       rect:
         serializedVersion: 2
@@ -189,8 +435,9 @@ TextureImporter:
         width: 20
         height: 17
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
     - name: HeliResQ_Splash_255
       rect:
         serializedVersion: 2
@@ -199,8 +446,10 @@ TextureImporter:
         width: 20
         height: 17
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 
