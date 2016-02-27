@@ -33,7 +33,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -45,19 +45,20 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 2048
   textureSettings:
-    filterMode: -1
+    filterMode: 2
     aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
-  compressionQuality: 50
+  compressionQuality: -1
+  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 400
   alphaIsTransparency: 1
@@ -75,6 +76,15 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -51, y: 41.331177}
+        - {x: -60, y: 16.331177}
+        - {x: -60, y: -12.668823}
+        - {x: -39, y: -40.668823}
+        - {x: 41, y: -40.668823}
+        - {x: 56, y: -32.668823}
+        - {x: 56, y: 36.331177}
+        - {x: 33, y: 41.331177}
     - name: sheep_1
       rect:
         serializedVersion: 2
@@ -85,6 +95,15 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -27, y: 41.342407}
+        - {x: -60, y: 30.342407}
+        - {x: -60, y: -21.657593}
+        - {x: -51, y: -40.657593}
+        - {x: 12, y: -40.657593}
+        - {x: 62, y: -33.657593}
+        - {x: 62, y: -3.6575928}
+        - {x: 37, y: 41.342407}
     - name: sheep_2
       rect:
         serializedVersion: 2
@@ -95,6 +114,17 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -25, y: 40.353638}
+        - {x: -61, y: 36.353638}
+        - {x: -61, y: -19.646362}
+        - {x: -53, y: -39.646362}
+        - {x: 9, y: -39.646362}
+        - {x: 62, y: -36.646362}
+        - {x: 62, y: -7.6463623}
+        - {x: 52, y: 25.353638}
+        - {x: 28, y: 37.353638}
+        - {x: 16, y: 40.353638}
     - name: sheep_3
       rect:
         serializedVersion: 2
@@ -105,6 +135,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -63, y: -7.635132}
+        - {x: -59, y: -21.635132}
+        - {x: -51, y: -37.63513}
+        - {x: 62, y: -37.63513}
+        - {x: 62, y: 8.364868}
+        - {x: 56, y: 28.364868}
+        - {x: 27, y: 38.36487}
+        - {x: -34, y: 38.36487}
+        - {x: -63, y: 30.364868}
     - name: sheep_4
       rect:
         serializedVersion: 2
@@ -115,6 +155,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 25, y: 40.37622}
+        - {x: -11, y: 40.37622}
+        - {x: -65, y: 19.37622}
+        - {x: -65, y: -36.62378}
+        - {x: -28, y: -44.62378}
+        - {x: -6, y: -44.62378}
+        - {x: 64, y: -34.62378}
+        - {x: 64, y: -12.623779}
+        - {x: 58, y: 18.37622}
     - name: sheep_5
       rect:
         serializedVersion: 2
@@ -125,6 +175,15 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11, y: 41.38745}
+        - {x: -62, y: 29.387451}
+        - {x: -63, y: 25.387451}
+        - {x: -63, y: -33.61255}
+        - {x: -44, y: -52.61255}
+        - {x: 56, y: -52.61255}
+        - {x: 56, y: 30.387451}
+        - {x: 26, y: 41.38745}
     - name: sheep_6
       rect:
         serializedVersion: 2
@@ -135,6 +194,22 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 38, y: 40.39868}
+        - {x: -23, y: 40.39868}
+        - {x: -63, y: 29.398682}
+        - {x: -63, y: -51.60132}
+        - {x: -49, y: -51.60132}
+        - {x: -38, y: -43.60132}
+        - {x: -34, y: -38.60132}
+        - {x: -33, y: -47.60132}
+        - {x: -29, y: -51.60132}
+        - {x: -23, y: -51.60132}
+        - {x: -20, y: -49.60132}
+        - {x: 41, y: -51.60132}
+        - {x: 51, y: -51.60132}
+        - {x: 56, y: -47.60132}
+        - {x: 56, y: 26.398682}
     - name: sheep_7
       rect:
         serializedVersion: 2
@@ -145,6 +220,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -63, y: 39.409973}
+        - {x: -63, y: 8.409973}
+        - {x: -60, y: 7.409973}
+        - {x: -56, y: 7.409973}
+        - {x: -63, y: -6.590027}
+        - {x: -63, y: -27.590027}
+        - {x: -41, y: -50.590027}
+        - {x: 56, y: -50.590027}
+        - {x: 56, y: 39.409973}
     - name: sheep_8
       rect:
         serializedVersion: 2
@@ -155,6 +240,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -23, y: 40.421204}
+        - {x: -63, y: 21.421204}
+        - {x: -63, y: -23.578796}
+        - {x: -56, y: -29.578796}
+        - {x: -51, y: -29.578796}
+        - {x: -54, y: -51.578796}
+        - {x: 60, y: -51.578796}
+        - {x: 60, y: 23.421204}
+        - {x: 26, y: 40.421204}
     - name: sheep_9
       rect:
         serializedVersion: 2
@@ -165,6 +260,13 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: 40.432434}
+        - {x: -63, y: 33.432434}
+        - {x: -63, y: -47.567566}
+        - {x: 64, y: -47.567566}
+        - {x: 64, y: 18.432434}
+        - {x: 46, y: 40.432434}
     - name: sheep_10
       rect:
         serializedVersion: 2
@@ -175,6 +277,14 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -43, y: 40.443726}
+        - {x: -55, y: 26.443726}
+        - {x: -63, y: 15.443726}
+        - {x: -63, y: -48.556274}
+        - {x: 65, y: -48.556274}
+        - {x: 65, y: 37.443726}
+        - {x: 54, y: 40.443726}
     - name: sheep_11
       rect:
         serializedVersion: 2
@@ -185,6 +295,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 50, y: 40.454987}
+        - {x: -41, y: 40.454987}
+        - {x: -63, y: 30.454987}
+        - {x: -63, y: -29.545013}
+        - {x: -56, y: -38.545013}
+        - {x: -44, y: -49.545013}
+        - {x: -8, y: -49.545013}
+        - {x: 64, y: -42.545013}
+        - {x: 65, y: -42.545013}
+        - {x: 65, y: 17.454987}
+        - {x: 60, y: 31.454987}
     - name: sheep_12
       rect:
         serializedVersion: 2
@@ -195,6 +317,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -40, y: 40.466217}
+        - {x: -61, y: 34.466217}
+        - {x: -62, y: 27.466217}
+        - {x: -63, y: 14.466217}
+        - {x: -63, y: -29.533783}
+        - {x: -60, y: -42.533783}
+        - {x: -55, y: -50.533783}
+        - {x: 49, y: -50.533783}
+        - {x: 65, y: -42.533783}
+        - {x: 65, y: 22.466217}
+        - {x: 27, y: 40.466217}
     - name: sheep_13
       rect:
         serializedVersion: 2
@@ -205,6 +339,20 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 20, y: 40.477493}
+        - {x: -7, y: 40.477493}
+        - {x: -19, y: 35.477493}
+        - {x: -24, y: 31.477493}
+        - {x: -46, y: 34.477493}
+        - {x: -60, y: 31.477493}
+        - {x: -63, y: 5.4774933}
+        - {x: -63, y: -28.522507}
+        - {x: -57, y: -53.522507}
+        - {x: -21, y: -53.522507}
+        - {x: 65, y: -35.522507}
+        - {x: 65, y: -6.5225067}
+        - {x: 55, y: 33.477493}
     - name: sheep_14
       rect:
         serializedVersion: 2
@@ -215,6 +363,19 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -46, y: 40.488747}
+        - {x: -62, y: 36.488747}
+        - {x: -63, y: 33.488747}
+        - {x: -63, y: -34.511253}
+        - {x: -29, y: -56.511253}
+        - {x: -7, y: -56.511253}
+        - {x: -4, y: -51.511253}
+        - {x: -4, y: -47.511253}
+        - {x: 8, y: -56.511253}
+        - {x: 56, y: -56.511253}
+        - {x: 56, y: 26.488747}
+        - {x: 28, y: 40.488747}
     - name: sheep_15
       rect:
         serializedVersion: 2
@@ -225,6 +386,21 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 62, y: -23}
+        - {x: 55, y: -18}
+        - {x: 57, y: 1}
+        - {x: 51, y: 32}
+        - {x: 23, y: 44}
+        - {x: -15, y: 44}
+        - {x: -55, y: 8}
+        - {x: -55, y: -43}
+        - {x: -7, y: -52}
+        - {x: 20, y: -52}
+        - {x: 58, y: -32}
+        - {x: 60, y: -30}
+        - {x: 62, y: -25}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

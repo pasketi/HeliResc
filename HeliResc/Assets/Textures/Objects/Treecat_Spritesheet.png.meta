@@ -20,7 +20,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -29,22 +29,23 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: -1
   maxTextureSize: 256
   textureSettings:
-    filterMode: 0
+    filterMode: 2
     aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
-  compressionQuality: 50
+  compressionQuality: -1
+  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 50
   alphaIsTransparency: 1
@@ -60,8 +61,14 @@ TextureImporter:
         width: 56
         height: 51
       alignment: 9
-      pivot: {x: .476904333, y: .32755205}
+      pivot: {x: 0.47690433, y: 0.32755205}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -23.706642, y: 34.294846}
+        - {x: -26.706642, y: 22.294846}
+        - {x: -26.706642, y: -16.705154}
+        - {x: 29.293358, y: -16.705154}
+        - {x: 29.293358, y: 34.294846}
     - name: Treecat_Spritesheet_1
       rect:
         serializedVersion: 2
@@ -72,6 +79,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
     - name: Treecat_Spritesheet_2
       rect:
         serializedVersion: 2
@@ -80,8 +88,19 @@ TextureImporter:
         width: 56
         height: 113
       alignment: 9
-      pivot: {x: .278281659, y: .472530395}
+      pivot: {x: 0.27828166, y: 0.4725304}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 39.41623, y: 8.604065}
+        - {x: 37.41623, y: 14.604065}
+        - {x: 25.416227, y: 11.604065}
+        - {x: 15.416227, y: 59.604065}
+        - {x: -15.583773, y: 59.604065}
+        - {x: -15.583773, y: -53.395935}
+        - {x: 19.416227, y: -53.395935}
+        - {x: 33.41623, y: -28.395935}
+        - {x: 39.41623, y: -9.395935}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

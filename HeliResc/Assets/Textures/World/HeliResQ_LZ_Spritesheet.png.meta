@@ -17,27 +17,32 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
   generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
-    filterMode: 0
+    filterMode: 2
     aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  compressionQuality: 50
+  rGBM: 0
+  compressionQuality: -1
+  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
@@ -53,8 +58,57 @@ TextureImporter:
         width: 662
         height: 364
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 258, y: -137}
+        - {x: 295, y: -112}
+        - {x: 311, y: -98}
+        - {x: 324, y: -63}
+        - {x: 331, y: -39}
+        - {x: 331, y: -27}
+        - {x: 294, y: -18}
+        - {x: 310, y: -15}
+        - {x: 319, y: -8}
+        - {x: 319, y: 16}
+        - {x: 313, y: 25}
+        - {x: 310, y: 26}
+        - {x: 110, y: 26}
+        - {x: 103, y: 21}
+        - {x: 89, y: 46}
+        - {x: 83, y: 64}
+        - {x: 56, y: 74}
+        - {x: 30, y: 91}
+        - {x: 8, y: 101}
+        - {x: 15, y: 182}
+        - {x: 0, y: 182}
+        - {x: -5, y: 142}
+        - {x: -11, y: 131}
+        - {x: -16, y: 92}
+        - {x: -46, y: 90}
+        - {x: -86, y: 82}
+        - {x: -116, y: 73}
+        - {x: -124, y: 66}
+        - {x: -124, y: 53}
+        - {x: -116, y: 39}
+        - {x: -120, y: 29}
+        - {x: -205, y: 14}
+        - {x: -212, y: 4}
+        - {x: -331, y: 2}
+        - {x: -331, y: -12}
+        - {x: -298, y: -45}
+        - {x: -265, y: -75}
+        - {x: -227, y: -106}
+        - {x: -248, y: -119}
+        - {x: -246, y: -150}
+        - {x: -154, y: -168}
+        - {x: -112, y: -175}
+        - {x: -71, y: -181}
+        - {x: -48, y: -182}
+        - {x: 65, y: -182}
+        - {x: 93, y: -180}
+        - {x: 142, y: -172}
+        - {x: 188, y: -161}
     - name: HeliResQ_LZ_Spritesheet_1
       rect:
         serializedVersion: 2
@@ -63,7 +117,18 @@ TextureImporter:
         width: 212
         height: 59
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -105, y: 29.5}
+        - {x: -106, y: 26.5}
+        - {x: -106, y: -8.5}
+        - {x: -93, y: -29.5}
+        - {x: 97, y: -29.5}
+        - {x: 106, y: -14.5}
+        - {x: 106, y: 29.5}
+    outline: []
   spritePackingTag: 
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 

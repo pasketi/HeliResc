@@ -27,7 +27,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -36,22 +36,23 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: -1
   maxTextureSize: 512
   textureSettings:
-    filterMode: -1
+    filterMode: 2
     aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
-  compressionQuality: 50
+  compressionQuality: -1
+  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
@@ -67,8 +68,18 @@ TextureImporter:
         width: 108
         height: 100
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 42, y: -22}
+        - {x: 42, y: -6}
+        - {x: -42, y: -6}
+        - {x: -42, y: -92}
+        - {x: -41, y: -100}
+        - {x: 21, y: -100}
+        - {x: 22, y: -97}
+        - {x: 26, y: -79}
+        - {x: 25, y: -63}
     - name: Fisherman_Jump_Spritesheet_1
       rect:
         serializedVersion: 2
@@ -77,8 +88,17 @@ TextureImporter:
         width: 108
         height: 100
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -44, y: -11}
+        - {x: -49, y: -20}
+        - {x: -49, y: -43}
+        - {x: -26, y: -100}
+        - {x: 26, y: -100}
+        - {x: 44, y: -40}
+        - {x: 44, y: -16}
+        - {x: 42, y: -11}
     - name: Fisherman_Jump_Spritesheet_2
       rect:
         serializedVersion: 2
@@ -87,8 +107,19 @@ TextureImporter:
         width: 108
         height: 100
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 47, y: -15}
+        - {x: 35, y: -13}
+        - {x: -47, y: -13}
+        - {x: -54, y: -16}
+        - {x: -54, y: -71}
+        - {x: -41, y: -100}
+        - {x: 22, y: -100}
+        - {x: 23, y: -98}
+        - {x: 50, y: -50}
+        - {x: 50, y: -22}
     - name: Fisherman_Jump_Spritesheet_3
       rect:
         serializedVersion: 2
@@ -97,8 +128,17 @@ TextureImporter:
         width: 108
         height: 100
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -18, y: -13}
+        - {x: -54, y: -40}
+        - {x: -54, y: -80}
+        - {x: -37, y: -100}
+        - {x: 26, y: -100}
+        - {x: 54, y: -61}
+        - {x: 54, y: -24}
+        - {x: 38, y: -13}
     - name: Fisherman_Jump_Spritesheet_4
       rect:
         serializedVersion: 2
@@ -107,8 +147,17 @@ TextureImporter:
         width: 108
         height: 100
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -35, y: -6}
+        - {x: -40, y: -12}
+        - {x: -40, y: -21}
+        - {x: -38, y: -26}
+        - {x: -24, y: -100}
+        - {x: 30, y: -100}
+        - {x: 43, y: -63}
+        - {x: 43, y: -6}
     - name: Fisherman_Jump_Spritesheet_5
       rect:
         serializedVersion: 2
@@ -117,8 +166,19 @@ TextureImporter:
         width: 108
         height: 100
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 37, y: 0}
+        - {x: -26, y: 0}
+        - {x: -36, y: -2}
+        - {x: -36, y: -44}
+        - {x: -31, y: -78}
+        - {x: -20, y: -97}
+        - {x: 15, y: -97}
+        - {x: 29, y: -94}
+        - {x: 39, y: -42}
+        - {x: 39, y: -4}
     - name: Fisherman_Jump_Spritesheet_6
       rect:
         serializedVersion: 2
@@ -127,8 +187,16 @@ TextureImporter:
         width: 108
         height: 100
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -36, y: -1}
+        - {x: -36, y: -49}
+        - {x: -21, y: -97}
+        - {x: -20, y: -100}
+        - {x: 24, y: -100}
+        - {x: 33, y: -86}
+        - {x: 33, y: -1}
     - name: Fisherman_Jump_Spritesheet_7
       rect:
         serializedVersion: 2
@@ -137,8 +205,16 @@ TextureImporter:
         width: 108
         height: 100
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -25, y: -5}
+        - {x: -39, y: -6}
+        - {x: -39, y: -42}
+        - {x: -28, y: -100}
+        - {x: 28, y: -100}
+        - {x: 30, y: -85}
+        - {x: 30, y: -5}
     - name: Fisherman_Jump_Spritesheet_8
       rect:
         serializedVersion: 2
@@ -147,8 +223,17 @@ TextureImporter:
         width: 108
         height: 100
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 35, y: -7}
+        - {x: -37, y: -7}
+        - {x: -40, y: -14}
+        - {x: -40, y: -47}
+        - {x: -24, y: -100}
+        - {x: 21, y: -100}
+        - {x: 27, y: -82}
+        - {x: 35, y: -40}
     - name: Fisherman_Jump_Spritesheet_9
       rect:
         serializedVersion: 2
@@ -157,8 +242,19 @@ TextureImporter:
         width: 108
         height: 100
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 42, y: -22}
+        - {x: 42, y: -6}
+        - {x: -42, y: -6}
+        - {x: -42, y: -92}
+        - {x: -41, y: -100}
+        - {x: 21, y: -100}
+        - {x: 22, y: -97}
+        - {x: 26, y: -79}
+        - {x: 25, y: -63}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

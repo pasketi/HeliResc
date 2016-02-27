@@ -17,27 +17,32 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
   generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
-    filterMode: 0
+    filterMode: 2
     aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  compressionQuality: 50
+  rGBM: 0
+  compressionQuality: -1
+  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
@@ -53,8 +58,9 @@ TextureImporter:
         width: 216
         height: 23
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
     - name: HeliResQ_LZ_Spritesheet_V2_1
       rect:
         serializedVersion: 2
@@ -63,7 +69,56 @@ TextureImporter:
         width: 664
         height: 261
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 210, y: -109.5}
+        - {x: 246, y: -107.5}
+        - {x: 263, y: -103.5}
+        - {x: 271, y: -89.5}
+        - {x: 279, y: -66.5}
+        - {x: 289, y: -61.5}
+        - {x: 298, y: -56.5}
+        - {x: 312, y: -43.5}
+        - {x: 332, y: 21.5}
+        - {x: 332, y: 24.5}
+        - {x: 330, y: 25.5}
+        - {x: 86, y: 25.5}
+        - {x: 84, y: 31.5}
+        - {x: 83, y: 109.5}
+        - {x: 76, y: 118.5}
+        - {x: 69, y: 121.5}
+        - {x: 16, y: 120.5}
+        - {x: 10, y: 111.5}
+        - {x: -8, y: 107.5}
+        - {x: -20, y: 114.5}
+        - {x: -34, y: 120.5}
+        - {x: -52, y: 127.5}
+        - {x: -66, y: 130.5}
+        - {x: -184, y: 130.5}
+        - {x: -186, y: 129.5}
+        - {x: -220, y: 81.5}
+        - {x: -223, y: 75.5}
+        - {x: -243, y: 71.5}
+        - {x: -251, y: 58.5}
+        - {x: -252, y: 54.5}
+        - {x: -332, y: 54.5}
+        - {x: -332, y: 39.5}
+        - {x: -294, y: 2.5}
+        - {x: -255, y: -30.5}
+        - {x: -239, y: -43.5}
+        - {x: -249, y: -52.5}
+        - {x: -247, y: -97.5}
+        - {x: -156, y: -115.5}
+        - {x: -120, y: -121.5}
+        - {x: -90, y: -125.5}
+        - {x: -48, y: -130.5}
+        - {x: 57, y: -130.5}
+        - {x: 83, y: -127.5}
+        - {x: 141, y: -119.5}
+        - {x: 176, y: -111.5}
+    outline: []
   spritePackingTag: 
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 

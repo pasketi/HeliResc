@@ -25,7 +25,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -34,7 +34,7 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: -1
   maxTextureSize: 256
   textureSettings:
     filterMode: 2
@@ -44,12 +44,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
-  compressionQuality: 50
+  compressionQuality: -1
+  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
@@ -65,8 +66,15 @@ TextureImporter:
         width: 64
         height: 68
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 6, y: 0}
+        - {x: -32, y: 0}
+        - {x: -32, y: -68}
+        - {x: 32, y: -68}
+        - {x: 32, y: -16}
+        - {x: 16, y: -3}
     - name: Sleep_Spritesheet_1
       rect:
         serializedVersion: 2
@@ -75,8 +83,17 @@ TextureImporter:
         width: 64
         height: 68
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 14, y: -7}
+        - {x: 7, y: 0}
+        - {x: -17, y: 0}
+        - {x: -32, y: -24}
+        - {x: -32, y: -68}
+        - {x: 30, y: -68}
+        - {x: 32, y: -63}
+        - {x: 32, y: -48}
     - name: Sleep_Spritesheet_2
       rect:
         serializedVersion: 2
@@ -85,8 +102,16 @@ TextureImporter:
         width: 64
         height: 68
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -18, y: -2}
+        - {x: -22, y: -3}
+        - {x: -32, y: -34}
+        - {x: -32, y: -68}
+        - {x: 32, y: -68}
+        - {x: 32, y: -41}
+        - {x: 13, y: -2}
     - name: Sleep_Spritesheet_3
       rect:
         serializedVersion: 2
@@ -95,8 +120,16 @@ TextureImporter:
         width: 64
         height: 68
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: -3}
+        - {x: -32, y: -8}
+        - {x: -32, y: -68}
+        - {x: 31, y: -68}
+        - {x: 32, y: -64}
+        - {x: 32, y: -37}
+        - {x: 12, y: -3}
     - name: Sleep_Spritesheet_4
       rect:
         serializedVersion: 2
@@ -105,8 +138,16 @@ TextureImporter:
         width: 64
         height: 68
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: -3}
+        - {x: -32, y: -8}
+        - {x: -32, y: -68}
+        - {x: 31, y: -68}
+        - {x: 32, y: -64}
+        - {x: 32, y: -37}
+        - {x: 12, y: -3}
     - name: Sleep_Spritesheet_5
       rect:
         serializedVersion: 2
@@ -115,8 +156,16 @@ TextureImporter:
         width: 64
         height: 68
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -18, y: -2}
+        - {x: -22, y: -3}
+        - {x: -32, y: -34}
+        - {x: -32, y: -68}
+        - {x: 32, y: -68}
+        - {x: 32, y: -41}
+        - {x: 13, y: -2}
     - name: Sleep_Spritesheet_6
       rect:
         serializedVersion: 2
@@ -125,8 +174,17 @@ TextureImporter:
         width: 64
         height: 68
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 14, y: -7}
+        - {x: 7, y: 0}
+        - {x: -17, y: 0}
+        - {x: -32, y: -24}
+        - {x: -32, y: -68}
+        - {x: 30, y: -68}
+        - {x: 32, y: -63}
+        - {x: 32, y: -48}
     - name: Sleep_Spritesheet_7
       rect:
         serializedVersion: 2
@@ -135,8 +193,16 @@ TextureImporter:
         width: 64
         height: 68
       alignment: 2
-      pivot: {x: .5, y: 1}
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 6, y: 0}
+        - {x: -32, y: 0}
+        - {x: -32, y: -68}
+        - {x: 32, y: -68}
+        - {x: 32, y: -16}
+        - {x: 16, y: -3}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

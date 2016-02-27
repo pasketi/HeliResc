@@ -23,7 +23,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -32,7 +32,7 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: -1
   maxTextureSize: 2048
   textureSettings:
     filterMode: 2
@@ -42,12 +42,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
-  compressionQuality: 50
+  compressionQuality: -1
+  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
@@ -63,8 +64,38 @@ TextureImporter:
         width: 366
         height: 658
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 83, y: 71}
+        - {x: 117, y: 126}
+        - {x: 119, y: 148}
+        - {x: 118, y: 160}
+        - {x: 142, y: 122}
+        - {x: 181, y: 76}
+        - {x: 183, y: 75}
+        - {x: 183, y: 153}
+        - {x: 170, y: 243}
+        - {x: 105, y: 325}
+        - {x: 83, y: 329}
+        - {x: -57, y: 329}
+        - {x: -82, y: 321}
+        - {x: -183, y: 242}
+        - {x: -183, y: 140}
+        - {x: -176, y: 131}
+        - {x: -153, y: 210}
+        - {x: -132, y: 62}
+        - {x: -62, y: -29}
+        - {x: -10, y: 38}
+        - {x: -7, y: 14}
+        - {x: -39, y: -57}
+        - {x: -46, y: -89}
+        - {x: -40, y: -155}
+        - {x: -14, y: -329}
+        - {x: 68, y: -329}
+        - {x: 76, y: -313}
+        - {x: 25, y: -153}
+        - {x: 53, y: 60}
     - name: PalmIsland 1_1
       rect:
         serializedVersion: 2
@@ -73,8 +104,41 @@ TextureImporter:
         width: 557
         height: 496
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -141.5, y: -1}
+        - {x: -135.5, y: -5}
+        - {x: -95.5, y: 43}
+        - {x: -84.5, y: 58}
+        - {x: -44.5, y: -5}
+        - {x: -33.5, y: -10}
+        - {x: -30.5, y: -2}
+        - {x: -6.5, y: -101}
+        - {x: 3.5, y: -110}
+        - {x: 61.5, y: -59}
+        - {x: 74.5, y: -38}
+        - {x: 94.5, y: 29}
+        - {x: 138.5, y: -84}
+        - {x: 147.5, y: -91}
+        - {x: 176.5, y: -19}
+        - {x: 155.5, y: 136}
+        - {x: 270.5, y: 68}
+        - {x: 275.5, y: 68}
+        - {x: 275.5, y: 84}
+        - {x: 247.5, y: 137}
+        - {x: 163.5, y: 210}
+        - {x: 84.5, y: 248}
+        - {x: -40.5, y: 248}
+        - {x: -153.5, y: 222}
+        - {x: -261.5, y: 98}
+        - {x: -278.5, y: 23}
+        - {x: -278.5, y: -129}
+        - {x: -253.5, y: -248}
+        - {x: -156.5, y: -248}
+        - {x: -220.5, y: -47}
+        - {x: -120.5, y: 172}
+        - {x: -143.5, y: 20}
     - name: PalmIsland 1_2
       rect:
         serializedVersion: 2
@@ -83,8 +147,18 @@ TextureImporter:
         width: 201
         height: 191
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -83.5, y: 95.5}
+        - {x: -100.5, y: 44.5}
+        - {x: -100.5, y: -83.5}
+        - {x: -99.5, y: -90.5}
+        - {x: -94.5, y: -95.5}
+        - {x: 84.5, y: -95.5}
+        - {x: 100.5, y: -65.5}
+        - {x: 100.5, y: 25.5}
+        - {x: 12.5, y: 95.5}
     - name: PalmIsland 1_3
       rect:
         serializedVersion: 2
@@ -93,8 +167,9 @@ TextureImporter:
         width: 7
         height: 4
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
     - name: PalmIsland 1_4
       rect:
         serializedVersion: 2
@@ -103,8 +178,92 @@ TextureImporter:
         width: 1469
         height: 256
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 155.5, y: -127}
+        - {x: 156.5, y: -126}
+        - {x: 451.5, y: -126}
+        - {x: 452.5, y: -125}
+        - {x: 734.5, y: -125}
+        - {x: 734.5, y: -119}
+        - {x: 726.5, y: -115}
+        - {x: 704.5, y: -105}
+        - {x: 695.5, y: -101}
+        - {x: 684.5, y: -96}
+        - {x: 666.5, y: -88}
+        - {x: 647.5, y: -80}
+        - {x: 637.5, y: -76}
+        - {x: 618.5, y: -68}
+        - {x: 595.5, y: -57}
+        - {x: 593.5, y: -54}
+        - {x: 578.5, y: -45}
+        - {x: 568.5, y: -38}
+        - {x: 551.5, y: -24}
+        - {x: 536.5, y: -14}
+        - {x: 499.5, y: 4}
+        - {x: 491.5, y: 7}
+        - {x: 485.5, y: 9}
+        - {x: 461.5, y: 16}
+        - {x: 439.5, y: 21}
+        - {x: 393.5, y: 30}
+        - {x: 375.5, y: 35}
+        - {x: 358.5, y: 38}
+        - {x: 319.5, y: 51}
+        - {x: 298.5, y: 61}
+        - {x: 296.5, y: 63}
+        - {x: 276.5, y: 73}
+        - {x: 259.5, y: 80}
+        - {x: 254.5, y: 83}
+        - {x: 227.5, y: 91}
+        - {x: 216.5, y: 92}
+        - {x: 199.5, y: 95}
+        - {x: 182.5, y: 97}
+        - {x: 171.5, y: 98}
+        - {x: 155.5, y: 99}
+        - {x: -19.5, y: 99}
+        - {x: -20.5, y: 98}
+        - {x: -58.5, y: 98}
+        - {x: -84.5, y: 97}
+        - {x: -107.5, y: 96}
+        - {x: -129.5, y: 95}
+        - {x: -150.5, y: 94}
+        - {x: -169.5, y: 93}
+        - {x: -184.5, y: 92}
+        - {x: -210.5, y: 90}
+        - {x: -230.5, y: 88}
+        - {x: -246.5, y: 86}
+        - {x: -267.5, y: 83}
+        - {x: -278.5, y: 81}
+        - {x: -304.5, y: 76}
+        - {x: -310.5, y: 73}
+        - {x: -347.5, y: 59}
+        - {x: -373.5, y: 50}
+        - {x: -398.5, y: 45}
+        - {x: -414.5, y: 43}
+        - {x: -428.5, y: 41}
+        - {x: -434.5, y: 40}
+        - {x: -457.5, y: 35}
+        - {x: -471.5, y: 30}
+        - {x: -480.5, y: 26}
+        - {x: -495.5, y: 18}
+        - {x: -504.5, y: 12}
+        - {x: -521.5, y: -2}
+        - {x: -539.5, y: -14}
+        - {x: -561.5, y: -26}
+        - {x: -579.5, y: -41}
+        - {x: -598.5, y: -54}
+        - {x: -610.5, y: -61}
+        - {x: -625.5, y: -71}
+        - {x: -632.5, y: -77}
+        - {x: -639.5, y: -80}
+        - {x: -668.5, y: -94}
+        - {x: -693.5, y: -106}
+        - {x: -723.5, y: -119}
+        - {x: -734.5, y: -124}
+        - {x: -734.5, y: -128}
+        - {x: -140.5, y: -128}
+        - {x: -139.5, y: -127}
     - name: PalmIsland 1_5
       rect:
         serializedVersion: 2
@@ -113,8 +272,36 @@ TextureImporter:
         width: 268
         height: 427
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 110, y: -70.5}
+        - {x: 78, y: -23.5}
+        - {x: 58, y: -5.5}
+        - {x: 99, y: 78.5}
+        - {x: 122, y: 86.5}
+        - {x: 123, y: 91.5}
+        - {x: 123, y: 132.5}
+        - {x: 77, y: 138.5}
+        - {x: 50, y: 210.5}
+        - {x: -33, y: 210.5}
+        - {x: -87, y: 134.5}
+        - {x: -126, y: 107.5}
+        - {x: -126, y: 87.5}
+        - {x: -116, y: 70.5}
+        - {x: -91, y: 74.5}
+        - {x: -86, y: 76.5}
+        - {x: -79, y: 62.5}
+        - {x: -39, y: 0.5}
+        - {x: -84, y: -38.5}
+        - {x: -94, y: -62.5}
+        - {x: -89, y: -181.5}
+        - {x: -78, y: -206.5}
+        - {x: 105, y: -206.5}
+        - {x: 123, y: -182.5}
+        - {x: 123, y: -179.5}
+        - {x: 110, y: -141.5}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 
