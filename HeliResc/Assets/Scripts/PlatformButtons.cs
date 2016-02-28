@@ -84,7 +84,7 @@ public class PlatformButtons: MonoBehaviour {
     public void ShowFuel(GameObject go) {
         if (levelManager.gameState.Equals(GameState.Running))
         {
-            Debug.Log("Fuel animation");
+            //Debug.Log("Fuel animation");
             fuelAnimator.Play("ShowFuel");
         }
     }
@@ -92,7 +92,7 @@ public class PlatformButtons: MonoBehaviour {
     {
         if (levelManager.gameState.Equals(GameState.Running))
         {
-            Debug.Log("Fuel animation");
+            //Debug.Log("Fuel animation");
             fuelAnimator.Play("ShowFuel");
         }
     }

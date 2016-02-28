@@ -15,7 +15,7 @@ public class PondScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         BucketScript bucket = other.GetComponent<BucketScript>();
-        Debug.Log("Collision: " + other.name);
+        //Debug.Log("Collision: " + other.name);
         if (bucket != null) { 
             //TODO
             bucket.Fill();

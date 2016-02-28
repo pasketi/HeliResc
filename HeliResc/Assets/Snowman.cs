@@ -59,8 +59,8 @@ public class Snowman : MonoBehaviour {
         }
         arm.eulerAngles = Vector3.zero;
         swinging = false;
-        Debug.Log("Speed: " + speed);
-        Debug.Log("Dist: " + dist);
+        //Debug.Log("Speed: " + speed);
+        //Debug.Log("Dist: " + dist);
     }    
 
     private void RotateArm() {
@@ -75,8 +75,8 @@ public class Snowman : MonoBehaviour {
                 //ThrowBall();           
         }
 
-        Debug.Log("Angle of copter and arm: " + Vector3.Angle(-arm.up, (copter.position - arm.position)));
-        Debug.Log("Dot of copter and arm: " + Vector3.Dot(-arm.right, (copter.position - arm.position).normalized));
+        //Debug.Log("Angle of copter and arm: " + Vector3.Angle(-arm.up, (copter.position - arm.position)));
+        //Debug.Log("Dot of copter and arm: " + Vector3.Dot(-arm.right, (copter.position - arm.position).normalized));
     }
 
     private void ThrowBall(GameObject ball) {

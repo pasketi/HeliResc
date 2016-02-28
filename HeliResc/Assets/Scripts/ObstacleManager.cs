@@ -45,9 +45,9 @@ public class ObstacleManager : MonoBehaviour {
 		if (collision.gameObject.transform.tag == "Hook") {
             if (killsHook) copter.rope.KillHook();
 
-			if (diesOnContact && deathAnimation != null) 
+			/*if (diesOnContact && deathAnimation != null) 
 				Instantiate (deathAnimation, transform.position, Quaternion.identity);
-			if (diesOnContact) Destroy(gameObject);
+			if (diesOnContact) Destroy(gameObject);*/
 		}
 
         ObstacleHit(gameObject.tag);

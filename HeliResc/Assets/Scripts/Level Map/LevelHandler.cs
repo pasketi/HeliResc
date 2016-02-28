@@ -74,7 +74,7 @@ public class LevelHandler : MonoBehaviour {
             }
         }
         if (nextSet != null && nextSet.unlocked == false) {
-            Debug.Log("Next Set");
+            //Debug.Log("Next Set");
             nextSet.unlocked = true;
             nextSet.Save();
             Level nextLevel = Levels[nextSet.levelSetName][0];

@@ -73,7 +73,7 @@ public class CargoSpace : Upgradable {
     public void CargoHookedCrates(Transform hookChild)
     {
 
-        Debug.Log("cargo: " + currentCargo);
+        //Debug.Log("cargo: " + currentCargo);
         if (hookChild.FindChild("LegHook") != null && hookChild.FindChild("LegHook").childCount != 0)
             CargoHookedCrates(hookChild.FindChild("LegHook").gameObject.transform);
         if (maxCapacity >= currentCargo)

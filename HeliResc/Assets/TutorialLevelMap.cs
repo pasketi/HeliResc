@@ -14,7 +14,7 @@ public class TutorialLevelMap : MonoBehaviour {
     private IEnumerator Init() {        
         LevelSetHandler set = GetComponent<LevelSetHandler>();
         bool passed = Level.Load(set.setName, 0).star1;
-        Debug.Log(set.setName + " " + passed);
+        //Debug.Log(set.setName + " " + passed);
         bool showFinger = set.Unlocked && !passed;
         if (showFinger == true && !set.Set.animated)
         {

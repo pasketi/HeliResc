@@ -24,7 +24,7 @@ public class LevelButtonHandler : MonoBehaviour {
 		loadImage = GameObject.Find("LoadImage");
 
         transform.localScale = Vector3.one;
-				Debug.Log(loadImage + " " + GameObject.Find("LoadImage"));
+				//Debug.Log(loadImage + " " + GameObject.Find("LoadImage"));
 
         if(level.unlocked == true) {
             if (unlockedStars.Length != 3) Debug.LogError("The stars array is not the correct size");

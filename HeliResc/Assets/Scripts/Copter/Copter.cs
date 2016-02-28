@@ -135,7 +135,7 @@ public abstract class Copter : MonoBehaviour {
     }
     //What happens if there is no input
     protected virtual void IdleInput() {
-        engine.IdleInput();
+		if (!levelManager.getPaused()) engine.IdleInput();
     }
     protected virtual void EnterPlatform() {
         onPlatform = true;

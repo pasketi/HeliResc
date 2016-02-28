@@ -52,7 +52,7 @@ public class ArcticShipScript : MonoBehaviour {
             MoveToTarget();
 	}
     void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("collision: " + other.name);
+        //Debug.Log("collision: " + other.name);
         SeracScript serac = other.GetComponent<SeracScript>();
         if (serac != null) {
             serac.UseAction();

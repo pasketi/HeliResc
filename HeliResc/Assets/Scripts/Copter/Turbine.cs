@@ -65,7 +65,7 @@ public class Turbine : Upgradable {
 		if (pressingButton == true) {
 			direction = Mathf.Sign (playerRb.transform.localScale.x);
 			Vector2 force = Vector2.right * direction * horizontalForce * Time.deltaTime;
-			Debug.Log(force);
+			//Debug.Log(force);
 			playerRb.AddForce(force);
 		}
 		//pressingButton = false;

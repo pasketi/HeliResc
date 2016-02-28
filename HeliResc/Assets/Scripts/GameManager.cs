@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour {
     public IEnumerator LoadLevelAsync(string level) {
         AsyncOperation async = Application.LoadLevelAsync(level);
         yield return async;
-        Debug.Log("Loading level " + level + " done");
+        //Debug.Log("Loading level " + level + " done");
     }
 
     public void GameOver() { }

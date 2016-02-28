@@ -50,7 +50,7 @@ public class CrateManager1 : MonoBehaviour {
 		}
 		crate = gameObject.transform.parent.gameObject;
 		animator = gameObject.transform.parent.GetComponent<Animator>();
-		Debug.Log(animator.name);
+		//Debug.Log(animator.name);
 		//spriteRenderer = crate.GetComponent<SpriteRenderer> ();
 		/*if (crate.transform.FindChild ("BackGround") != null)
 			bgRenderer = crate.transform.FindChild ("BackGround").GetComponent<SpriteRenderer> ();*/

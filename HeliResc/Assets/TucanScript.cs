@@ -42,7 +42,7 @@ public class TucanScript : MonoBehaviour {
 
     private void Rotation() {
         float angle = Vector3.Angle((target-_transform.position).normalized, Vector3.right * _transform.localScale.x);
-        Debug.Log("Angle" + angle);
+        //Debug.Log("Angle" + angle);
         Vector3 newAngle = new Vector3(0, 0, angle);
         _transform.eulerAngles = newAngle;
     }

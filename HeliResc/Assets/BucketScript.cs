@@ -40,12 +40,12 @@ public class BucketScript : HookScript {
 
     public void Fill() {
         full = true;
-        Debug.Log("Fill");
+        //Debug.Log("Fill");
         _animator.Play("IdleFull");
     }
 
     public void Throw() {
-        Debug.Log("Throw water: " + canThrowWater);        
+        //Debug.Log("Throw water: " + canThrowWater);        
         OpenBucket();
     }
 

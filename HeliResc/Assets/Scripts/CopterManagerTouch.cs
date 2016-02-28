@@ -268,7 +268,7 @@ public class CopterManagerTouch : MonoBehaviour {
 			cargo.cargoHookedCrates (hook);
 			if (cargo.getCargoCrates() >= manager.cargoSize && hook.transform.childCount > 0){
 				isHookDown = true;
-				Debug.Log("Cargo full");
+				//Debug.Log("Cargo full");
 			} else if (hook.transform.childCount == 0){
 				Destroy (hook);
 				once = false;

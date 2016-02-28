@@ -144,7 +144,7 @@ public class FisherMan : HookableObject, IChainable {
         if (hooked == false || dead == true) return;
 
 		GetComponent<HingeJoint2D> ().enabled = false;
-        Debug.Log(gameObject.name);
+        //Debug.Log(gameObject.name);
         joint.connectedBody = null;
 
         hooked = false;
