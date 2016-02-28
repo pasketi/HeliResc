@@ -43,7 +43,7 @@ public class IntroScreenScript : MonoBehaviour {
         else {
             challenges[0].text = set.challenge1;
             challenges[1].text = set.challenge2;
-            challenges[2].text = set.challenge3 + set.levelTimeChallenges[LevelHandler.CurrentLevel.id].ToString() ;
+            challenges[2].text = set.challenge3/* + set.levelTimeChallenges[LevelHandler.CurrentLevel.id].ToString() */;
         }
 	}
 
