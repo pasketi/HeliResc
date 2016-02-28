@@ -7,7 +7,7 @@ public class CameraManager : MonoBehaviour {
 	
 	private GameObject copter;
 	public bool hasBounds = false;
-	public float 	deadZonePercent = 0.2f, 
+	public float 	deadZonePercent = 0.25f, 
 	dampTime = 2f, //good value is 2f
 	maxSpeed = 20f, //good value is 20f
 	maxY = 30f, //the camera can not get higher than this
@@ -24,7 +24,7 @@ public class CameraManager : MonoBehaviour {
 	risingVelocity = 1f, //expected speed to rise the copter. If the copter is rising slowler that is propably meant to be hoovering
 	cameraFront = 3.5f, //how much camera is forvard from copter's x positon
 	cameraDownLook = 2.5f; //if the copter is moving down the camera looks further to see the sea or the ground earlier. 
-	private bool cameraMovingRight = false, //true if the copter and the camera is moving the same direction, false if copter change its flying direction.
+	private bool cameraMovingRight = true, //true if the copter and the camera is moving the same direction, false if copter change its flying direction.
 	cameraMovingLeft = false;
 	private Rigidbody2D copterRb;		//Reference to the copters rigidbody to access its velocity
 	
