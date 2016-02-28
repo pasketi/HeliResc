@@ -44,7 +44,7 @@ public class LevelManager : MonoBehaviour {
 	public bool isDiverInCargo { get { return diverInCargo; } set { diverInCargo = value; } }
 	public bool isCatDry { get { return dryCat; } set { dryCat = value; } }
 	public bool multipleCratesHooked { get { return twoCratesHooked; } set { twoCratesHooked = value; } }
-	public bool totalAccuracy { get { return noMissedThrows; } set { noMissedThrows = value; } }
+	public bool totalAccuracy { get { return GameObject.FindObjectOfType<ActionButton>().usedThrows() <= crateAmount; } }
 	public bool chainFormed { get { return fishermenChained; } set { fishermenChained = value; } }
 	public bool shipNotHit { get { return shipIntact; } set { shipIntact = value; } }
 
@@ -160,6 +160,7 @@ public class LevelManager : MonoBehaviour {
 		}
 		StartGame ();
 	}
+
 	private IEnumerator PostGame(bool passed) {
         gameState = GameState.PostGame;
         int endReason = EndReason.lose;

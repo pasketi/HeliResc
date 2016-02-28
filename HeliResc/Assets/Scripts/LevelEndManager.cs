@@ -108,19 +108,19 @@ public class LevelEndManager : MonoBehaviour {
 		bonusObjective.text = "Bonus: " + LevelHandler.GetLevelSet(level.setName).challenge2;
 
 		float timeDifference = (level.bestTime < level.levelTimeChallenge && level.star3) ? (levelEnd.levelTime - level.bestTime) : (levelEnd.levelTime - level.levelTimeChallenge) ;
-		star3Text.text = (timeDifference.CompareTo(0f) >= 0 ? "+ " : "- ") + (Mathf.Abs(timeDifference / 60f) >= 1f ? Mathf.Abs(timeDifference / 60f).ToString("##:") : "" ) + Mathf.Abs(timeDifference % 60f).ToString("00.00");
+		star3Text.text = (timeDifference.CompareTo(0f) >= 0 ? "+ " : "- ") + (Mathf.Abs(timeDifference / 60f) >= 1f ? Mathf.Floor(Mathf.Abs(timeDifference / 60f)).ToString("##:") : "" ) + Mathf.Abs(timeDifference % 60f).ToString("00.00");
 
-		playerTime.text = levelEnd.passedLevel ? ("Time: " + (levelEnd.levelTime / 60f >= 1f ? (levelEnd.levelTime / 60f).ToString("##:") : "") + (levelEnd.levelTime % 60f).ToString("00.00")) : "Time: 0.00";
+		playerTime.text = levelEnd.passedLevel ? ("Time: " + (levelEnd.levelTime / 60f >= 1f ? Mathf.Floor(levelEnd.levelTime / 60f).ToString("##:") : "") + (levelEnd.levelTime % 60f).ToString("00.00")) : "Time: 0.00";
 
 		if (!level.star3) {
-			targetTime.text = "Target: " + (level.levelTimeChallenge / 60f >= 1f ? (level.levelTimeChallenge / 60f).ToString("##:"): "") + (level.levelTimeChallenge % 60f).ToString("00.00");
+			targetTime.text = "Target: " + (level.levelTimeChallenge / 60f >= 1f ? Mathf.Floor(level.levelTimeChallenge / 60f).ToString("##:"): "") + (level.levelTimeChallenge % 60f).ToString("00.00");
 			if (levelEnd.levelTime < level.levelTimeChallenge && levelEnd.passedLevel) {
 				level.bestTime = levelEnd.levelTime;
 				//personalBest.gameObject.SetActive(true);
 				//PlayerPrefs.SetFloat(level.name + "BestTime", level.bestTime);
 			} else level.bestTime = 999f;
 		} else {
-			targetTime.text = "Best: " + (level.bestTime / 60f >= 1f ? (level.bestTime / 60f).ToString("##:") : "" ) + (level.bestTime % 60f).ToString("00.00");
+			targetTime.text = "Best: " + (level.bestTime / 60f >= 1f ? Mathf.Floor(level.bestTime / 60f).ToString("##:") : "" ) + (level.bestTime % 60f).ToString("00.00");
 			if (levelEnd.levelTime < level.bestTime && levelEnd.passedLevel) {
 				level.bestTime = levelEnd.levelTime;
 				//personalBest.gameObject.SetActive(true);

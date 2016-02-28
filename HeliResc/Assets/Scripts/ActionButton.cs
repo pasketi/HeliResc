@@ -41,6 +41,11 @@ public class ActionButton : MonoBehaviour {
     public void UseAction() {
         actionMethod();
     }
+
+	public int usedThrows () {
+		return maxActions - actionsLeft;
+	}
+
     private void ThrowLifeRing() {
         if (actionsLeft >= 1)
         {

@@ -84,11 +84,7 @@ public class MissionObjectives : MonoBehaviour {
 	}
 
 	public bool noMissedThrows () {
-		bool missed = false;
-		foreach (GameObject test in GameObject.FindObjectsOfType<GameObject>()) {
-			if (!missed) missed = !test.name.Contains("LifeRing");
-		}
-		return missed;
+		return manager.totalAccuracy;
 	}
 
 	public bool fishermenChained () {
