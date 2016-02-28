@@ -156,6 +156,10 @@ public class Level {
 		else { PlayerPrefs.SetFloat(name + "BestTime", 999f); }
     }
 
+	public bool checkLevelCompletion (Level level) {
+		return (level.star1 && level.star2 && level.star3 && level.rubyFound) ? true : false ;
+	}
+
     public override string ToString()
     {
         string str = "Unlocked: " + unlocked;

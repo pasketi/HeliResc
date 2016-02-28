@@ -6,8 +6,11 @@ using System.Collections.Generic;
 public class LevelSetHandler : MonoBehaviour {
 
     public GameObject lockedPanel;
-    public GameObject buttonPrefab; //Prefab of a button to open levels    
+    public GameObject buttonPrefab; //Prefab of a button to open levels
+	private GameObject flashOfWhite;
     public Image setImage;          //The image UI-component in the middle of the button set
+	public Image setBG, setChest;
+	public Sprite setBGDefault, setBGCompleted;
     public string setName;
 
     public bool Unlocked { 
@@ -18,10 +21,11 @@ public class LevelSetHandler : MonoBehaviour {
     }
 
     public LevelSet Set { get { return set; } }
-    private LevelSet set;            //The kind of set the group has
+    private LevelSet set; //The kind of set the group has
 
     void Awake() {
 
+		flashOfWhite = GameObject.Find("flashOfWhite");
         RectTransform rect = GetComponent<RectTransform>();
         //rect.anchoredPosition *= GameObject.FindObjectOfType<LevelMapScript>().size;
 
@@ -29,17 +33,18 @@ public class LevelSetHandler : MonoBehaviour {
 
         int playerStars = PlayerPrefs.GetInt(SaveStrings.sPlayerStars);
 
-        if (playerStars >= set.neededStars && set.unlocked == true && set.animated == true) {
-            SetUnlocked();
-        }
-        else {
+		if (playerStars >= set.neededStars && set.unlocked == true && set.animated == true && set.completed == true)
+            SetCompleted();
+		else if (playerStars >= set.neededStars && set.unlocked == true && set.animated == true) {
+			SetUnlocked();
+		} else
             SetLocked(playerStars);
-        }
     }
 
     private void SetLocked(int playerStars) {
         lockedPanel.SetActive(true);
         setImage.enabled = false;
+		setBG.sprite = setBGDefault;
 
         Text starText = lockedPanel.GetComponentInChildren<Text>();
         starText.text = playerStars + "/" + set.neededStars;
@@ -49,6 +54,7 @@ public class LevelSetHandler : MonoBehaviour {
 
         setImage.enabled = true;
         lockedPanel.SetActive(false);
+		setBG.sprite = setBGDefault;
         
 		float mapSize = GameObject.FindObjectOfType<LevelMapScript> ().size;
 		for (int i = 0; i < set.levelAmount; i++) {
@@ -63,13 +69,21 @@ public class LevelSetHandler : MonoBehaviour {
             setImage.enabled = false;
         else
             setImage.sprite = set.setImage;
+
+		if (set.checkCompletion() && !set.completed) setChest.enabled = true;
     }    
+
+	private void SetCompleted () {
+		SetUnlocked();
+		setBG.sprite = setBGCompleted;
+	}
 
     public void OpenSetFirstTime() {
         set.animated = true;
         set.Save();
         StartCoroutine(UnlockFirstTime());
     }
+
     private IEnumerator UnlockFirstTime() {
         setImage.enabled = true;
         lockedPanel.SetActive(false);
@@ -92,6 +106,17 @@ public class LevelSetHandler : MonoBehaviour {
         yield return null;
 
     }
+
+	public void completeSet () {
+		flashOfWhiteManager flash;
+		flash = flashOfWhite.GetComponent<flashOfWhiteManager>();
+		if (flash.setLevelSet(gameObject)) {
+			flash.playAnimation();
+			set.completed = true;
+			set.Save();
+		} else Debug.LogError("LevelSet failed!");
+	}
+
     private Vector3 CalculateButtonPosition(int index, float mapSize) {
         Vector3 vec = new Vector2();
         float angle = (360f / set.levelAmount) * index * Mathf.Deg2Rad;
@@ -133,6 +158,7 @@ public class LevelSet {
     public int setIndex;            //the index of the set in the list of level sets
     public bool unlocked;           //Is the set unlocked
     public bool animated;           //Has the animation been played
+	public bool completed;			//Completed and animated
 
 	public Objective objective1;
 	public Objective objective2;
@@ -145,9 +171,22 @@ public class LevelSet {
     public void Save() {
         PlayerPrefsExt.SetBool(levelSetName + "Set", unlocked);
         PlayerPrefsExt.SetBool(levelSetName + "Animation", animated);
+		PlayerPrefsExt.SetBool(levelSetName + "Completed", completed);
     }
     public void Load() {
         unlocked = PlayerPrefsExt.GetBool(levelSetName + "Set") || unlocked;
         animated = PlayerPrefsExt.GetBool(levelSetName + "Animation") || animated;
+		completed = PlayerPrefsExt.GetBool(levelSetName + "Completed") || completed;
     }
+
+	public bool checkCompletion () {
+		List<Level> temp = new List<Level>();
+		bool result = true;
+		if (LevelHandler.Levels.TryGetValue(levelSetName, out temp)){
+			foreach (Level lev in temp) {
+				if (result) result = lev.checkLevelCompletion(lev);
+			}
+		}
+		return result;
+	}
 }

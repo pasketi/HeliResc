@@ -59,16 +59,26 @@ public class SoundMusic : MonoBehaviour {
     }
 
     public static void PlaySound(AudioClip clip) {
-        if(instance.soundMuted == false)
+        if(!instance.soundMuted)
             instance.soundSource.PlayOneShot(clip);
     }
     public static void PlayMusic(AudioClip clip) {
-        if (instance.musicMuted == false) {
+        if (!instance.musicMuted) {
             if (clip.Equals(instance.musicSource.clip)) return;
             instance.musicSource.clip = clip;
             instance.musicSource.Play();
         }
     }
+
+	public static void PlayMusicOnce(AudioClip clip) {
+		if (!instance.musicMuted) {
+			if (clip.Equals(instance.musicSource.clip)) return;
+			instance.musicSource.clip = clip;
+			instance.musicSource.loop = false;
+			instance.musicSource.Play();
+		}
+	}
+
     public static void Stop() {
         instance.soundSource.Stop();
         instance.musicSource.Stop();

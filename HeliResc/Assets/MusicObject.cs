@@ -25,9 +25,17 @@ public class MusicObject : MonoBehaviour
 
         AudioClip c = clips;
         _audio.clip = c;
-        PlayMusic();
+		if (!_audio.loop && _audio.isPlaying) ;
+		else PlayMusic();
         
-    }   
+    }
+
+	void Update () {
+		if (!_audio.loop && !_audio.isPlaying) {
+			_audio.loop = loop;
+			PlayMusic();
+		}
+	}
 
     public void Mute(bool mute) {
         if (_audio == null)

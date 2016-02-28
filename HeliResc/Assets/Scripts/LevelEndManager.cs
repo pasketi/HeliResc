@@ -39,11 +39,15 @@ public class LevelEndManager : MonoBehaviour {
 
     private Animator animator;
 
+	private MusicObject audioObject;
+	public AudioClip menuMusic, threeStarMusic, passedMusic, loseMusic;
+
     private int starsEarned;
 
 
     public void UpdateLevelEnd(GameManager gm) {
         gameManager = gm;
+		audioObject = GameObject.Find("LevelMapMusic").GetComponent<MusicObject>();
 		moneyText = GameObject.Find("TextMoney").GetComponent<MoneyUIUpdate>();
 
 		star1Text = star1.GetComponentInChildren<Text>();
@@ -128,6 +132,17 @@ public class LevelEndManager : MonoBehaviour {
 			}
 		}
 
+		// Musiikin määritys
+		if (levelEnd.passedLevel) {
+			if (levelEnd.obj1Passed && levelEnd.obj2Passed && levelEnd.obj3Passed)
+				audioObject.clips = threeStarMusic;
+			else if (levelEnd.obj1Passed || levelEnd.obj2Passed || levelEnd.obj3Passed)
+				audioObject.clips = threeStarMusic;
+		} else {
+			audioObject.clips = loseMusic;
+		}
+		audioObject.PlayMusic();
+
 		level.rubyFound = levelEnd.rubyFound || level.rubyFound;
 		level.star1 = levelEnd.obj1Passed || level.star1;
         level.star2 = levelEnd.obj2Passed || level.star2;
@@ -135,7 +150,7 @@ public class LevelEndManager : MonoBehaviour {
 
 		// Grafiikoiden määritys
         if (levelEnd.passedLevel == true)
-        {            
+        {
             PassedLevel();
             Level.Save(level);
         }
