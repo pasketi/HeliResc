@@ -117,19 +117,19 @@ public class LevelEndManager : MonoBehaviour {
 			if (levelEnd.levelTime < level.levelTimeChallenge && levelEnd.passedLevel) {
 				level.bestTime = levelEnd.levelTime;
 				//personalBest.gameObject.SetActive(true);
-				PlayerPrefs.SetFloat(level.name + "BestTime", level.bestTime);
-			}
+				//PlayerPrefs.SetFloat(level.name + "BestTime", level.bestTime);
+			} else level.bestTime = 999f;
 		} else {
 			targetTime.text = "Best: " + (level.bestTime / 60f >= 1f ? (level.bestTime / 60f).ToString("##:") : "" ) + (level.bestTime % 60f).ToString("00.00");
 			if (levelEnd.levelTime < level.bestTime && levelEnd.passedLevel) {
 				level.bestTime = levelEnd.levelTime;
 				//personalBest.gameObject.SetActive(true);
-				PlayerPrefs.SetFloat(level.name + "BestTime", level.bestTime);
+				//PlayerPrefs.SetFloat(level.name + "BestTime", level.bestTime);
 			}
 		}
 
 		level.rubyFound = levelEnd.rubyFound || level.rubyFound;
-        level.star1 = levelEnd.obj1Passed || level.star1;
+		level.star1 = levelEnd.obj1Passed || level.star1;
         level.star2 = levelEnd.obj2Passed || level.star2;
         level.star3 = levelEnd.obj3Passed || level.star3;
 
@@ -142,6 +142,7 @@ public class LevelEndManager : MonoBehaviour {
         else
         {
             FailedLevel();
+			Level.Save(level);
         }
 
         if (levelEnd.rubyFound == true)
@@ -162,28 +163,28 @@ public class LevelEndManager : MonoBehaviour {
     private IEnumerator Animations(bool showRuby) {
         yield return null;
     }
-		private IEnumerator CoinFlow(int amount, GameObject spawnPosition) {
+	private IEnumerator CoinFlow(int amount, GameObject spawnPosition) {
 
-		// Coin initialization
-		yield return new WaitForSeconds(1f);
-		GameObject[] coins = new GameObject[amount];
-		//Debug.Log(coinDestination);
-		for (int i = 0; i < amount; i++) {
-			coins[i] = Instantiate(coinPrefab, spawnPosition.transform.position, Quaternion.identity) as GameObject;
-			coins[i].transform.SetParent(spawnPosition.transform.parent.transform);
-			Vector2 force = new Vector2 (Random.value-0.5f,Random.value-0.5f);
-			force.Normalize();
-			coins[i].GetComponent<Rigidbody2D>().AddForce(force * (Random.value * 7500f + 2500f), ForceMode2D.Force);
-		}
+	// Coin initialization
+	yield return new WaitForSeconds(1f);
+	GameObject[] coins = new GameObject[amount];
+	//Debug.Log(coinDestination);
+	for (int i = 0; i < amount; i++) {
+		coins[i] = Instantiate(coinPrefab, spawnPosition.transform.position, Quaternion.identity) as GameObject;
+		coins[i].transform.SetParent(spawnPosition.transform.parent.transform);
+		Vector2 force = new Vector2 (Random.value-0.5f,Random.value-0.5f);
+		force.Normalize();
+		coins[i].GetComponent<Rigidbody2D>().AddForce(force * (Random.value * 7500f + 2500f), ForceMode2D.Force);
+	}
 
-		/*foreach (GameObject coin in coins) {
-						//coin.transform.localScale = new Vector3(1f,1f,1f);
-						//coin.GetComponent<RectTransform>().anchorMin = new Vector2 (0f,0f);
-						//coin.GetComponent<RectTransform>().anchorMax = new Vector2 (0.1f,0.1f);
-				}*/
+	/*foreach (GameObject coin in coins) {
+					//coin.transform.localScale = new Vector3(1f,1f,1f);
+					//coin.GetComponent<RectTransform>().anchorMin = new Vector2 (0f,0f);
+					//coin.GetComponent<RectTransform>().anchorMax = new Vector2 (0.1f,0.1f);
+			}*/
 
-		// End
-		yield return null;
+	// End
+	yield return null;
     }
     private IEnumerator StarsAnimation() {
         yield return null;

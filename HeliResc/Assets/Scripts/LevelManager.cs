@@ -181,18 +181,6 @@ public class LevelManager : MonoBehaviour {
 		end.maxItems = getCrateAmount();
         end.Reward = reward;
         end.levelTime = levelTimer;
-        if (passed == true) {
-            LevelHandler.CompleteLevel(end.level);
-            FireworksController fw = GameObject.FindObjectOfType<FireworksController>();
-			if (!cheerOnce) {
-				endCheer.PlaySound();
-				cheerOnce = true;
-			}
-            if (fw != null) {
-                //fw.transform.position = GameObject.FindObjectOfType<Copter>().transform.position + Vector3.up * 3;
-                fw.Launch();
-            }
-        }
         
         RubyScript ruby = GameObject.FindObjectOfType<RubyScript>();
 
@@ -209,6 +197,19 @@ public class LevelManager : MonoBehaviour {
             end.obj2Passed = objectives.LevelObjective2();
             end.obj3Passed = objectives.LevelObjective3();
         }
+
+		if (passed == true) {
+			LevelHandler.CompleteLevel(end.level);
+			FireworksController fw = GameObject.FindObjectOfType<FireworksController>();
+			if (!cheerOnce) {
+				endCheer.PlaySound();
+				cheerOnce = true;
+			}
+			if (fw != null) {
+				//fw.transform.position = GameObject.FindObjectOfType<Copter>().transform.position + Vector3.up * 3;
+				fw.Launch();
+			}
+		}
 
 		if (!passed) setResetButton(true);
         float timer = resetCountdown;
