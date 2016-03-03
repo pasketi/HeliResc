@@ -5,6 +5,7 @@ using System.Collections;
 public class Tutorial1 : TutorialScript {
 	
     public Text text;
+	public Text tipText;
     public GameObject holdTipImage;
     
     private bool clickedOnce;
@@ -47,7 +48,8 @@ public class Tutorial1 : TutorialScript {
             manager.StartGame();
         } else {
             clickedOnce = true;
-            text.text = "Tilt";            
+            text.text = "Tilt";
+			tipText.text = "Angle the force";
             animator.Play("SecondTip");
         }
     }

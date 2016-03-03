@@ -24,6 +24,7 @@ public class flashOfWhiteManager : MonoBehaviour {
 	public void playAnimation () {
 		gameObject.GetComponent<Animator>().Play("flash");
 		gameObject.GetComponent<Animator>().SetTrigger("end");
+		gameObject.GetComponent<SoundObject>().PlaySound();
 	}
 
 	public void complete () {
