@@ -81,8 +81,7 @@ public class GameManager : MonoBehaviour {
         if (level == 1 && showLevelEnd) {
             GameObject.Find("LevelEnd").GetComponent<LevelEndManager>().UpdateLevelEnd(this);
             SaveLoad.SaveWallet(wallet);
-
-        }                            
+        }
     }
 
 	public void save () {

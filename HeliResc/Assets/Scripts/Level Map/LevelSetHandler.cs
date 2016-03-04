@@ -29,16 +29,16 @@ public class LevelSetHandler : MonoBehaviour {
         RectTransform rect = GetComponent<RectTransform>();
         //rect.anchoredPosition *= GameObject.FindObjectOfType<LevelMapScript>().size;
 
-        set = LevelHandler.GetLevelSet(setName);
+		set = LevelHandler.GetLevelSet(setName);
+		if (set.checkCompletion() && !set.completed) setChest.enabled = true;
 
-        int playerStars = PlayerPrefs.GetInt(SaveStrings.sPlayerStars);
-
+		int playerStars = PlayerPrefs.GetInt(SaveStrings.sPlayerStars);
 		if (playerStars >= set.neededStars && set.unlocked == true && set.animated == true && set.completed == true)
-            SetCompleted();
+			SetCompleted();
 		else if (playerStars >= set.neededStars && set.unlocked == true && set.animated == true) {
 			SetUnlocked();
 		} else
-            SetLocked(playerStars);
+			SetLocked(playerStars);
     }
 
     private void SetLocked(int playerStars) {
@@ -69,7 +69,7 @@ public class LevelSetHandler : MonoBehaviour {
             setImage.enabled = false;
         else
             setImage.sprite = set.setImage;
-
+		
 		if (set.checkCompletion() && !set.completed) setChest.enabled = true;
     }    
 
@@ -153,6 +153,7 @@ public class LevelSet {
 
 	public string levelSetName;     //The identifier of the set. Crate, swimmer etc.
 	public int levelAmount;         //how many levels is in the set
+	public int completionReward;	//How many coins you'll get for completing
 	public Sprite setImage;         //The image to show in the middle of the set
 	public int neededStars;			//How many stars is required to open the set
     public int setIndex;            //the index of the set in the list of level sets
@@ -182,11 +183,15 @@ public class LevelSet {
 	public bool checkCompletion () {
 		List<Level> temp = new List<Level>();
 		bool result = true;
-		if (LevelHandler.Levels.TryGetValue(levelSetName, out temp)){
-			foreach (Level lev in temp) {
-				if (result) result = lev.checkLevelCompletion(lev);
-			}
+
+		for (int i = 0; i < levelAmount; i++) {
+			temp.Add(Level.Load(levelSetName, i));
 		}
+			
+		foreach (Level lev in temp) {
+			if (result) result = lev.checkLevelCompletion(lev);
+		}
+
 		return result;
 	}
 }

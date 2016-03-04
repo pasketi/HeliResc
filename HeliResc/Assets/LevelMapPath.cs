@@ -47,7 +47,7 @@ public class LevelMapPath : MonoBehaviour {
 
         LevelSetHandler set = endPoint.GetComponent<LevelSetHandler>();
         if (set.Unlocked && set.Set.animated) {
-            SetUnlocked();
+			SetUnlocked();
         }
         else if (set.Unlocked) {
             StartCoroutine(SetUnlockedAnimated(set));

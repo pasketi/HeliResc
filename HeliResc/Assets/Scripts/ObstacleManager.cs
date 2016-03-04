@@ -7,6 +7,7 @@ public class ObstacleManager : MonoBehaviour {
     public Action<string> ObstacleHit = (string obstacleTag) => { };
 
 	public GameObject deathAnimation;
+	public AudioClip deathSound;
 	public bool instaKill = false, fixedDamage = false, killsHook = false, diesOnContact = false;
 	public float damageMultiplier = 1f, fixedDamageAmount = 20f;
 
@@ -37,9 +38,13 @@ public class ObstacleManager : MonoBehaviour {
                 copter.Detonate();
             }
 
-			if (diesOnContact && deathAnimation != null) 
+			if (diesOnContact && deathAnimation != null) {
 				Instantiate (deathAnimation, transform.position, Quaternion.identity);
-			if (diesOnContact) Destroy(gameObject);
+			}
+			if (diesOnContact) {
+				if (deathSound != null) SoundMusic.PlaySound(deathSound);
+				Destroy(gameObject);
+			}
 		}
 
 		if (collision.gameObject.transform.tag == "Hook") {
@@ -70,7 +75,10 @@ public class ObstacleManager : MonoBehaviour {
 
             if (diesOnContact && deathAnimation != null)
                 Instantiate(deathAnimation, transform.position, Quaternion.identity);
-            if (diesOnContact) Destroy(gameObject);
+			if (diesOnContact) {
+				if (deathSound != null) SoundMusic.PlaySound(deathSound);
+				Destroy(gameObject);
+			}
         }
 
         ObstacleHit(gameObject.tag);        

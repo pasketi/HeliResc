@@ -6,8 +6,9 @@ public class RubyScript : MonoBehaviour {
     public bool found;
     public bool IsSapphire { get { return isSapphire; } }
     public Sprite sapphireSprite;
+	public AudioClip bling;
 
-    private bool isSapphire;
+    private bool isSapphire, once = false;
     private Animator animator;
     //private string rubyName;
 
@@ -34,6 +35,11 @@ public class RubyScript : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag.Equals("Copter") || other.tag.Equals("Hook")) {
             found = true;
+
+			if (!once) {
+				SoundMusic.PlaySound(bling);
+				once = true;
+			}
 
             if (isSapphire == false)
             {
