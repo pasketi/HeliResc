@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class LevelSetHandler : MonoBehaviour {
 
     public GameObject lockedPanel;
+	public GameObject starsPanel;
     public GameObject buttonPrefab; //Prefab of a button to open levels
 	private GameObject flashOfWhite;
     public Image setImage;          //The image UI-component in the middle of the button set
@@ -42,7 +43,12 @@ public class LevelSetHandler : MonoBehaviour {
     }
 
     private void SetLocked(int playerStars) {
+		LevelSet lastSet = LevelHandler.GetLevelSet(set.setIndex - 1);
+
         lockedPanel.SetActive(true);
+		if (Level.Load(lastSet.levelSetName, 0).star1 == false)
+			starsPanel.SetActive(false);
+		else starsPanel.SetActive(true);
         setImage.enabled = false;
 		setBG.sprite = setBGDefault;
 

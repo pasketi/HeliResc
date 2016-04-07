@@ -7,12 +7,14 @@ public class LevelHandler : MonoBehaviour {
     public LevelSet[] LevelSets;
 	public Level currentLevel;
 	public string currentSet;
+	public int currentSetIndex;
 
 	public static Dictionary<string, List<Level>> Levels;       //all the levels in the game. the key string is the name of the set of levels
 	public static Level CurrentLevel { get { return instance.currentLevel; } 
 		set { 
 			instance.currentLevel = value;
             instance.currentSet = value.setName;
+			instance.currentSetIndex = value.id;
 			PlayerPrefs.SetInt(SaveStrings.sCurrentLevelIndex, value.id);
 			PlayerPrefs.SetString(SaveStrings.sCurrentLevelSet, value.setName);
 		} 
@@ -49,7 +51,7 @@ public class LevelHandler : MonoBehaviour {
 		currentLevel = Levels[currentSet][PlayerPrefs.GetInt(SaveStrings.sCurrentLevelIndex, 0)];
 	}
 
-    public static LevelSet GetLevelSet(string name = "") {
+	public static LevelSet GetLevelSet(string name = "") {
         if (name.Equals(""))
             name = instance.currentSet;
         foreach (LevelSet s in instance.LevelSets) {
@@ -60,6 +62,18 @@ public class LevelHandler : MonoBehaviour {
         }
         return null;
     }
+
+	public static LevelSet GetLevelSet(int index) {
+		if (index == -1)
+			index = instance.currentSetIndex;
+		foreach (LevelSet s in instance.LevelSets) {
+			if (s.setIndex == index) {
+				s.Load();
+				return s;
+			}
+		}
+		return null;
+	}
     
     public static void CompleteLevel(Level l) {
         Level.Save(l);
