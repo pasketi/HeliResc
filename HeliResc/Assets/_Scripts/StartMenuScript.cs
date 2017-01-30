@@ -10,6 +10,7 @@ public class StartMenuScript : MonoBehaviour {
     
     public GameObject autoHooveDialog;
 	public GameObject resetDialog;
+    public GameObject credits;
 
 	private GameManager manager;
     private Animator settingsAnimator;
@@ -45,9 +46,21 @@ public class StartMenuScript : MonoBehaviour {
     public void ShowAutoHooverBox() {
         autoHooveDialog.SetActive(true);
     }
+
 	public void ShowResetBox() {
 		resetDialog.SetActive(true);
 	}
+
+    public void ShowCredits()
+    {
+        credits.SetActive(true);
+    }
+
+    public void HideCredits()
+    {
+        credits.SetActive(false);
+    }
+
     public void AutoHoover(bool on) {
         autoHooverOn = on;
 		autoHooverOff.SetActive (!autoHooverOn);

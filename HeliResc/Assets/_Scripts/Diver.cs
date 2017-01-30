@@ -4,6 +4,7 @@ using System.Collections;
 public class Diver : HookableObject {
 
     protected Animator animator;
+    public Animator TutorialText;
 
     protected override void Start() {
         base.Start();
@@ -14,6 +15,7 @@ public class Diver : HookableObject {
         base.GrabHook(hookRb);
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         animator.Play("Hooked");
+        TutorialText.SetTrigger("Fade");
     }
 
     public override void DetachHook() {
