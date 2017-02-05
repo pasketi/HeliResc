@@ -8,12 +8,12 @@ TextureImporter:
     21300002: eggcopter (1)_1
     21300004: eggcopter (1)_2
     21300006: eggcopter (1)_3
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -25,10 +25,8 @@ TextureImporter:
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 1024
@@ -39,9 +37,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: -1
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -49,12 +45,44 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 400
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: eggcopter (1)_0
+    - serializedVersion: 2
+      name: eggcopter (1)_0
       rect:
         serializedVersion: 2
         x: 0
@@ -64,32 +92,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 109.5, y: -26.721558}
-        - {x: 215.5, y: 80.27844}
-        - {x: 215.5, y: 125.27844}
-        - {x: 155.5, y: 129.27844}
-        - {x: -170.5, y: 129.27844}
-        - {x: -215.5, y: 113.27844}
-        - {x: -215.5, y: 95.27844}
-        - {x: -202.5, y: 87.27844}
-        - {x: -170.5, y: 81.27844}
-        - {x: -130.5, y: 76.27844}
-        - {x: -89.5, y: 73.27844}
-        - {x: -100.5, y: 30.278442}
-        - {x: -157.5, y: 79.27844}
-        - {x: -177.5, y: 79.27844}
-        - {x: -190.5, y: 78.27844}
-        - {x: -193.5, y: 77.27844}
-        - {x: -198.5, y: -2.7215576}
-        - {x: -151.5, y: -49.721558}
-        - {x: -124.5, y: -38.721558}
-        - {x: -85.5, y: -127.72156}
-        - {x: 120.5, y: -127.72156}
-        - {x: 134.5, y: -117.72156}
-        - {x: 133.5, y: -109.72156}
-        - {x: 122.5, y: -102.72156}
-    - name: eggcopter (1)_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: eggcopter (1)_1
       rect:
         serializedVersion: 2
         x: 0
@@ -99,32 +105,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 109.5, y: -26.647705}
-        - {x: 215.5, y: 80.352295}
-        - {x: 215.5, y: 125.352295}
-        - {x: 155.5, y: 129.3523}
-        - {x: -170.5, y: 129.3523}
-        - {x: -215.5, y: 113.352295}
-        - {x: -215.5, y: 95.352295}
-        - {x: -202.5, y: 87.352295}
-        - {x: -170.5, y: 81.352295}
-        - {x: -130.5, y: 76.352295}
-        - {x: -89.5, y: 73.352295}
-        - {x: -101.5, y: 29.352295}
-        - {x: -157.5, y: 79.352295}
-        - {x: -177.5, y: 79.352295}
-        - {x: -190.5, y: 78.352295}
-        - {x: -193.5, y: 77.352295}
-        - {x: -198.5, y: -2.647705}
-        - {x: -151.5, y: -49.647705}
-        - {x: -124.5, y: -38.647705}
-        - {x: -85.5, y: -127.647705}
-        - {x: 120.5, y: -127.647705}
-        - {x: 134.5, y: -117.647705}
-        - {x: 133.5, y: -109.647705}
-        - {x: 122.5, y: -102.647705}
-    - name: eggcopter (1)_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: eggcopter (1)_2
       rect:
         serializedVersion: 2
         x: 0
@@ -134,32 +118,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 109.5, y: -26.573853}
-        - {x: 215.5, y: 80.42615}
-        - {x: 215.5, y: 125.42615}
-        - {x: 155.5, y: 129.42615}
-        - {x: -170.5, y: 129.42615}
-        - {x: -215.5, y: 113.42615}
-        - {x: -215.5, y: 95.42615}
-        - {x: -202.5, y: 87.42615}
-        - {x: -170.5, y: 81.42615}
-        - {x: -130.5, y: 76.42615}
-        - {x: -89.5, y: 73.42615}
-        - {x: -147.5, y: 70.42615}
-        - {x: -157.5, y: 79.42615}
-        - {x: -177.5, y: 79.42615}
-        - {x: -190.5, y: 78.42615}
-        - {x: -193.5, y: 77.42615}
-        - {x: -198.5, y: -2.5738525}
-        - {x: -151.5, y: -49.573853}
-        - {x: -124.5, y: -38.573853}
-        - {x: -85.5, y: -127.57385}
-        - {x: 120.5, y: -127.57385}
-        - {x: 134.5, y: -117.57385}
-        - {x: 133.5, y: -109.57385}
-        - {x: 122.5, y: -102.57385}
-    - name: eggcopter (1)_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: eggcopter (1)_3
       rect:
         serializedVersion: 2
         x: 0
@@ -169,33 +131,8 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 97.5, y: 24}
-        - {x: 215.5, y: 85}
-        - {x: 215.5, y: 111}
-        - {x: 212.5, y: 117}
-        - {x: 168.5, y: 123}
-        - {x: 110.5, y: 128}
-        - {x: -174.5, y: 128}
-        - {x: -215.5, y: 120}
-        - {x: -215.5, y: 93}
-        - {x: -203.5, y: 82}
-        - {x: -170.5, y: 80}
-        - {x: -130.5, y: 75}
-        - {x: -89.5, y: 72}
-        - {x: -90.5, y: 46}
-        - {x: -157.5, y: 78}
-        - {x: -177.5, y: 78}
-        - {x: -190.5, y: 77}
-        - {x: -194.5, y: 76}
-        - {x: -196.5, y: 3}
-        - {x: -169.5, y: -68}
-        - {x: -132.5, y: -86}
-        - {x: -86.5, y: -128}
-        - {x: 128.5, y: -128}
-        - {x: 135.5, y: -110}
-        - {x: 122.5, y: -104}
-        - {x: 109.5, y: -28}
+      outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 

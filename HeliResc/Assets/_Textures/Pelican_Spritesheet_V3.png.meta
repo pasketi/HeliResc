@@ -9,12 +9,12 @@ TextureImporter:
     21300004: Pelican_Spritesheet_V3_2
     21300006: Pelican_Spritesheet_V3_3
     21300008: Pelican_Spritesheet_V3_4
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -26,10 +26,8 @@ TextureImporter:
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 2048
@@ -40,9 +38,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: -1
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -50,12 +46,44 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: Pelican_Spritesheet_V3_0
+    - serializedVersion: 2
+      name: Pelican_Spritesheet_V3_0
       rect:
         serializedVersion: 2
         x: 0
@@ -65,22 +93,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 41, y: 25}
-        - {x: -1, y: 41}
-        - {x: -73, y: 41}
-        - {x: -66, y: -18}
-        - {x: -51, y: -10}
-        - {x: -48, y: -10}
-        - {x: -50, y: -10}
-        - {x: -55, y: -14}
-        - {x: -86, y: -44}
-        - {x: -86, y: -54}
-        - {x: 4, y: -54}
-        - {x: 46, y: -36}
-        - {x: 86, y: -8}
-        - {x: 86, y: 7}
-    - name: Pelican_Spritesheet_V3_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Pelican_Spritesheet_V3_1
       rect:
         serializedVersion: 2
         x: 172
@@ -90,15 +106,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -60, y: 33}
-        - {x: -82, y: 28}
-        - {x: -82, y: -18}
-        - {x: -63, y: -41}
-        - {x: 86, y: -41}
-        - {x: 86, y: 9}
-        - {x: 61, y: 33}
-    - name: Pelican_Spritesheet_V3_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Pelican_Spritesheet_V3_2
       rect:
         serializedVersion: 2
         x: 344
@@ -108,14 +119,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -76, y: -31}
-        - {x: -8, y: -52}
-        - {x: 86, y: -52}
-        - {x: 86, y: 5}
-        - {x: 73, y: 33}
-        - {x: -76, y: 33}
-    - name: Pelican_Spritesheet_V3_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Pelican_Spritesheet_V3_3
       rect:
         serializedVersion: 2
         x: 516
@@ -125,15 +132,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 45, y: 54}
-        - {x: -72, y: 54}
-        - {x: -72, y: 18}
-        - {x: -67, y: -54}
-        - {x: 86, y: -54}
-        - {x: 86, y: -18}
-        - {x: 64, y: -9}
-    - name: Pelican_Spritesheet_V3_4
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Pelican_Spritesheet_V3_4
       rect:
         serializedVersion: 2
         x: 688
@@ -143,15 +145,8 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 76, y: 8}
-        - {x: -24, y: 37}
-        - {x: -58, y: 37}
-        - {x: -85, y: -30}
-        - {x: -85, y: -42}
-        - {x: 64, y: -42}
-        - {x: 86, y: -13}
-        - {x: 86, y: 4}
+      outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 

@@ -12,12 +12,12 @@ TextureImporter:
     21300010: Sleep_Spritesheet_5
     21300012: Sleep_Spritesheet_6
     21300014: Sleep_Spritesheet_7
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -29,10 +29,8 @@ TextureImporter:
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 256
@@ -43,9 +41,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: -1
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -53,12 +49,44 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: Sleep_Spritesheet_0
+    - serializedVersion: 2
+      name: Sleep_Spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -68,14 +96,10 @@ TextureImporter:
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 6, y: 0}
-        - {x: -32, y: 0}
-        - {x: -32, y: -68}
-        - {x: 32, y: -68}
-        - {x: 32, y: -16}
-        - {x: 16, y: -3}
-    - name: Sleep_Spritesheet_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Sleep_Spritesheet_1
       rect:
         serializedVersion: 2
         x: 64
@@ -85,16 +109,10 @@ TextureImporter:
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 14, y: -7}
-        - {x: 7, y: 0}
-        - {x: -17, y: 0}
-        - {x: -32, y: -24}
-        - {x: -32, y: -68}
-        - {x: 30, y: -68}
-        - {x: 32, y: -63}
-        - {x: 32, y: -48}
-    - name: Sleep_Spritesheet_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Sleep_Spritesheet_2
       rect:
         serializedVersion: 2
         x: 128
@@ -104,15 +122,10 @@ TextureImporter:
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -18, y: -2}
-        - {x: -22, y: -3}
-        - {x: -32, y: -34}
-        - {x: -32, y: -68}
-        - {x: 32, y: -68}
-        - {x: 32, y: -41}
-        - {x: 13, y: -2}
-    - name: Sleep_Spritesheet_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Sleep_Spritesheet_3
       rect:
         serializedVersion: 2
         x: 192
@@ -122,15 +135,10 @@ TextureImporter:
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -15, y: -3}
-        - {x: -32, y: -8}
-        - {x: -32, y: -68}
-        - {x: 31, y: -68}
-        - {x: 32, y: -64}
-        - {x: 32, y: -37}
-        - {x: 12, y: -3}
-    - name: Sleep_Spritesheet_4
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Sleep_Spritesheet_4
       rect:
         serializedVersion: 2
         x: 0
@@ -140,15 +148,10 @@ TextureImporter:
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -15, y: -3}
-        - {x: -32, y: -8}
-        - {x: -32, y: -68}
-        - {x: 31, y: -68}
-        - {x: 32, y: -64}
-        - {x: 32, y: -37}
-        - {x: 12, y: -3}
-    - name: Sleep_Spritesheet_5
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Sleep_Spritesheet_5
       rect:
         serializedVersion: 2
         x: 64
@@ -158,15 +161,10 @@ TextureImporter:
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -18, y: -2}
-        - {x: -22, y: -3}
-        - {x: -32, y: -34}
-        - {x: -32, y: -68}
-        - {x: 32, y: -68}
-        - {x: 32, y: -41}
-        - {x: 13, y: -2}
-    - name: Sleep_Spritesheet_6
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Sleep_Spritesheet_6
       rect:
         serializedVersion: 2
         x: 128
@@ -176,16 +174,10 @@ TextureImporter:
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 14, y: -7}
-        - {x: 7, y: 0}
-        - {x: -17, y: 0}
-        - {x: -32, y: -24}
-        - {x: -32, y: -68}
-        - {x: 30, y: -68}
-        - {x: 32, y: -63}
-        - {x: 32, y: -48}
-    - name: Sleep_Spritesheet_7
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Sleep_Spritesheet_7
       rect:
         serializedVersion: 2
         x: 192
@@ -195,13 +187,8 @@ TextureImporter:
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 6, y: 0}
-        - {x: -32, y: 0}
-        - {x: -32, y: -68}
-        - {x: 32, y: -68}
-        - {x: 32, y: -16}
-        - {x: 16, y: -3}
+      outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 

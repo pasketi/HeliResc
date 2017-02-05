@@ -9,12 +9,12 @@ TextureImporter:
     21300004: tucan_2
     21300006: tucan_3
     21300008: tucan_4
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -26,10 +26,8 @@ TextureImporter:
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 2048
@@ -40,9 +38,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: -1
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -50,12 +46,44 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: tucan_0
+    - serializedVersion: 2
+      name: tucan_0
       rect:
         serializedVersion: 2
         x: 0
@@ -65,23 +93,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 78, y: -36}
-        - {x: 84, y: -33}
-        - {x: 84, y: 7}
-        - {x: 81, y: 8}
-        - {x: -53, y: 8}
-        - {x: -83, y: -31}
-        - {x: -83, y: -38}
-        - {x: -77, y: -41}
-        - {x: -66, y: -41}
-        - {x: -19, y: -53}
-        - {x: -4, y: -56}
-        - {x: 21, y: -56}
-        - {x: 41, y: -51}
-        - {x: 50, y: -45}
-        - {x: 47, y: -38}
-    - name: tucan_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tucan_1
       rect:
         serializedVersion: 2
         x: 180
@@ -91,19 +106,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 30, y: 19}
-        - {x: 3, y: 19}
-        - {x: -10, y: 15}
-        - {x: -18, y: 12}
-        - {x: -32, y: 4}
-        - {x: -83, y: -21}
-        - {x: -83, y: -45}
-        - {x: -82, y: -46}
-        - {x: 84, y: -46}
-        - {x: 84, y: -13}
-        - {x: 58, y: 10}
-    - name: tucan_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tucan_2
       rect:
         serializedVersion: 2
         x: 360
@@ -113,18 +119,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -83, y: -29}
-        - {x: -83, y: -38}
-        - {x: -77, y: -41}
-        - {x: -61, y: -46}
-        - {x: 84, y: -46}
-        - {x: 84, y: -12}
-        - {x: 79, y: 7}
-        - {x: 29, y: 56}
-        - {x: -7, y: 56}
-        - {x: -26, y: 41}
-    - name: tucan_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tucan_3
       rect:
         serializedVersion: 2
         x: 540
@@ -134,18 +132,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -42, y: 56}
-        - {x: -47, y: 53}
-        - {x: -83, y: -30}
-        - {x: -83, y: -37}
-        - {x: -77, y: -41}
-        - {x: -58, y: -46}
-        - {x: 25, y: -46}
-        - {x: 84, y: -36}
-        - {x: 84, y: -10}
-        - {x: 1, y: 56}
-    - name: tucan_4
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: tucan_4
       rect:
         serializedVersion: 2
         x: 720
@@ -155,17 +145,8 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -34, y: 8}
-        - {x: -83, y: -27}
-        - {x: -83, y: -36}
-        - {x: -77, y: -41}
-        - {x: -65, y: -40}
-        - {x: -37, y: -56}
-        - {x: 53, y: -56}
-        - {x: 84, y: -37}
-        - {x: 84, y: 3}
-        - {x: 76, y: 8}
+      outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 

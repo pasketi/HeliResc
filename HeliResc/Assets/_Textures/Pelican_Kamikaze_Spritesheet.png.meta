@@ -9,12 +9,12 @@ TextureImporter:
     21300004: Pelican_Kamikaze_Spritesheet_2
     21300006: Pelican_Kamikaze_Spritesheet_3
     21300008: Pelican_Kamikaze_Spritesheet_4
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -26,10 +26,8 @@ TextureImporter:
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 2048
@@ -40,9 +38,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: -1
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -50,12 +46,44 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: Pelican_Kamikaze_Spritesheet_0
+    - serializedVersion: 2
+      name: Pelican_Kamikaze_Spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -65,22 +93,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 48, y: 36}
-        - {x: 4, y: 41}
-        - {x: -79, y: 41}
-        - {x: -66, y: -18}
-        - {x: -51, y: -10}
-        - {x: -48, y: -10}
-        - {x: -50, y: -10}
-        - {x: -60, y: -18}
-        - {x: -87, y: -46}
-        - {x: -87, y: -54}
-        - {x: 4, y: -54}
-        - {x: 46, y: -36}
-        - {x: 87, y: -7}
-        - {x: 87, y: 10}
-    - name: Pelican_Kamikaze_Spritesheet_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Pelican_Kamikaze_Spritesheet_1
       rect:
         serializedVersion: 2
         x: 176
@@ -90,18 +106,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19, y: 33}
-        - {x: -58, y: 33}
-        - {x: -82, y: 13}
-        - {x: -82, y: 7}
-        - {x: -73, y: -23}
-        - {x: 14, y: -41}
-        - {x: 65, y: -41}
-        - {x: 87, y: -15}
-        - {x: 87, y: 2}
-        - {x: 48, y: 23}
-    - name: Pelican_Kamikaze_Spritesheet_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Pelican_Kamikaze_Spritesheet_2
       rect:
         serializedVersion: 2
         x: 352
@@ -111,16 +119,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -65, y: -24}
-        - {x: -48, y: -33}
-        - {x: 0, y: -52}
-        - {x: 87, y: -52}
-        - {x: 87, y: 11}
-        - {x: 77, y: 33}
-        - {x: -76, y: 33}
-        - {x: -76, y: 22}
-    - name: Pelican_Kamikaze_Spritesheet_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Pelican_Kamikaze_Spritesheet_3
       rect:
         serializedVersion: 2
         x: 528
@@ -130,16 +132,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -63, y: -28}
-        - {x: -48, y: -37}
-        - {x: -3, y: -54}
-        - {x: 87, y: -54}
-        - {x: 87, y: 11}
-        - {x: 66, y: 54}
-        - {x: -72, y: 54}
-        - {x: -72, y: 37}
-    - name: Pelican_Kamikaze_Spritesheet_4
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Pelican_Kamikaze_Spritesheet_4
       rect:
         serializedVersion: 2
         x: 704
@@ -149,14 +145,8 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 87, y: -11}
-        - {x: 87, y: 4}
-        - {x: -2, y: 37}
-        - {x: -59, y: 37}
-        - {x: -85, y: -31}
-        - {x: -85, y: -42}
-        - {x: 59, y: -42}
+      outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 

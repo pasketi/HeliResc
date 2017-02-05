@@ -7,12 +7,12 @@ TextureImporter:
     21300000: lateralSign_0
     21300002: lateralSign_1
     21300004: lateralSign_2
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -24,10 +24,8 @@ TextureImporter:
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 2048
@@ -38,9 +36,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: -1
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -48,12 +44,44 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 150
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: lateralSign_0
+    - serializedVersion: 2
+      name: lateralSign_0
       rect:
         serializedVersion: 2
         x: 20
@@ -63,32 +91,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 23, y: 82}
-        - {x: 82, y: 78}
-        - {x: 82, y: 282}
-        - {x: 24, y: 309}
-        - {x: 16, y: 347}
-        - {x: -11, y: 347}
-        - {x: -23, y: 309}
-        - {x: -19, y: 291}
-        - {x: -75, y: 286}
-        - {x: -77, y: 282}
-        - {x: -77, y: 83}
-        - {x: -75, y: 81}
-        - {x: -70, y: 81}
-        - {x: -27, y: 82}
-        - {x: -27, y: 30}
-        - {x: -82, y: 30}
-        - {x: -82, y: -43}
-        - {x: -27, y: -43}
-        - {x: -27, y: -335}
-        - {x: -19, y: -347}
-        - {x: 15, y: -347}
-        - {x: 25, y: -334}
-        - {x: 82, y: -47}
-        - {x: 82, y: 32}
-    - name: lateralSign_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: lateralSign_1
       rect:
         serializedVersion: 2
         x: 219
@@ -98,27 +104,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 25.5, y: 58}
-        - {x: 62.5, y: 119}
-        - {x: 52.5, y: 191}
-        - {x: 12.5, y: 347}
-        - {x: -27.5, y: 347}
-        - {x: -31.5, y: 345}
-        - {x: -24.5, y: 270}
-        - {x: -81.5, y: 128}
-        - {x: -81.5, y: 116}
-        - {x: -24.5, y: 116}
-        - {x: -81.5, y: 62}
-        - {x: -81.5, y: -18}
-        - {x: -25.5, y: -16}
-        - {x: -24.5, y: -339}
-        - {x: -15.5, y: -347}
-        - {x: 15.5, y: -347}
-        - {x: 25.5, y: -339}
-        - {x: 81.5, y: -27}
-        - {x: 81.5, y: 58}
-    - name: lateralSign_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: lateralSign_2
       rect:
         serializedVersion: 2
         x: 420
@@ -128,33 +117,8 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 75.5, y: -253}
-        - {x: 66.5, y: -148}
-        - {x: 57.5, y: -42}
-        - {x: 37.5, y: 191}
-        - {x: 25.5, y: 335}
-        - {x: 17.5, y: 346}
-        - {x: 14.5, y: 347}
-        - {x: -12.5, y: 347}
-        - {x: -17.5, y: 344}
-        - {x: -20.5, y: 341}
-        - {x: -25.5, y: 333}
-        - {x: -27.5, y: 303}
-        - {x: -29.5, y: 280}
-        - {x: -34.5, y: 222}
-        - {x: -49.5, y: 47}
-        - {x: -51.5, y: 23}
-        - {x: -53.5, y: 0}
-        - {x: -65.5, y: -140}
-        - {x: -67.5, y: -164}
-        - {x: -75.5, y: -257}
-        - {x: -78.5, y: -292}
-        - {x: -80.5, y: -315}
-        - {x: -80.5, y: -347}
-        - {x: 80.5, y: -347}
-        - {x: 80.5, y: -312}
-        - {x: 79.5, y: -299}
+      outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 

@@ -11,12 +11,12 @@ TextureImporter:
     21300008: Diver_Spritesheet_4
     21300010: Diver_Spritesheet_5
     21300012: Diver_Spritesheet_6
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -28,10 +28,8 @@ TextureImporter:
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 2048
@@ -42,9 +40,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: -1
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -52,12 +48,44 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: Diver_Spritesheet_0
+    - serializedVersion: 2
+      name: Diver_Spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -67,14 +95,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -46, y: 69}
-        - {x: -46, y: -69}
-        - {x: 18, y: -69}
-        - {x: 23, y: -45}
-        - {x: 44, y: 13}
-        - {x: 44, y: 69}
-    - name: Diver_Spritesheet_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Diver_Spritesheet_1
       rect:
         serializedVersion: 2
         x: 0
@@ -84,21 +108,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -3, y: 69}
-        - {x: -44, y: 41}
-        - {x: -44, y: -66}
-        - {x: -23, y: -60}
-        - {x: -7, y: -47}
-        - {x: -2, y: -41}
-        - {x: -12, y: -58}
-        - {x: -13, y: -64}
-        - {x: -6, y: -69}
-        - {x: 23, y: -69}
-        - {x: 44, y: 1}
-        - {x: 44, y: 40}
-        - {x: 24, y: 69}
-    - name: Diver_Spritesheet_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Diver_Spritesheet_2
       rect:
         serializedVersion: 2
         x: 0
@@ -108,14 +121,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -46, y: 69}
-        - {x: -46, y: -69}
-        - {x: 18, y: -69}
-        - {x: 23, y: -45}
-        - {x: 44, y: 13}
-        - {x: 44, y: 69}
-    - name: Diver_Spritesheet_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Diver_Spritesheet_3
       rect:
         serializedVersion: 2
         x: 0
@@ -125,27 +134,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 29, y: 68.5}
-        - {x: -1, y: 68.5}
-        - {x: -34, y: 55.5}
-        - {x: -46, y: 14.5}
-        - {x: -39, y: 9.5}
-        - {x: -34, y: 7.5}
-        - {x: -46, y: -32.5}
-        - {x: -46, y: -55.5}
-        - {x: -43, y: -57.5}
-        - {x: -28, y: -58.5}
-        - {x: -8, y: -45.5}
-        - {x: -4, y: -40.5}
-        - {x: -20, y: -57.5}
-        - {x: -20, y: -61.5}
-        - {x: -16, y: -68.5}
-        - {x: 12, y: -68.5}
-        - {x: 17, y: -42.5}
-        - {x: 45, y: -0.5}
-        - {x: 45, y: 35.5}
-    - name: Diver_Spritesheet_4
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Diver_Spritesheet_4
       rect:
         serializedVersion: 2
         x: 0
@@ -155,14 +147,10 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.40354377, y: 0.573621}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -26.248064, y: 57.693054}
-        - {x: -26.248064, y: -21.306946}
-        - {x: -11.248064, y: -78.306946}
-        - {x: 39.751938, y: -78.306946}
-        - {x: 39.751938, y: -1.3069458}
-        - {x: 32.751938, y: 57.693054}
-    - name: Diver_Spritesheet_5
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Diver_Spritesheet_5
       rect:
         serializedVersion: 2
         x: 70
@@ -173,7 +161,9 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Diver_Spritesheet_6
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Diver_Spritesheet_6
       rect:
         serializedVersion: 2
         x: 0
@@ -183,15 +173,8 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -25, y: 70}
-        - {x: -32, y: 57}
-        - {x: -35, y: 48}
-        - {x: -35, y: -6}
-        - {x: -22, y: -70}
-        - {x: 35, y: -70}
-        - {x: 35, y: -12}
-        - {x: 17, y: 70}
+      outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 

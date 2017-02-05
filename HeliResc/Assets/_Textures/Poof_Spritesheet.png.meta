@@ -15,12 +15,12 @@ TextureImporter:
     21300016: Poof_Spritesheet_8
     21300018: Poof_Spritesheet
     21300020: Poof_Spritesheet_10
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -32,10 +32,8 @@ TextureImporter:
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 2048
@@ -46,9 +44,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: -1
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -56,12 +52,44 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: Poof_Spritesheet_0
+    - serializedVersion: 2
+      name: Poof_Spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -71,15 +99,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -11, y: 17}
-        - {x: -11, y: -13}
-        - {x: -9, y: -14}
-        - {x: 4, y: -14}
-        - {x: 19, y: -11}
-        - {x: 19, y: 9}
-        - {x: 16, y: 17}
-    - name: Poof_Spritesheet_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Poof_Spritesheet_1
       rect:
         serializedVersion: 2
         x: 196
@@ -89,23 +112,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 32, y: -28}
-        - {x: 33, y: -26}
-        - {x: 33, y: 17}
-        - {x: 27, y: 26}
-        - {x: -12, y: 26}
-        - {x: -29, y: 22}
-        - {x: -29, y: -2}
-        - {x: -28, y: -4}
-        - {x: -27, y: -18}
-        - {x: -12, y: -30}
-        - {x: -2, y: -30}
-        - {x: -1, y: -29}
-        - {x: -2, y: -25}
-        - {x: -3, y: -23}
-        - {x: 13, y: -26}
-    - name: Poof_Spritesheet_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Poof_Spritesheet_2
       rect:
         serializedVersion: 2
         x: 392
@@ -115,23 +125,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 25, y: 36}
-        - {x: 19, y: 30}
-        - {x: 9, y: 31}
-        - {x: 7, y: 28}
-        - {x: 20, y: 32}
-        - {x: 22, y: 34}
-        - {x: 24, y: 42}
-        - {x: -23, y: 42}
-        - {x: -31, y: 41}
-        - {x: -39, y: 36}
-        - {x: -39, y: -39}
-        - {x: -33, y: -40}
-        - {x: 47, y: -40}
-        - {x: 47, y: 21}
-        - {x: 35, y: 31}
-    - name: Poof_Spritesheet_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Poof_Spritesheet_3
       rect:
         serializedVersion: 2
         x: 588
@@ -141,75 +138,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -43, y: -59}
-        - {x: -32, y: -60}
-        - {x: -19, y: -60}
-        - {x: -16, y: -59}
-        - {x: -16, y: -51}
-        - {x: -17, y: -49}
-        - {x: -59, y: -16}
-        - {x: -63, y: -16}
-        - {x: -63, y: -34}
-      - - {x: 30, y: -38}
-        - {x: 9, y: -45}
-        - {x: 9, y: -54}
-        - {x: 21, y: -58}
-        - {x: 62, y: -58}
-        - {x: 74, y: -49}
-        - {x: 74, y: -38}
-      - - {x: 31, y: 39}
-        - {x: -34, y: 39}
-        - {x: -36, y: 34}
-        - {x: -36, y: 8}
-        - {x: -20, y: -7}
-        - {x: -16, y: -8}
-        - {x: -17, y: -9}
-        - {x: -20, y: -7}
-        - {x: -25, y: -7}
-        - {x: -28, y: -8}
-        - {x: -33, y: -14}
-        - {x: -36, y: -22}
-        - {x: -36, y: -37}
-        - {x: -31, y: -38}
-        - {x: -2, y: -38}
-        - {x: 3, y: -29}
-        - {x: 2, y: -23}
-        - {x: 0, y: -21}
-        - {x: 9, y: -28}
-        - {x: 14, y: -35}
-        - {x: 22, y: -38}
-        - {x: 27, y: -38}
-        - {x: 29, y: -36}
-        - {x: 40, y: -27}
-        - {x: 40, y: 27}
-      - - {x: -66, y: 10}
-        - {x: -58, y: 10}
-        - {x: -46, y: 44}
-        - {x: -46, y: 57}
-        - {x: -54, y: 57}
-        - {x: -66, y: 49}
-      - - {x: 50, y: 60}
-        - {x: 45, y: 60}
-        - {x: 45, y: 48}
-        - {x: 59, y: 13}
-        - {x: 65, y: 13}
-        - {x: 68, y: 19}
-        - {x: 68, y: 33}
-        - {x: 64, y: 49}
-      - - {x: -13, y: 61}
-        - {x: -25, y: 59}
-        - {x: -27, y: 53}
-        - {x: -27, y: 50}
-        - {x: -25, y: 48}
-        - {x: -21, y: 48}
-        - {x: -9, y: 46}
-        - {x: 22, y: 43}
-        - {x: 29, y: 43}
-        - {x: 30, y: 45}
-        - {x: 30, y: 50}
-        - {x: 18, y: 61}
-    - name: Poof_Spritesheet_4
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Poof_Spritesheet_4
       rect:
         serializedVersion: 2
         x: 784
@@ -219,38 +151,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -42, y: -68}
-        - {x: -30, y: -68}
-        - {x: -30, y: -60}
-        - {x: -56, y: -13}
-        - {x: -63, y: -13}
-        - {x: -64, y: -15}
-        - {x: -64, y: -48}
-      - - {x: -42, y: -47}
-        - {x: 8, y: -68}
-        - {x: 81, y: -68}
-        - {x: 81, y: -7}
-        - {x: 61, y: 70}
-        - {x: -16, y: 70}
-        - {x: -42, y: 59}
-      - - {x: 66, y: 49}
-        - {x: 62, y: 27}
-        - {x: 62, y: 1}
-        - {x: 78, y: 1}
-        - {x: 78, y: 49}
-      - - {x: -77, y: 28}
-        - {x: -75, y: 22}
-        - {x: -73, y: 19}
-        - {x: -66, y: 7}
-        - {x: -62, y: 7}
-        - {x: -60, y: 8}
-        - {x: -60, y: 20}
-        - {x: -66, y: 55}
-        - {x: -68, y: 56}
-        - {x: -72, y: 56}
-        - {x: -77, y: 48}
-    - name: Poof_Spritesheet_5
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Poof_Spritesheet_5
       rect:
         serializedVersion: 2
         x: 980
@@ -260,64 +164,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 48, y: -55}
-        - {x: 11, y: -55}
-        - {x: 10, y: -57}
-        - {x: 10, y: -60}
-        - {x: 22, y: -73}
-        - {x: 64, y: -73}
-        - {x: 75, y: -65}
-        - {x: 75, y: -58}
-        - {x: 74, y: -56}
-      - - {x: -82, y: -24}
-        - {x: -82, y: -30}
-        - {x: -77, y: -45}
-        - {x: -63, y: -60}
-        - {x: -45, y: -65}
-        - {x: -32, y: -65}
-        - {x: -32, y: -57}
-        - {x: -77, y: -24}
-      - - {x: -49, y: 54}
-        - {x: -49, y: 7}
-        - {x: -26, y: -13}
-        - {x: -21, y: -13}
-        - {x: -28, y: -13}
-        - {x: -31, y: -14}
-        - {x: -36, y: -18}
-        - {x: -49, y: -41}
-        - {x: -49, y: -49}
-        - {x: -46, y: -50}
-        - {x: 54, y: -50}
-        - {x: 54, y: -12}
-        - {x: 4, y: 54}
-      - - {x: 82, y: 40}
-        - {x: 78, y: 37}
-        - {x: 63, y: 1}
-        - {x: 63, y: -5}
-        - {x: 71, y: -5}
-        - {x: 84, y: 4}
-        - {x: 88, y: 22}
-        - {x: 88, y: 40}
-      - - {x: -84, y: 33}
-        - {x: -82, y: 23}
-        - {x: -68, y: 10}
-        - {x: -62, y: 10}
-        - {x: -60, y: 11}
-        - {x: -60, y: 16}
-        - {x: -77, y: 56}
-        - {x: -82, y: 56}
-        - {x: -84, y: 54}
-      - - {x: 20, y: 75}
-        - {x: 8, y: 75}
-        - {x: 8, y: 70}
-        - {x: 9, y: 66}
-        - {x: 18, y: 18}
-        - {x: 42, y: 18}
-        - {x: 49, y: 21}
-        - {x: 49, y: 44}
-        - {x: 46, y: 62}
-    - name: Poof_Spritesheet_6
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Poof_Spritesheet_6
       rect:
         serializedVersion: 2
         x: 1176
@@ -327,65 +177,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 83, y: -53}
-        - {x: 79, y: -53}
-        - {x: 23, y: -72}
-        - {x: 22, y: -74}
-        - {x: 22, y: -79}
-        - {x: 33, y: -82}
-        - {x: 53, y: -82}
-        - {x: 66, y: -77}
-        - {x: 84, y: -60}
-        - {x: 84, y: -55}
-      - - {x: -67, y: -52}
-        - {x: -76, y: -52}
-        - {x: -76, y: -62}
-        - {x: -59, y: -74}
-        - {x: -25, y: -74}
-        - {x: -18, y: -72}
-        - {x: -17, y: -70}
-        - {x: -17, y: -63}
-        - {x: -33, y: -60}
-      - - {x: 20, y: -51}
-        - {x: 31, y: -54}
-        - {x: 42, y: -54}
-        - {x: 75, y: -25}
-        - {x: 85, y: -13}
-        - {x: 85, y: 13}
-        - {x: 45, y: 15}
-        - {x: 10, y: 20}
-        - {x: 3, y: 20}
-        - {x: 0, y: 19}
-        - {x: -2, y: 20}
-        - {x: 4, y: 20}
-        - {x: 8, y: 23}
-        - {x: 14, y: 29}
-        - {x: 5, y: 63}
-        - {x: -8, y: 66}
-        - {x: -62, y: 66}
-        - {x: -82, y: 37}
-        - {x: -83, y: 33}
-        - {x: -83, y: 24}
-        - {x: -79, y: 17}
-        - {x: -64, y: 4}
-        - {x: -50, y: 2}
-        - {x: -53, y: -50}
-        - {x: -41, y: -54}
-        - {x: -23, y: -54}
-        - {x: -13, y: -49}
-        - {x: 1, y: -46}
-        - {x: 5, y: -35}
-      - - {x: 23, y: 54}
-        - {x: 22, y: 51}
-        - {x: 22, y: 25}
-        - {x: 24, y: 22}
-        - {x: 43, y: -3}
-        - {x: 51, y: -3}
-        - {x: 58, y: 30}
-        - {x: 58, y: 52}
-        - {x: 51, y: 54}
-    - name: Poof_Spritesheet_7
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Poof_Spritesheet_7
       rect:
         serializedVersion: 2
         x: 1372
@@ -395,58 +190,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 41, y: -64}
-        - {x: 20, y: -64}
-        - {x: 19, y: -65}
-        - {x: 19, y: -72}
-        - {x: 23, y: -80}
-        - {x: 36, y: -82}
-        - {x: 75, y: -82}
-        - {x: 83, y: -76}
-        - {x: 83, y: -68}
-        - {x: 82, y: -66}
-      - - {x: -11, y: -59}
-        - {x: -53, y: -63}
-        - {x: -53, y: -71}
-        - {x: -42, y: -78}
-        - {x: -17, y: -78}
-        - {x: -10, y: -77}
-        - {x: 8, y: -66}
-        - {x: 8, y: -60}
-        - {x: 6, y: -59}
-      - - {x: -68, y: 24}
-        - {x: -68, y: -63}
-        - {x: 64, y: -63}
-        - {x: 69, y: -43}
-        - {x: 69, y: 6}
-        - {x: 57, y: 24}
-      - - {x: -59, y: 76}
-        - {x: -69, y: 72}
-        - {x: -69, y: 21}
-        - {x: -60, y: 14}
-        - {x: -12, y: 14}
-        - {x: -7, y: 27}
-        - {x: -7, y: 71}
-        - {x: -28, y: 76}
-      - - {x: 54, y: 57}
-        - {x: 33, y: 57}
-        - {x: 31, y: 56}
-        - {x: 25, y: 43}
-        - {x: 25, y: 23}
-        - {x: 60, y: 23}
-        - {x: 64, y: 30}
-        - {x: 64, y: 47}
-        - {x: 61, y: 54}
-      - - {x: -11, y: 44}
-        - {x: -12, y: 41}
-        - {x: -12, y: 30}
-        - {x: -11, y: 29}
-        - {x: -1, y: 29}
-        - {x: 4, y: 30}
-        - {x: 4, y: 43}
-        - {x: 2, y: 44}
-    - name: Poof_Spritesheet_8
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Poof_Spritesheet_8
       rect:
         serializedVersion: 2
         x: 1568
@@ -456,42 +203,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -67, y: -61}
-        - {x: -72, y: -61}
-        - {x: -73, y: -63}
-        - {x: -73, y: -68}
-        - {x: -59, y: -82}
-        - {x: -24, y: -82}
-        - {x: -13, y: -81}
-        - {x: -12, y: -74}
-        - {x: -14, y: -69}
-        - {x: -33, y: -66}
-      - - {x: -77, y: 82}
-        - {x: -77, y: -76}
-        - {x: 72, y: -76}
-        - {x: 78, y: -69}
-        - {x: 78, y: 26}
-        - {x: 29, y: 82}
-      - - {x: 65, y: 63}
-        - {x: 45, y: 63}
-        - {x: 29, y: 51}
-        - {x: 27, y: 30}
-        - {x: 27, y: 22}
-        - {x: 28, y: 20}
-        - {x: 63, y: 20}
-        - {x: 75, y: 29}
-        - {x: 75, y: 42}
-        - {x: 71, y: 61}
-      - - {x: -7, y: 48}
-        - {x: -12, y: 45}
-        - {x: -12, y: 32}
-        - {x: -10, y: 31}
-        - {x: 5, y: 31}
-        - {x: 6, y: 35}
-        - {x: 6, y: 47}
-        - {x: 4, y: 48}
-    - name: Poof_Spritesheet_10
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Poof_Spritesheet_10
       rect:
         serializedVersion: 2
         x: 22
@@ -502,6 +217,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 

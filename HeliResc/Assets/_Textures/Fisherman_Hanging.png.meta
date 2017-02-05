@@ -17,12 +17,12 @@ TextureImporter:
     21300020: Fisherman_Hanging_10
     21300022: Fisherman_Hanging_11
     21300024: Fisherman_Hanging_12
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -34,10 +34,8 @@ TextureImporter:
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 1024
@@ -48,9 +46,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: -1
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -58,12 +54,44 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: Fisherman_Hanging_0
+    - serializedVersion: 2
+      name: Fisherman_Hanging_0
       rect:
         serializedVersion: 2
         x: 0
@@ -73,16 +101,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 1, y: 53}
-        - {x: -23, y: 40}
-        - {x: -23, y: -28}
-        - {x: -19, y: -52}
-        - {x: 19, y: -52}
-        - {x: 22, y: -40}
-        - {x: 22, y: 34}
-        - {x: 17, y: 53}
-    - name: Fisherman_Hanging_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Hanging_1
       rect:
         serializedVersion: 2
         x: 46
@@ -92,14 +114,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -20, y: 54}
-        - {x: -23, y: 50}
-        - {x: -23, y: -53}
-        - {x: -20, y: -54}
-        - {x: 23, y: -54}
-        - {x: 23, y: 54}
-    - name: Fisherman_Hanging_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Hanging_2
       rect:
         serializedVersion: 2
         x: 92
@@ -110,7 +128,9 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Fisherman_Hanging_3
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Hanging_3
       rect:
         serializedVersion: 2
         x: 112
@@ -120,14 +140,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -30.5, y: 18}
-        - {x: -30.5, y: -6}
-        - {x: -23.5, y: -18}
-        - {x: 22.5, y: -18}
-        - {x: 30.5, y: -15}
-        - {x: 30.5, y: 18}
-    - name: Fisherman_Hanging_4
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Hanging_4
       rect:
         serializedVersion: 2
         x: 173
@@ -137,37 +153,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 6.5, y: -41}
-        - {x: 5.5, y: -46}
-        - {x: 5.5, y: -52}
-        - {x: 7.5, y: -53}
-        - {x: 16.5, y: -53}
-        - {x: 22.5, y: -49}
-        - {x: 22.5, y: -44}
-        - {x: 21.5, y: -41}
-      - - {x: -15.5, y: -43}
-        - {x: -18.5, y: -46}
-        - {x: -18.5, y: -47}
-        - {x: -14.5, y: -51}
-        - {x: -10.5, y: -51}
-        - {x: -8.5, y: -49}
-        - {x: -8.5, y: -46}
-        - {x: -11.5, y: -43}
-      - - {x: 14.5, y: 53}
-        - {x: -1.5, y: 53}
-        - {x: -21.5, y: 33}
-        - {x: -22.5, y: 27}
-        - {x: -22.5, y: 20}
-        - {x: -32.5, y: -11}
-        - {x: -32.5, y: -35}
-        - {x: -30.5, y: -40}
-        - {x: -25.5, y: -38}
-        - {x: -26.5, y: -43}
-        - {x: 22.5, y: -43}
-        - {x: 22.5, y: 48}
-        - {x: 21.5, y: 50}
-    - name: Fisherman_Hanging_5
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Hanging_5
       rect:
         serializedVersion: 2
         x: 240
@@ -177,15 +166,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -25.5, y: 54}
-        - {x: -33.5, y: 25}
-        - {x: -33.5, y: -54}
-        - {x: 25.5, y: -54}
-        - {x: 25.5, y: 37}
-        - {x: 24.5, y: 50}
-        - {x: 20.5, y: 54}
-    - name: Fisherman_Hanging_6
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Hanging_6
       rect:
         serializedVersion: 2
         x: 307
@@ -195,33 +179,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -2.5, y: -44}
-        - {x: -5.5, y: -47}
-        - {x: -5.5, y: -49}
-        - {x: -2.5, y: -52}
-        - {x: 2.5, y: -52}
-        - {x: 5.5, y: -49}
-        - {x: 5.5, y: -47}
-        - {x: 2.5, y: -44}
-      - - {x: 2.5, y: 53}
-        - {x: -22.5, y: 33}
-        - {x: -22.5, y: -13}
-        - {x: -21.5, y: -36}
-        - {x: -0.5, y: -46}
-        - {x: 2.5, y: -43}
-        - {x: 10.5, y: -47}
-        - {x: 20.5, y: -47}
-        - {x: 26.5, y: -46}
-        - {x: 26.5, y: 32}
-        - {x: 15.5, y: 53}
-      - - {x: -25.5, y: -34}
-        - {x: -25.5, y: -42}
-        - {x: -20.5, y: -44}
-        - {x: -13.5, y: -44}
-        - {x: -13.5, y: -39}
-        - {x: -16.5, y: -34}
-    - name: Fisherman_Hanging_7
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Hanging_7
       rect:
         serializedVersion: 2
         x: 374
@@ -231,20 +192,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 28.5, y: -48}
-        - {x: 28.5, y: 24}
-        - {x: 27.5, y: 37}
-        - {x: 18.5, y: 54}
-        - {x: -17.5, y: 54}
-        - {x: -28.5, y: 40}
-        - {x: -28.5, y: -41}
-        - {x: -24.5, y: -48}
-        - {x: -7.5, y: -54}
-        - {x: 8.5, y: -54}
-        - {x: 9.5, y: -49}
-        - {x: 11.5, y: -54}
-    - name: Fisherman_Hanging_8
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Hanging_8
       rect:
         serializedVersion: 2
         x: 441
@@ -254,40 +205,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 9.5, y: -39}
-        - {x: 8.5, y: -44}
-        - {x: 8.5, y: -51}
-        - {x: 15.5, y: -51}
-        - {x: 21.5, y: -49}
-        - {x: 21.5, y: -40}
-        - {x: 20.5, y: -39}
-      - - {x: -21.5, y: -40}
-        - {x: -21.5, y: -47}
-        - {x: -17.5, y: -50}
-        - {x: -10.5, y: -50}
-        - {x: -7.5, y: -49}
-        - {x: -7.5, y: -45}
-        - {x: -9.5, y: -40}
-      - - {x: 12.5, y: 53}
-        - {x: -0.5, y: 53}
-        - {x: -22.5, y: 34}
-        - {x: -22.5, y: -24}
-        - {x: -21.5, y: -43}
-        - {x: -17.5, y: -45}
-        - {x: 3.5, y: -45}
-        - {x: 23.5, y: -36}
-        - {x: 23.5, y: 34}
-        - {x: 20.5, y: 50}
-      - - {x: 27.5, y: -24}
-        - {x: 24.5, y: -27}
-        - {x: 24.5, y: -31}
-        - {x: 27.5, y: -34}
-        - {x: 29.5, y: -34}
-        - {x: 32.5, y: -31}
-        - {x: 32.5, y: -26}
-        - {x: 30.5, y: -24}
-    - name: Fisherman_Hanging_9
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Hanging_9
       rect:
         serializedVersion: 2
         x: 508
@@ -297,16 +218,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19.5, y: 54}
-        - {x: -25.5, y: 49}
-        - {x: -25.5, y: -50}
-        - {x: -24.5, y: -54}
-        - {x: 27.5, y: -54}
-        - {x: 33.5, y: -42}
-        - {x: 33.5, y: 18}
-        - {x: 23.5, y: 54}
-    - name: Fisherman_Hanging_10
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Hanging_10
       rect:
         serializedVersion: 2
         x: 575
@@ -316,33 +231,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -9.5, y: -43}
-        - {x: -9.5, y: -53}
-        - {x: 3.5, y: -53}
-        - {x: 6.5, y: -52}
-        - {x: 6.5, y: -44}
-        - {x: 2.5, y: -43}
-      - - {x: -21.5, y: -38}
-        - {x: -22.5, y: -39}
-        - {x: -22.5, y: -45}
-        - {x: -21.5, y: -46}
-        - {x: -13.5, y: -46}
-        - {x: -12.5, y: -44}
-        - {x: -12.5, y: -41}
-        - {x: -15.5, y: -38}
-      - - {x: -4.5, y: 53}
-        - {x: -14.5, y: 47}
-        - {x: -22.5, y: 33}
-        - {x: -22.5, y: 20}
-        - {x: -21.5, y: 17}
-        - {x: -20.5, y: -25}
-        - {x: -18.5, y: -42}
-        - {x: -9.5, y: -46}
-        - {x: 24.5, y: -46}
-        - {x: 24.5, y: 35}
-        - {x: 21.5, y: 53}
-    - name: Fisherman_Hanging_11
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Hanging_11
       rect:
         serializedVersion: 2
         x: 642
@@ -352,15 +244,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -24.5, y: 54}
-        - {x: -25.5, y: 45}
-        - {x: -25.5, y: -47}
-        - {x: -18.5, y: -54}
-        - {x: 27.5, y: -54}
-        - {x: 27.5, y: 44}
-        - {x: 20.5, y: 54}
-    - name: Fisherman_Hanging_12
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Hanging_12
       rect:
         serializedVersion: 2
         x: 709
@@ -371,6 +258,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 

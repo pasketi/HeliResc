@@ -14,12 +14,12 @@ TextureImporter:
     21300014: Fisherman_Shaky_Spritesheet_7
     21300016: Fisherman_Shaky_Spritesheet_8
     21300018: Fisherman_Shaky_Spritesheet_9
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -31,10 +31,8 @@ TextureImporter:
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 512
@@ -45,9 +43,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: -1
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -55,12 +51,44 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: Fisherman_Shaky_Spritesheet_0
+    - serializedVersion: 2
+      name: Fisherman_Shaky_Spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -70,15 +98,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -14, y: 44}
-        - {x: -26, y: 33}
-        - {x: -26, y: -44}
-        - {x: 25, y: -44}
-        - {x: 26, y: -38}
-        - {x: 26, y: 22}
-        - {x: 9, y: 44}
-    - name: Fisherman_Shaky_Spritesheet_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Shaky_Spritesheet_1
       rect:
         serializedVersion: 2
         x: 52
@@ -88,16 +111,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -10, y: 43}
-        - {x: -26, y: 29}
-        - {x: -26, y: -24}
-        - {x: -24, y: -44}
-        - {x: 24, y: -44}
-        - {x: 26, y: -39}
-        - {x: 26, y: 29}
-        - {x: 15, y: 43}
-    - name: Fisherman_Shaky_Spritesheet_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Shaky_Spritesheet_2
       rect:
         serializedVersion: 2
         x: 0
@@ -107,14 +124,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -14, y: 40}
-        - {x: -26, y: 32}
-        - {x: -26, y: -44}
-        - {x: 26, y: -44}
-        - {x: 26, y: 26}
-        - {x: 14, y: 40}
-    - name: Fisherman_Shaky_Spritesheet_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Shaky_Spritesheet_3
       rect:
         serializedVersion: 2
         x: 52
@@ -124,16 +137,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -21, y: 40}
-        - {x: -26, y: 31}
-        - {x: -26, y: -28}
-        - {x: -22, y: -44}
-        - {x: 23, y: -44}
-        - {x: 26, y: -34}
-        - {x: 26, y: 19}
-        - {x: 24, y: 40}
-    - name: Fisherman_Shaky_Spritesheet_4
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Shaky_Spritesheet_4
       rect:
         serializedVersion: 2
         x: 0
@@ -143,17 +150,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 14, y: 40}
-        - {x: -22, y: 40}
-        - {x: -26, y: 30}
-        - {x: -26, y: -43}
-        - {x: -24, y: -44}
-        - {x: 23, y: -44}
-        - {x: 26, y: -32}
-        - {x: 26, y: 14}
-        - {x: 15, y: 39}
-    - name: Fisherman_Shaky_Spritesheet_5
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Shaky_Spritesheet_5
       rect:
         serializedVersion: 2
         x: 52
@@ -163,16 +163,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -21, y: 40}
-        - {x: -26, y: 31}
-        - {x: -26, y: -28}
-        - {x: -22, y: -44}
-        - {x: 23, y: -44}
-        - {x: 26, y: -34}
-        - {x: 26, y: 19}
-        - {x: 24, y: 40}
-    - name: Fisherman_Shaky_Spritesheet_6
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Shaky_Spritesheet_6
       rect:
         serializedVersion: 2
         x: 0
@@ -182,17 +176,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 14, y: 40}
-        - {x: -22, y: 40}
-        - {x: -26, y: 30}
-        - {x: -26, y: -43}
-        - {x: -24, y: -44}
-        - {x: 23, y: -44}
-        - {x: 26, y: -32}
-        - {x: 26, y: 14}
-        - {x: 15, y: 39}
-    - name: Fisherman_Shaky_Spritesheet_7
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Shaky_Spritesheet_7
       rect:
         serializedVersion: 2
         x: 52
@@ -202,14 +189,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -14, y: 40}
-        - {x: -26, y: 32}
-        - {x: -26, y: -44}
-        - {x: 26, y: -44}
-        - {x: 26, y: 26}
-        - {x: 14, y: 40}
-    - name: Fisherman_Shaky_Spritesheet_8
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Shaky_Spritesheet_8
       rect:
         serializedVersion: 2
         x: 0
@@ -219,16 +202,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -10, y: 43}
-        - {x: -26, y: 29}
-        - {x: -26, y: -24}
-        - {x: -24, y: -44}
-        - {x: 24, y: -44}
-        - {x: 26, y: -39}
-        - {x: 26, y: 29}
-        - {x: 15, y: 43}
-    - name: Fisherman_Shaky_Spritesheet_9
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Fisherman_Shaky_Spritesheet_9
       rect:
         serializedVersion: 2
         x: 52
@@ -238,14 +215,8 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -14, y: 44}
-        - {x: -26, y: 33}
-        - {x: -26, y: -44}
-        - {x: 25, y: -44}
-        - {x: 26, y: -38}
-        - {x: 26, y: 22}
-        - {x: 9, y: 44}
+      outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 

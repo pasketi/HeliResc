@@ -16,12 +16,12 @@ TextureImporter:
     21300018: HeliResQ_Helicopter_Ver2_PH_Spritesheet_9
     21300020: HeliResQ_Helicopter_Ver2_PH_Spritesheet_10
     21300022: HeliResQ_Helicopter_Ver2_PH_Spritesheet_11
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -33,10 +33,8 @@ TextureImporter:
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 512
@@ -47,9 +45,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: -1
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -57,12 +53,44 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 64
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_0
+    - serializedVersion: 2
+      name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -72,14 +100,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -60, y: 34.5}
-        - {x: -60, y: -22.5}
-        - {x: -47, y: -34.5}
-        - {x: 48, y: -34.5}
-        - {x: 59, y: 0.5}
-        - {x: 59, y: 34.5}
-    - name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_1
       rect:
         serializedVersion: 2
         x: 0
@@ -89,14 +113,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -60, y: 34.5}
-        - {x: -60, y: -22.5}
-        - {x: -47, y: -34.5}
-        - {x: 48, y: -34.5}
-        - {x: 59, y: 0.5}
-        - {x: 59, y: 34.5}
-    - name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_2
       rect:
         serializedVersion: 2
         x: 0
@@ -106,14 +126,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -60, y: 34.5}
-        - {x: -60, y: -22.5}
-        - {x: -47, y: -34.5}
-        - {x: 48, y: -34.5}
-        - {x: 59, y: 0.5}
-        - {x: 59, y: 34.5}
-    - name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_3
       rect:
         serializedVersion: 2
         x: 0
@@ -123,14 +139,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -60, y: 34.5}
-        - {x: -60, y: -22.5}
-        - {x: -47, y: -34.5}
-        - {x: 48, y: -34.5}
-        - {x: 59, y: 0.5}
-        - {x: 59, y: 34.5}
-    - name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_4
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_4
       rect:
         serializedVersion: 2
         x: 0
@@ -140,18 +152,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 17, y: 22}
-        - {x: -18, y: 22}
-        - {x: -33, y: 18}
-        - {x: -33, y: -8}
-        - {x: -27, y: -18}
-        - {x: -22, y: -22}
-        - {x: 30, y: -22}
-        - {x: 33, y: -21}
-        - {x: 33, y: 4}
-        - {x: 21, y: 19}
-    - name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_5
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_5
       rect:
         serializedVersion: 2
         x: 101
@@ -162,7 +166,9 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_6
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_6
       rect:
         serializedVersion: 2
         x: 66
@@ -173,7 +179,9 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_7
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_7
       rect:
         serializedVersion: 2
         x: 101
@@ -184,7 +192,9 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_8
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_8
       rect:
         serializedVersion: 2
         x: 66
@@ -195,7 +205,9 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_9
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_9
       rect:
         serializedVersion: 2
         x: 0
@@ -206,7 +218,9 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_10
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_10
       rect:
         serializedVersion: 2
         x: 0
@@ -217,7 +231,9 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_11
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: HeliResQ_Helicopter_Ver2_PH_Spritesheet_11
       rect:
         serializedVersion: 2
         x: 49
@@ -228,6 +244,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 

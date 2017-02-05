@@ -8,12 +8,12 @@ TextureImporter:
     21300002: miniCopter_1
     21300004: miniCopter_2
     21300006: miniCopter_3
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -25,10 +25,8 @@ TextureImporter:
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 2048
@@ -39,9 +37,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: -1
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -49,12 +45,44 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 400
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: miniCopter_0
+    - serializedVersion: 2
+      name: miniCopter_0
       rect:
         serializedVersion: 2
         x: 0
@@ -64,74 +92,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 214.5, y: -201}
-        - {x: 200.5, y: -196}
-        - {x: 179.5, y: -214}
-        - {x: 137.5, y: -196}
-        - {x: 127.5, y: -198}
-        - {x: 183.5, y: -100}
-        - {x: 192.5, y: -57}
-        - {x: 192.5, y: -12}
-        - {x: 177.5, y: 37}
-        - {x: 162.5, y: 59}
-        - {x: 128.5, y: 95}
-        - {x: 91.5, y: 115}
-        - {x: 52.5, y: 127}
-        - {x: 66.5, y: 137}
-        - {x: 186.5, y: 142}
-        - {x: 278.5, y: 151}
-        - {x: 310.5, y: 155}
-        - {x: 359.5, y: 169}
-        - {x: 367.5, y: 177}
-        - {x: 367.5, y: 192}
-        - {x: 357.5, y: 201}
-        - {x: 310.5, y: 213}
-        - {x: 235.5, y: 223}
-        - {x: 171.5, y: 227}
-        - {x: 116.5, y: 230}
-        - {x: -89.5, y: 230}
-        - {x: -221.5, y: 219}
-        - {x: -280.5, y: 212}
-        - {x: -320.5, y: 189}
-        - {x: -309.5, y: 169}
-        - {x: -228.5, y: 150}
-        - {x: -128.5, y: 142}
-        - {x: -42.5, y: 139}
-        - {x: -11.5, y: 132}
-        - {x: -68.5, y: 99}
-        - {x: -105.5, y: 83}
-        - {x: -153.5, y: 75}
-        - {x: -177.5, y: 53}
-        - {x: -179.5, y: 34}
-        - {x: -248.5, y: 28}
-        - {x: -268.5, y: 65}
-        - {x: -315.5, y: 115}
-        - {x: -367.5, y: 113}
-        - {x: -367.5, y: 97}
-        - {x: -351.5, y: 37}
-        - {x: -363.5, y: 8}
-        - {x: -353.5, y: -30}
-        - {x: -331.5, y: -56}
-        - {x: -305.5, y: -68}
-        - {x: -277.5, y: -68}
-        - {x: -261.5, y: -66}
-        - {x: -247.5, y: -26}
-        - {x: -218.5, y: -20}
-        - {x: -139.5, y: -38}
-        - {x: -140.5, y: -60}
-        - {x: -131.5, y: -97}
-        - {x: -107.5, y: -143}
-        - {x: -65.5, y: -179}
-        - {x: -63.5, y: -213}
-        - {x: -122.5, y: -212}
-        - {x: -130.5, y: -225}
-        - {x: -122.5, y: -231}
-        - {x: 187.5, y: -231}
-        - {x: 201.5, y: -226}
-        - {x: 208.5, y: -219}
-        - {x: 213.5, y: -210}
-    - name: miniCopter_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: miniCopter_1
       rect:
         serializedVersion: 2
         x: 0
@@ -141,73 +105,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 200.5, y: -196}
-        - {x: 179.5, y: -214}
-        - {x: 137.5, y: -196}
-        - {x: 127.5, y: -198}
-        - {x: 161.5, y: -138}
-        - {x: 183.5, y: -100}
-        - {x: 192.5, y: -57}
-        - {x: 192.5, y: -12}
-        - {x: 177.5, y: 37}
-        - {x: 156.5, y: 66}
-        - {x: 109.5, y: 109}
-        - {x: 61.5, y: 132}
-        - {x: 99.5, y: 139}
-        - {x: 151.5, y: 139}
-        - {x: 278.5, y: 150}
-        - {x: 344.5, y: 162}
-        - {x: 367.5, y: 176}
-        - {x: 367.5, y: 194}
-        - {x: 341.5, y: 209}
-        - {x: 255.5, y: 221}
-        - {x: 201.5, y: 226}
-        - {x: 108.5, y: 231}
-        - {x: -44.5, y: 231}
-        - {x: -157.5, y: 226}
-        - {x: -247.5, y: 215}
-        - {x: -309.5, y: 199}
-        - {x: -320.5, y: 179}
-        - {x: -280.5, y: 158}
-        - {x: -197.5, y: 146}
-        - {x: -72.5, y: 139}
-        - {x: -17.5, y: 138}
-        - {x: -1.5, y: 126}
-        - {x: -37.5, y: 119}
-        - {x: -94.5, y: 84}
-        - {x: -148.5, y: 73}
-        - {x: -173.5, y: 53}
-        - {x: -175.5, y: 34}
-        - {x: -154.5, y: 26}
-        - {x: -249.5, y: 26}
-        - {x: -262.5, y: 53}
-        - {x: -266.5, y: 59}
-        - {x: -315.5, y: 115}
-        - {x: -367.5, y: 113}
-        - {x: -367.5, y: 97}
-        - {x: -351.5, y: 37}
-        - {x: -359.5, y: 14}
-        - {x: -362.5, y: -1}
-        - {x: -351.5, y: -29}
-        - {x: -343.5, y: -44}
-        - {x: -316.5, y: -67}
-        - {x: -271.5, y: -69}
-        - {x: -259.5, y: -60}
-        - {x: -247.5, y: -18}
-        - {x: -139.5, y: -38}
-        - {x: -140.5, y: -60}
-        - {x: -131.5, y: -97}
-        - {x: -107.5, y: -143}
-        - {x: -65.5, y: -179}
-        - {x: -63.5, y: -213}
-        - {x: -122.5, y: -212}
-        - {x: -130.5, y: -225}
-        - {x: -122.5, y: -231}
-        - {x: 197.5, y: -231}
-        - {x: 218.5, y: -211}
-        - {x: 214.5, y: -201}
-    - name: miniCopter_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: miniCopter_2
       rect:
         serializedVersion: 2
         x: 0
@@ -217,75 +118,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 200.5, y: -196}
-        - {x: 179.5, y: -214}
-        - {x: 143.5, y: -209}
-        - {x: 139.5, y: -191}
-        - {x: 116.5, y: -184}
-        - {x: 161.5, y: -138}
-        - {x: 183.5, y: -100}
-        - {x: 192.5, y: -57}
-        - {x: 192.5, y: -12}
-        - {x: 178.5, y: 37}
-        - {x: 149.5, y: 75}
-        - {x: 122.5, y: 99}
-        - {x: 60.5, y: 133}
-        - {x: 169.5, y: 141}
-        - {x: 304.5, y: 152}
-        - {x: 364.5, y: 169}
-        - {x: 367.5, y: 173}
-        - {x: 367.5, y: 194}
-        - {x: 366.5, y: 198}
-        - {x: 343.5, y: 205}
-        - {x: 314.5, y: 212}
-        - {x: 272.5, y: 219}
-        - {x: 171.5, y: 229}
-        - {x: 73.5, y: 231}
-        - {x: -23.5, y: 231}
-        - {x: -96.5, y: 229}
-        - {x: -156.5, y: 224}
-        - {x: -214.5, y: 219}
-        - {x: -252.5, y: 214}
-        - {x: -308.5, y: 198}
-        - {x: -319.5, y: 180}
-        - {x: -280.5, y: 158}
-        - {x: -221.5, y: 150}
-        - {x: -93.5, y: 139}
-        - {x: -17.5, y: 139}
-        - {x: -89.5, y: 84}
-        - {x: -144.5, y: 73}
-        - {x: -163.5, y: 57}
-        - {x: -169.5, y: 44}
-        - {x: -171.5, y: 34}
-        - {x: -152.5, y: 26}
-        - {x: -250.5, y: 26}
-        - {x: -252.5, y: 34}
-        - {x: -265.5, y: 59}
-        - {x: -313.5, y: 111}
-        - {x: -316.5, y: 114}
-        - {x: -367.5, y: 113}
-        - {x: -367.5, y: 96}
-        - {x: -353.5, y: 38}
-        - {x: -364.5, y: -1}
-        - {x: -355.5, y: -32}
-        - {x: -316.5, y: -69}
-        - {x: -285.5, y: -69}
-        - {x: -262.5, y: -65}
-        - {x: -249.5, y: -34}
-        - {x: -211.5, y: -21}
-        - {x: -141.5, y: -40}
-        - {x: -138.5, y: -89}
-        - {x: -107.5, y: -143}
-        - {x: -65.5, y: -179}
-        - {x: -63.5, y: -213}
-        - {x: -122.5, y: -212}
-        - {x: -130.5, y: -225}
-        - {x: -122.5, y: -231}
-        - {x: 197.5, y: -231}
-        - {x: 218.5, y: -211}
-        - {x: 214.5, y: -201}
-    - name: miniCopter_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: miniCopter_3
       rect:
         serializedVersion: 2
         x: 0
@@ -295,74 +131,8 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 210.5, y: -196}
-        - {x: 200.5, y: -198}
-        - {x: 181.5, y: -213}
-        - {x: 143.5, y: -209}
-        - {x: 139.5, y: -192}
-        - {x: 120.5, y: -203}
-        - {x: 125.5, y: -173}
-        - {x: 152.5, y: -150}
-        - {x: 180.5, y: -111}
-        - {x: 192.5, y: -57}
-        - {x: 192.5, y: -20}
-        - {x: 181.5, y: 28}
-        - {x: 163.5, y: 59}
-        - {x: 123.5, y: 99}
-        - {x: 72.5, y: 123}
-        - {x: 60.5, y: 133}
-        - {x: 224.5, y: 145}
-        - {x: 304.5, y: 152}
-        - {x: 366.5, y: 167}
-        - {x: 367.5, y: 170}
-        - {x: 367.5, y: 195}
-        - {x: 349.5, y: 204}
-        - {x: 299.5, y: 215}
-        - {x: 226.5, y: 224}
-        - {x: 109.5, y: 231}
-        - {x: -24.5, y: 231}
-        - {x: -131.5, y: 228}
-        - {x: -214.5, y: 221}
-        - {x: -298.5, y: 204}
-        - {x: -308.5, y: 198}
-        - {x: -318.5, y: 180}
-        - {x: -282.5, y: 160}
-        - {x: -246.5, y: 153}
-        - {x: -112.5, y: 140}
-        - {x: -71.5, y: 140}
-        - {x: -12.5, y: 130}
-        - {x: -113.5, y: 81}
-        - {x: -151.5, y: 71}
-        - {x: -165.5, y: 57}
-        - {x: -173.5, y: 44}
-        - {x: -175.5, y: 34}
-        - {x: -156.5, y: 26}
-        - {x: -250.5, y: 26}
-        - {x: -258.5, y: 46}
-        - {x: -266.5, y: 59}
-        - {x: -315.5, y: 115}
-        - {x: -367.5, y: 117}
-        - {x: -367.5, y: 34}
-        - {x: -365.5, y: -10}
-        - {x: -345.5, y: -42}
-        - {x: -316.5, y: -66}
-        - {x: -285.5, y: -70}
-        - {x: -262.5, y: -65}
-        - {x: -249.5, y: -34}
-        - {x: -249.5, y: -23}
-        - {x: -140.5, y: -39}
-        - {x: -139.5, y: -72}
-        - {x: -119.5, y: -123}
-        - {x: -100.5, y: -148}
-        - {x: -63.5, y: -181}
-        - {x: -65.5, y: -211}
-        - {x: -129.5, y: -214}
-        - {x: -126.5, y: -228}
-        - {x: -121.5, y: -230}
-        - {x: 188.5, y: -230}
-        - {x: 201.5, y: -226}
-        - {x: 216.5, y: -211}
+      outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 
