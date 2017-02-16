@@ -18,43 +18,43 @@ public class CopterInput {
     public Action IdleUpdate = () => { };                           //Event when there is no input
     
 
-#if UNITY_EDITOR
-    public void UpdateMethod() {
-        noInput = true;
-        bool mouseUp = Input.GetMouseButtonUp(0);
-        
-        if(handleInput == true && (Input.GetMouseButton(0) || mouseUp)) {
-            
-            //If the mouse was just clicked assign current values to the variables
-            if (Input.GetMouseButtonDown(0)) {
-                previousMouse = Input.mousePosition;
-                previousTime = Time.time;
-            }
-
-            MouseTouch t = MouseTouch.TransformMouse(Input.mousePosition, previousMouse, previousTime, mouseUp);
-            
-            previousTime = Time.time;               //Set the values ready for next frame
-            previousMouse = Input.mousePosition;    //Set the value ready for next frame
-
-            noInput = false;
-
-            //Decide which event to trigger
-            switch (t.phase) {
-                case TouchPhase.Began:
-                    TouchStart(t);
-                    break;
-                case TouchPhase.Moved:
-                    InputUpdate(t);
-                    break;
-                case TouchPhase.Ended:
-                    TouchEnd(t);
-                    break;
-            }            
-        }
-        if (noInput == true)
-            IdleUpdate();
-    }
-#elif UNITY_ANDROID || UNITY_IPHONE
+//#if UNITY_EDITOR
+//    public void UpdateMethod() {
+//        noInput = true;
+//        bool mouseUp = Input.GetMouseButtonUp(0);
+//        
+//        if(handleInput == true && (Input.GetMouseButton(0) || mouseUp)) {
+//            
+//            //If the mouse was just clicked assign current values to the variables
+//            if (Input.GetMouseButtonDown(0)) {
+//                previousMouse = Input.mousePosition;
+//                previousTime = Time.time;
+//            }
+//
+//            MouseTouch t = MouseTouch.TransformMouse(Input.mousePosition, previousMouse, previousTime, mouseUp);
+//            
+//            previousTime = Time.time;               //Set the values ready for next frame
+//            previousMouse = Input.mousePosition;    //Set the value ready for next frame
+//
+//            noInput = false;
+//
+//            //Decide which event to trigger
+//            switch (t.phase) {
+//                case TouchPhase.Began:
+//                    TouchStart(t);
+//                    break;
+//                case TouchPhase.Moved:
+//                    InputUpdate(t);
+//                    break;
+//                case TouchPhase.Ended:
+//                    TouchEnd(t);
+//                    break;
+//            }            
+//        }
+//        if (noInput == true)
+//            IdleUpdate();
+//    }
+//#elif UNITY_ANDROID || UNITY_IPHONE
     public void UpdateMethod() {
         noInput = true;
         if(handleInput == true) {
@@ -79,7 +79,7 @@ public class CopterInput {
         if (noInput == true)
             IdleUpdate();
     }
-#endif
+//#endif
 
 
     public void DisableInput() {

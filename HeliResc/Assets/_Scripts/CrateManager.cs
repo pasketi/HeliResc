@@ -54,7 +54,7 @@ public class CrateManager : MonoBehaviour {
 		/*if (crate.transform.FindChild ("BackGround") != null)
 			bgRenderer = crate.transform.FindChild ("BackGround").GetComponent<SpriteRenderer> ();*/
 
-		if (animator.GetInteger("status") == null){
+		if (animator.GetInteger("status") == 0){
 			stationary = true;
 		} else if (animator.GetInteger("status") == 1){
 			twoPhases = true;

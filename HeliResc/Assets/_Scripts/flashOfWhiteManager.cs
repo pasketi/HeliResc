@@ -5,17 +5,17 @@ using System.Collections;
 public class flashOfWhiteManager : MonoBehaviour {
 
 	public GameObject levelSet;
-	public bool trigger = false, once = true;
+	public bool once = true;
 	private int spam = 10;
 	private LevelSetHandler handler;
 	public GameObject coinPrefab;
 
-	void Update () {
-		if (trigger) {
-			complete ();
-			trigger = false;
-		}
-	}
+	//void Update () {
+	//	if (trigger) {
+	//		complete ();
+	//		trigger = false;
+	//	}
+	//}
 
 	public bool setLevelSet (GameObject levelS) {
 		levelSet = levelS;
@@ -59,7 +59,7 @@ public class flashOfWhiteManager : MonoBehaviour {
 		yield return null;
 	}
 
-	private IEnumerator CoinSpam(int amount, GameObject spawnPosition) {
+    private IEnumerator CoinSpam(int amount, GameObject spawnPosition) {
 
 		for (int i = 0; i < spam; i++){
 			StartCoroutine(CoinFlow(amount/spam, spawnPosition));
