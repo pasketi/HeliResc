@@ -8,7 +8,9 @@ public class LeaderboardManager : MonoBehaviour {
     public RectTransform ContentParent;
     public GameObject prefab;
     public Sprite star, rubySprite;
+    public Text TotalTimeText;
     private GameObject temp;
+    private float TotalTime;
 
 	// Use this for initialization
 	void Start () {
@@ -57,6 +59,7 @@ public class LeaderboardManager : MonoBehaviour {
                     level.bestTime = 999f;
                 else
                 {
+                    TotalTime += level.bestTime;
                     BestTime.text = (level.bestTime / 60f >= 1f ? Mathf.Floor(level.bestTime / 60f).ToString("##:") : "") + (level.bestTime % 60f).ToString("00.00");
                 }
 
@@ -65,5 +68,7 @@ public class LeaderboardManager : MonoBehaviour {
                 temp = null;
             }
         }
+
+        TotalTimeText.text = (TotalTime / 60f >= 1f ? Mathf.Floor(TotalTime / 60f).ToString("##:") : "") + (TotalTime % 60f).ToString("00.00"); ;
     }
 }
