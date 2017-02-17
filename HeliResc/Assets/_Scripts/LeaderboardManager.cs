@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class LeaderboardManager : MonoBehaviour {
 
     public RectTransform ContentParent;
+    public RectTransform ViewPort;
     public GameObject prefab;
     public Sprite star, rubySprite;
     public Text TotalTimeText;
@@ -14,6 +15,9 @@ public class LeaderboardManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+        float newHeight = ViewPort.rect.height / 10f;
+
         foreach (Level level in LevelHandler.GetLevels())
         {
             if (level.unlocked && level.star1)
@@ -68,12 +72,13 @@ public class LeaderboardManager : MonoBehaviour {
                     BestTime.text = (level.bestTime / 60f >= 1f ? Mathf.Floor(level.bestTime / 60f).ToString("##:") : "") + (level.bestTime % 60f).ToString("00.00");
                 }
 
-                ContentParent.sizeDelta = new Vector2(ContentParent.sizeDelta.x, ContentParent.sizeDelta.y + 50);
+                ContentParent.sizeDelta = new Vector2(ContentParent.sizeDelta.x, ContentParent.sizeDelta.y + newHeight);
+                (temp.transform as RectTransform).sizeDelta = new Vector3((temp.transform as RectTransform).sizeDelta.x, newHeight);
                 temp.transform.SetParent(ContentParent);
                 temp = null;
             }
         }
 
-        TotalTimeText.text = (TotalTime / 60f >= 1f ? Mathf.Floor(TotalTime / 60f).ToString("##:") : "") + (TotalTime % 60f).ToString("00.00"); ;
+        TotalTimeText.text = (TotalTime / 60f >= 1f ? Mathf.Floor(TotalTime / 60f).ToString("##:") : "") + (TotalTime % 60f).ToString("00.00");
     }
 }
