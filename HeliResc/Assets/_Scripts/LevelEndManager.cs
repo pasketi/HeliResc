@@ -13,6 +13,7 @@ public class LevelEndManager : MonoBehaviour {
 	public Image star1, star2, star3;
 	private Text star1Text, star2Text, star3Text;
 	private Text targetTime, playerTime, bonusObjective;
+    public Text clearText;
 	private Image personalBest;
     public Image rubyImage;
 
@@ -83,6 +84,42 @@ public class LevelEndManager : MonoBehaviour {
 		int playerStars = PlayerPrefs.GetInt(SaveStrings.sPlayerStars, 0);
 		moneyText.setOldMoney(gameManager.wallet.Coins);
 		moneyText.setLevelEnd(true);
+
+        string levelNumber = "";
+
+        switch (level.setName)
+        {
+            case "Tutorial0":
+                levelNumber = "0-";
+                break;
+            case "Tutorial1":
+                levelNumber = "0-";
+                break;
+            case "Tutorial2":
+                levelNumber = "0-";
+                break;
+            case "Cat":
+                levelNumber = "1-";
+                break;
+            case "Crate":
+                levelNumber = "2-";
+                break;
+            case "Swim":
+                levelNumber = "3-";
+                break;
+            case "fisherman":
+                levelNumber = "4-";
+                break;
+            case "iceberg":
+                levelNumber = "5-";
+                break;
+            case "Mountain":
+                levelNumber = "6-";
+                break;
+        }
+
+        levelNumber = levelNumber + (level.id + 1).ToString();
+        clearText.text = "Level " + levelNumber + (levelEnd.passedLevel ? " cleared" : " failed");
 
 		if (level.star1 == false && levelEnd.obj1Passed == true) {
 			gameManager.wallet.AddMoney(10 + 10 * level.id);

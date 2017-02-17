@@ -63,7 +63,22 @@ public class LevelHandler : MonoBehaviour {
         return null;
     }
 
-	public static LevelSet GetLevelSet(int index) {
+    public static List<Level> GetLevels()
+    {
+        List<Level> levels = new List<Level>();
+
+        for (int j = 0; j < levelSets.Length; j++)
+        {
+            for (int i = 0; i < GetLevelSet(j).levelAmount; i++)
+            {
+                levels.Add(Level.Load(GetLevelSet(j).levelSetName, i));
+            }
+        }
+
+        return levels;
+    }
+
+    public static LevelSet GetLevelSet(int index) {
 		if (index == -1)
 			index = instance.currentSetIndex;
 		foreach (LevelSet s in instance.LevelSets) {
@@ -141,6 +156,7 @@ public class Level {
 
         return l;
     }
+
     public static void Save(Level level) {
         PlayerPrefsExt.SetBool(level.name + "Star1", level.star1);
         PlayerPrefsExt.SetBool(level.name + "Star2", level.star2);
