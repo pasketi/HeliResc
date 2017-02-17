@@ -70,7 +70,7 @@ public class ScrollingMenus : MonoBehaviour {
 		
 		for(int i = 0; i < menus.Count; i++){
 			canvasAnchorPoints[i] = menus[0].transform.position.x + (i * vecs[3].x);
-			panelAnchorPoints[i] = new Vector3(canvasAnchorPoints[i] - i * menus.Count * canvasAnchorPoints[0], menus[0].transform.position.y);
+			panelAnchorPoints[i] = new Vector3(canvasAnchorPoints[i] - i * 4 * canvasAnchorPoints[0], menus[0].transform.position.y);
 			menus[i].transform.position = new Vector3(canvasAnchorPoints[i], menus[i].transform.position.y);
 		}
 
@@ -84,7 +84,7 @@ public class ScrollingMenus : MonoBehaviour {
 
         moneyPanel.sizeDelta = new Vector2(Screen.width * 0.3f, Screen.height * 0.12f);    //Set the size of the money panel
         moneyHideHeight = Screen.height * 0.35f;
-        if (go[current].name.Equals("StartMenu") || go[current].name.Equals("Leaderboard")) {
+        if (menus[current].name.Equals("StartMenu") || menus[current].name.Equals("Leaderboard")) {
             moneyPanel.anchoredPosition = new Vector2(0, moneyHideHeight);
         }
                 
@@ -147,14 +147,14 @@ public class ScrollingMenus : MonoBehaviour {
 				scrollingSpeed = originalSpeed;
 
 				menuPanel.position = target;
-                if (current == (menus.Count - 1))
+                if (menus[current].name.Equals("Upgrades"))
                     GameManager.LoadLevel("LevelMap");
 			}
 		}
 	}
 
     private IEnumerator SetMoneyPanelPosition() {
-        if (go[current].name.Equals("StartMenu") || go[current].name.Equals("Leaderboard")) { 
+        if (menus[current].name.Equals("StartMenu") || menus[current].name.Equals("Leaderboard")) { 
             float previousTime = Time.time;
             while (moneyPanel.anchoredPosition.y < moneyHideHeight) {
                 moneyPanel.anchoredPosition += Vector2.up * (Time.time-previousTime) * moneyScrollSpeed;
@@ -163,7 +163,7 @@ public class ScrollingMenus : MonoBehaviour {
             }
             moneyPanel.anchoredPosition = Vector2.up * moneyHideHeight;
         }
-        else if (go[previousMenu].name.Equals("StartMenu") || go[previousMenu].name.Equals("Leaderboard")) {            
+        else if (menus[previousMenu].name.Equals("StartMenu") || menus[previousMenu].name.Equals("Leaderboard")) {            
             float previousTime = Time.time;
             while (moneyPanel.anchoredPosition.y > 0) {
                 moneyPanel.anchoredPosition -= Vector2.up * (Time.time - previousTime) * moneyScrollSpeed;
