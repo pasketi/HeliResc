@@ -90,35 +90,40 @@ public class LevelEndManager : MonoBehaviour {
         switch (level.setName)
         {
             case "Tutorial0":
-                levelNumber = "0-";
+                levelNumber = "0-1";
                 break;
             case "Tutorial1":
-                levelNumber = "0-";
+                levelNumber = "0-2";
                 break;
             case "Tutorial2":
-                levelNumber = "0-";
+                levelNumber = "0-3";
                 break;
             case "Cat":
                 levelNumber = "1-";
+                levelNumber = levelNumber + (level.id + 1).ToString();
                 break;
             case "Crate":
                 levelNumber = "2-";
+                levelNumber = levelNumber + (level.id + 1).ToString();
                 break;
             case "Swim":
                 levelNumber = "3-";
+                levelNumber = levelNumber + (level.id + 1).ToString();
                 break;
             case "fisherman":
                 levelNumber = "4-";
+                levelNumber = levelNumber + (level.id + 1).ToString();
                 break;
             case "iceberg":
                 levelNumber = "5-";
+                levelNumber = levelNumber + (level.id + 1).ToString();
                 break;
             case "Mountain":
                 levelNumber = "6-";
+                levelNumber = levelNumber + (level.id + 1).ToString();
                 break;
         }
 
-        levelNumber = levelNumber + (level.id + 1).ToString();
         clearText.text = "Level " + levelNumber + (levelEnd.passedLevel ? " cleared" : " failed");
 
 		if (level.star1 == false && levelEnd.obj1Passed == true) {

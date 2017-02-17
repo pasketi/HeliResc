@@ -27,20 +27,22 @@ public class LeaderboardManager : MonoBehaviour {
                 switch (level.setName)
                 {
                     case "Tutorial0":
-                        LevelSetNumber = "0";
+                        LevelSetNumber = "0-1";
+                        LevelNumber.text = LevelSetNumber;
                         break;
                     case "Tutorial1":
-                        LevelSetNumber = "0";
+                        LevelSetNumber = "0-2";
+                        LevelNumber.text = LevelSetNumber;
                         break;
                     case "Tutorial2":
-                        LevelSetNumber = "0";
+                        LevelSetNumber = "0-3";
+                        LevelNumber.text = LevelSetNumber;
                         break;
                     default:
                         LevelSetNumber = (LevelHandler.GetLevelSet(level.setName).setIndex - 2).ToString();
+                        LevelNumber.text = LevelSetNumber + "-" + (level.id + 1).ToString();
                         break;
                 }
-
-                LevelNumber.text = LevelSetNumber + "-" + level.id.ToString();
 
                 Image star1 = temp.transform.FindChild("Star1").GetComponent<Image>();
                 if (level.star1)
@@ -56,7 +58,10 @@ public class LeaderboardManager : MonoBehaviour {
                     ruby.sprite = rubySprite;
 
                 if (!level.star3)
-                    level.bestTime = 999f;
+                {
+                    //level.bestTime = 9999f;
+                    //BestTime.text = (level.bestTime / 60f >= 1f ? Mathf.Floor(level.bestTime / 60f).ToString("##:") : "") + (level.bestTime % 60f).ToString("00.00");
+                }
                 else
                 {
                     TotalTime += level.bestTime;

@@ -54,13 +54,13 @@ public class ScrollingMenus : MonoBehaviour {
 				if(showLevelEnd)
 					menus.Add(go[i]);
 			}
-            else if(go[i].name.Equals("Leaderboard"))
-            {
-                if (Level.Load(LevelHandler.GetLevelSet(0).levelSetName, 0).star1)
-                {
-                    menus.Add(go[i]);
-                }
-            }
+            //else if(go[i].name.Equals("Leaderboard"))
+            //{
+            //    if (Level.Load(LevelHandler.GetLevelSet(0).levelSetName, 0).star1)
+            //    {
+            //        menus.Add(go[i]);
+            //    }
+            //}
 			else
 				menus.Add(go[i]);
 		}
@@ -84,7 +84,7 @@ public class ScrollingMenus : MonoBehaviour {
 
         moneyPanel.sizeDelta = new Vector2(Screen.width * 0.3f, Screen.height * 0.12f);    //Set the size of the money panel
         moneyHideHeight = Screen.height * 0.35f;
-        if (current == 0 || current == 2) {
+        if (go[current].name.Equals("StartMenu") || go[current].name.Equals("Leaderboard")) {
             moneyPanel.anchoredPosition = new Vector2(0, moneyHideHeight);
         }
                 
@@ -154,7 +154,7 @@ public class ScrollingMenus : MonoBehaviour {
 	}
 
     private IEnumerator SetMoneyPanelPosition() {
-        if (current == 0 || current == 2) { 
+        if (go[current].name.Equals("StartMenu") || go[current].name.Equals("Leaderboard")) { 
             float previousTime = Time.time;
             while (moneyPanel.anchoredPosition.y < moneyHideHeight) {
                 moneyPanel.anchoredPosition += Vector2.up * (Time.time-previousTime) * moneyScrollSpeed;
@@ -163,7 +163,7 @@ public class ScrollingMenus : MonoBehaviour {
             }
             moneyPanel.anchoredPosition = Vector2.up * moneyHideHeight;
         }
-        else if (previousMenu == 0 || previousMenu == 2) {            
+        else if (go[previousMenu].name.Equals("StartMenu") || go[previousMenu].name.Equals("Leaderboard")) {            
             float previousTime = Time.time;
             while (moneyPanel.anchoredPosition.y > 0) {
                 moneyPanel.anchoredPosition -= Vector2.up * (Time.time - previousTime) * moneyScrollSpeed;
