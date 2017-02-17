@@ -68,7 +68,7 @@ public class LeaderboardManager : MonoBehaviour {
                     BestTime.text = (level.bestTime / 60f >= 1f ? Mathf.Floor(level.bestTime / 60f).ToString("##:") : "") + (level.bestTime % 60f).ToString("00.00");
                 }
 
-                ContentParent.sizeDelta.Set(ContentParent.sizeDelta.x, ContentParent.sizeDelta.y + 50);
+                ContentParent.sizeDelta = new Vector2(ContentParent.sizeDelta.x, ContentParent.sizeDelta.y + 50);
                 temp.transform.SetParent(ContentParent);
                 temp = null;
             }
