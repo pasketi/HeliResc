@@ -9,7 +9,7 @@ public class LeaderboardManager : MonoBehaviour {
     public RectTransform ViewPort;
     public GameObject prefab;
     public Sprite star, rubySprite;
-    public Text TotalTimeText;
+    public Text TotalTimeText, TotalTimeLabel;
     private GameObject temp;
     private float TotalTime;
 
@@ -61,21 +61,18 @@ public class LeaderboardManager : MonoBehaviour {
                 if (level.rubyFound)
                     ruby.sprite = rubySprite;
 
-                if (!level.star3)
-                {
-                    //level.bestTime = 9999f;
-                    //BestTime.text = (level.bestTime / 60f >= 1f ? Mathf.Floor(level.bestTime / 60f).ToString("##:") : "") + (level.bestTime % 60f).ToString("00.00");
-                }
-                else
-                {
-                    TotalTime += level.bestTime;
-                    BestTime.text = (level.bestTime / 60f >= 1f ? Mathf.Floor(level.bestTime / 60f).ToString("##:") : "") + (level.bestTime % 60f).ToString("00.00");
-                }
+                TotalTime += level.bestTime;
+                BestTime.text = (level.bestTime / 60f >= 1f ? Mathf.Floor(level.bestTime / 60f).ToString("##:") : "") + (level.bestTime % 60f).ToString("00.00");
 
                 ContentParent.sizeDelta = new Vector2(ContentParent.sizeDelta.x, ContentParent.sizeDelta.y + newHeight);
                 (temp.transform as RectTransform).sizeDelta = new Vector3((temp.transform as RectTransform).sizeDelta.x, newHeight);
                 temp.transform.SetParent(ContentParent);
                 temp = null;
+            }
+            else
+            {
+                TotalTimeText.enabled = false;
+                TotalTimeLabel.enabled = false;
             }
         }
 
